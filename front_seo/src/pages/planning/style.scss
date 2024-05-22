@@ -1,0 +1,107 @@
+.Presentation {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.Calendar {
+    margin: 20px;
+    padding-top: 20px;
+}
+
+.rbc-toolbar-label,
+.rbc-continues-prior,
+.rbc-header {
+    text-transform: capitalize;
+}
+
+.fleches {
+    text-align-last: right;
+}
+
+.Projet {
+    margin: 20px;
+}
+
+button.rbc-button-link.rbc-show-more {
+    color: black
+}
+
+.TitrePage {
+    font-size: 4em;
+    margin-bottom: 0px;
+}
+
+.swiper-button-prev-1:hover,
+.swiper-button-next-1:hover,
+.swiper-button-prev-2:hover,
+.swiper-button-next-2:hover {
+    cursor: pointer;
+}
+
+.swiper-button-disabled {
+    color: rgb(128, 128, 128);
+    cursor: auto !important;
+}
+
+.cree_ticket_bouton {
+    font-size: 16px;
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    border-radius: 12px;
+    background: #0293FC;
+    border: none;
+    align-self: center;
+    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+    cursor: pointer;
+}
+
+.affichage_bouton {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 20px;
+}
+
+.rbc-btn-group-button {
+    margin: 0px 5px;
+    border-radius: 10%;
+}
+
+.ProjetCards {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+
+.swiper-horizontal {
+    padding-left: 20px !important;
+    margin-left: -20px !important;
+    padding-right: 20px !important;
+    margin-right: -20px !important;
+}
+
+.swiper-wrapper {
+    margin-top: 32px;
+    margin-bottom: 50px;
+    overflow: visible !important;
+}
+
+.right_container {
+    margin-top: 12%;
+    margin-left: 100px;
+
+    .Presentation {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+    }
+
+}

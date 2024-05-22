@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1000" height="1000" viewBox="0 0 1000 1000" xml:space="preserve">
+<defs>
+</defs>
+<rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>
+<g transform="matrix(30.1875 0 0 30.1875 585.5334 435.6754)" id="372278">
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(2,147,252); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke" transform=" translate(-9.25, -11.75)" d="M 1 23.5 L 0 2 L 1 0 H 11.5 L 14.5 3.5 L 18 6 L 18.5 23 L 1 23.5 Z" stroke-linecap="round"/>
+</g>
+<g transform="matrix(28.5318 0 0 28.5318 499.3065 499.3065)" id="828189">
+<g style="" vector-effect="non-scaling-stroke">
+		<g transform="matrix(1 0 0 1 2.9166 -2.9168)" id="Icon">
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: evenodd; opacity: 1;" transform=" translate(-20.4166, -14.5833)" d="M 10.2083 1.45825 H 23.2082 L 30.625 8.87502 V 27.7083 H 10.2083 V 1.45825 Z M 13.125 4.37492 V 24.7916 H 27.7083 V 11.6666 H 20.4167 V 4.37492 H 13.125 Z M 23.3333 5.70815 L 26.3751 8.74992 H 23.3333 V 5.70815 Z" stroke-linecap="round"/>
+</g>
+		<g transform="matrix(1 0 0 1 -2.9167 2.9166)" id="Icon">
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; is-custom-font: none; font-file-url: none; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-14.5833, -20.4166)" d="M 7.29167 7.29159 V 30.6249 H 24.7917 V 33.5416 H 4.375 V 7.29159 H 7.29167 Z" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</svg>

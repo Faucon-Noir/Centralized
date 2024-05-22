@@ -1,0 +1,17 @@
+
+1. Préambule	
+
+2. Description générale	
+
+3. Exigences fonctionnelles	
+    
+4. Exigences non fonctionnelles	
+    
+Application	
+Annexe A : Diagrammes de cas d'utilisation	
+
+Annexe B : Cas d'utilisation	
+
+Annexe C : Ensembles de champs	
+
+Reporting (trimestriel, financier, social)	

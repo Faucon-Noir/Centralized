@@ -1,0 +1,139 @@
+.calendarBox {
+    border-radius: 20px;
+    box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    background-color: #FFFFFF;
+    width: 100%;
+    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+}
+
+.react-calendar {
+    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+    width: 100%;
+    background-color: #fff;
+    padding-right: 45px;
+    padding-left: 45px;
+    padding-top: 20px;
+}
+
+.highlight {
+    background-color: #0293FC !important;
+    color: white;
+}
+
+.highlight-start {
+    background-color: #0293FC !important;
+    color: white;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.highlight-end {
+    background-color: #0293FC !important;
+    color: white;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.react-calendar {
+    border: none;
+    box-shadow: none;
+}
+
+.react-calendar__navigation {
+    justify-content: center;
+    align-items: center;
+    font-size: 20px !important;
+}
+
+.react-calendar__navigation__arrow {
+    font-size: 40px;
+}
+
+.react-calendar__navigation__label {
+    width: 150px;
+    flex-grow: 0 !important;
+    text-transform: capitalize;
+    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+
+}
+
+.react-calendar__tile--now {
+    background: #e6e6e6;
+}
+
+.texte_calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px;
+}
+
+.react-calendar__month-view__weekdays {
+    margin: 10px 0px;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+    text-transform: capitalize;
+
+}
+
+.react-calendar__month-view__days {
+    gap: 10px 0px;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none;
+}
+
+.react-calendar__navigation__label {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.circlemini {
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+}
+
+.titre_calendar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-right: 45px;
+    padding-left: 45px;
+
+    h2 {
+        font-size: 16px !important;
+    }
+}
+
+.flex_align {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-right: 45px;
+    padding-left: 45px;
+    font-size: 14px;
+}
+
+.planning-title {
+    margin-bottom: 32px !important;
+}
+
+hr {
+    margin-top: 32px;
+    width: 78%;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: black;
+    margin-bottom: 0px;
+}

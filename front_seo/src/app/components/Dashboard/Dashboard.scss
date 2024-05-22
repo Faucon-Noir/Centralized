@@ -1,0 +1,85 @@
+.dashboard {
+    background-color: #0293fc;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+    // align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+
+    a {
+        text-decoration: none;
+    }
+
+    .centralized_logo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 90%;
+        }
+    }
+
+    .active {
+        background: #FFF !important;
+        padding: 12px 24px !important;
+        color: black !important;
+        margin-left: 20px;
+
+        img {
+            filter: invert(1);
+        }
+    }
+
+    .dashboard_button {
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+        padding: 12px 24px;
+        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 350ms ease-in-out;
+        color: white;
+
+        img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .dashboard_button:hover {
+        transform: translateY(-10px);
+    }
+
+    .home_button {
+        margin-top: 80px;
+        display: flex;
+        margin-bottom: 20px;
+
+    }
+
+    .dashboard_nav {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .dashboard_profile {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+
+        .red {
+            color: #FB2C39;
+        }
+
+    }
+
+}

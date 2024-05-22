@@ -1,0 +1,36 @@
+1 Présentation générale du projet
+    1.1 Contexte
+        1.1.1 Historique du projet
+        1.1.2 Définitions
+        1.1.3 Priorités
+    1.2 Enjeux
+        1.2.1 Équipes impactées
+        1.2.2 Secteur impactés
+2 Cible et objectifs
+    2.1 Cible
+    2.2 Objectifs stratégiques
+        2.2.1 Exigences fonctionnels
+        2.2.2 Exigences client
+    2.3 Objectifs Opérationnels mesurables
+        2.3.1 Définition des KPIs
+        2.3.2 Utilisation des KPIs
+3 Planning et technologies
+    3.1 Planning 
+        3.1.1 Lead du projet
+        3.1.2 SPOC pour chaque équipes ou secteurs impactés
+        3.1.3 Dates clées
+        3.1.4 Planning
+    3.2 Budget
+        3.2.1 Répartition du budget
+        3.2.2 Explications
+    3.3 Technologies
+        3.3.1 Exigences techniques
+        3.3.2 Explications
+    3.4 KPI de validation
+4 Après projet
+    4.1 Méthodes pédagogiques
+        4.1.1 Qui doit recevoir une formation
+        4.1.2 Comment les former
+    4.2 Support pédagogiques 
+        4.2.1 Supports nécessaires
+        4.2.2 Planning de formation 

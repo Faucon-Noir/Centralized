@@ -1,0 +1,54 @@
+.MuiPaper-root {
+  background-color: #0293fc;
+  max-width: 16.666667%;
+}
+
+.MuiButtonBase-root {
+  gap: 20px;
+}
+
+.MuiListItemIcon-root {
+  min-width: 0;
+}
+
+.selected,
+.no-selected,
+.other-button {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selected:hover,
+.no-selected:hover,
+.other-button:hover {
+  background-color: #0083E1;
+  border-radius: 12px;
+}
+
+.black {
+  filter: invert(99%) sepia(0%) saturate(7497%) hue-rotate(237deg) brightness(104%) contrast(100%);
+}
+
+.selected {
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 12px;
+}
+
+.no-selected,
+.white {
+  color: #FFFFFF;
+}
+
+.other-button {
+  color: #f44336;
+}
+
+.logo {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}

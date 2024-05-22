@@ -1,0 +1,46 @@
+.teamcard {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 30px;
+  width: 200px;
+  background-color: #ffffff;
+
+  .first_line {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    h2 {
+      font-size: 16px;
+    }
+  }
+
+  .second_line {
+    a {
+      text-decoration: none;
+      color: white;
+      border-radius: 50px;
+      padding: 5px 10px;
+      background-color: #0293FC;
+    }
+
+    button {
+      display: flex;
+      background-color: transparent;
+      border: none;
+      transition: all 350ms ease-in-out;
+      width: 100% !important;
+      margin: 0 !important
+    }
+
+    button:hover {
+      transform: translateY(-10px);
+    }
+  }
+}
