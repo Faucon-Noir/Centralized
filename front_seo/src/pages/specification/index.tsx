@@ -11,7 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { ProjectType } from "./type";
 
 function TeamPage() {
-  const [specification, setSpecification] = useState<ProjectType[]>([]);
+  const [specification, setSpecification] = useState({});
   if (typeof window !== 'undefined') {
 
     const isAuth: boolean = !!localStorage.getItem("token");
@@ -20,12 +20,13 @@ function TeamPage() {
       const token: any = localStorage.getItem("token");
       const decodeToken: any = jwtDecode(token);
       user_id = decodeToken["id"];
+      const project_id = localStorage.getItem("SelectedProject")
 
       useEffect(() => {
         //GET PROJECT OF USER
         [/* TODO Soit on récupère les projets et on doit réussi a pointé le specification, soit on récupère les specification mais ils auraient besoin d'un nom */]
         try {
-          axios.get(`http://localhost:8000/api/project/user/${user_id}`, {
+          axios.get(`http://localhost:8000/api/cdc/project/${project_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => {
             setSpecification(res.data);
@@ -34,7 +35,7 @@ function TeamPage() {
         } catch (error) {
           console.log(error);
         }
-      }, [token, user_id]);
+      }, [token, project_id]);
 
     }
   }
@@ -54,19 +55,15 @@ function TeamPage() {
             <hr align="left" />
           </div>
           <div className="specification_container">
-            {specification && specification.map((item: ProjectType) => (
-              <div key={item.id}>
-                <SpecificationHomeCard
-                  id={item.id}
-                  name={item.name}
-                  color={item.color}
-                  start={item.start_date}
-                  end={item.end_date}
-                  budget={item.budget}
-                  desc={item.description}
-                />
-              </div>
-            ))}
+            {<SpecificationHomeCard
+              id={specification.id}
+              name={specification.name}
+              color={specification.color}
+              start={specification.start_date}
+              end={specification.end_date}
+              budget={specification.budget}
+              desc={specification.description}
+            />}
           </div>
         </Grid>
       </Grid>
