@@ -196,6 +196,7 @@ export default function Home(): JSX.Element {
                         totalTickets={ticketproject[item.id] ? ticketproject[item.id] : 0}
                         key={item.id}
                         id={item.color}
+                        project={item.id}
                       />
                     </SwiperSlide>
                   )) : null}
