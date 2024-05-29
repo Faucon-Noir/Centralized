@@ -78,6 +78,6 @@ Cypress.Commands.add('login', (): void => {
 })
 
 Cypress.Commands.add('logout', (): void => {
-	localStorage.setItem('token', '')
+	localStorage.removeItem('token')
 	cy.visit('localhost:3000/login')
 })
