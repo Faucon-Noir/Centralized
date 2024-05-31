@@ -2,17 +2,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  Index,
   ManyToOne,
   JoinColumn,
-  CreateDateColumn,
-  OneToOne,
-  OneToMany,
 } from "typeorm";
 import { Planning } from "./Planning";
 import { User } from "./User";
+import { StatusEnum } from "../enum";
 @Entity()
 export class Ticket {
   @PrimaryGeneratedColumn("uuid")
@@ -27,14 +22,7 @@ export class Ticket {
   private urgenceId: number;
 
   @Column()
-  private status:
-    | "ouvert"
-    | "en cours"
-    | "en attente"
-    | "annulé"
-    | "résolu"
-    | "rejeté"
-    | "en revue";
+  private status: StatusEnum;
 
   @Column()
   private start_date: Date;
@@ -56,15 +44,7 @@ export class Ticket {
     title: string,
     description: string,
     urgenceId: number,
-    status:
-      | "ouvert"
-      | "en cours"
-      | "en attente"
-      | "annulé"
-      | "résolu"
-      | "rejeté"
-      | "en attente"
-      | "en revue",
+    status: StatusEnum,
     planningId: string,
     start_date: Date,
     end_date: Date
@@ -99,17 +79,7 @@ export class Ticket {
   public getUrgenceId(): number {
     return this.urgenceId;
   }
-  public setStatus(
-    status:
-      | "ouvert"
-      | "en cours"
-      | "en attente"
-      | "annulé"
-      | "résolu"
-      | "rejeté"
-      | "en attente"
-      | "en revue"
-  ): void {
+  public setStatus(status: StatusEnum): void {
     this.status = status;
   }
   public getStatus(): string {

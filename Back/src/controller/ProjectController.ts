@@ -12,7 +12,7 @@ import {
 } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Project } from "../entity/Project";
-import { Cdc } from "../entity/Cdc";
+import { Cdc } from "../entity/Specification";
 import { Team } from "../entity/Team";
 import { CheckAuth } from "../middleware/Auth";
 import "reflect-metadata";
@@ -124,11 +124,14 @@ export class ProjectController {
    */
   public async getAllPojectByUser(@Param("userid") userid: string) {
     try {
-      const project: Project = await this.projectRepository.find({ where: { user: { id: userid } }, order: { start_date: "ASC" } });
-      if (!project) throw new Error('Project not found');
+      const project: Project = await this.projectRepository.find({
+        where: { user: { id: userid } },
+        order: { start_date: "ASC" },
+      });
+      if (!project) throw new Error("Project not found");
       return project;
     } catch (err) {
-      return { error: err.message }
+      return { error: err.message };
     }
   }
 

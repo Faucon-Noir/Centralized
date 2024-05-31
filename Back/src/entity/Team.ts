@@ -2,17 +2,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  Index,
-  ManyToOne,
-  JoinColumn,
   CreateDateColumn,
   OneToMany,
 } from "typeorm";
-import { IsEmail } from "class-validator";
 import { TeamUser } from "./TeamUser";
-import { Cdc } from "./Cdc";
+import { Cdc } from "./Specification";
 
 @Entity()
 export class Team {

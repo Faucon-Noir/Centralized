@@ -14,7 +14,7 @@ import { AppDataSource } from "../db/data-source";
 import { Planning } from "../entity/Planning";
 import { Project } from "../entity/Project";
 import { Team } from "../entity/Team";
-import { Cdc } from "../entity/Cdc";
+import { Cdc } from "../entity/Specification";
 import { CheckAuth } from "../middleware/Auth";
 import { User } from "../entity/User";
 
