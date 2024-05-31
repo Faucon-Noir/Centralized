@@ -73,10 +73,11 @@ L'outil à une interface web lui permettant d'être ouvert sur n'importe quelle 
 
 Pour lancer le projet, vous devez vous diriger sur la branche "dev" du GitHub. Une fois que vous aurez cloné le projet et que vous serez sur la branche dev, vous devez suivre les commandes suivantes pour lancer le projet:
 
-/!\ Attention, il est nécessaire d'avoir un serveur Mysql, Node.js et npm ou yarn d'installé sur votre machine pour lancer le projet /!\
+/!\ Attention, il est nécessaire d'avoir un serveur Mysql, Node.js et npm ou yarn d'installé sur votre machine pour lancer le projet
 
-Nous documentons ici le lancement du projet en local avec yarn ou npm. Pensez toujour le même gestionnaire de paquet une fois que vous avez choisi entre yarn et npm.
+Nous documentons ici le lancement du projet en local avec yarn ou npm. Pensez à toujour utiliser le même gestionnaire de paquet une fois que vous avez choisi entre yarn et npm.
 Nous partons du principes que vous avez déjà cloné le projet et que vous êtes à la racine du projet pour chaque commande.
+/!\ Nous partons également du principe que vous avez déjà récupéré les variables d'environnement et que vous avez créé une base de donnée avec le nom correspondant dans le fichier .env
 
 Pour installer les dépendances:
 
@@ -192,6 +193,7 @@ L'avantage est que nous pouvons capurer l'ensemble des appels API et ainsi ne pa
 
 Les tests ne sont disponibles qu'en environnement de développement, et ne sont pas déployés en production.
 
+/!\ Afin d'éxécuter vos tests, vous devrez lancer le front avant de lancer les tests.
 Pour accéder à l'interface graphiques des tests, il suffit de lancer la commande suivante:
 `yarn cy:open` ou `npm run cy:open`
 

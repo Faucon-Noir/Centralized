@@ -2,13 +2,14 @@ import { Avatar, Box, Button, IconButton, Input, Modal, TextField } from "@mui/m
 import './style.css';
 import Grid from "@mui/material/Unstable_Grid2";
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalContentStyle } from './style';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
 import { UserType } from "./type";
+import { AvartarImageCy, BioFielCy, BioLabelCy, EmailFielCy, EmailLabelCy, FirstNameFielCy, FirstNameLabelCy, LastNameFielCy, LastNameLabelCy, PhoneFielCy, PhoneLabelCy, SaveButtonCy } from "./const";
 
 
 export default function AccountPage() {
@@ -106,7 +107,7 @@ export default function AccountPage() {
         <Grid xs={10}>
           <div className="accent" />
           <div style={{ display: 'block' }}>
-            <div className="profile-photo" style={{ position: 'relative' }}>
+            <div data-cy={AvartarImageCy} className="profile-photo" style={{ position: 'relative' }}>
               <Avatar src={`/media/${user.avatar}`} sx={{ height: '100%', width: '100%' }} />
               <div id='inner' className="inner" onClick={handleClickOpen}>
                 <CameraOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -125,20 +126,22 @@ export default function AccountPage() {
 
           <form>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-              <label htmlFor='firstName'>
+              <label cy-data={FirstNameLabelCy} htmlFor='firstName'>
                 First Name
               </label>
               <TextField
+                cy-data={FirstNameFielCy}
                 size="small"
                 className="textField"
                 placeholder={'Votre prénom'}
                 value={user?.firstname ? user.firstname : ''}
                 onChange={(e) => setUser({ ...user, firstname: e.target.value })}
               />
-              <label htmlFor='lastName'>
+              <label cy-data={LastNameLabelCy} htmlFor='lastName'>
                 Last Name
               </label>
               <TextField
+                cy-data={LastNameFielCy}
                 size="small"
                 className="textField"
                 placeholder={'Votre nom'}
@@ -146,37 +149,40 @@ export default function AccountPage() {
                 onChange={(e) => setUser({ ...user, lastname: e.target.value })}
               />
             </Box>
-            <label htmlFor='email'>
+            <label cy-data={EmailLabelCy} htmlFor='email'>
               Email
             </label>
             <TextField
+              cy-data={EmailFielCy}
               size="small"
               className="textField"
               placeholder={'Votre adresse mail'}
               value={user?.mail ? user.mail : ''}
               onChange={(e) => setUser({ ...user, mail: e.target.value })}
             />
-            <label htmlFor='phone'>
+            <label cy-data={PhoneLabelCy} htmlFor='phone'>
               Phone
             </label>
             <TextField
+              cy-data={PhoneFielCy}
               size="small"
               className="textField"
               placeholder={'Votre numéro de téléphone'}
               value={user?.phone ? user.phone : ''}
               onChange={(e) => setUser({ ...user, phone: e.target.value })}
             />
-            <label htmlFor='bio'>
+            <label cy-data={BioLabelCy} htmlFor='bio'>
               Bio
             </label>
             <TextField
+              cy-data={BioFielCy}
               multiline
               className="textField"
               placeholder={'Une courte description de vous-même'}
               value={user?.bio ? user.bio : ''}
               onChange={(e) => setUser({ ...user, bio: e.target.value })}
             />
-            <Button disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
+            <Button cy-data={SaveButtonCy} disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
               Sauvegarder
             </Button>
           </form>
