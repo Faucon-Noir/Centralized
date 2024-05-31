@@ -71,17 +71,27 @@ L'outil à une interface web lui permettant d'être ouvert sur n'importe quelle 
 
 ## Lancement du projet
 
-Pour lancer le projet, vous devez vous diriger sur la branche "dev" du gitlab. Une fois que vous aurez clone le projet et que vous serez sur la branche dev, vous devez suivre les commandes suivantes pour lancer le projet:
+Pour lancer le projet, vous devez vous diriger sur la branche "dev" du GitHub. Une fois que vous aurez cloné le projet et que vous serez sur la branche dev, vous devez suivre les commandes suivantes pour lancer le projet:
+
+/!\ Attention, il est nécessaire d'avoir un serveur Mysql, Node.js et npm ou yarn d'installé sur votre machine pour lancer le projet /!\
+
+Nous documentons ici le lancement du projet en local avec yarn ou npm. Pensez toujour le même gestionnaire de paquet une fois que vous avez choisi entre yarn et npm.
+Nous partons du principes que vous avez déjà cloné le projet et que vous êtes à la racine du projet pour chaque commande.
+
+Pour installer les dépendances:
+
+- `cd Front/` ou `cd Back/`
+- `npm install` ou `yarn install`
 
 Pour lancer le Front:
 
-- `cd Application/front_seo`
-- `npm run dev`
+- `cd Front/`
+- `npm run dev` ou `yarn dev`
 
 Pour lancer le Back:
 
-- `cd Application/Back`
-- `npm run dev`
+- `cd Back/`
+- `npm run dev` ou `yarn dev`
 
 ## Décomposition du projet
 
@@ -140,8 +150,9 @@ Le front est développé sur une base TypeScript avec NextJS. Il repose sur les 
 - swiper (11.0.5)
 - typescript (5.3.3)
 
-En raison de la méthode de référencement Google, nous avons décidé d'utiliser NextsJS, étant donné que NextJS est une surcouche de React, qui corrige le souci de SEO inhérent à React il est donc plus facile de faire du SEO avec NextJS.
-Afin d'harmoniser le design de notre application et d'en simplifier le développement, nous avons choisi d'utiliser Material UI, qui est une bibliothèque de composants React qui implémente les spécifications de Material Design, ainsi que plusieurs composants et bibliothèque d'icones très utiles et en phase avec les derniers standarts graphiques.
+En raison de la méthode de référencement Google, nous avons décidé d'utiliser NextsJS.
+Ce dernier est une surcouche de React, qui corrige le souci de SEO inhérent à React.
+Afin d'harmoniser le design de notre application et d'en simplifier le développement, nous avons choisi d'utiliser Material UI,  une bibliothèque de composants React qui implémente les spécifications de Material Design, ainsi que plusieurs composants et bibliothèque d'icones très utiles et en phase avec les derniers standarts graphiques.
 
 ## Approche par composants
 
@@ -178,6 +189,14 @@ Cypress inclut également des fonctionnalités avancées telles que le test de c
 Nous allons tester chacune des pages et leurs fonctionnalités, afin de nous assurer que l'application fonctionne correctement et que les utilisateurs peuvent interagir avec elle de manière fluide et intuitive.
 Ainsi nous pourrons par exemple tester l'upload d'une image, la modification d'un cahier des charges, la suppression d'un tickets...
 L'avantage est que nous pouvons capurer l'ensemble des appels API et ainsi ne pas interférer avec la base de donnée. En revanche, cela nous imposes de faire en sorte que les données utilisées pour les tests soient dans le même format que les différents modèles de données utilisés en base.
+
+Les tests ne sont disponibles qu'en environnement de développement, et ne sont pas déployés en production.
+
+Pour accéder à l'interface graphiques des tests, il suffit de lancer la commande suivante:
+`yarn cy:open` ou `npm run cy:open`
+
+Pour exécuter tous les tests en mode headless, il suffit de lancer la commande suivante:
+`yarn cy:all` ou `npm run cy:all`
 
 # Back
 
