@@ -126,22 +126,22 @@ export default function AccountPage() {
 
           <form>
             <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-              <label cy-data={FirstNameLabelCy} htmlFor='firstName'>
+              <label data-cy={FirstNameLabelCy} htmlFor='firstName'>
                 First Name
               </label>
               <TextField
-                cy-data={FirstNameFielCy}
+                data-cy={FirstNameFielCy}
                 size="small"
                 className="textField"
                 placeholder={'Votre prénom'}
                 value={user?.firstname ? user.firstname : ''}
                 onChange={(e) => setUser({ ...user, firstname: e.target.value })}
               />
-              <label cy-data={LastNameLabelCy} htmlFor='lastName'>
+              <label data-cy={LastNameLabelCy} htmlFor='lastName'>
                 Last Name
               </label>
               <TextField
-                cy-data={LastNameFielCy}
+                data-cy={LastNameFielCy}
                 size="small"
                 className="textField"
                 placeholder={'Votre nom'}
@@ -149,40 +149,40 @@ export default function AccountPage() {
                 onChange={(e) => setUser({ ...user, lastname: e.target.value })}
               />
             </Box>
-            <label cy-data={EmailLabelCy} htmlFor='email'>
+            <label data-cy={EmailLabelCy} htmlFor='email'>
               Email
             </label>
             <TextField
-              cy-data={EmailFielCy}
+              data-cy={EmailFielCy}
               size="small"
               className="textField"
               placeholder={'Votre adresse mail'}
               value={user?.mail ? user.mail : ''}
               onChange={(e) => setUser({ ...user, mail: e.target.value })}
             />
-            <label cy-data={PhoneLabelCy} htmlFor='phone'>
+            <label data-cy={PhoneLabelCy} htmlFor='phone'>
               Phone
             </label>
             <TextField
-              cy-data={PhoneFielCy}
+              data-cy={PhoneFielCy}
               size="small"
               className="textField"
               placeholder={'Votre numéro de téléphone'}
               value={user?.phone ? user.phone : ''}
               onChange={(e) => setUser({ ...user, phone: e.target.value })}
             />
-            <label cy-data={BioLabelCy} htmlFor='bio'>
+            <label data-cy={BioLabelCy} htmlFor='bio'>
               Bio
             </label>
             <TextField
-              cy-data={BioFielCy}
+              data-cy={BioFielCy}
               multiline
               className="textField"
               placeholder={'Une courte description de vous-même'}
               value={user?.bio ? user.bio : ''}
               onChange={(e) => setUser({ ...user, bio: e.target.value })}
             />
-            <Button cy-data={SaveButtonCy} disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
+            <Button data-cy={SaveButtonCy} disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
               Sauvegarder
             </Button>
           </form>

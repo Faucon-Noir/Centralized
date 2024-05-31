@@ -47,11 +47,8 @@ describe('AccountPage', () => {
 			}
 		})
 	})
-})
 
-describe('AccountPageData', () => {
 	it('should display user information', () => {
-		cy.visit('http://localhost:3000/account')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 		;[
 			FirstNameFielCy,
