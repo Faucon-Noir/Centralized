@@ -69,9 +69,10 @@ Cypress.Commands.add(
 Cypress.Commands.add('login', (): void => {
 	cy.visit('localhost:3000/login')
 	// Token valide 10 ans
+	localStorage.clear()
 	localStorage.setItem(
 		'token',
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkMzQ1ZWEyLTJhNWYtNDJmMi1hNTg4LTU2MGZmNGVhYmE4ZSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzE3MTY4NzAyLCJleHAiOjIwMzI3NDQ3MDJ9.VWTrnQtsblK4obJJ6xNKgriYkPp-jPWHCnFd1wKvMvQ'
+		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkMzQ1ZWEyLTJhNWYtNDJmMi1hNTg4LTU2MGZmNGVhYmE4ZSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzE3NTk3MDkyLCJleHAiOjI0NzQ5Nzk0OTJ9.So-Ldq8l1g_hSG6Nz7SdoAhbvdM4WNCkqHGy-wl3IjY"
 	)
 	cy.visit('localhost:3000/')
 	cy.viewport(1920, 1080)

@@ -46,8 +46,8 @@ declare global {
 			): Chainable<JQuery<HTMLElement>>
 
 			/**
-			 * Custom command to login with a user
-			 * @example cy.login('user')
+			 * Custom command to login
+			 * @example cy.login()
 			 */
 			login(): void
 

@@ -10,7 +10,7 @@ function LoginPage() {
         <div className="page-container">
             <Grid container sx={MainGridStyle}>
                 <Grid data-cy={WhiteGridCy} container xs={9} justifyContent='center' alignItems='center'>
-                    <RegistrationForm data-cy={RegistrationFormCy} />
+                    <RegistrationForm />
                 </Grid>
                 <Grid data-cy={BlueGridCy} xs={3} sx={BlueGrid}>
                     <div className="logo">

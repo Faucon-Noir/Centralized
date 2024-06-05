@@ -6,15 +6,7 @@
 			"firstname": "JDC",
 			"mail": "beuret_m@etna-alternance.net",
 			"bio": "Je suis un petit suisse",
-			"tel": "+33 7 01 21 94 14"
-		},
-		"user2": {
-			"id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
-			"lastname": "2048",
-			"firstname": "JDC",
-			"mail": "beuret_m@etna-alternance.net",
-			"bio": "Je suis un petit suisse",
-			"tel": "+33 7 01 21 94 14"
+			"phone": "+33 7 01 21 94 14"
 		}
 	},
 	"ticket": {},

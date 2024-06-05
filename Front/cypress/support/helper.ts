@@ -8,7 +8,7 @@
 //   "password": "string"
 // }
 export const mockGetUserByIdHttpCall = (id: string) => {
-	cy.intercept('GET', `http://localhost:3000/api/user/${id}`, {
+	cy.intercept('GET', `http://localhost:8000/api/user/${id}`, {
 		fixture: `user/${id}.json`,
-	}).as('user')
+	}).as('getUserById')
 }

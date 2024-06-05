@@ -40,9 +40,11 @@ import {
 
 // Collection de test pour la page de login
 describe('LoginPage', () => {
+	beforeEach(() => {
+		cy.visit('http://localhost:3000/login')
+	})
 	// Test pour vérifier que la page de login s'affiche correctement
 	it('should display all page elements', () => {
-		cy.visit('http://localhost:3000/login')
 		;[WhiteGridCy, BlueGridCy].forEach((grid) => {
 			cy.centralizedGet(grid).should('be.visible')
 			switch (grid) {

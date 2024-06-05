@@ -50,22 +50,19 @@ describe('AccountPage', () => {
 
 	it('should display user information', () => {
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
-		;[
-			FirstNameFielCy,
-			LastNameFielCy,
-			EmailFielCy,
-			PhoneFielCy,
-			BioFielCy,
-		].forEach((element) => {
-			;[
-				'JDC',
-				'2048',
-				'beuret_m@etna-alternance.net',
-				'+33 7 01 21 94 14',
-				'Je suis un petit suisse',
-			].forEach((text) => {
-				cy.centralizedGet(element).should('have.text', text)
-			})
-		})
+		cy.wait('@getUserById')
+		const fieldValues = [
+			{ field: FirstNameFielCy, value: 'JDC' },
+			{ field: LastNameFielCy, value: '2048' },
+			{ field: EmailFielCy, value: 'beuret_m@etna-alternance.net' },
+			{ field: PhoneFielCy, value: '+33 7 01 21 94 14' },
+			{ field: BioFielCy, value: 'Je suis un petit suisse' },
+		  ];
+		  
+		  fieldValues.forEach(({ field, value }) => {
+			// On récupère le field a tester, on trouve la saisie et on vérifie que la valeur est bien celle attendue
+			// Si on test un champ de saisie et qu'une erreur apparait, c'est une méthode de résolution
+			cy.centralizedGet(field).find('input, textarea').should('have.value', value);
+		  });
 	})
 })

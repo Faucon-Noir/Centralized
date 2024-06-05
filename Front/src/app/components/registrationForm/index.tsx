@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import { Poppins } from 'next/font/google'
 import confetti from "canvas-confetti";
 import { UserType } from "./type";
-import { CGUButtonCy, ForgotPasswordLinkCy, SwitchLoginButtonCy, MailFieldCy, NameFieldCy, PasswordFieldCy, PhoneFieldCy, SwitchRegisterButtonCy, SurnameFieldCy, SubmitButtonCy } from "./const";
+import { CGUButtonCy, ForgotPasswordLinkCy, SwitchLoginButtonCy, MailFieldCy, NameFieldCy, PasswordFieldCy, PhoneFieldCy, SwitchRegisterButtonCy, SurnameFieldCy, SubmitButtonCy, RegistrationFormCy } from "./const";
 
 const poppins = Poppins({ subsets: ['latin'], weight: "600" })
 
@@ -97,7 +97,7 @@ function RegistrationForm() {
   }
 
   return (
-    <Container maxWidth="sm">
+    <Container data-cy={RegistrationFormCy} maxWidth="sm">
       <h1 className="welcome">Bienvenue ✌🏻</h1>
       <Box sx={MainBoxStyle}>
         <Box
