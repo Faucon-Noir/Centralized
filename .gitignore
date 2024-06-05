@@ -1,6 +1,15 @@
 # File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
-# Created by https://www.toptal.com/developers/gitignore/api/yarn,windows,visualstudiocode,react,node,nextjs,dotenv,visualstudio
-# Edit at https://www.toptal.com/developers/gitignore?templates=yarn,windows,visualstudiocode,react,node,nextjs,dotenv,visualstudio
+# Created by https://www.toptal.com/developers/gitignore/api/yarn,windows,visualstudiocode,visualstudio,react,node,nextjs,dotenv,cypressio
+# Edit at https://www.toptal.com/developers/gitignore?templates=yarn,windows,visualstudiocode,visualstudio,react,node,nextjs,dotenv,cypressio
+
+### CypressIO ###
+# gitignore template for the CypressIO, browser test framework
+# website: https://www.cypress.io/
+
+cypress/results/*
+cypress/reports/*
+cypress/screenshots/*
+cypress/videos/*
 
 ### dotenv ###
 .env
@@ -638,10 +647,12 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/yarn,windows,visualstudiocode,react,node,nextjs,dotenv,visualstudio
+# End of https://www.toptal.com/developers/gitignore/api/yarn,windows,visualstudiocode,visualstudio,react,node,nextjs,dotenv,cypressio
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+
 .vscode
 yarn.lock
 package-lock.json
 *env
+cypress/downloads/*
