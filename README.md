@@ -16,13 +16,14 @@ Centralized - GPE 2023-2024
 | Date | 16/01/2024 |
 | Version | 1.0 |
 | Mots-clés |  |
-| Auteurs | Paul GILLET (gillet_p) |
+| Auteurs | Paul GILLET (gillet_p), Mathieu BEURET (beuret_m) |
 
 ## Rédaction et Modifications
 
 | Version | Date | Nom | Description |
 | :---: | :---: | :---: | :---: |
 | 1.0 | 16/01/2024 | Paul GILLET | Première version |
+| 1.1 | 31/05/2024 | Mathieu BEURET | Révision des procédures |
 
 ## Table des matières
 
