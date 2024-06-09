@@ -49,7 +49,7 @@ export default function Dashboard({ page = "" }) {
                             <p className="project_name">{project.name}</p>
                             <a><button className={page == 'specification' ? 'dashboard_button active' : 'dashboard_button'} onClick={(e) => router.push(`/specification/${project.id}`)}><img src="/assets/icons/specification.svg" alt="" />Cahier des charges</button></a>
                             <a href="/ticket"><button className={page == 'ticket' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/tickets.svg" alt="" />Tickets</button></a>
-                            <a href="/rex"><button className={page == 'rex' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/rex.svg" alt="" />Rex</button></a>
+                            <a href={"/rex/" + project.id}><button className={page == 'rex' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/rex.svg" alt="" />Rex</button></a>
                         </>
                         : null}
 
