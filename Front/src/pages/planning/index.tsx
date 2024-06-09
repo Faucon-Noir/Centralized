@@ -89,6 +89,8 @@ export default function Planning() {
     const [project, setProject] = useState<ProjectType[]>([]);
     const [projectview, setProjectView] = useState<ProjectViewType[]>([]);
     const [ticketproject, setTicketProject] = useState<any>({});
+    const [myList, setMyList] = useState([]);
+    const [eventColor, setEventColor] = useState('');
     function handleRedirect(e: any) {
         e.preventDefault();
         router.push('/ticket/create');
@@ -98,6 +100,7 @@ export default function Planning() {
         let user_id: string = "";
         var ticket_number_liste = {};
         if (isAuth) {
+            const project_id = localStorage.getItem("SelectedProject")
             const token: any = localStorage.getItem("token");
             const decodeToken: any = jwtDecode(token);
             user_id = decodeToken["id"];
@@ -169,6 +172,13 @@ export default function Planning() {
                                 event: ticket_liste,
                                 finished: false,
                             })
+                            if(element.id == project_id) {
+                                let test: any = ticket_liste; 
+                                if (test != null) {
+                                    setEventColor(numberToColor(element.color));
+                                    setMyList(test);
+                                }
+                            }
                         });
                     })
                     setProjectView(project_liste);
@@ -178,7 +188,6 @@ export default function Planning() {
             }, [token, user_id]);
         }
     }
-    const [myList, setMyList] = useState([])
     let handleEventSelection = useCallback((myevent: any, color: string) => {
         if (myevent != null) {
             setEventColor(color)
@@ -188,7 +197,6 @@ export default function Planning() {
     },
         [myList]
     );
-    const [eventColor, setEventColor] = useState('blue');
     const eventStyleGetter = () => {
         var style = {
             backgroundColor: eventColor

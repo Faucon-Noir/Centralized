@@ -1,39 +1,34 @@
 "use client";
 
+import { FormEvent } from 'react'
+import { useRouter } from 'next/router'
 import "./style.scss"
-import { useRouter } from "next/router";
-import Link from "next/link";
 import { Grid } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { numberToColor } from '@/app/helpers';
+import CustomEditor from '@/app/components/customEditor';
+import CheckIcon from '@mui/icons-material/Check';
+import { useCallback } from 'react';
 import Dashboard from "@/app/components/Dashboard/Dashboard";
-import { ProjectType } from "../type";
 
-export default function Specification() {
+export default function SpecificationEdit() {
   const router = useRouter();
-  const [project, setProject] = useState<ProjectType>({
-    id: "",
-    color: 0,
-    team: "",
-    user: "",
-    name: "",
-    description: "",
-    functionality: "",
-    forecast: "",
-    start_date: "",
-    end_date: "",
-    budget: "",
-    technology: "",
-    constraints: "",
-    validation: "",
-    team_user: "",
-    constraint: "",
-    template: "",
-    status: false
-  });
-  // let project: string = '' ou setProject(...project, id: idProject)
+  const [project, setProject] = useState<string>('');
+  const [specification, setSpecification] = useState<string>('');
+  const [mySpecification, setMySpecification] = useState<{ charge: string }>({ charge: "" });
+  let contentText: string = '';
+  const [text, setText] = useState<string | undefined>(contentText);
+
+  const handleChangeContentText = useCallback(
+    (value: string) => {
+      if (value !== text) {
+        setText(value);
+      }
+    },
+    [setText, text]
+  );
+
   if (typeof window !== 'undefined') {
 
     const isAuth: boolean = !!localStorage.getItem("token");
@@ -44,21 +39,10 @@ export default function Specification() {
       user_id = decodeToken["id"];
 
       useEffect(() => {
-        let idProject: string = new URL(window.location.href).pathname.split('/')[2]
+        let idProject = new URL(window.location.href).pathname.split('/')[2]
+        setProject(idProject)
         if (!idProject) {
           router.push("/specification");
-        }
-
-        //GET PROJECT OF USER
-        try {
-          axios.get(`http://localhost:8000/api/project/${idProject}`, {
-            headers: { Authorization: `Bearer ${token}` }
-          }).then(res => {
-            setProject(res.data)
-            console.log(res.data)
-          })
-        } catch (error) {
-          console.log(error);
         }
         //GET PROJECT OF USER
         try {
@@ -66,9 +50,9 @@ export default function Specification() {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => {
             let new_specification = res.data.cdc;
-            const element: Element | null = document.querySelector('.box-specification');
-            if (element) { element.innerHTML = new_specification; }
-
+            setMySpecification({ charge: new_specification })
+            setText(new_specification)
+            setSpecification(res.data.id)
           })
         } catch (error) {
           console.log(error);
@@ -78,21 +62,40 @@ export default function Specification() {
     }
   }
 
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const token: any = localStorage.getItem("token");
+    // TODO: data a revoir => x n'exsite pas sur le type EventTarget
+    axios.patch(`http://localhost:8000/api/cdc/${specification}`, {
+      cdc: text
+    }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(function (response) {
+        if (response.status === 200) {
+          router.push(`/specification/${project}`)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
-    <>
+    <div>
       <Grid container>
         <Grid xs={2}>
           <Dashboard page="specification" />
         </Grid>
         <Grid xs={10}>
-          <div className="right_container">
-            <div className="Presentation">
-              <div className='TitrePage' style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}> {project ? <h1>Mon cahier des charges</h1> : null}</div>
+          <form onSubmit={handleSubmit}>
+            <div className="box-specification">
+              <CustomEditor content={mySpecification.charge} onChange={(value: string) => handleChangeContentText(value)} />
+              <button type="submit">
+                <CheckIcon />
+              </button>
             </div>
-            <div className="box-specification" onClick={(e) => router.push(`/specification/${project.id}/edit`)} style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}></div>
-          </div>
+          </form>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 }
