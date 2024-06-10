@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import axios, { AxiosResponse } from "axios";
 import { MyRexType, RexType } from './type';
 import { ProjectType } from '../specification/type';
+import Dashboard from '@/app/components/Dashboard/Dashboard';
 
 export default function Page() {
   // On récupère l'id dans l'url et on le change en nombre
@@ -130,7 +131,7 @@ export default function Page() {
     <div>
       <Grid container>
         <Grid xs={2}>
-          <PermanentDrawerLeft page="rex" />
+          <Dashboard page="rex" />
         </Grid>
         <Grid xs={10}>
           {IsForm ?
