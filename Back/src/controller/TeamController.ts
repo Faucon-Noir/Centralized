@@ -19,6 +19,10 @@ import "reflect-metadata";
 
 import * as dotenv from "dotenv";
 import { multerConfig } from "../config/multer";
+import { TeamUserDto } from "../dto/TeamUserDto";
+import { ErrorDto, SuccessDto } from "../dto/ResultDto";
+import { UserDto } from "../dto/UserDto";
+import { TeamDto } from "../dto/TeamDto";
 dotenv.config();
 
 @JsonController()
@@ -86,7 +90,7 @@ export class TeamController {
 		@Param("userid") userid: string,
 		@UploadedFiles("avatar", { options: multerConfig })
 		storedFiles: Array<any>
-	) {
+	): Promise<TeamUser | ErrorDto> {
 		try {
 			const team: Team = data;
 			if (!team) throw new Error("Team not created");
@@ -161,7 +165,9 @@ export class TeamController {
 	 * @param data - The data containing the user and team IDs.
 	 * @returns The added team user.
 	 */
-	public async addUserTeam(@Body() data: TeamUser) {
+	public async addUserTeam(
+		@Body() data: TeamUser
+	): Promise<TeamUser | ErrorDto> {
 		try {
 			var mail = data.getUser();
 			const user: User = await this.userRepository.findOne({
@@ -243,7 +249,9 @@ export class TeamController {
 	 * @returns A promise that resolves to an array of teams.
 	 * @throws An error if the user is not found.
 	 */
-	public async getAllTeamFromUser(@Param("id") id: string) {
+	public async getAllTeamFromUser(
+		@Param("id") id: string
+	): Promise<TeamUserDto[] | ErrorDto> {
 		try {
 			const team_of_user = await this.teamuserRepository
 				.createQueryBuilder("team_user")
@@ -301,7 +309,9 @@ export class TeamController {
 	 * @returns A Promise that resolves to an array of users in the team.
 	 * @throws If the team is not found, an error is thrown.
 	 */
-	public async getAllUserFromTeam(@Param("id") id: string) {
+	public async getAllUserFromTeam(
+		@Param("id") id: string
+	): Promise<UserDto[] | ErrorDto> {
 		try {
 			const users_in_team = await this.teamuserRepository
 				.createQueryBuilder("team_user")
@@ -356,7 +366,7 @@ export class TeamController {
 	 * @param id - The ID of the team to retrieve.
 	 * @returns The team object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string) {
+	public async getOne(@Param("id") id: string): Promise<Team | ErrorDto> {
 		try {
 			const team: Team = await this.teamRepository.findOne({
 				where: { id },
@@ -411,7 +421,9 @@ export class TeamController {
 	 * @param id - The ID of the team to remove.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(@Param("id") id: string) {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const team: Team = await this.teamRepository.findOne({
 				where: { id },
@@ -468,7 +480,9 @@ export class TeamController {
 	 * @param id - The ID of the user to be removed from the team.
 	 * @returns A success message if the user is successfully removed from the team, or an error message if an error occurs.
 	 */
-	public async removeUserTeam(@Param("id") id: string) {
+	public async removeUserTeam(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const teamuser: TeamUser = await this.teamuserRepository.findOne({
 				where: { id },
@@ -568,7 +582,7 @@ export class TeamController {
 		@Body() data: Team,
 		@UploadedFiles("avatar", { options: multerConfig })
 		storedFiles: Array<any>
-	) {
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const team: Team = await this.teamRepository.findOne({
 				where: { id },
@@ -578,7 +592,7 @@ export class TeamController {
 			console.log(data);
 			// Version avatar
 			if (storedFiles) {
-				const files = storedFiles.map((file) => {
+				const files = storedFiles.map((file): SuccessDto => {
 					data.setAvatar(file.filename);
 					this.teamRepository.save({ ...team, ...data });
 					return { success: "Team updated" };

@@ -17,6 +17,8 @@ import { CheckAuth } from "../middleware/Auth";
 import "reflect-metadata";
 
 import * as dotenv from "dotenv";
+import { SuccessDto, ErrorDto } from "../dto/ResultDto";
+import { TicketDto } from "../dto/TicketDto";
 dotenv.config();
 
 @JsonController()
@@ -61,7 +63,9 @@ export class TicketController {
 	 * @param data - The ticket data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async createTicket(@Body() data: Ticket) {
+	public async createTicket(
+		@Body() data: Ticket
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const planning = await this.planningRepository.findOne({
 				where: { id: data.getPlanning() },
@@ -125,7 +129,10 @@ export class TicketController {
 	 * @param data - The updated ticket data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(@Param("id") id: string, @Body() data: Ticket) {
+	public async update(
+		@Param("id") id: string,
+		@Body() data: Ticket
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.findOne({
 				where: { id },
@@ -174,7 +181,7 @@ export class TicketController {
 	 * @param id - The ID of the ticket to retrieve.
 	 * @returns The ticket object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string) {
+	public async getOne(@Param("id") id: string): Promise<Ticket | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.findOne({
 				where: { id },
@@ -223,7 +230,7 @@ export class TicketController {
 	 */
 	public async getAllTicketByPlanning(
 		@Param("planningid") planningid: string
-	) {
+	): Promise<Ticket | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.find({
 				where: { planning: { id: planningid } },
@@ -270,7 +277,9 @@ export class TicketController {
 	 * @param projectid - The ID of the project.
 	 * @returns A promise that resolves to the array of tickets or an error object.
 	 */
-	public async getAllTicketByProject(@Param("projectid") projectid: string) {
+	public async getAllTicketByProject(
+		@Param("projectid") projectid: string
+	): Promise<Ticket | ErrorDto> {
 		try {
 			const planning: Planning = await this.planningRepository.find({
 				where: { project: { id: projectid } },
@@ -320,7 +329,9 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getAllTicketByUser(@Param("userid") userid: string) {
+	public async getAllTicketByUser(
+		@Param("userid") userid: string
+	): Promise<TicketDto[] | ErrorDto> {
 		try {
 			const ticket = await this.ticketRepository
 				.createQueryBuilder("ticket")
@@ -383,7 +394,9 @@ export class TicketController {
 	 * @param id - The ID of the ticket to be removed.
 	 * @returns A promise that resolves to an object with a success property if the ticket is deleted successfully, or an error property if an error occurs.
 	 */
-	public async remove(@Param("id") id: string) {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.findOne({
 				where: { id },

@@ -1,5 +1,4 @@
 import { ProjectDto } from "./ProjectDto";
-import { TicketDto } from "./TicketDto";
 
 export interface PlanningDto {
 	id: string;

@@ -25,6 +25,7 @@ import * as fs from "fs";
 import * as dotenv from "dotenv";
 import { Ticket } from "../entity/Ticket";
 import { StatusEnum } from "../enum";
+import { SuccessDto, ErrorDto } from "../dto/ResultDto";
 dotenv.config();
 
 // TODO: Retourner un statut pending tant que l'ia n'as aps terminé de créer un
@@ -259,7 +260,7 @@ export class SpecificationController {
 		@Req() req: any,
 		@Param("teamid") teamid: string,
 		@Param("userid") userid: string
-	) {
+	): Promise<SuccessDto | ErrorDto> {
 		//On recherche l'id de la team pour l'attribuer au nouveau projet
 		const team: Team = await this.teamRepository.findOne({
 			where: { id: teamid },
@@ -465,7 +466,7 @@ export class SpecificationController {
 	 * @param id - The ID of the Cdc entity.
 	 * @returns The retrieved Cdc entity if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string) {
+	public async getOne(@Param("id") id: string): Promise<Cdc | ErrorDto> {
 		try {
 			const cdc: Cdc = await this.cdcRepository.findOne({
 				where: { id },
@@ -517,7 +518,9 @@ export class SpecificationController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the retrieved CDCs or an error object.
 	 */
-	public async getAllCdcByUser(@Param("userid") userid: string) {
+	public async getAllCdcByUser(
+		@Param("userid") userid: string
+	): Promise<Cdc | ErrorDto> {
 		try {
 			const cdc: Cdc = await this.cdcRepository.find({
 				where: { user: { id: userid } },
@@ -569,7 +572,9 @@ export class SpecificationController {
 	 * @param projectid - The ID of the project.
 	 * @returns A Promise that resolves to the retrieved CDCs, or an error object if not found.
 	 */
-	public async getAllCdcByProject(@Param("projectid") projectid: string) {
+	public async getAllCdcByProject(
+		@Param("projectid") projectid: string
+	): Promise<Cdc | ErrorDto> {
 		try {
 			const cdc: Cdc = await this.cdcRepository.findOne({
 				where: { project: { id: projectid } },
@@ -624,7 +629,9 @@ export class SpecificationController {
 	 * @param id - The ID of the Cdc to remove.
 	 * @returns A promise that resolves to an object with a success property if the Cdc is deleted successfully, or an error property if an error occurs.
 	 */
-	public async remove(@Param("id") id: string) {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const cdc: Cdc = await this.cdcRepository.findOne({
 				where: { id },
@@ -687,7 +694,10 @@ export class SpecificationController {
 	 * @param data - The updated data for the Cdc record.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(@Param("id") id: string, @Body() data: Cdc) {
+	public async update(
+		@Param("id") id: string,
+		@Body() data: Cdc
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const cdc: Cdc = await this.cdcRepository.findOne({
 				where: { id },

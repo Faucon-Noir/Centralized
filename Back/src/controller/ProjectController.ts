@@ -14,6 +14,7 @@ import { Team } from "../entity/Team";
 import { CheckAuth } from "../middleware/Auth";
 import "reflect-metadata";
 import * as dotenv from "dotenv";
+import { ErrorDto, SuccessDto } from "../dto/ResultDto";
 dotenv.config();
 
 @JsonController()
@@ -68,7 +69,7 @@ export class ProjectController {
 	 * @param id - The ID of the project to retrieve.
 	 * @returns The project object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string) {
+	public async getOne(@Param("id") id: string): Promise<Project | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.findOne({
 				where: { id },
@@ -119,7 +120,9 @@ export class ProjectController {
 	 * @returns A Promise that resolves to the project associated with the user.
 	 * @throws An error if the project is not found.
 	 */
-	public async getAllPojectByUser(@Param("userid") userid: string) {
+	public async getAllPojectByUser(
+		@Param("userid") userid: string
+	): Promise<Project | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.find({
 				where: { user: { id: userid } },
@@ -173,7 +176,9 @@ export class ProjectController {
 	 * @param id - The ID of the project to be removed.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(@Param("id") id: string) {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.findOne({
 				where: { id },
@@ -234,7 +239,10 @@ export class ProjectController {
 	 * @param data - The updated project data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(@Param("id") id: string, @Body() data: Project) {
+	public async update(
+		@Param("id") id: string,
+		@Body() data: Project
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.findOne({
 				where: { id },

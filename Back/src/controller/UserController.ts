@@ -4,7 +4,6 @@ import {
 	Body,
 	Get,
 	Post,
-	Put,
 	Delete,
 	Req,
 	UseBefore,
@@ -23,7 +22,12 @@ import { multerConfig } from "../config/multer";
 
 import * as dotenv from "dotenv";
 import { UserDto } from "../dto/UserDto";
-import { ErrorDto } from "../dto/ErrorDto";
+import {
+	ErrorDto,
+	ErrorAuthDto,
+	SuccessDto,
+	SuccessAuthDto,
+} from "../dto/ResultDto";
 dotenv.config();
 
 @JsonController()
@@ -75,7 +79,9 @@ export class UserController {
 	 * @param data - The user data to be registered.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async register(@Body() data: User) {
+	public async register(
+		@Body() data: User
+	): Promise<SuccessAuthDto | ErrorAuthDto> {
 		try {
 			// verif object existing in data source
 			const hasAccountWithEmail: User = await this.userRepository.findOne(
@@ -168,7 +174,10 @@ export class UserController {
 	 * @returns An object containing the success message and the generated token if authentication is successful,
 	 *          otherwise an object containing the error message.
 	 */
-	public async login(@Body() data: User, @Req() req: any) {
+	public async login(
+		@Body() data: User,
+		@Req() req: any
+	): Promise<SuccessAuthDto | ErrorAuthDto> {
 		try {
 			// find object in data source
 			const user: User = await this.userRepository.findOne({
@@ -372,7 +381,7 @@ export class UserController {
 		@Body() data: User,
 		@UploadedFiles("avatar", { options: multerConfig })
 		storedFiles: Array<any>
-	) {
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			var user: User = await this.userRepository.findOne({
 				where: { id },
@@ -444,7 +453,9 @@ export class UserController {
 	 * @param id - The ID of the user account to be removed.
 	 * @returns A promise that resolves to an object with a success property if the account is deleted, or an error property if an error occurs.
 	 */
-	public async remove(@Param("id") id: string) {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const user: User = await this.userRepository.findOne({
 				where: { id },
@@ -498,7 +509,10 @@ export class UserController {
 	 * @param req - The request object.
 	 * @returns The password reset link or an error object.
 	 */
-	public async requestResetPassword(@Body() data: User, @Req() req: any) {
+	public async requestResetPassword(
+		@Body() data: User,
+		@Req() req: any
+	): Promise<string | ErrorDto> {
 		try {
 			const user: User = await this.userRepository.findOne({
 				where: { mail: data.getMail() },
@@ -568,7 +582,10 @@ export class UserController {
 	 * @param req - The request object.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async resetPassword(@Body() data: any, @Req() req: any) {
+	public async resetPassword(
+		@Body() data: any,
+		@Req() req: any
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			let passwordResetToken = await req.session.token;
 			if (!passwordResetToken)
