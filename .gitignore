@@ -653,5 +653,6 @@ FodyWeavers.xsd
 
 .vscode
 yarn.lock
+package-lock.json
 *env
 cypress/downloads/*
