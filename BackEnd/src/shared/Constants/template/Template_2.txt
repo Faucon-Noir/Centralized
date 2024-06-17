@@ -1,0 +1,26 @@
+1 Votre projet
+    1.1 Description du projet
+    1.2 Vos besoins
+2 Objectifs
+    2.1 Objectifs qualitatifs
+    2.2 Objectifs quantitatifs
+    2.3 Votre cible
+3 Caractéristiques
+    3.1 OS supportés
+    3.2 Type de diffusion
+    3.3 Type de logiciel
+    3.4 Demandes spécifiques
+    3.5 Exemple de logiciel
+4 Fonctionnalités
+5 Contraintes techniques
+6 Structure
+    6.1 Arborescence de votre futur logiciel
+    6.2 Nombre de pages estimées
+7 Design
+    7.1 Exigence graphiques
+8 Déroulement du projet
+    8.1 Gestion de projet
+    8.2 Communication
+    8.3 Autre
+    8.4 Délais
+    8.5 Budget
