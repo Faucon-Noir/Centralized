@@ -1,7 +1,10 @@
-export interface TeamDto {
-	id: string;
+export interface CreateTeamDto {
 	name: string;
 	avatar: string;
 }
-export interface CreateTeamDto {}
-export interface UpdateTeamDto {}
+
+export interface TeamDto extends CreateTeamDto {
+	id: string;
+}
+
+export interface UpdateTeamDto extends Partial<TeamDto> {}

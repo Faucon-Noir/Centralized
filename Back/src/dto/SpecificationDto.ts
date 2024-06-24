@@ -11,4 +11,4 @@ export interface SpecificationDto {
 }
 
 export interface CreateSpecificationDto {}
-export interface UpdateSpecificationDto {}
+export interface UpdateSpecificationDto extends Partial<SpecificationDto> {}

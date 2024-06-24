@@ -81,7 +81,7 @@ export class UserController {
 	 */
 	public async register(
 		@Body() data: User
-	): Promise<SuccessAuthDto | ErrorAuthDto> {
+	): Promise<SuccessAuthDto | ErrorDto> {
 		try {
 			// verif object existing in data source
 			const hasAccountWithEmail: User = await this.userRepository.findOne(
@@ -177,7 +177,7 @@ export class UserController {
 	public async login(
 		@Body() data: User,
 		@Req() req: any
-	): Promise<SuccessAuthDto | ErrorAuthDto> {
+	): Promise<SuccessAuthDto | ErrorDto> {
 		try {
 			// find object in data source
 			const user: User = await this.userRepository.findOne({

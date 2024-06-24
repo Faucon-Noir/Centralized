@@ -26,6 +26,7 @@ import * as dotenv from "dotenv";
 import { Ticket } from "../entity/Ticket";
 import { StatusEnum } from "../enum";
 import { SuccessDto, ErrorDto } from "../dto/ResultDto";
+import { SpecificationDto } from "../dto/SpecificationDto";
 dotenv.config();
 
 // TODO: Retourner un statut pending tant que l'ia n'as aps terminé de créer un
@@ -466,9 +467,11 @@ export class SpecificationController {
 	 * @param id - The ID of the Cdc entity.
 	 * @returns The retrieved Cdc entity if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string): Promise<Cdc | ErrorDto> {
+	public async getOne(
+		@Param("id") id: string
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
-			const cdc: Cdc = await this.cdcRepository.findOne({
+			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { id },
 			});
 			if (!cdc) throw new Error("Cdc not found");
@@ -520,9 +523,9 @@ export class SpecificationController {
 	 */
 	public async getAllCdcByUser(
 		@Param("userid") userid: string
-	): Promise<Cdc | ErrorDto> {
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
-			const cdc: Cdc = await this.cdcRepository.find({
+			const cdc: SpecificationDto = await this.cdcRepository.find({
 				where: { user: { id: userid } },
 			});
 			if (!cdc) throw new Error("Cdc not found");
@@ -574,9 +577,9 @@ export class SpecificationController {
 	 */
 	public async getAllCdcByProject(
 		@Param("projectid") projectid: string
-	): Promise<Cdc | ErrorDto> {
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
-			const cdc: Cdc = await this.cdcRepository.findOne({
+			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { project: { id: projectid } },
 			});
 			if (!cdc) throw new Error("Cdc not found");
@@ -633,7 +636,7 @@ export class SpecificationController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const cdc: Cdc = await this.cdcRepository.findOne({
+			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { id },
 			});
 			if (!cdc) throw new Error("Cdc not found");
@@ -699,7 +702,7 @@ export class SpecificationController {
 		@Body() data: Cdc
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const cdc: Cdc = await this.cdcRepository.findOne({
+			const cdc = await this.cdcRepository.findOne({
 				where: { id },
 			});
 			if (!cdc) throw new Error("Cdc not found");

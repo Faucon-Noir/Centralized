@@ -1,7 +1,6 @@
 import { StatusEnum } from "../enum";
 
-export interface TicketDto {
-	id: string;
+export interface CreateTicketDto {
 	title: string;
 	description: string;
 	urgenceId: number;
@@ -9,7 +8,11 @@ export interface TicketDto {
 	start_date: Date;
 	end_date: Date;
 	planningId: string;
+}
+
+export interface TicketDto extends CreateTicketDto {
+	id: string;
 	userId: string;
 }
-export interface CreateTicketDto {}
-export interface UpdateTicketDto {}
+
+export interface UpdateTicketDto extends Partial<TicketDto> {}

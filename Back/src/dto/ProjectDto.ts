@@ -1,5 +1,4 @@
-export interface ProjectDto {
-	id: string;
+export interface CreateProjectDto {
 	name: string;
 	description: string;
 	functionality: string;
@@ -14,6 +13,8 @@ export interface ProjectDto {
 	status: boolean;
 	color: number;
 }
+export interface ProjectDto extends CreateProjectDto {
+	id: string;
+}
 
-export interface CreateProjectDto {}
-export interface UpdateProjectDto {}
+export interface UpdateProjectDto extends Partial<ProjectDto> {}

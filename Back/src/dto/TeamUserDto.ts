@@ -1,11 +1,13 @@
 import { TeamDto } from "./TeamDto";
 import { UserDto } from "./UserDto";
 
-export interface TeamUserDto {
-	id: string;
+export interface CreateTeamUserDto {
 	team: TeamDto;
 	user: UserDto;
 }
 
-export interface CreateTeamUserDto {}
-export interface UpdateTeamUserDto {}
+export interface TeamUserDto extends CreateTeamUserDto {
+	id: string;
+}
+
+export interface UpdateTeamUserDto extends Partial<TeamUserDto> {}
