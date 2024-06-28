@@ -15,6 +15,7 @@ import { CheckAuth } from "../middleware/Auth";
 import "reflect-metadata";
 import * as dotenv from "dotenv";
 import { ErrorDto, SuccessDto } from "../dto/ResultDto";
+import { ProjectDto } from "../dto/ProjectDto";
 dotenv.config();
 
 @JsonController()
@@ -69,9 +70,11 @@ export class ProjectController {
 	 * @param id - The ID of the project to retrieve.
 	 * @returns The project object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string): Promise<Project | ErrorDto> {
+	public async getOne(
+		@Param("id") id: string
+	): Promise<ProjectDto | ErrorDto> {
 		try {
-			const project: Project = await this.projectRepository.findOne({
+			const project: ProjectDto = await this.projectRepository.findOne({
 				where: { id },
 			});
 			if (!project) throw new Error("Project not found");
@@ -122,9 +125,9 @@ export class ProjectController {
 	 */
 	public async getAllPojectByUser(
 		@Param("userid") userid: string
-	): Promise<Project | ErrorDto> {
+	): Promise<ProjectDto | ErrorDto> {
 		try {
-			const project: Project = await this.projectRepository.find({
+			const project: ProjectDto = await this.projectRepository.find({
 				where: { user: { id: userid } },
 				order: { start_date: "ASC" },
 			});
@@ -180,7 +183,7 @@ export class ProjectController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const project: Project = await this.projectRepository.findOne({
+			const project: ProjectDto = await this.projectRepository.findOne({
 				where: { id },
 			});
 			if (!project) throw new Error("Project not found");
@@ -241,7 +244,7 @@ export class ProjectController {
 	 */
 	public async update(
 		@Param("id") id: string,
-		@Body() data: Project
+		@Body() data: ProjectDto
 	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.findOne({

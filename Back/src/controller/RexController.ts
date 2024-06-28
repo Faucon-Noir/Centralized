@@ -20,6 +20,7 @@ import "reflect-metadata";
 
 import * as dotenv from "dotenv";
 import { SuccessDto, ErrorDto } from "../dto/ResultDto";
+import { RexDto } from "../dto/RexDto";
 dotenv.config();
 
 @Controller()
@@ -132,9 +133,9 @@ export class RexController {
 	 * @param id - The ID of the Rex entity to retrieve.
 	 * @returns The retrieved Rex entity if found, otherwise an object with an error message.
 	 */
-	public async getOne(@Param("id") id: string): Promise<Rex | ErrorDto> {
+	public async getOne(@Param("id") id: string): Promise<RexDto | ErrorDto> {
 		try {
-			const rex: Rex = await this.rexRepository.findOne({
+			const rex: RexDto = await this.rexRepository.findOne({
 				where: { id },
 			});
 			if (!rex) throw new Error("Rex not found");
@@ -189,9 +190,9 @@ export class RexController {
 	 */
 	public async getAllRexByProject(
 		@Param("projectid") projectid: string
-	): Promise<Rex | ErrorDto> {
+	): Promise<RexDto | ErrorDto> {
 		try {
-			const rex: Rex = await this.rexRepository.findOne({
+			const rex: RexDto = await this.rexRepository.findOne({
 				where: { project: { id: projectid } },
 			});
 			if (!rex) throw new Error("Rex not found");
@@ -253,7 +254,7 @@ export class RexController {
 	 */
 	public async update(
 		@Param("id") id: string,
-		@Body() data: Rex
+		@Body() data: RexDto
 	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const rex: Rex = await this.rexRepository.findOne({
@@ -315,7 +316,7 @@ export class RexController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const rex: Rex = await this.rexRepository.findOne({
+			const rex: RexDto = await this.rexRepository.findOne({
 				where: { id },
 			});
 			if (!rex) throw new Error("Rex not found");

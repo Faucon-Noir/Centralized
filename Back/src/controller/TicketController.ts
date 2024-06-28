@@ -131,7 +131,7 @@ export class TicketController {
 	 */
 	public async update(
 		@Param("id") id: string,
-		@Body() data: Ticket
+		@Body() data: TicketDto
 	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.findOne({
@@ -181,9 +181,11 @@ export class TicketController {
 	 * @param id - The ID of the ticket to retrieve.
 	 * @returns The ticket object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string): Promise<Ticket | ErrorDto> {
+	public async getOne(
+		@Param("id") id: string
+	): Promise<TicketDto | ErrorDto> {
 		try {
-			const ticket: Ticket = await this.ticketRepository.findOne({
+			const ticket: TicketDto = await this.ticketRepository.findOne({
 				where: { id },
 			});
 			if (!ticket) throw new Error("Account not found");
@@ -230,9 +232,9 @@ export class TicketController {
 	 */
 	public async getAllTicketByPlanning(
 		@Param("planningid") planningid: string
-	): Promise<Ticket | ErrorDto> {
+	): Promise<TicketDto | ErrorDto> {
 		try {
-			const ticket: Ticket = await this.ticketRepository.find({
+			const ticket: TicketDto = await this.ticketRepository.find({
 				where: { planning: { id: planningid } },
 			});
 			if (!ticket) throw new Error("Ticket not found");
@@ -279,12 +281,12 @@ export class TicketController {
 	 */
 	public async getAllTicketByProject(
 		@Param("projectid") projectid: string
-	): Promise<Ticket | ErrorDto> {
+	): Promise<TicketDto | ErrorDto> {
 		try {
 			const planning: Planning = await this.planningRepository.find({
 				where: { project: { id: projectid } },
 			});
-			const ticket: Ticket = await this.ticketRepository.find({
+			const ticket: TicketDto = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
 			});
 			if (!ticket) throw new Error("Ticket not found");
@@ -398,7 +400,7 @@ export class TicketController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const ticket: Ticket = await this.ticketRepository.findOne({
+			const ticket: TicketDto = await this.ticketRepository.findOne({
 				where: { id },
 			});
 			if (!ticket) throw new Error("Ticket not found");

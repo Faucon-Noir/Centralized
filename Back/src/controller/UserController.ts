@@ -457,7 +457,7 @@ export class UserController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const user: User = await this.userRepository.findOne({
+			const user: UserDto = await this.userRepository.findOne({
 				where: { id },
 			});
 			if (!user) throw new Error("Account not found");

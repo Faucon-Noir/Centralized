@@ -170,12 +170,12 @@ export class TeamController {
 	): Promise<TeamUser | ErrorDto> {
 		try {
 			var mail = data.getUser();
-			const user: User = await this.userRepository.findOne({
+			const user: UserDto = await this.userRepository.findOne({
 				where: { mail },
 			});
 			if (!user) throw new Error("Account not found");
 
-			const team: Team = await this.teamRepository.findOne({
+			const team: TeamDto = await this.teamRepository.findOne({
 				where: { id: data.getTeam() },
 			});
 			if (!team) throw new Error("Team not found");
@@ -366,9 +366,9 @@ export class TeamController {
 	 * @param id - The ID of the team to retrieve.
 	 * @returns The team object if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string): Promise<Team | ErrorDto> {
+	public async getOne(@Param("id") id: string): Promise<TeamDto | ErrorDto> {
 		try {
-			const team: Team = await this.teamRepository.findOne({
+			const team: TeamDto = await this.teamRepository.findOne({
 				where: { id },
 			});
 			if (!team) throw new Error("Team not found");
@@ -425,7 +425,7 @@ export class TeamController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const team: Team = await this.teamRepository.findOne({
+			const team: TeamDto = await this.teamRepository.findOne({
 				where: { id },
 			});
 			if (!team) throw new Error("Team not found");
@@ -484,9 +484,11 @@ export class TeamController {
 		@Param("id") id: string
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const teamuser: TeamUser = await this.teamuserRepository.findOne({
-				where: { id },
-			});
+			const teamuser: TeamUserDto = await this.teamuserRepository.findOne(
+				{
+					where: { id },
+				}
+			);
 			if (!teamuser) throw new Error("User cannot be deleted from Team");
 			await this.teamuserRepository.remove(teamuser);
 			return { success: "User deleted from Team" };
@@ -584,7 +586,7 @@ export class TeamController {
 		storedFiles: Array<any>
 	): Promise<SuccessDto | ErrorDto> {
 		try {
-			const team: Team = await this.teamRepository.findOne({
+			const team: TeamDto = await this.teamRepository.findOne({
 				where: { id },
 			});
 			if (!team) throw new Error("Team not found");
