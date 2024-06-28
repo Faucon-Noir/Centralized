@@ -10,6 +10,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import useData from './hook';
 import { ProjectType } from "../specification/type";
 import { CreateTeamProps, TeamProps } from "./type";
+import Dashboard from "@/app/components/Dashboard/Dashboard";
 
 
 
@@ -48,7 +49,7 @@ function CreateTeam() {
         <>
             <Grid container>
                 <Grid xs={2}>
-                    <PermanentDrawerLeft page="team" />
+                    <Dashboard page="team" />
                 </Grid>
                 <Grid xs={10}>
                     <form>

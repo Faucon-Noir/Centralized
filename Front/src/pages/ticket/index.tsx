@@ -24,6 +24,7 @@ export default function Tickets() {
   const selected: TicketType | undefined = tickets.find((ticket: TicketType) => ticket.ticket_id === selectedTaskId);
 
   const options: any = [];
+  let project_id: string = "";
   for (let id = 0; id <= 4; id++) {
     options.push(<option key={id} value={id}>{urgenceIdToString(id)}</option>);
   }
@@ -75,7 +76,7 @@ export default function Tickets() {
       }).then(res => {
         if (res.status === 200) {
           try {
-            axios.get(`http://localhost:8000/api/ticket/user/${user_id}`, {
+            axios.get(`http://localhost:8000/api/ticket/project/${project_id}`, {
               headers: { Authorization: `Bearer ${token}` }
             }).then((res: any) => {
               setTickets(res.data);
@@ -100,12 +101,20 @@ export default function Tickets() {
       const token: any = localStorage.getItem("token");
       const decodeToken: any = jwtDecode(token);
       user_id = decodeToken["id"];
+      const isSelected: boolean = !!localStorage.getItem("SelectedProject");
+      if (isSelected) {
+        project_id = localStorage.getItem("SelectedProject")?? '';
+      } else {
+        router.push('/')
+      }
       useEffect(() => {
         try {
-          axios.get(`http://localhost:8000/api/ticket/user/${user_id}`, {
+          axios.get(`http://localhost:8000/api/ticket/project/${project_id}`, {
             headers: { Authorization: `Bearer ${token}` }
           }).then(res => {
-            setTickets(res.data);
+            if (!res.data.error) {
+              setTickets(res.data);
+            }
           })
         } catch (error) {
           console.log(error);

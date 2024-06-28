@@ -272,12 +272,15 @@ export class TicketController {
    */
   public async getAllTicketByProject(@Param("projectid") projectid: string) {
     try {
-      const planning: Planning = await this.planningRepository.find({
-        where: { project: { id: projectid } },
-      });
-      const ticket: Ticket = await this.ticketRepository.find({
-        where: { planning: { id: planning[0].getId() } },
-      });
+      const ticket = await this.ticketRepository
+        .createQueryBuilder("ticket")
+        .innerJoin("ticket.planning", 
+        "planning", 
+        "planning.projectid = :projectid",
+        { projectid: projectid })
+        .select(["ticket", "planning.project"])
+        .getRawMany();
+
       if (!ticket) throw new Error("Ticket not found");
       return ticket;
     } catch (err) {

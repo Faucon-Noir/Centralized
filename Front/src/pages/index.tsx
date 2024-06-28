@@ -99,26 +99,26 @@ export default function Home(): JSX.Element {
         }
 
         //GET TEAM OF USER
-        try {
-          axios.get(`http://localhost:8000/api/team/${user_id}`, {
-            headers: { Authorization: `Bearer ${token}` }
-          }).then(res => {
-            setTeam(res.data.team);
-            if (team) {
-              try {
-                axios.get(`http://localhost:8000/api/teamuser/${team.id}`, {
-                  headers: { Authorization: `Bearer ${token}` }
-                }).then(res => {
-                  setTeamUser(res.data);
-                })
-              } catch (error) {
-                console.log(error);
-              }
-            }
-          })
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   axios.get(`http://localhost:8000/api/team/${user_id}`, {
+        //     headers: { Authorization: `Bearer ${token}` }
+        //   }).then(res => {
+        //     setTeam(res.data.team);
+        //     if (team) {
+        //       try {
+        //         axios.get(`http://localhost:8000/api/teamuser/${team.id}`, {
+        //           headers: { Authorization: `Bearer ${token}` }
+        //         }).then(res => {
+        //           setTeamUser(res.data);
+        //         })
+        //       } catch (error) {
+        //         console.log(error);
+        //       }
+        //     }
+        //   })
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
         //GET TICKET INFO
         try {
@@ -160,7 +160,6 @@ export default function Home(): JSX.Element {
       lastproject = project[project.length - 1];
     }
     if (rex.length > 0) {
-      console.log(rex)
       lastrex = rex[0];
     }
   }
