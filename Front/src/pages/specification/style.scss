@@ -271,3 +271,19 @@ button:disabled {
   flex-wrap: wrap;
 
 }
+
+.fake-btn {
+  width: 50%;
+  padding: 5px 10px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  font-family: "__myFont_834f5e", "__myFont_Fallback_834f5e";
+  background-color: #0293FC;
+  color: white;
+  transition: all 350ms ease-in-out;
+}

@@ -272,7 +272,9 @@ export default function CreateSpecification() {
                 ))}
 
                 <div className="btn_container">
-                  <button id="monBouton" onClick={() => handleOpen()}>Suivant</button>
+                  <div className="fake-btn" onClick={() => handleOpen()}>
+                    <p>Suivant</p>
+                  </div>
                 </div>
               </div>
 
