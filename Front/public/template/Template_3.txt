@@ -1,15 +1,23 @@
 1 Contexte du projet
-
+    1.1 Description
+    1.2 Besoins Initiaux
+    1.3 Contexte techniques
 2 Objectifs du projet
-
+    2.1 Bénéfices attendus
+    2.2 Concurrence
 3 Périmètre du projet
-
+    3.1 Quelles sont les limites du projet
+    3.2 Qui est impliqué
+    3.3 Qui en sont les bénéficiaires principaux
 4 Aspects fonctionnels
-
+    4.1 Définition des objectifs
 5 Aspects techniques
-
+    5.1 Contraintes techniques
 6 Ressources
-
+    6.1 Ressources nécessaire au projet
+    6.2 Organisation des équipes
 7 Délais
-
+    7.1 Temps nécessaire à la réalisation du projet
+    7.2 Temps pour les tests
+    7.3 Temps pour la mise en Prod
 8 Budget

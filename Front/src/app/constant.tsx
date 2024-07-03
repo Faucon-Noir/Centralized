@@ -156,17 +156,49 @@ export const FormSpecification = [
 		idError: 12,
 		NameError: "Veuillez entrer la répartition des taches du projet",
 		placeholder: "Jean Dupont est le lead-dev, Paul Martin est administrateur système et Thomas Lopez est développeur web"
+	}
+	// ,
+	// {
+	// 	name: 'template',
+	// 	type: 'buttonGroup',
+	// 	label: 'Template',
+	// 	input: [],
+	// 	idError: 13,
+	// 	NameError: "Veuillez sélectionner un template",
+	// 	placeholder: "Template du projet"
+	// }
+]
+
+export const FormSpecificationPopup = [
+	{
+			name: 'template',
+			type: 'buttonGroup',
+			label: 'Template',
+			input: [],
+			idError: 13,
+			NameError: "Veuillez sélectionner un template",
+			placeholder: "Template du projet"
+		}
+]
+
+export const ListFichierTemplate = [
+	{
+		name: "template_1",
+		emplacement: "/template/Template_1.txt"},
+	{
+		name: "template_2",
+		emplacement: "/template/Template_2.txt"
 	},
 	{
-		name: 'template',
-		type: 'buttonGroup',
-		label: 'Template',
-		input: [],
-		idError: 13,
-		NameError: "Veuillez sélectionner un template",
-		placeholder: "Template du projet"
-	}
+		name: "template_3",
+		emplacement: "/template/Template_3.txt"
+	},
+	{
+		name: "template_4",
+		emplacement: "/template/Template_4.txt"
+	},
 ]
+
 export const creationTicket = [
 	{
 		name: 'title',

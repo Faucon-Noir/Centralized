@@ -1,17 +1,38 @@
-
+Historique des modifications	
 1. Préambule	
-
+1.1. Cession	
+1.2. Champ d'application	
+1.3. Définitions, acronymes et abréviations	
+1.4. Liens	
 2. Description générale	
-
+    2.1. Vision du produit	
+    2.2. Interaction du produit avec d'autres produits et composants	
+    2.3. Classes d'utilisateurs et caractéristiques	
+    2.5. Limites de conception et de mise en œuvre	
 3. Exigences fonctionnelles	
-    
+    3.1. Bloc fonctionnel « Autorisation »	
+        3.1.1. Description et priorité	
+        3.1.2. Relations de cause à effet	
+        3.1.3. Exigences fonctionnelles	
+        3.1.4. Algorithmes	
+    3.2. Bloc fonctionnel « Gestion des comptes utilisateurs système »	
+        3.2.1. Description et priorité	
+        3.2.2. Relations de cause à effet	
+        3.2.3. Exigences fonctionnelles	
+        3.2.4. Algorithmes	
+    3.3. Bloc fonction Rapports et tableau de bord	
+        3.3.1. Description et priorité	
+        3.3.3. Exigences fonctionnelles	
+        3.3.4. Algorithmes	
 4. Exigences non fonctionnelles	
-    
-Application	
+    4.1. Les interfaces	
+Interface utilisateur	
+    4.2. Documentation de l'utilisateur	
+    4.3. Exigences en matière de licence	
+    4.4. Mentions légales, droits d'auteur et autres	
+    4.5. Exigences de performance	
+    4.6. Exigences en matière de sécurité	
+    4.7. Attributs de qualité	
 Annexe A : Diagrammes de cas d'utilisation	
-
 Annexe B : Cas d'utilisation	
-
 Annexe C : Ensembles de champs	
-
-Reporting (trimestriel, financier, social)	

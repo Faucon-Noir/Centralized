@@ -2,20 +2,25 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import "./style.scss";
-import { FormSpecification, templateList } from "@/app/constant";
-import { Button, Grid, Radio, RadioGroup, Tooltip } from "@mui/material";
+import { FormSpecification, FormSpecificationPopup, templateList, ListFichierTemplate } from "@/app/constant";
+import { Box, Button, Grid, IconButton, Modal, Radio, RadioGroup, Tooltip } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
 import confetti from "canvas-confetti";
 import { Mosaic } from "react-loading-indicators";
 import { ProjectType, TeamType } from "./type";
-
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
+import { ModalContentStyle } from "./style";
+interface FileData {
+  name: string;
+  content: string;
+}
 export default function CreateSpecification() {
   const router = useRouter();
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [team, setTeam] = useState<TeamType[]>([]);
-  const [fileContents, setFileContents] = useState<string[]>([]);
+  const [fileContents, setFileContents] = useState<FileData[]>([]);
   const [load, setLoad] = useState<boolean>(false);
   const [Loading, setLoading] = useState<boolean>(false);
   const [Loading1, setLoading1] = useState<boolean>(false);
@@ -38,6 +43,7 @@ export default function CreateSpecification() {
     status: false,
   });
   const [isError, setIsError] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
   const keys = ['name', 'description', 'functionality', 'forecast', 'start_date', 'end_date', 'budget', 'technology', 'constraints', 'validation', 'team', 'team_user', 'template'];
 
   function verificationTicket() {
@@ -100,7 +106,12 @@ export default function CreateSpecification() {
       setLoad(false);
     }
   };
-
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   if (typeof window !== 'undefined') {
 
     const isAuth: boolean = !!localStorage.getItem("token");
@@ -121,6 +132,14 @@ export default function CreateSpecification() {
         } catch (error) {
           console.log(error);
         }
+        ListFichierTemplate.forEach(fileName => {
+          fetch(fileName.emplacement)
+            .then(response => response.text())
+            .then(data => {
+              const formattedData = data.replace(/\n/g, '<br/>');
+              setFileContents(prev => [...prev, { name: fileName.name, content: formattedData }]);
+            });
+        });
       }, [token, user_id]);
     } else {
       router.push("/login")
@@ -251,8 +270,9 @@ export default function CreateSpecification() {
                     ) : null}
                   </>
                 ))}
+
                 <div className="btn_container">
-                  <button type="submit" disabled={load} onClick={e => handleSubmit(e)}>Générer</button>
+                  <button id="monBouton" onClick={() => handleOpen()}>Suivant</button>
                 </div>
               </div>
 
@@ -260,8 +280,36 @@ export default function CreateSpecification() {
                 <p className="error_message">Une erreur est survenue</p> : ""
               }
             </div>
-            {/* A dev, pour remplacer le select des templates */}
+            <Modal open={open}>
+              <Box sx={ModalContentStyle}>
+                <IconButton onClick={handleClose} style={{ position: 'absolute', top: 10, right: 10 }}>
+                  <CloseOutlinedIcon />
+                </IconButton>
+                <div className="form_container">
+                  <div className="containerPopup">
+                    {fileContents.map((fileName, index) => (
+                      <div key={index}>
+                        <input type="radio" id={fileName.name} name="template" value={fileName.name} />
+                        <label htmlFor={fileName.name}>
+                          <div className="boxPopup">
+                            <p dangerouslySetInnerHTML={{ __html: fileName.content }} />
+                          </div>
+                        </label>
+                        <h2></h2>
+
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="btn_container">
+                    <button type="submit" disabled={load} onClick={e => handleSubmit(e)}>Générer</button>
+                  </div>
+                </div>
+              </Box >
+            </Modal >
           </form>
+
+
         </Grid >
       </Grid >
     </>
