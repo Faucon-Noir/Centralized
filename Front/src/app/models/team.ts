@@ -1,3 +1,3 @@
 import { Common } from './common';
 
-export type User = Common & {};
+export type Team = Common & {};

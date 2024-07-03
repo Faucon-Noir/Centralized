@@ -3,11 +3,11 @@
   "useTabs": true,
   "trailingComma": "es5",
   "singleQuote": true,
-  "quoteProps":"as-needed",
+  "quoteProps": "as-needed",
   "jsxSingleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": false,
   "arrowParens": "always",
-  "semi": false,
+  "semi": true,
   "endOfLine": "lf"
 }
