@@ -30,6 +30,7 @@ export default function Tickets() {
 	)
 
 	const options: any = []
+	let project_id: string = ''
 	for (let id = 0; id <= 4; id++) {
 		options.push(
 			<option key={id} value={id}>
@@ -111,7 +112,7 @@ export default function Tickets() {
 						try {
 							axios
 								.get(
-									`http://localhost:8000/api/ticket/user/${user_id}`,
+									`http://localhost:8000/api/ticket/project/${project_id}`,
 									{
 										headers: {
 											Authorization: `Bearer ${token}`,
@@ -140,17 +141,26 @@ export default function Tickets() {
 			const token: any = localStorage.getItem('token')
 			const decodeToken: any = jwtDecode(token)
 			user_id = decodeToken['id']
+			const isSelected: boolean =
+				!!localStorage.getItem('SelectedProject')
+			if (isSelected) {
+				project_id = localStorage.getItem('SelectedProject') ?? ''
+			} else {
+				router.push('/')
+			}
 			useEffect(() => {
 				try {
 					axios
 						.get(
-							`http://localhost:8000/api/ticket/user/${user_id}`,
+							`http://localhost:8000/api/ticket/project/${project_id}`,
 							{
 								headers: { Authorization: `Bearer ${token}` },
 							}
 						)
 						.then((res) => {
-							setTickets(res.data)
+							if (!res.data.error) {
+								setTickets(res.data)
+							}
 						})
 				} catch (error) {
 					console.log(error)
@@ -158,7 +168,6 @@ export default function Tickets() {
 			}, [token, user_id])
 		}
 	}
-	console.log('tickets', tickets)
 	return (
 		<>
 			<Grid container>

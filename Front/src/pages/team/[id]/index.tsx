@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { TeamType } from "../type";
+import Dashboard from "@/app/components/Dashboard/Dashboard";
 
 function TeamPage() {
   // TODO: Compléter le back pour récupérer un grade et si possible une bio de l'utilisateur
@@ -32,7 +33,7 @@ function TeamPage() {
     <Box sx={MainBox}>
       <Grid container>
         <Grid xs={2} id="Drawer">
-          <PermanentDrawerLeft page="team" />
+          <Dashboard page="team" />
         </Grid>
         <Grid xs={10} id="Affichage-Equipe">
           <div style={{ width: '100%', marginTop: "100px", marginLeft: '150px' }}>

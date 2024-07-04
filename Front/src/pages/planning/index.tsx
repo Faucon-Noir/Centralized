@@ -155,9 +155,9 @@ export default function Planning() {
                                         setTicketProject(ticket_number_liste);
                                         Array.prototype.forEach.call(res.data, element => {
                                             ticket_liste.push({
-                                                title: element.title,
-                                                start: new Date(element.start_date),
-                                                end: new Date(element.end_date),
+                                                title: element.ticket_title,
+                                                start: new Date(element.ticket_start_date),
+                                                end: new Date(element.ticket_end_date),
                                             })
                                         })
                                     }
