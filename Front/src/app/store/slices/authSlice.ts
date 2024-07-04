@@ -1,5 +1,5 @@
 import api from '@/app/api';
-import { LOGIN, REGISTER } from '@/app/api/apiRoute';
+import { LOGIN, REGISTER, REQUEST_RESET_PASSWORD } from '@/app/api/apiRoute';
 import { Login, Register } from '@/app/models/auth';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
@@ -29,6 +29,14 @@ const postRegister = createAsyncThunk(
 	'auth/register',
 	async (register: Register) => {
 		const response = await api.post(REGISTER, register);
+		return response.data;
+	}
+);
+
+const postRequestResetPassword = createAsyncThunk(
+	'auth/requestResetPassword',
+	async (mail: string) => {
+		const response = await api.post(REQUEST_RESET_PASSWORD, mail);
 		return response.data;
 	}
 );
@@ -71,6 +79,24 @@ const AuthSlice = createSlice({
 				state.token = action.payload;
 			})
 			.addCase(postRegister.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+				state.status = StatusEnum.Failed;
+			});
+		// Request Reset Password
+		builder
+			.addCase(postRequestResetPassword.pending, (state) => {
+				state.loading = true;
+				state.error = undefined;
+				state.status = StatusEnum.Loading;
+			})
+			.addCase(postRequestResetPassword.fulfilled, (state, action) => {
+				state.loading = false;
+				state.token = action.payload;
+				state.status = StatusEnum.Succeeded;
+				state.token = action.payload;
+			})
+			.addCase(postRequestResetPassword.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;

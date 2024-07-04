@@ -22,7 +22,7 @@ export const ALL_REX_BY_PROJECT_ID = `${REX}/project/:id`;
 export const SPECIFICATION = '/cdc';
 export const SINGLE_SPECIFICATION_BY_ID = `${SPECIFICATION}/:id`;
 export const ALL_SPECIFICATION_BY_USER_ID = `${SPECIFICATION}/user/:id`;
-export const ALL_SPECIFICATION_BY_PROJECT_ID = `${SPECIFICATION}/project/:id`;
+export const ALL_SPECIFICATION_BY_PROJECT_ID = `${SPECIFICATION}${SINGLE_PROJECT_BY_ID}`;
 
 // --- A traiter ---
 // TEAM
