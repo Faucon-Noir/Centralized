@@ -2,18 +2,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  Index,
-  ManyToOne,
-  JoinColumn,
   CreateDateColumn,
   OneToMany,
 } from "typeorm";
-import { IsEmail, IsPhoneNumber } from "class-validator";
+import { IsEmail } from "class-validator";
 import { TeamUser } from "./TeamUser";
 import { Ticket } from "./Ticket";
-import { Cdc } from "./Cdc";
+import { Cdc } from "./Specification";
 
 @Entity()
 export class User {
@@ -63,7 +58,7 @@ export class User {
     phone: string,
     bio: string,
     password: string,
-    avatar: string,
+    avatar: string
   ) {
     this.lastname = lastname;
     this.firstname = firstname;

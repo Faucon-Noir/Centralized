@@ -2,17 +2,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToMany,
-  JoinTable,
-  Index,
   ManyToOne,
   JoinColumn,
-  CreateDateColumn,
-  OneToOne,
 } from "typeorm";
 import { Team } from "./Team";
 import { User } from "./User";
-import { Planning } from "./Planning";
 
 @Entity()
 export class Project {
