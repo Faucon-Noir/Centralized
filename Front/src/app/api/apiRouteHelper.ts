@@ -5,7 +5,6 @@ import {
 	ALL_REX_BY_PROJECT_ID,
 	ALL_SPECIFICATION_BY_PROJECT_ID,
 	ALL_SPECIFICATION_BY_USER_ID,
-	REX,
 	SINGLE_PLANNING_BY_ID,
 	SINGLE_PROJECT_BY_ID,
 	SINGLE_REX_BY_ID,
@@ -63,8 +62,8 @@ export const replaceAllSpecificationByProjectIdRouteParam = (
 export const replaceSingleTeamByIdRouteParam = (teamId: string): string =>
 	SINGLE_TEAM_USER_BY_ID.replace(':id', teamId);
 
-export const replaceSingleTeamUserRouteParam = (teamUserId: string): string =>
-	SINGLE_TEAM_USER_BY_ID.replace(':id', teamUserId);
+export const replaceSingleTeamUserRouteParam = (id: string): string =>
+	SINGLE_TEAM_USER_BY_ID.replace(':id', id);
 
 export const replaceUserTeamRouteParam = (teamId: string): string =>
 	TEAM_BY_USER_ID.replace(':id', teamId);

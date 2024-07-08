@@ -1,4 +1,4 @@
-import { Specification } from '@/app/models/specification';
+import { CreateSpecification, Specification } from '@/app/models/specification';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
 import api from '@/app/api';
@@ -8,27 +8,21 @@ import {
 	replaceAllSpecificationByUserIdRouteParam,
 	replaceSingleSpecificationByIdRouteParam,
 } from '@/app/api/apiRouteHelper';
-import {
-	createPlanning,
-	getPlanningById,
-	getAllPlanningByProjectId,
-	getAllPlanningByUserId,
-	updatePlanningById,
-	deletePlanningById,
-} from './planningSlice';
 
 // Initial state
 interface SpecificationState {
-	specifications: Specification[];
-	specification: Specification | null;
+	AllSpecifications: Specification[];
+	Specification: Specification | null;
+	CreateSpecification: CreateSpecification | null;
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
 }
 
 const initialState: SpecificationState = {
-	specifications: [],
-	specification: null,
+	AllSpecifications: [],
+	Specification: null,
+	CreateSpecification: null,
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
@@ -36,7 +30,7 @@ const initialState: SpecificationState = {
 
 const createSpecification = createAsyncThunk(
 	'specification/createSpecification',
-	async (specification: Specification) => {
+	async (specification: CreateSpecification) => {
 		const response = await api.post(SPECIFICATION, specification);
 		return response.data;
 	}
@@ -44,7 +38,7 @@ const createSpecification = createAsyncThunk(
 
 const getSpecificationById = createAsyncThunk(
 	'specification/getSpecificationById',
-	async (id: string) => {
+	async (id: string): Promise<Specification> => {
 		const response = await api.get(
 			replaceSingleSpecificationByIdRouteParam(id)
 		);
@@ -54,7 +48,7 @@ const getSpecificationById = createAsyncThunk(
 
 const getAllSpecificationByUserId = createAsyncThunk(
 	'specification/getAllSpecificationByUserId',
-	async (id: string) => {
+	async (id: string): Promise<Specification[]> => {
 		const response = await api.get(
 			replaceAllSpecificationByUserIdRouteParam(id)
 		);
@@ -64,7 +58,7 @@ const getAllSpecificationByUserId = createAsyncThunk(
 
 const getAllSpecificationByProjectId = createAsyncThunk(
 	'specification/getAllSpecificationByProjectId',
-	async (id: string) => {
+	async (id: string): Promise<Specification[]> => {
 		const response = await api.get(
 			replaceAllSpecificationByProjectIdRouteParam(id)
 		);
@@ -103,11 +97,11 @@ const SpecificationSlice = createSlice({
 			.addCase(createSpecification.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(createSpecification.fulfilled, (state, action) => {
 				state.loading = false;
-				state.specification = action.payload;
+				state.Specification = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(createSpecification.rejected, (state, action) => {
@@ -121,11 +115,11 @@ const SpecificationSlice = createSlice({
 			.addCase(getSpecificationById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getSpecificationById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.specification = action.payload;
+				state.Specification = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getSpecificationById.rejected, (state, action) => {
@@ -139,11 +133,11 @@ const SpecificationSlice = createSlice({
 			.addCase(getAllSpecificationByUserId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getAllSpecificationByUserId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.specifications = action.payload;
+				state.AllSpecifications = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getAllSpecificationByUserId.rejected, (state, action) => {
@@ -157,13 +151,13 @@ const SpecificationSlice = createSlice({
 			.addCase(getAllSpecificationByProjectId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(
 				getAllSpecificationByProjectId.fulfilled,
 				(state, action) => {
 					state.loading = false;
-					state.specifications = action.payload;
+					state.AllSpecifications = action.payload;
 					state.status = StatusEnum.Succeeded;
 				}
 			)
@@ -181,11 +175,11 @@ const SpecificationSlice = createSlice({
 			.addCase(updateSpecificationById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(updateSpecificationById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.specification = action.payload;
+				state.Specification = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(updateSpecificationById.rejected, (state, action) => {
@@ -199,11 +193,14 @@ const SpecificationSlice = createSlice({
 			.addCase(deleteSpecificationById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(deleteSpecificationById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.specification = action.payload;
+				state.Specification = null;
+				state.AllSpecifications = state.AllSpecifications.filter(
+					(specification) => specification.id !== action.payload.id
+				);
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(deleteSpecificationById.rejected, (state, action) => {
@@ -214,4 +211,12 @@ const SpecificationSlice = createSlice({
 	},
 });
 
+export {
+	createSpecification,
+	getSpecificationById,
+	getAllSpecificationByUserId,
+	getAllSpecificationByProjectId,
+	updateSpecificationById,
+	deleteSpecificationById,
+};
 export default SpecificationSlice.reducer;

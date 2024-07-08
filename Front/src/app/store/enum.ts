@@ -1,6 +1,7 @@
 export enum StatusEnum {
 	Idle = 'idle',
-	Loading = 'loading',
-	Succeeded = 'succeeded',
-	Failed = 'failed',
+	Loading = 'Loading',
+	Succeeded = 'Succeeded',
+	Failed = 'Failed',
+	Pending = 'Pending',
 }

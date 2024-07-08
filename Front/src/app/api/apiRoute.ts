@@ -27,10 +27,11 @@ export const ALL_SPECIFICATION_BY_PROJECT_ID = `${SPECIFICATION}${SINGLE_PROJECT
 // --- A traiter ---
 // TEAM
 export const TEAM = '/team';
-export const SINGLE_TEAM = `/${TEAM}/:id`;
+export const SINGLE_TEAM = `${TEAM}/:id`;
+export const CREATE_TEAM_WITH_USER_ID = SINGLE_TEAM;
 export const TEAM_USER = '/teamuser';
 export const SINGLE_TEAM_USER_BY_ID = `${TEAM_USER}/:id`;
-export const TEAM_BY_USER_ID = `/${TEAM}/user/:id`;
+export const TEAM_BY_USER_ID = `${TEAM}/user/:id`;
 // ---  ---
 
 // TICKET
@@ -42,7 +43,7 @@ export const TICKET_BY_USER_ID = `${TICKET}/user/:id`;
 
 // USER
 export const USER = '/user';
-export const SINGLE_USER_BY_ID = `/${USER}/:id`;
+export const SINGLE_USER_BY_ID = `${USER}/:id`;
 export const SINGLE_USER_BY_MAIL = `${USER}/mail/:mail`;
 export const REQUEST_RESET_PASSWORD = '/requestResetPassword';
 export const RESET_PASSWORD = '/resetPassword';

@@ -1,4 +1,4 @@
-import { Planning } from '@/app/models/planning';
+import { CreatePlanning, Planning } from '@/app/models/planning';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { PLANNING } from '../../api/apiRoute';
 import api from '@/app/api';
@@ -11,40 +11,42 @@ import { StatusEnum } from '../enum';
 
 // Initial state
 interface PlanningState {
-	Plannings: Planning[];
+	AllPlannings: Planning[];
 	Planning: Planning | null;
+	CreatePlanning: CreatePlanning | null;
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
 }
 
 const initialState: PlanningState = {
-	Plannings: [],
+	AllPlannings: [],
 	Planning: null,
+	CreatePlanning: null,
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
 };
 
-export const createPlanning = createAsyncThunk(
+const createPlanning = createAsyncThunk(
 	'planning/createPlanning',
-	async (planning: Planning) => {
+	async (planning: CreatePlanning) => {
 		const response = await api.post(PLANNING, planning);
 		return response.data;
 	}
 );
 
-export const getPlanningById = createAsyncThunk(
+const getPlanningById = createAsyncThunk(
 	'planning/getPlanningById',
-	async (id: string) => {
+	async (id: string): Promise<Planning> => {
 		const response = await api.get(replaceSinglePlanningByIdRouteParam(id));
 		return response.data;
 	}
 );
 
-export const getAllPlanningByProjectId = createAsyncThunk(
+const getAllPlanningByProjectId = createAsyncThunk(
 	'planning/getAllPlanningByProjectId',
-	async (id: string) => {
+	async (id: string): Promise<Planning[]> => {
 		const response = await api.get(
 			replaceAllPlanningByProjectIdRouteParam(id)
 		);
@@ -52,9 +54,9 @@ export const getAllPlanningByProjectId = createAsyncThunk(
 	}
 );
 
-export const getAllPlanningByUserId = createAsyncThunk(
+const getAllPlanningByUserId = createAsyncThunk(
 	'planning/getAllPlanningByUserId',
-	async (id: string) => {
+	async (id: string): Promise<Planning[]> => {
 		const response = await api.get(
 			replaceAllPlanningByUserIdRouteParam(id)
 		);
@@ -62,7 +64,7 @@ export const getAllPlanningByUserId = createAsyncThunk(
 	}
 );
 
-export const updatePlanningById = createAsyncThunk(
+const updatePlanningById = createAsyncThunk(
 	'planning/updatePlanningById',
 	async (planning: Planning) => {
 		const response = await api.put(
@@ -73,7 +75,7 @@ export const updatePlanningById = createAsyncThunk(
 	}
 );
 
-export const deletePlanningById = createAsyncThunk(
+const deletePlanningById = createAsyncThunk(
 	'planning/deletePlanningById',
 	async (id: string) => {
 		const response = await api.delete(
@@ -93,7 +95,7 @@ const PlanningSlice = createSlice({
 			.addCase(createPlanning.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(createPlanning.fulfilled, (state, action) => {
 				state.loading = false;
@@ -111,7 +113,7 @@ const PlanningSlice = createSlice({
 			.addCase(getPlanningById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getPlanningById.fulfilled, (state, action) => {
 				state.loading = false;
@@ -129,11 +131,11 @@ const PlanningSlice = createSlice({
 			.addCase(getAllPlanningByProjectId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getAllPlanningByProjectId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.Plannings = action.payload;
+				state.AllPlannings = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getAllPlanningByProjectId.rejected, (state, action) => {
@@ -147,11 +149,11 @@ const PlanningSlice = createSlice({
 			.addCase(getAllPlanningByUserId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getAllPlanningByUserId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.Plannings = action.payload;
+				state.AllPlannings = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getAllPlanningByUserId.rejected, (state, action) => {
@@ -165,7 +167,7 @@ const PlanningSlice = createSlice({
 			.addCase(updatePlanningById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(updatePlanningById.fulfilled, (state, action) => {
 				state.loading = false;
@@ -183,11 +185,14 @@ const PlanningSlice = createSlice({
 			.addCase(deletePlanningById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(deletePlanningById.fulfilled, (state, action) => {
 				state.loading = false;
 				state.Planning = null;
+				state.AllPlannings = state.AllPlannings.filter(
+					(planning) => planning.id !== action.payload.id
+				);
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(deletePlanningById.rejected, (state, action) => {
@@ -198,4 +203,12 @@ const PlanningSlice = createSlice({
 	},
 });
 
+export {
+	createPlanning,
+	getPlanningById,
+	getAllPlanningByProjectId,
+	getAllPlanningByUserId,
+	updatePlanningById,
+	deletePlanningById,
+};
 export default PlanningSlice.reducer;

@@ -6,7 +6,6 @@ import {
 	replaceSingleUserByIdRouteParam,
 	replaceSingleUserByMailRouteParam,
 } from '@/app/api/apiRouteHelper';
-
 // Initial state
 interface UserState {
 	Users: User[];
@@ -31,7 +30,7 @@ const getUserById = createAsyncThunk('user/getUserById', async (id: string) => {
 
 const getUserByMail = createAsyncThunk(
 	'user/getUserByMail',
-	async (mail: string) => {
+	async (mail: string): Promise<User> => {
 		const response = await api.get(replaceSingleUserByMailRouteParam(mail));
 		return response.data;
 	}
@@ -60,7 +59,7 @@ const UserSlice = createSlice({
 			.addCase(getUserById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getUserById.fulfilled, (state, action) => {
 				state.loading = false;
@@ -77,7 +76,7 @@ const UserSlice = createSlice({
 			.addCase(getUserByMail.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getUserByMail.fulfilled, (state, action) => {
 				state.loading = false;
@@ -94,7 +93,7 @@ const UserSlice = createSlice({
 			.addCase(update.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(update.fulfilled, (state, action) => {
 				state.loading = false;
@@ -111,12 +110,12 @@ const UserSlice = createSlice({
 			.addCase(deleteUser.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(deleteUser.fulfilled, (state, action) => {
 				state.loading = false;
-				state.status = StatusEnum.Succeeded;
 				state.User = null;
+				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(deleteUser.rejected, (state, action) => {
 				state.loading = false;
@@ -126,4 +125,5 @@ const UserSlice = createSlice({
 	},
 });
 
+export { getUserById, getUserByMail, update, deleteUser };
 export default UserSlice.reducer;

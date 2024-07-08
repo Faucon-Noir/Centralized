@@ -4,30 +4,26 @@ import {
 	replaceAllProjectByUserIdRouteParam,
 	replaceSingleProjectByIdRouteParam,
 } from '@/app/api/apiRouteHelper';
-import { Project } from '@/app/models/project';
+import { CreateProject, Project, UpdateProject } from '@/app/models/project';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
-import {
-	createPlanning,
-	getPlanningById,
-	getAllPlanningByProjectId,
-	getAllPlanningByUserId,
-	updatePlanningById,
-	deletePlanningById,
-} from './planningSlice';
 
 // Initial state
-export interface ProjectState {
-	Projects: Project[];
-	Project: Project | null;
+interface ProjectState {
+	AllProjects: Project[];
+	Project: Project | UpdateProject | null;
+	CreateProject: CreateProject | null;
+	SelectedProject: string;
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
 }
 
 const initialState: ProjectState = {
-	Projects: [],
+	AllProjects: [],
 	Project: null,
+	CreateProject: null,
+	SelectedProject: '',
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
@@ -35,7 +31,7 @@ const initialState: ProjectState = {
 
 const createProject = createAsyncThunk(
 	'project/createProject',
-	async (project: Project) => {
+	async (project: CreateProject) => {
 		const response = await api.post(PROJECT, project);
 		return response.data;
 	}
@@ -43,7 +39,7 @@ const createProject = createAsyncThunk(
 
 const getProjectById = createAsyncThunk(
 	'project/getProjectById',
-	async (id: string) => {
+	async (id: string): Promise<Project> => {
 		const response = await api.get(replaceSingleProjectByIdRouteParam(id));
 		return response.data;
 	}
@@ -51,7 +47,7 @@ const getProjectById = createAsyncThunk(
 
 const getAllProjectByUserId = createAsyncThunk(
 	'project/getAllProjectByUserId',
-	async (id: string) => {
+	async (id: string): Promise<Project[]> => {
 		const response = await api.get(replaceAllProjectByUserIdRouteParam(id));
 		return response.data;
 	}
@@ -88,11 +84,12 @@ const ProjectSlice = createSlice({
 			.addCase(createProject.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(createProject.fulfilled, (state, action) => {
 				state.loading = false;
 				state.error = undefined;
+				state.Project = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(createProject.rejected, (state, action) => {
@@ -106,7 +103,7 @@ const ProjectSlice = createSlice({
 			.addCase(getProjectById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getProjectById.fulfilled, (state, action) => {
 				state.loading = false;
@@ -124,11 +121,11 @@ const ProjectSlice = createSlice({
 			.addCase(getAllProjectByUserId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(getAllProjectByUserId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.Projects = action.payload;
+				state.AllProjects = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getAllProjectByUserId.rejected, (state, action) => {
@@ -142,7 +139,7 @@ const ProjectSlice = createSlice({
 			.addCase(updateProjectById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(updateProjectById.fulfilled, (state, action) => {
 				state.loading = false;
@@ -160,11 +157,14 @@ const ProjectSlice = createSlice({
 			.addCase(deleteProjectById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(deleteProjectById.fulfilled, (state, action) => {
 				state.loading = false;
 				state.Project = null;
+				state.AllProjects = state.AllProjects.filter(
+					(project) => project.id !== action.payload.id
+				);
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(deleteProjectById.rejected, (state, action) => {
@@ -175,4 +175,11 @@ const ProjectSlice = createSlice({
 	},
 });
 
+export {
+	createProject,
+	getProjectById,
+	getAllProjectByUserId,
+	updateProjectById,
+	deleteProjectById,
+};
 export default ProjectSlice.reducer;

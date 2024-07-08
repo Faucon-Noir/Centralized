@@ -1,3 +1,14 @@
 import { Common } from './common';
 
-export type User = Common & {};
+type CommonUser = Common & {
+	lastname: string;
+	firstname: string;
+	mail: string;
+	phone: string;
+};
+export type User = CommonUser & {
+	avatar: string;
+	bio: string;
+};
+
+export type UpdateUser = Partial<User>;

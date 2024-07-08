@@ -1,4 +1,4 @@
-import { Ticket } from '@/app/models/ticket';
+import { CreateTicket, Ticket, UpdateTicket } from '@/app/models/ticket';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
 import api from '@/app/api';
@@ -12,16 +12,18 @@ import {
 
 // Initial state
 interface TicketState {
-	Tickets: Ticket[];
-	Ticket: Ticket | null;
+	AllTickets: Ticket[];
+	Ticket: Ticket | UpdateTicket | null;
+	CreateTicket: CreateTicket | null;
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
 }
 
 const initialState: TicketState = {
-	Tickets: [],
+	AllTickets: [],
 	Ticket: null,
+	CreateTicket: null,
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
@@ -29,7 +31,7 @@ const initialState: TicketState = {
 
 const createTicket = createAsyncThunk(
 	'ticket/createTicket',
-	async (ticket: Ticket) => {
+	async (ticket: CreateTicket) => {
 		const response = await api.post(TICKET, ticket);
 		return ticket;
 	}
@@ -37,7 +39,7 @@ const createTicket = createAsyncThunk(
 
 const getTicketById = createAsyncThunk(
 	'ticket/getTicketById',
-	async (id: string) => {
+	async (id: string): Promise<Ticket> => {
 		const response = await api.get(replaceSingleTicketByIdRouteParam(id));
 		return response.data;
 	}
@@ -45,7 +47,7 @@ const getTicketById = createAsyncThunk(
 
 const getAllTicketByPlanningId = createAsyncThunk(
 	'ticket/getAllTicketByPlanningId',
-	async (id: string) => {
+	async (id: string): Promise<Ticket[]> => {
 		const response = await api.get(replaceTicketByPlanningIdRouteParam(id));
 		return response.data;
 	}
@@ -53,7 +55,7 @@ const getAllTicketByPlanningId = createAsyncThunk(
 
 const getAllTicketByProjectId = createAsyncThunk(
 	'ticket/getAllTicketByProjectId',
-	async (id: string) => {
+	async (id: string): Promise<Ticket[]> => {
 		const response = await api.get(replaceTicketByProjectIdRouteParam(id));
 		return response.data;
 	}
@@ -61,7 +63,7 @@ const getAllTicketByProjectId = createAsyncThunk(
 
 const getAllTicketByUserId = createAsyncThunk(
 	'ticket/getAllTicketByUserId',
-	async (id: string) => {
+	async (id: string): Promise<Ticket[]> => {
 		const response = await api.get(replaceTicketByUserIdRouteParam(id));
 		return response.data;
 	}
@@ -69,10 +71,21 @@ const getAllTicketByUserId = createAsyncThunk(
 
 const updateTicketById = createAsyncThunk(
 	'ticket/updateTicketById',
-	async (ticket: Ticket) => {
+	async (ticket: UpdateTicket) => {
 		const response = await api.patch(
-			replaceSingleTicketByIdRouteParam(ticket.id),
+			replaceSingleTicketByIdRouteParam(ticket.id!),
 			ticket
+		);
+		return response.data;
+	}
+);
+
+const resolveTicketById = createAsyncThunk(
+	'ticket/archiveTicketById',
+	async (id: string) => {
+		const response = await api.patch(
+			replaceSingleTicketByIdRouteParam(id),
+			{ status: 'résolu' }
 		);
 		return response.data;
 	}
@@ -98,17 +111,16 @@ const TicketSlice = createSlice({
 			.addCase(createTicket.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(createTicket.fulfilled, (state, { payload }) => {
+			.addCase(createTicket.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = undefined;
 				state.status = StatusEnum.Succeeded;
-				state.Tickets.push(payload);
+				state.Ticket = action.payload;
 			})
-			.addCase(createTicket.rejected, (state, { error }) => {
+			.addCase(createTicket.rejected, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 
@@ -117,17 +129,16 @@ const TicketSlice = createSlice({
 			.addCase(getTicketById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(getTicketById.fulfilled, (state, { payload }) => {
+			.addCase(getTicketById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = undefined;
 				state.status = StatusEnum.Succeeded;
-				state.Ticket = payload;
+				state.Ticket = action.payload;
 			})
-			.addCase(getTicketById.rejected, (state, { error }) => {
+			.addCase(getTicketById.rejected, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 		// GET BY PLANNING ID
@@ -135,20 +146,16 @@ const TicketSlice = createSlice({
 			.addCase(getAllTicketByPlanningId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(
-				getAllTicketByPlanningId.fulfilled,
-				(state, { payload }) => {
-					state.loading = false;
-					state.error = undefined;
-					state.status = StatusEnum.Succeeded;
-					state.Tickets = payload;
-				}
-			)
-			.addCase(getAllTicketByPlanningId.rejected, (state, { error }) => {
+			.addCase(getAllTicketByPlanningId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.AllTickets = action.payload;
+				state.status = StatusEnum.Succeeded;
+			})
+			.addCase(getAllTicketByPlanningId.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 		// GET BY PROJECT ID
@@ -156,20 +163,16 @@ const TicketSlice = createSlice({
 			.addCase(getAllTicketByProjectId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(
-				getAllTicketByProjectId.fulfilled,
-				(state, { payload }) => {
-					state.loading = false;
-					state.error = undefined;
-					state.status = StatusEnum.Succeeded;
-					state.Tickets = payload;
-				}
-			)
-			.addCase(getAllTicketByProjectId.rejected, (state, { error }) => {
+			.addCase(getAllTicketByProjectId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.AllTickets = action.payload;
+				state.status = StatusEnum.Succeeded;
+			})
+			.addCase(getAllTicketByProjectId.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 		// GET BY USER ID
@@ -177,17 +180,16 @@ const TicketSlice = createSlice({
 			.addCase(getAllTicketByUserId.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(getAllTicketByUserId.fulfilled, (state, { payload }) => {
+			.addCase(getAllTicketByUserId.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = undefined;
+				state.AllTickets = action.payload;
 				state.status = StatusEnum.Succeeded;
-				state.Tickets = payload;
 			})
-			.addCase(getAllTicketByUserId.rejected, (state, { error }) => {
+			.addCase(getAllTicketByUserId.rejected, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 		// UPDATE
@@ -195,20 +197,36 @@ const TicketSlice = createSlice({
 			.addCase(updateTicketById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(updateTicketById.fulfilled, (state, { payload }) => {
+			.addCase(updateTicketById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = undefined;
-				state.status = StatusEnum.Succeeded;
-				state.Tickets = state.Tickets.map((ticket) =>
-					ticket.id === payload.id ? payload : ticket
+				state.AllTickets = state.AllTickets.map((ticket) =>
+					ticket.id === action.payload.id ? action.payload : ticket
 				);
-				state.Ticket = payload;
+				state.Ticket = action.payload;
+				state.status = StatusEnum.Succeeded;
 			})
-			.addCase(updateTicketById.rejected, (state, { error }) => {
+			.addCase(updateTicketById.rejected, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.error = action.error.message;
+				state.status = StatusEnum.Failed;
+			});
+		// RESOLVE
+		builder
+			.addCase(resolveTicketById.pending, (state) => {
+				state.loading = true;
+				state.error = undefined;
+				state.status = StatusEnum.Pending;
+			})
+			.addCase(resolveTicketById.fulfilled, (state, action) => {
+				state.loading = false;
+				state.Ticket = action.payload;
+				state.status = StatusEnum.Succeeded;
+			})
+			.addCase(resolveTicketById.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 		// DELETE
@@ -216,20 +234,31 @@ const TicketSlice = createSlice({
 			.addCase(deleteTicketById.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
-			.addCase(deleteTicketById.fulfilled, (state, { payload }) => {
+			.addCase(deleteTicketById.fulfilled, (state, action) => {
 				state.loading = false;
-				state.error = undefined;
-				state.status = StatusEnum.Succeeded;
 				state.Ticket = null;
+				state.AllTickets = state.AllTickets.filter(
+					(ticket) => ticket.id !== action.payload.id
+				);
+				state.status = StatusEnum.Succeeded;
 			})
-			.addCase(deleteTicketById.rejected, (state, { error }) => {
+			.addCase(deleteTicketById.rejected, (state, action) => {
 				state.loading = false;
-				state.error = error.message;
+				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
 	},
 });
 
+export {
+	createTicket,
+	getTicketById,
+	getAllTicketByPlanningId,
+	getAllTicketByProjectId,
+	getAllTicketByUserId,
+	updateTicketById,
+	deleteTicketById,
+};
 export default TicketSlice.reducer;

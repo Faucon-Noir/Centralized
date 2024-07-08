@@ -1,9 +1,14 @@
 import api from '@/app/api';
-import { LOGIN, REGISTER, REQUEST_RESET_PASSWORD } from '@/app/api/apiRoute';
+import {
+	LOGIN,
+	REGISTER,
+	REQUEST_RESET_PASSWORD,
+	RESET_PASSWORD,
+} from '@/app/api/apiRoute';
 import { Login, Register } from '@/app/models/auth';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
-import { stat } from 'fs';
+import { jwtDecode } from 'jwt-decode';
 
 // Initial state
 interface AuthState {
@@ -11,6 +16,7 @@ interface AuthState {
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
+	userId: string;
 }
 
 const initialState: AuthState = {
@@ -18,6 +24,7 @@ const initialState: AuthState = {
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
+	userId: '',
 };
 
 const postLogin = createAsyncThunk('auth/login', async (login: Login) => {
@@ -41,23 +48,31 @@ const postRequestResetPassword = createAsyncThunk(
 	}
 );
 
+const postResetPassword = createAsyncThunk(
+	'auth/resetPassword',
+	async (data: { password: string; token: string }) => {
+		const response = await api.post(RESET_PASSWORD, data);
+		return response.data;
+	}
+);
+
 const AuthSlice = createSlice({
 	name: 'Auth',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
-		// Login
+		// LOGIN
 		builder
 			.addCase(postLogin.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(postLogin.fulfilled, (state, action) => {
 				state.loading = false;
 				state.token = action.payload;
+				state.userId = jwtDecode<{ id: string }>(action.payload).id;
 				state.status = StatusEnum.Succeeded;
-				state.token = action.payload;
 			})
 			.addCase(postLogin.rejected, (state, action) => {
 				state.loading = false;
@@ -65,38 +80,52 @@ const AuthSlice = createSlice({
 				state.status = StatusEnum.Failed;
 			});
 
-		// Register
+		// REGISTER
 		builder
 			.addCase(postRegister.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(postRegister.fulfilled, (state, action) => {
 				state.loading = false;
 				state.token = action.payload;
+				state.userId = jwtDecode<{ id: string }>(action.payload).id;
 				state.status = StatusEnum.Succeeded;
-				state.token = action.payload;
 			})
 			.addCase(postRegister.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
-		// Request Reset Password
+		// REQUEST RESET PASSWORD
 		builder
 			.addCase(postRequestResetPassword.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
-				state.status = StatusEnum.Loading;
+				state.status = StatusEnum.Pending;
 			})
 			.addCase(postRequestResetPassword.fulfilled, (state, action) => {
 				state.loading = false;
-				state.token = action.payload;
 				state.status = StatusEnum.Succeeded;
-				state.token = action.payload;
 			})
 			.addCase(postRequestResetPassword.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message;
+				state.status = StatusEnum.Failed;
+			});
+		// RESET PASSWORD
+		builder
+			.addCase(postResetPassword.pending, (state) => {
+				state.loading = true;
+				state.error = undefined;
+				state.status = StatusEnum.Pending;
+			})
+			.addCase(postResetPassword.fulfilled, (state, action) => {
+				state.loading = false;
+				state.status = StatusEnum.Succeeded;
+			})
+			.addCase(postResetPassword.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
@@ -104,4 +133,5 @@ const AuthSlice = createSlice({
 	},
 });
 
+export { postLogin, postRegister, postRequestResetPassword, postResetPassword };
 export default AuthSlice.reducer;
