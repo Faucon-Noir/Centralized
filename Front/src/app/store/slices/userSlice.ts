@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
 import api from '@/app/api';
 import {
-	replaceSingleUserByIdRouteParam,
-	replaceSingleUserByMailRouteParam,
+	formatUserByIdRouteParam,
+	formatUserByMailRouteParam,
 } from '@/app/api/apiRouteHelper';
 // Initial state
 interface UserState {
@@ -24,28 +24,25 @@ const initialState: UserState = {
 };
 
 const getUserById = createAsyncThunk('user/getUserById', async (id: string) => {
-	const response = await api.get(replaceSingleUserByIdRouteParam(id));
+	const response = await api.get(formatUserByIdRouteParam(id));
 	return response.data;
 });
 
 const getUserByMail = createAsyncThunk(
 	'user/getUserByMail',
 	async (mail: string): Promise<User> => {
-		const response = await api.get(replaceSingleUserByMailRouteParam(mail));
+		const response = await api.get(formatUserByMailRouteParam(mail));
 		return response.data;
 	}
 );
 
 const update = createAsyncThunk('user/update', async (user: User) => {
-	const response = await api.put(
-		replaceSingleUserByIdRouteParam(user.id),
-		user
-	);
+	const response = await api.put(formatUserByIdRouteParam(user.id), user);
 	return response.data;
 });
 
 const deleteUser = createAsyncThunk('user/delete', async (id: string) => {
-	const response = await api.delete(replaceSingleUserByIdRouteParam(id));
+	const response = await api.delete(formatUserByIdRouteParam(id));
 	return response.data;
 });
 

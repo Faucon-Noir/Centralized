@@ -2,12 +2,12 @@ import { CreateTicket, Ticket, UpdateTicket } from '@/app/models/ticket';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
 import api from '@/app/api';
-import { TICKET } from '@/app/api/apiRoute';
+import { TICKETS } from '@/app/api/apiRoute';
 import {
-	replaceSingleTicketByIdRouteParam,
-	replaceTicketByPlanningIdRouteParam,
-	replaceTicketByProjectIdRouteParam,
-	replaceTicketByUserIdRouteParam,
+	formatTicketByIdRouteParam,
+	formatTicketsByPlanningIdRouteParam,
+	formatTicketsByProjectIdRouteParam,
+	formatTicketsByUserIdRouteParam,
 } from '@/app/api/apiRouteHelper';
 
 // Initial state
@@ -32,7 +32,7 @@ const initialState: TicketState = {
 const createTicket = createAsyncThunk(
 	'ticket/createTicket',
 	async (ticket: CreateTicket) => {
-		const response = await api.post(TICKET, ticket);
+		const response = await api.post(TICKETS, ticket);
 		return ticket;
 	}
 );
@@ -40,7 +40,7 @@ const createTicket = createAsyncThunk(
 const getTicketById = createAsyncThunk(
 	'ticket/getTicketById',
 	async (id: string): Promise<Ticket> => {
-		const response = await api.get(replaceSingleTicketByIdRouteParam(id));
+		const response = await api.get(formatTicketByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -48,7 +48,7 @@ const getTicketById = createAsyncThunk(
 const getAllTicketByPlanningId = createAsyncThunk(
 	'ticket/getAllTicketByPlanningId',
 	async (id: string): Promise<Ticket[]> => {
-		const response = await api.get(replaceTicketByPlanningIdRouteParam(id));
+		const response = await api.get(formatTicketsByPlanningIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -56,7 +56,7 @@ const getAllTicketByPlanningId = createAsyncThunk(
 const getAllTicketByProjectId = createAsyncThunk(
 	'ticket/getAllTicketByProjectId',
 	async (id: string): Promise<Ticket[]> => {
-		const response = await api.get(replaceTicketByProjectIdRouteParam(id));
+		const response = await api.get(formatTicketsByProjectIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -64,7 +64,7 @@ const getAllTicketByProjectId = createAsyncThunk(
 const getAllTicketByUserId = createAsyncThunk(
 	'ticket/getAllTicketByUserId',
 	async (id: string): Promise<Ticket[]> => {
-		const response = await api.get(replaceTicketByUserIdRouteParam(id));
+		const response = await api.get(formatTicketsByUserIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -73,7 +73,7 @@ const updateTicketById = createAsyncThunk(
 	'ticket/updateTicketById',
 	async (ticket: UpdateTicket) => {
 		const response = await api.patch(
-			replaceSingleTicketByIdRouteParam(ticket.id!),
+			formatTicketByIdRouteParam(ticket.id!),
 			ticket
 		);
 		return response.data;
@@ -83,10 +83,9 @@ const updateTicketById = createAsyncThunk(
 const resolveTicketById = createAsyncThunk(
 	'ticket/archiveTicketById',
 	async (id: string) => {
-		const response = await api.patch(
-			replaceSingleTicketByIdRouteParam(id),
-			{ status: 'résolu' }
-		);
+		const response = await api.patch(formatTicketByIdRouteParam(id), {
+			status: 'résolu',
+		});
 		return response.data;
 	}
 );
@@ -94,9 +93,7 @@ const resolveTicketById = createAsyncThunk(
 const deleteTicketById = createAsyncThunk(
 	'ticket/deleteTicketById',
 	async (id: string) => {
-		const response = await api.delete(
-			replaceSingleTicketByIdRouteParam(id)
-		);
+		const response = await api.delete(formatTicketByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -258,6 +255,7 @@ export {
 	getAllTicketByPlanningId,
 	getAllTicketByProjectId,
 	getAllTicketByUserId,
+	resolveTicketById,
 	updateTicketById,
 	deleteTicketById,
 };

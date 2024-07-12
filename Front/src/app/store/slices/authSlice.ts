@@ -71,6 +71,7 @@ const AuthSlice = createSlice({
 			.addCase(postLogin.fulfilled, (state, action) => {
 				state.loading = false;
 				state.token = action.payload;
+				console.log('token slice', state.token);
 				state.userId = jwtDecode<{ id: string }>(action.payload).id;
 				state.status = StatusEnum.Succeeded;
 			})
@@ -78,6 +79,7 @@ const AuthSlice = createSlice({
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
+				console.log('token slice', state.error);
 			});
 
 		// REGISTER

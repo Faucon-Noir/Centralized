@@ -3,47 +3,47 @@ export const LOGIN = '/login';
 export const REGISTER = '/register';
 
 // PLANNING
-export const PLANNING = '/planning';
-export const SINGLE_PLANNING_BY_ID = `${PLANNING}/:id`;
-export const ALL_PLANNING_BY_USER_ID = `${PLANNING}/user/:id`;
-export const ALL_PLANNING_BY_PROJECT_ID = `${PLANNING}/project/:id`;
+export const PLANNINGS = '/planning';
+export const PLANNING_BY_ID = `${PLANNINGS}/:id`;
+export const PLANNING_BY_USER = `${PLANNINGS}/user/:id`;
+export const PLANNING_BY_PROJECT = `${PLANNINGS}/project/:id`;
 
 // PROJECT
-export const PROJECT = '/project';
-export const SINGLE_PROJECT_BY_ID = `${PROJECT}/:id`;
-export const ALL_PROJECT_BY_USER_ID = `${PROJECT}/user/:id`;
+export const PROJECTS = '/project';
+export const PROJECT_BY_ID = `${PROJECTS}/:id`;
+export const PROJECT_BY_USER = `${PROJECTS}/user/:id`;
 
 // REX
-export const REX = '/rex';
-export const SINGLE_REX_BY_ID = `${REX}/:id`;
-export const ALL_REX_BY_PROJECT_ID = `${REX}/project/:id`;
+export const REXS = '/rex';
+export const REX_BY_ID = `${REXS}/:id`;
+export const REX_BY_PROJECT = `${REXS}/project/:id`;
 
 // SPECIFICATION
-export const SPECIFICATION = '/cdc';
-export const SINGLE_SPECIFICATION_BY_ID = `${SPECIFICATION}/:id`;
-export const ALL_SPECIFICATION_BY_USER_ID = `${SPECIFICATION}/user/:id`;
-export const ALL_SPECIFICATION_BY_PROJECT_ID = `${SPECIFICATION}${SINGLE_PROJECT_BY_ID}`;
+export const SPECIFICATIONS = '/specification';
+export const SPECIFICATION_BY_ID = `${SPECIFICATIONS}/:id`;
+export const SPECIFICATION_BY_USER = `${SPECIFICATIONS}/user/:id`;
+export const SPECIFICATION_BY_PROJECT = `${SPECIFICATIONS}${PROJECT_BY_ID}`;
 
 // --- A traiter ---
 // TEAM
-export const TEAM = '/team';
-export const SINGLE_TEAM = `${TEAM}/:id`;
-export const CREATE_TEAM_WITH_USER_ID = SINGLE_TEAM;
+export const TEAMS = '/team';
+export const TEAM_BY_ID = `${TEAMS}/:id`;
+export const CREATE_TEAM_WITH_USER_ID = TEAM_BY_ID;
 export const TEAM_USER = '/teamuser';
-export const SINGLE_TEAM_USER_BY_ID = `${TEAM_USER}/:id`;
-export const TEAM_BY_USER_ID = `${TEAM}/user/:id`;
+export const TEAM_USER_BY_ID = `${TEAM_USER}/:id`;
+export const TEAM_BY_USER = `${TEAMS}/user/:id`;
 // ---  ---
 
 // TICKET
-export const TICKET = '/ticket';
-export const SINGLE_TICKET_BY_ID = `${TICKET}/:id`;
-export const TICKET_BY_PLANNING_ID = `${TICKET}/planning/:id`;
-export const TICKET_BY_PROJECT_ID = `${TICKET}/project/:id`;
-export const TICKET_BY_USER_ID = `${TICKET}/user/:id`;
+export const TICKETS = '/ticket';
+export const TICKET_BY_ID = `${TICKETS}/:id`;
+export const TICKETS_BY_PLANNING = `${TICKETS}/planning/:id`;
+export const TICKETS_BY_PROJECT = `${TICKETS}/project/:id`;
+export const TICKETS_BY_USER = `${TICKETS}/user/:id`;
 
 // USER
 export const USER = '/user';
-export const SINGLE_USER_BY_ID = `${USER}/:id`;
-export const SINGLE_USER_BY_MAIL = `${USER}/mail/:mail`;
+export const USER_BY_ID = `${USER}/:id`;
+export const USER_BY_MAIL = `${USER}/mail/:mail`;
 export const REQUEST_RESET_PASSWORD = '/requestResetPassword';
 export const RESET_PASSWORD = '/resetPassword';

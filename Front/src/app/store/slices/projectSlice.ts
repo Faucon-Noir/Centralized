@@ -1,9 +1,6 @@
 import api from '@/app/api';
-import { PROJECT } from '@/app/api/apiRoute';
-import {
-	replaceAllProjectByUserIdRouteParam,
-	replaceSingleProjectByIdRouteParam,
-} from '@/app/api/apiRouteHelper';
+import { PROJECTS } from '@/app/api/apiRoute';
+import { formatProjectByUserIdRouteParam } from '@/app/api/apiRouteHelper';
 import { CreateProject, Project, UpdateProject } from '@/app/models/project';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
@@ -32,7 +29,7 @@ const initialState: ProjectState = {
 const createProject = createAsyncThunk(
 	'project/createProject',
 	async (project: CreateProject) => {
-		const response = await api.post(PROJECT, project);
+		const response = await api.post(PROJECTS, project);
 		return response.data;
 	}
 );
@@ -40,7 +37,7 @@ const createProject = createAsyncThunk(
 const getProjectById = createAsyncThunk(
 	'project/getProjectById',
 	async (id: string): Promise<Project> => {
-		const response = await api.get(replaceSingleProjectByIdRouteParam(id));
+		const response = await api.get(formatProjectByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -48,7 +45,7 @@ const getProjectById = createAsyncThunk(
 const getAllProjectByUserId = createAsyncThunk(
 	'project/getAllProjectByUserId',
 	async (id: string): Promise<Project[]> => {
-		const response = await api.get(replaceAllProjectByUserIdRouteParam(id));
+		const response = await api.get(formatProjectByUserIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -57,7 +54,7 @@ const updateProjectById = createAsyncThunk(
 	'project/updateProjectById',
 	async (project: Project) => {
 		const response = await api.patch(
-			replaceSingleProjectByIdRouteParam(project.id),
+			formatProjectByIdRouteParam(project.id),
 			project
 		);
 		return response.data;
@@ -67,9 +64,7 @@ const updateProjectById = createAsyncThunk(
 const deleteProjectById = createAsyncThunk(
 	'project/deleteProjectById',
 	async (id: string) => {
-		const response = await api.delete(
-			replaceSingleProjectByIdRouteParam(id)
-		);
+		const response = await api.delete(formatProjectByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -183,3 +178,6 @@ export {
 	deleteProjectById,
 };
 export default ProjectSlice.reducer;
+function formatProjectByIdRouteParam(id: string): string {
+	throw new Error('Function not implemented.');
+}

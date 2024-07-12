@@ -1,11 +1,11 @@
 import { CreatePlanning, Planning } from '@/app/models/planning';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { PLANNING } from '../../api/apiRoute';
+import { PLANNINGS } from '../../api/apiRoute';
 import api from '@/app/api';
 import {
-	replaceAllPlanningByProjectIdRouteParam,
-	replaceAllPlanningByUserIdRouteParam,
-	replaceSinglePlanningByIdRouteParam,
+	formatPlanningByProjectIdRouteParam,
+	formatPlanningsByUserIdRouteParam,
+	formatPlanningByIdRouteParam,
 } from '@/app/api/apiRouteHelper';
 import { StatusEnum } from '../enum';
 
@@ -31,7 +31,7 @@ const initialState: PlanningState = {
 const createPlanning = createAsyncThunk(
 	'planning/createPlanning',
 	async (planning: CreatePlanning) => {
-		const response = await api.post(PLANNING, planning);
+		const response = await api.post(PLANNINGS, planning);
 		return response.data;
 	}
 );
@@ -39,7 +39,7 @@ const createPlanning = createAsyncThunk(
 const getPlanningById = createAsyncThunk(
 	'planning/getPlanningById',
 	async (id: string): Promise<Planning> => {
-		const response = await api.get(replaceSinglePlanningByIdRouteParam(id));
+		const response = await api.get(formatPlanningByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -47,9 +47,7 @@ const getPlanningById = createAsyncThunk(
 const getAllPlanningByProjectId = createAsyncThunk(
 	'planning/getAllPlanningByProjectId',
 	async (id: string): Promise<Planning[]> => {
-		const response = await api.get(
-			replaceAllPlanningByProjectIdRouteParam(id)
-		);
+		const response = await api.get(formatPlanningByProjectIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -57,9 +55,7 @@ const getAllPlanningByProjectId = createAsyncThunk(
 const getAllPlanningByUserId = createAsyncThunk(
 	'planning/getAllPlanningByUserId',
 	async (id: string): Promise<Planning[]> => {
-		const response = await api.get(
-			replaceAllPlanningByUserIdRouteParam(id)
-		);
+		const response = await api.get(formatPlanningsByUserIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -68,7 +64,7 @@ const updatePlanningById = createAsyncThunk(
 	'planning/updatePlanningById',
 	async (planning: Planning) => {
 		const response = await api.put(
-			replaceSinglePlanningByIdRouteParam(planning.id),
+			formatPlanningByIdRouteParam(planning.id),
 			planning
 		);
 		return response.data;
@@ -78,9 +74,7 @@ const updatePlanningById = createAsyncThunk(
 const deletePlanningById = createAsyncThunk(
 	'planning/deletePlanningById',
 	async (id: string) => {
-		const response = await api.delete(
-			replaceSinglePlanningByIdRouteParam(id)
-		);
+		const response = await api.delete(formatPlanningByIdRouteParam(id));
 		return response.data;
 	}
 );

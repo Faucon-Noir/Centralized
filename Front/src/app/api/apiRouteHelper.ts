@@ -1,90 +1,89 @@
 import {
-	ALL_PLANNING_BY_PROJECT_ID,
-	ALL_PLANNING_BY_USER_ID,
-	ALL_PROJECT_BY_USER_ID,
-	ALL_REX_BY_PROJECT_ID,
-	ALL_SPECIFICATION_BY_PROJECT_ID,
-	ALL_SPECIFICATION_BY_USER_ID,
-	SINGLE_PLANNING_BY_ID,
-	SINGLE_PROJECT_BY_ID,
-	SINGLE_REX_BY_ID,
-	SINGLE_SPECIFICATION_BY_ID,
-	SINGLE_TEAM_USER_BY_ID,
-	SINGLE_TICKET_BY_ID,
-	SINGLE_USER_BY_ID,
-	SINGLE_USER_BY_MAIL,
-	TEAM_BY_USER_ID,
-	TICKET_BY_PLANNING_ID,
-	TICKET_BY_PROJECT_ID,
-	TICKET_BY_USER_ID,
+	PLANNING_BY_PROJECT,
+	PLANNING_BY_USER,
+	PROJECT_BY_USER,
+	REX_BY_PROJECT,
+	SPECIFICATION_BY_PROJECT,
+	SPECIFICATION_BY_USER,
+	PLANNING_BY_ID,
+	PROJECT_BY_ID,
+	REX_BY_ID,
+	SPECIFICATION_BY_ID,
+	TEAM_USER_BY_ID,
+	TICKET_BY_ID,
+	USER_BY_ID,
+	USER_BY_MAIL,
+	TEAM_BY_USER,
+	TICKETS_BY_PLANNING,
+	TICKETS_BY_PROJECT,
+	TICKETS_BY_USER,
 } from './apiRoute';
 
 // PLANNING
-export const replaceSinglePlanningByIdRouteParam = (
-	planningId: string
-): string => SINGLE_PLANNING_BY_ID.replace(':id', planningId);
+export const formatPlanningByIdRouteParam = (planningId: string): string =>
+	PLANNING_BY_ID.replace(':id', planningId);
 
-export const replaceAllPlanningByUserIdRouteParam = (userId: string): string =>
-	ALL_PLANNING_BY_USER_ID.replace(':id', userId);
+export const formatPlanningsByUserIdRouteParam = (userId: string): string =>
+	PLANNING_BY_USER.replace(':id', userId);
 
-export const replaceAllPlanningByProjectIdRouteParam = (
+export const formatPlanningByProjectIdRouteParam = (
 	projectId: string
-): string => ALL_PLANNING_BY_PROJECT_ID.replace(':id', projectId);
+): string => PLANNING_BY_PROJECT.replace(':id', projectId);
 
 // PROJECT
-export const replaceSingleProjectByIdRouteParam = (projectId: string): string =>
-	SINGLE_PROJECT_BY_ID.replace(':id', projectId);
+export const formatProjectByIdRouteParam = (projectId: string): string =>
+	PROJECT_BY_ID.replace(':id', projectId);
 
-export const replaceAllProjectByUserIdRouteParam = (userId: string): string =>
-	ALL_PROJECT_BY_USER_ID.replace(':id', userId);
+export const formatProjectByUserIdRouteParam = (userId: string): string =>
+	PROJECT_BY_USER.replace(':id', userId);
 
 // REX
-export const replaceSingleRexByIdRouteParam = (rexId: string): string =>
-	SINGLE_REX_BY_ID.replace(':id', rexId);
+export const formatRexByIdRouteParam = (rexId: string): string =>
+	REX_BY_ID.replace(':id', rexId);
 
-export const replaceAllRexByProjectIdRouteParam = (userId: string): string =>
-	ALL_REX_BY_PROJECT_ID.replace(':id', userId);
+export const formatRexByProjectIdRouteParam = (userId: string): string =>
+	REX_BY_PROJECT.replace(':id', userId);
 
 // SPECIFICATION
-export const replaceSingleSpecificationByIdRouteParam = (
+export const formatSpecificationByIdRouteParam = (
 	specificationId: string
-): string => SINGLE_SPECIFICATION_BY_ID.replace(':id', specificationId);
+): string => SPECIFICATION_BY_ID.replace(':id', specificationId);
 
-export const replaceAllSpecificationByUserIdRouteParam = (
+export const formatSpecificationsByUserIdRouteParam = (
 	userId: string
-): string => ALL_SPECIFICATION_BY_USER_ID.replace(':id', userId);
+): string => SPECIFICATION_BY_USER.replace(':id', userId);
 
-export const replaceAllSpecificationByProjectIdRouteParam = (
+export const formatSpecificationsByProjectIdRouteParam = (
 	projectId: string
-): string => ALL_SPECIFICATION_BY_PROJECT_ID.replace(':id', projectId);
+): string => SPECIFICATION_BY_PROJECT.replace(':id', projectId);
 
 // TEAM
-export const replaceSingleTeamByIdRouteParam = (teamId: string): string =>
-	SINGLE_TEAM_USER_BY_ID.replace(':id', teamId);
+export const formatTeamByIdRouteParam = (teamId: string): string =>
+	TEAM_USER_BY_ID.replace(':id', teamId);
 
-export const replaceSingleTeamUserRouteParam = (id: string): string =>
-	SINGLE_TEAM_USER_BY_ID.replace(':id', id);
+export const formatTeamUserRouteParam = (id: string): string =>
+	TEAM_USER_BY_ID.replace(':id', id);
 
-export const replaceUserTeamRouteParam = (teamId: string): string =>
-	TEAM_BY_USER_ID.replace(':id', teamId);
+export const formatTeamByUserIdRouteParam = (teamId: string): string =>
+	TEAM_BY_USER.replace(':id', teamId);
 
 // TICKET
-export const replaceSingleTicketByIdRouteParam = (ticketId: string): string =>
-	SINGLE_TICKET_BY_ID.replace(':id', ticketId);
+export const formatTicketByIdRouteParam = (ticketId: string): string =>
+	TICKET_BY_ID.replace(':id', ticketId);
 
-export const replaceTicketByPlanningIdRouteParam = (
+export const formatTicketsByPlanningIdRouteParam = (
 	planningId: string
-): string => TICKET_BY_PLANNING_ID.replace(':id', planningId);
+): string => TICKETS_BY_PLANNING.replace(':id', planningId);
 
-export const replaceTicketByProjectIdRouteParam = (projectId: string): string =>
-	TICKET_BY_PROJECT_ID.replace(':id', projectId);
+export const formatTicketsByProjectIdRouteParam = (projectId: string): string =>
+	TICKETS_BY_PROJECT.replace(':id', projectId);
 
-export const replaceTicketByUserIdRouteParam = (userId: string): string =>
-	TICKET_BY_USER_ID.replace(':id', userId);
+export const formatTicketsByUserIdRouteParam = (userId: string): string =>
+	TICKETS_BY_USER.replace(':id', userId);
 
 // USER
-export const replaceSingleUserByIdRouteParam = (userId: string): string =>
-	SINGLE_USER_BY_ID.replace(':id', userId);
+export const formatUserByIdRouteParam = (userId: string): string =>
+	USER_BY_ID.replace(':id', userId);
 
-export const replaceSingleUserByMailRouteParam = (mail: string): string =>
-	SINGLE_USER_BY_MAIL.replace(':mail', mail);
+export const formatUserByMailRouteParam = (mail: string): string =>
+	USER_BY_MAIL.replace(':mail', mail);

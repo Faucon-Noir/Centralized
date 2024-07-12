@@ -1,12 +1,12 @@
 import { Rex } from '@/app/models/rex';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
-import { REX } from '@/app/api/apiRoute';
+import { REXS } from '@/app/api/apiRoute';
 import api from '@/app/api';
 import { CreateRex } from '../../models/rex';
 import {
-	replaceAllRexByProjectIdRouteParam,
-	replaceSingleRexByIdRouteParam,
+	formatRexByProjectIdRouteParam,
+	formatRexByIdRouteParam,
 } from '@/app/api/apiRouteHelper';
 
 // Initial state
@@ -29,14 +29,14 @@ const initialState: RexState = {
 };
 
 const createRex = createAsyncThunk('rex/createRex', async (rex: CreateRex) => {
-	const response = await api.post(REX, rex);
+	const response = await api.post(REXS, rex);
 	return response.data;
 });
 
 const getRexById = createAsyncThunk(
 	'rex/getRexById',
 	async (id: string): Promise<Rex> => {
-		const response = await api.get(replaceSingleRexByIdRouteParam(id));
+		const response = await api.get(formatRexByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -44,7 +44,7 @@ const getRexById = createAsyncThunk(
 const getAllRexByProjectId = createAsyncThunk(
 	'rex/getAllRexByProjectId',
 	async (id: string): Promise<Rex[]> => {
-		const response = await api.get(replaceAllRexByProjectIdRouteParam(id));
+		const response = await api.get(formatRexByProjectIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -52,10 +52,7 @@ const getAllRexByProjectId = createAsyncThunk(
 const updateRexById = createAsyncThunk(
 	'rex/updateRexById',
 	async (rex: Rex) => {
-		const response = await api.patch(
-			replaceSingleRexByIdRouteParam(rex.id),
-			rex
-		);
+		const response = await api.patch(formatRexByIdRouteParam(rex.id), rex);
 		return response.data;
 	}
 );
@@ -63,7 +60,7 @@ const updateRexById = createAsyncThunk(
 const deleteRexById = createAsyncThunk(
 	'rex/deleteRexById',
 	async (id: string) => {
-		const response = await api.delete(replaceSingleRexByIdRouteParam(id));
+		const response = await api.delete(formatRexByIdRouteParam(id));
 		return response.data;
 	}
 );

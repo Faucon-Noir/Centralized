@@ -1,43 +1,53 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import './style.scss'
-import { FormSpecification, templateList } from '@/app/constant'
-import { Button, Grid, Radio, RadioGroup, Tooltip } from '@mui/material'
-import { jwtDecode } from 'jwt-decode'
-import axios from 'axios'
-import Dashboard from '@/app/components/Dashboard/Dashboard'
-import confetti from 'canvas-confetti'
-import { Mosaic } from 'react-loading-indicators'
-import { ProjectType, TeamType } from './type'
+'use client';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import './style.scss';
+import { FormSpecification, templateList } from '@/app/constant';
+import { Button, Grid, Radio, RadioGroup, Tooltip } from '@mui/material';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
+import Dashboard from '@/app/components/Dashboard/Dashboard';
+import confetti from 'canvas-confetti';
+import { Mosaic } from 'react-loading-indicators';
+import { ProjectType, TeamType } from './type';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, useTypedSelector } from '@/app/store';
+import { CreateProject, Project } from '../../app/models/project';
+import AuthSlice from '../../app/store/slices/authSlice';
+import { createProject } from '@/app/store/slices/projectSlice';
 
 export default function CreateSpecification() {
-	const router = useRouter()
-	const [isRunning, setIsRunning] = useState<boolean>(false)
-	const [team, setTeam] = useState<TeamType[]>([])
-	const [fileContents, setFileContents] = useState<string[]>([])
-	const [load, setLoad] = useState<boolean>(false)
-	const [Loading, setLoading] = useState<boolean>(false)
-	const [Loading1, setLoading1] = useState<boolean>(false)
-	const [project, setProject] = useState<ProjectType>({
+	const router = useRouter();
+	// NEW
+	const dispatch: AppDispatch = useDispatch();
+	// const project = useTypedSelector((state) => state.project.Project);
+	const { userId } = useTypedSelector((state) => state.auth);
+	// OLD
+	// const [isRunning, setIsRunning] = useState<boolean>(false);
+	const [team, setTeam] = useState<TeamType[]>([]);
+	// const [fileContents, setFileContents] = useState<string[]>([]);
+	const [load, setLoad] = useState<boolean>(false);
+	const [Loading, setLoading] = useState<boolean>(false);
+	const [Loading1, setLoading1] = useState<boolean>(false);
+	const [project, setProject] = useState<CreateProject>({
 		team: '',
 		user: '',
 		name: '',
 		description: '',
 		functionality: '',
 		forecast: '',
-		start_date: '',
-		end_date: '',
+		start_date: new Date(),
+		end_date: new Date(),
 		budget: '',
 		technology: '',
 		constraints: '',
 		validation: '',
-		team_user: '',
+		teamUser: '',
 		constraint: '',
 		template: 0,
 		status: false,
-	})
-	const [isError, setIsError] = useState<number>(0)
+	});
+	const [isError, setIsError] = useState<number>(0);
 	const keys = [
 		'name',
 		'description',
@@ -52,102 +62,106 @@ export default function CreateSpecification() {
 		'team',
 		'team_user',
 		'template',
-	]
-
+	];
 	function verificationTicket() {
 		for (let i = 0; i < keys.length; i++) {
-			const value = project[keys[i]]
+			const value = project[keys[i]];
 			if (value === undefined || String(value).trim() === '') {
-				return i + 1
+				return i + 1;
 			}
 		}
-		return 0
+		return 0;
 	}
 
 	async function handleSubmit(e: any) {
-		e.preventDefault()
+		e.preventDefault();
 		if (!load) {
-			setLoad(true)
+			setLoad(true);
 			//TODO verifier si on passer autrement que par une variable intermediaire pour bloquer les validations directs
-			let statusError: number = verificationTicket()
-			setIsError(statusError)
+			let statusError: number = verificationTicket();
+			setIsError(statusError);
 
 			if (statusError == 0) {
-				const token: any = localStorage.getItem('token')
-				axios
-					.post(
-						`http://localhost:8000/api/project/${project.team}/${project.user}`,
-						project,
-						{ headers: { Authorization: `Bearer ${token}` } }
-					)
-					.then(function (response) {
-						if (response.status === 200 && response.data.success) {
-							setLoading(true)
-							setTimeout(() => {
-								setLoading(false)
-								setLoading1(true)
-								setTimeout(() => {
-									setLoading1(false)
-									for (let index = 0; index < 20; index++) {
-										confetti({
-											origin: {
-												x: Math.random() - 0.1,
-												y: Math.random() - 0.1,
-											},
-										})
-										setTimeout(() => {
-											router.push('/specification')
-										}, 1000)
-									}
-								}, 60000)
-							}, 60000)
-						} else if (response.data && response.data.error) {
-							//TODO
-							setIsError(keys.length + 1)
-						} else {
-							setIsRunning(true)
-						}
-					})
-					.catch(function (error) {
-						console.log(error)
-						setIsError(keys.length + 1)
-					})
+				const token: any = localStorage.getItem('token');
+
+				dispatch(createProject(project));
+				// axios
+				// 	.post(
+				// 		`http://localhost:8000/api/project/${project.team}/${project.user}`,
+				// 		project,
+				// 		{ headers: { Authorization: `Bearer ${token}` } }
+				// 	)
+				// 	.then(function (response) {
+				// 		if (response.status === 200 && response.data.success) {
+				// 			setLoading(true);
+				// 			setTimeout(() => {
+				// 				setLoading(false);
+				// 				setLoading1(true);
+				// 				setTimeout(() => {
+				// 					setLoading1(false);
+				// 					for (let index = 0; index < 20; index++) {
+				// 						confetti({
+				// 							origin: {
+				// 								x: Math.random() - 0.1,
+				// 								y: Math.random() - 0.1,
+				// 							},
+				// 						});
+				// 						setTimeout(() => {
+				// 							router.push('/specification');
+				// 						}, 1000);
+				// 					}
+				// 				}, 60000);
+				// 			}, 60000);
+				// 		} else if (response.data && response.data.error) {
+				// 			//TODO
+				// 			setIsError(keys.length + 1);
+				// 		} else {
+				// 			setIsRunning(true);
+				// 		}
+				// 	})
+				// 	.catch(function (error) {
+				// 		console.log(error);
+				// 		setIsError(keys.length + 1);
+				// 	});
 			}
-			setLoad(false)
+			setLoad(false);
 		}
 	}
 
-	if (typeof window !== 'undefined') {
-		const isAuth: boolean = !!localStorage.getItem('token')
-		let user_id: string = ''
-		if (isAuth) {
-			const token: any = localStorage.getItem('token')
-			const decodeToken: any = jwtDecode(token)
-			user_id = decodeToken['id']
+	useEffect(() => {
+		dispatch(getAllTeamByUserId(userId)); // TODO
+	}, [dispatch, userId]);
+	// if (typeof window !== 'undefined') {
+	// 	const isAuth: boolean = !!localStorage.getItem('token');
+	// 	let user_id: string = '';
+	// 	if (isAuth) {
+	// 		const token: any = localStorage.getItem('token');
+	// 		const decodeToken: any = jwtDecode(token);
+	// 		user_id = decodeToken['id'];
 
-			useEffect(() => {
-				setProject({ ...project, user: user_id })
-				try {
-					axios
-						.get(
-							`http://localhost:8000/api/teamuser/user/${user_id}`,
-							{
-								headers: { Authorization: `Bearer ${token}` },
-							}
-						)
-						.then((res: any) => {
-							setTeam(res.data)
-						})
-				} catch (error) {
-					console.log(error)
-				}
-			}, [token, user_id])
-		} else {
-			router.push('/login')
-		}
-	}
+	// 		useEffect(() => {
+	// 			setProject({ ...project, user: user_id });
+	// 			try {
+	// 				axios
+	// 					.get(
+	// 						`http://localhost:8000/api/teamuser/user/${user_id}`,
+	// 						{
+	// 							headers: { Authorization: `Bearer ${token}` },
+	// 						}
+	// 					)
+	// 					.then((res: any) => {
+	// 						setTeam(res.data);
+	// 					});
+	// 			} catch (error) {
+	// 				console.log(error);
+	// 			}
+	// 		}, [token, user_id]);
+	// 	} else {
+	// 		router.push('/login');
+	// 	}
+	// }
 
-	console.log('project', project)
+	console.log('project', project);
 	return (
 		<>
 			<Grid container>
@@ -466,5 +480,5 @@ export default function CreateSpecification() {
 				</Grid>
 			</Grid>
 		</>
-	)
+	);
 }

@@ -1,7 +1,6 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
-import { buildLogMessage, getDurationApi } from './helpers';
-import { ErrorType } from './types';
+import { useTypedSelector } from '../store/index';
 
 const api = axios.create({
 	baseURL: process.env.API_URL ?? '',
@@ -11,8 +10,9 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
 	const router = useRouter();
 	if (router.pathname !== '/login') {
+		const token = useTypedSelector((state) => state.auth.token);
 		// Ajout du token dans l'en-tête
-		const token = localStorage.getItem('token');
+		// const token = localStorage.getItem('token');
 		config.headers.Authorization = `Bearer ${token}`;
 	}
 	return config;

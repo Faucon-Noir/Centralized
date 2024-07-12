@@ -2,11 +2,11 @@ import { CreateSpecification, Specification } from '@/app/models/specification';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { StatusEnum } from '../enum';
 import api from '@/app/api';
-import { SPECIFICATION } from '@/app/api/apiRoute';
+import { SPECIFICATIONS } from '@/app/api/apiRoute';
 import {
-	replaceAllSpecificationByProjectIdRouteParam,
-	replaceAllSpecificationByUserIdRouteParam,
-	replaceSingleSpecificationByIdRouteParam,
+	formatSpecificationsByProjectIdRouteParam,
+	formatSpecificationsByUserIdRouteParam,
+	formatSpecificationByIdRouteParam,
 } from '@/app/api/apiRouteHelper';
 
 // Initial state
@@ -31,7 +31,7 @@ const initialState: SpecificationState = {
 const createSpecification = createAsyncThunk(
 	'specification/createSpecification',
 	async (specification: CreateSpecification) => {
-		const response = await api.post(SPECIFICATION, specification);
+		const response = await api.post(SPECIFICATIONS, specification);
 		return response.data;
 	}
 );
@@ -39,9 +39,7 @@ const createSpecification = createAsyncThunk(
 const getSpecificationById = createAsyncThunk(
 	'specification/getSpecificationById',
 	async (id: string): Promise<Specification> => {
-		const response = await api.get(
-			replaceSingleSpecificationByIdRouteParam(id)
-		);
+		const response = await api.get(formatSpecificationByIdRouteParam(id));
 		return response.data;
 	}
 );
@@ -50,7 +48,7 @@ const getAllSpecificationByUserId = createAsyncThunk(
 	'specification/getAllSpecificationByUserId',
 	async (id: string): Promise<Specification[]> => {
 		const response = await api.get(
-			replaceAllSpecificationByUserIdRouteParam(id)
+			formatSpecificationsByUserIdRouteParam(id)
 		);
 		return response.data;
 	}
@@ -60,7 +58,7 @@ const getAllSpecificationByProjectId = createAsyncThunk(
 	'specification/getAllSpecificationByProjectId',
 	async (id: string): Promise<Specification[]> => {
 		const response = await api.get(
-			replaceAllSpecificationByProjectIdRouteParam(id)
+			formatSpecificationsByProjectIdRouteParam(id)
 		);
 		return response.data;
 	}
@@ -70,7 +68,7 @@ const updateSpecificationById = createAsyncThunk(
 	'specification/updateSpecificationById',
 	async (specification: Specification) => {
 		const response = await api.patch(
-			replaceSingleSpecificationByIdRouteParam(specification.id),
+			formatSpecificationByIdRouteParam(specification.id),
 			specification
 		);
 		return response.data;
@@ -81,7 +79,7 @@ const deleteSpecificationById = createAsyncThunk(
 	'specification/deleteSpecificationById',
 	async (id: string) => {
 		const response = await api.delete(
-			replaceSingleSpecificationByIdRouteParam(id)
+			formatSpecificationByIdRouteParam(id)
 		);
 		return response.data;
 	}

@@ -1,38 +1,25 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import './style.scss';
-import { jwtDecode } from 'jwt-decode';
 import RexItem from '@/app/components/LongCard/RexItem';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
-import { ProjectRexType } from './type';
-import { ProjectType } from '../specification/type';
-import api from '@/app/api';
+import { AppDispatch, useTypedSelector } from '@/app/store';
+import { useDispatch } from 'react-redux';
+import { getAllProjectByUserId } from '@/app/store/slices/projectSlice';
+import { Rex } from '@/app/models/rex';
 
-function TeamPage() {
-	const [project, setProject] = useState<ProjectType[]>([]);
-
-	let user_id: string = '';
-	const token: any = localStorage.getItem('token');
-	const decodeToken: any = jwtDecode(token);
-	user_id = decodeToken['id'];
+function RexPage() {
+	const dispatch: AppDispatch = useDispatch();
+	const project = useTypedSelector((state): Rex[] => state.rex.AllRexs);
+	const { userId } = useTypedSelector((state) => state.auth);
 
 	useEffect(() => {
-		//GET PROJECT OF USER
-		// try {
-		// 	axios
-		// 		.get(`http://localhost:8000/api/project/user/${user_id}`, {
-		// 			headers: { Authorization: `Bearer ${token}` },
-		// 		})
-		// 		.then((res) => {
-		// 			setProject(res.data);
-		// 		});
-		// } catch (error) {
-		// 	console.log(error);
-		// }
 		try {
-		} catch (error) {}
-	}, []);
+			dispatch(getAllProjectByUserId(userId));
+		} catch (error) {
+			console.log(error);
+		}
+	}, [dispatch, userId]);
 
 	return (
 		<>
@@ -70,4 +57,4 @@ function TeamPage() {
 	);
 }
 
-export default TeamPage;
+export default RexPage;
