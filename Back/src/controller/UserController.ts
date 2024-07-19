@@ -179,6 +179,8 @@ export class UserController {
 		@Req() req: any
 	): Promise<SuccessAuthDto | ErrorDto> {
 		try {
+			// TODO: A enlever une fois le problèmes des intercepteurs réglé (permet de vérifier qu'on reçoit la requête et ce qui s'y trouve	)
+			console.log("data", data);
 			// find object in data source
 			const user: User = await this.userRepository.findOne({
 				where: { mail: data.getMail() },
@@ -322,6 +324,9 @@ export class UserController {
 		}
 	}
 
+	// TODO: Modifier en /me et décoder le token pour savoir quel user on va mettre à jour
+	// Comme le token est signé, si on change l'id conten u dedans il n'est plus valide donc 403
+	// Et comme ça on améliore la sécurité
 	/**
 	 * @swagger
 	 * /user/{id}:
@@ -364,18 +369,14 @@ export class UserController {
 	 *                 error:
 	 *                   type: string
 	 */
-	@Patch("/user/:id")
+	@Patch("/user/:id") // => /user/:id deviendrait /me
 	@UseBefore(CheckAuth)
 	/**
 	 * Updates a user account.
-	 * @param id - The ID of the user account to update.
-	 * @param data - The updated user data.
+	 * @param id - The ID of the user account to update. => voué à disparaitre du coup, serait remplacé par le token
+	 * @param data - The updated user data. => ça on garde
 	 * @returns An object indicating the success or error message.
 	 */
-	//   public async update(@Param("id") id: string, @Body() data: User) {
-	// try {
-	//   const user: User = await this.userRepository.findOne({ where: { id } });
-	//       if (!user) throw new Error("Account not found");
 	public async update(
 		@Param("id") id: string,
 		@Body() data: User,

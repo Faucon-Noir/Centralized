@@ -25,6 +25,7 @@ import { UserDto } from "../dto/UserDto";
 import { TeamDto } from "../dto/TeamDto";
 dotenv.config();
 
+// TODO: revoir les urls, plusieurs ne sont pas logiques
 @JsonController()
 export class TeamController {
 	private clientUrl = "http://localhost:8000";
@@ -39,6 +40,8 @@ export class TeamController {
 		this.userRepository = AppDataSource.getRepository(User);
 	}
 
+	// Récupérer le userID depuis le token et changer l'url pour /team
+	// Ce qui serait pas mal aussi c'est de faire en sorte que chaque id qu'on saisit en front soit ajouté d'office par cette requête, plutot que de multiplier les appels sur /teamuser
 	/**
 	 * @swagger
 	 * /team/{userid}:
@@ -125,6 +128,7 @@ export class TeamController {
 		}
 	}
 
+	// TODO: L'url est bonne mais il y a un bug qui fait qu'on ne peut pas ajouter un user à une équipe
 	/**
 	 * @swagger
 	 * /teamuser:
@@ -206,6 +210,7 @@ export class TeamController {
 		}
 	}
 
+	// Récupérer le userID depuis le token et changer l'url pour /teamuser/user
 	/**
 	 * @swagger
 	 * /teamuser/user/{id}:
@@ -266,6 +271,11 @@ export class TeamController {
 		}
 	}
 
+	/**
+	 * ========================================================================
+	 * A partir d'ici on ne touche plus les urls, elles sont logiques
+	 * ========================================================================
+	 */
 	/**
 	 * @swagger
 	 * /teamuser/{id}:

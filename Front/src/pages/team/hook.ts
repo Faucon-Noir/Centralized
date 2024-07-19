@@ -1,47 +1,68 @@
-import styled from '@mui/system/styled'
-import axios from 'axios'
-import { useState } from 'react'
-import { jwtDecode } from 'jwt-decode'
-import { useRouter } from 'next/router'
+import styled from '@mui/system/styled';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import { useRouter } from 'next/router';
+import { useTypedSelector } from '@/app/store';
+import { AppDispatch } from '../../app/store/index';
+import { useDispatch } from 'react-redux';
+import { postCreateTeam } from '@/app/store/slices/teamSlice';
+import { getUserByMail } from '@/app/store/slices/userSlice';
+import { User } from '@/app/models/user';
+import { keys, height, width } from '@mui/system';
+import { log } from 'console';
+import { id } from 'date-fns/locale';
+import { type } from 'os';
+import { ChangeEvent } from 'react';
 
 export default function useData(
 	setTeam: any,
 	team: any,
-	addUser?: any,
 	addUserCreate?: any,
 	selectedTeamId?: any
 ) {
-	const router = useRouter()
-	const mail_array = addUser.split(/,\s?/)
-	const mail_array_create = addUserCreate?.split(/,\s?/)
+	const dispatch: AppDispatch = useDispatch();
+
+	const router = useRouter();
+	const mail_array_create = addUserCreate?.split(/,\s?/);
+	const token = useTypedSelector((state) => state.auth.token);
 
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file = event.target.files?.[0]
+		const file = event.target.files?.[0];
 		if (file) {
-			const allowedTypes = ['image/png', 'image/jpeg']
-			const maxSize = 2 * 1024 * 1024 // 2Mo
+			const allowedTypes = ['image/png', 'image/jpeg'];
+			const maxSize = 2 * 1024 * 1024; // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
-				setTeam({ ...team, avatar: file })
+				setTeam({ ...team, avatar: file });
 			} else {
 				alert(
 					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
-				)
+				);
 			}
 		} else {
-			console.log('No file selected')
+			console.log('No file selected');
 		}
-	}
+	};
 
 	// Multer Create
 	async function handleCreateSubmit(e: any) {
-		e.preventDefault()
-		const token: any = localStorage.getItem('token')
-		const decodeToken: any = jwtDecode(token)
-		const user_id = decodeToken['id']
-		const formData = new FormData()
+		e.preventDefault();
+		const decodeToken: any = jwtDecode(token ?? '');
+		const user_id = decodeToken['id'];
+		const formData = new FormData();
 		Object.keys(team).forEach((key) => {
-			formData.append(key, team[key])
-		})
+			formData.append(key, team[key]);
+		});
+
+		// TODO: rework le useEffect (un souci de type est présent sur le res.payload.id)
+		// dispatch(postCreateTeam(formData)).then((res) => {
+		// 	if (res.meta.requestStatus === 'fulfilled') {
+		// 		mail_array_create.forEach((element: any, index: any) => {
+		// 			dispatch(getUserByMail(element)).then((res) => {
+		// 				mail_array_create[index] = res.payload.id;
+		// 			});
+		// 		});
+		// 	}
+		// });
 		axios
 			.post(`http://localhost:8000/api/team/${user_id}`, formData, {
 				headers: {
@@ -50,7 +71,7 @@ export default function useData(
 				},
 			})
 			.then(function (response) {
-				console.log(response)
+				console.log(response);
 				if (response.status === 200) {
 					mail_array_create.forEach((element: any, index: any) => {
 						axios
@@ -63,9 +84,9 @@ export default function useData(
 								}
 							)
 							.then(function (res) {
-								mail_array_create[index] = res.data.id
-							})
-					})
+								mail_array_create[index] = res.data.id;
+							});
+					});
 					mail_array_create.forEach((element: any) => {
 						axios.post(
 							`http://localhost:8000/api/teamuser`,
@@ -78,15 +99,15 @@ export default function useData(
 									Authorization: `Bearer ${token}`,
 								},
 							}
-						)
-					})
-					router.push('/team')
+						);
+					});
+					router.push('/team');
 				}
 			})
 			.catch(function (error) {
-				console.log('error', error)
-				router.push('/team')
-			})
+				console.log('error', error);
+				router.push('/team');
+			});
 	}
 
 	const VisuallyHiddenInput = styled('input')({
@@ -99,11 +120,11 @@ export default function useData(
 		left: 0,
 		whiteSpace: 'nowrap',
 		width: 1,
-	})
+	});
 	return {
 		handleFileChange,
 		// handleEditSubmit,
 		handleCreateSubmit,
 		VisuallyHiddenInput,
-	}
+	};
 }
