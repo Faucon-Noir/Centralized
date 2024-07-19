@@ -232,13 +232,17 @@ export class TicketController {
 	 */
 	public async getAllTicketByPlanning(
 		@Param("planningid") planningid: string
-	): Promise<TicketDto | ErrorDto> {
+	) {
 		try {
 			const ticket: TicketDto = await this.ticketRepository.find({
 				where: { planning: { id: planningid } },
 			});
 			if (!ticket) throw new Error("Ticket not found");
-			return ticket;
+			let count = 0;
+			for (let l in ticket) {
+				count++
+			}
+			return { ticket: ticket, count: count };
 		} catch (err) {
 			return { error: err.message };
 		}
@@ -279,18 +283,21 @@ export class TicketController {
 	 * @param projectid - The ID of the project.
 	 * @returns A promise that resolves to the array of tickets or an error object.
 	 */
-	public async getAllTicketByProject(
-		@Param("projectid") projectid: string
-	): Promise<TicketDto | ErrorDto> {
+	public async getAllTicketByProject(@Param("projectid") projectid: string) {
 		try {
 			const planning: Planning = await this.planningRepository.find({
 				where: { project: { id: projectid } },
 			});
+			if (!planning) throw new Error("Ticket not found");
 			const ticket: TicketDto = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
 			});
 			if (!ticket) throw new Error("Ticket not found");
-			return ticket;
+			let count = 0;
+			for (let l in ticket) {
+				count++
+			}
+			return { ticket: ticket, count: count };
 		} catch (err) {
 			return { error: err.message };
 		}

@@ -79,9 +79,7 @@ export class UserController {
 	 * @param data - The user data to be registered.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async register(
-		@Body() data: User
-	): Promise<SuccessAuthDto | ErrorDto> {
+	public async register(@Body() data: User): Promise<SuccessAuthDto | ErrorDto> {
 		try {
 			// verif object existing in data source
 			const hasAccountWithEmail: User = await this.userRepository.findOne(
@@ -174,13 +172,8 @@ export class UserController {
 	 * @returns An object containing the success message and the generated token if authentication is successful,
 	 *          otherwise an object containing the error message.
 	 */
-	public async login(
-		@Body() data: User,
-		@Req() req: any
-	): Promise<SuccessAuthDto | ErrorDto> {
+	public async login(@Body() data: User, @Req() req: any): Promise<SuccessAuthDto | ErrorDto> {
 		try {
-			// TODO: A enlever une fois le problèmes des intercepteurs réglé (permet de vérifier qu'on reçoit la requête et ce qui s'y trouve	)
-			console.log("data", data);
 			// find object in data source
 			const user: User = await this.userRepository.findOne({
 				where: { mail: data.getMail() },
@@ -206,11 +199,11 @@ export class UserController {
 			);
 			if (!token) throw new Error("Error authentication");
 
-			// await this.mailer.sendMailTicket(
-			//   user.getMail(),
-			//   "Centralized : votre ticket à été avec succès !",
-			//   user.getLastname()
-			// );
+			await this.mailer.sendMailTicket(
+				user.getMail(),
+				"Centralized : votre ticket à été avec succès !",
+				user.getLastname()
+			);
 
 			return { success: "Account login", token: token };
 		} catch (error) {
@@ -526,9 +519,8 @@ export class UserController {
 			req.session.token = hash;
 
 			// url page reset password
-			const link = `${
-				this.clientUrl
-			}/passwordReset?token=${resetToken}&id=${user.getId()}`;
+			const link = `${this.clientUrl
+				}/passwordReset?token=${resetToken}&id=${user.getId()}`;
 			return link;
 		} catch (error) {
 			return { error: error.message };

@@ -5,19 +5,17 @@ dotenv.config();
 export class NodeMailerSendEmail {
 	public mailApp: string = process.env.MAIL_APP;
 
-	public transporter = nodemailer.createTransport({
-		host: process.env.MAIL_HOST,
-		port: 465,
-		secure: true,
+	public transport = nodemailer.createTransport({
+		host: "sandbox.smtp.mailtrap.io",
+		port: 2525,
 		auth: {
-			user: this.mailApp,
-			pass: process.env.MAIL_KEY,
+			user: "fb8ee8bdfc1f45",
+			pass: "dbfe3978d7f7d1"
 		},
 		tls: {
 			rejectUnauthorized: false, // ne pas vérifier le certificat du serveur SMTP
 		},
 	});
-
 	public async sendMailTicket(
 		email: string,
 		subject: string,
@@ -49,7 +47,7 @@ export class NodeMailerSendEmail {
 		};
 
 		try {
-			const info = await this.transporter.sendMail(mailOptions);
+			const info = await this.transport.sendMail(mailOptions);
 			console.log("Message sent: %s", info.messageId);
 			return { success: info.messageId };
 		} catch (error) {

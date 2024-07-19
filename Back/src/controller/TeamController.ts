@@ -170,37 +170,29 @@ export class TeamController {
 	 * @returns The added team user.
 	 */
 	public async addUserTeam(
-		@Body() data: TeamUser
+		@Body() data
 	): Promise<TeamUser | ErrorDto> {
 		try {
-			var mail = data.getUser();
-			const user: UserDto = await this.userRepository.findOne({
-				where: { mail },
+			const user: User = await this.userRepository.findOne({
+				where: { mail: data.mail },
 			});
 			if (!user) throw new Error("Account not found");
-
-			const team: TeamDto = await this.teamRepository.findOne({
-				where: { id: data.getTeam() },
+			const team: Team = await this.teamRepository.findOne({
+				where: { id: data.team },
 			});
 			if (!team) throw new Error("Team not found");
 
-			const user_in_team = await this.teamuserRepository
+			const team_of_user = await this.teamuserRepository
 				.createQueryBuilder("team_user")
-				.leftJoinAndSelect("team_user.user", "user")
-				.leftJoinAndSelect("team_user.team", "team")
-				.where(
-					"user.id = :userId",
-					{ userId: data.getUser() },
-					"team.id = :teamId",
-					{ teamId: data.getTeam() }
-				)
-				.getCount();
+				.where("userId = :userId", { userId: user.getId() })
+				.andWhere("teamId = :teamId", { teamId: team.getId() })
+				.execute();
 
-			if (user_in_team >= 1) {
-				throw new Error("User is already in this Team");
-			}
+			if (team_of_user.length > 0) throw new Error(user.getMail() + " already in the team")
 
-			const teamuser: TeamUser = data;
+			const teamuser: TeamUser = new TeamUser();
+			teamuser.setUser(user);
+			teamuser.setTeam(team);
 			if (!teamuser) throw new Error("User not added to a Team");
 
 			await this.teamuserRepository.save(teamuser);
@@ -601,7 +593,6 @@ export class TeamController {
 			});
 			if (!team) throw new Error("Team not found");
 
-			console.log(data);
 			// Version avatar
 			if (storedFiles) {
 				const files = storedFiles.map((file): SuccessDto => {
