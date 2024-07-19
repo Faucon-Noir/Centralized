@@ -6,23 +6,25 @@ import {
 	formatUserByIdRouteParam,
 	formatUserByMailRouteParam,
 } from '@/app/api/apiRouteHelper';
+
+// La définition d'un store
+
 // Initial state
 interface UserState {
-	Users: User[];
-	User: User | null;
+	User: User;
 	loading: boolean;
 	error: string | undefined;
 	status: StatusEnum;
 }
 
 const initialState: UserState = {
-	Users: [],
-	User: null,
+	User: {} as User,
 	loading: false,
 	error: undefined,
 	status: StatusEnum.Idle,
 };
 
+// Thunks (async actions)
 const getUserById = createAsyncThunk('user/getUserById', async (id: string) => {
 	const response = await api.get(formatUserByIdRouteParam(id));
 	return response.data;
@@ -36,7 +38,7 @@ const getUserByMail = createAsyncThunk(
 	}
 );
 
-const update = createAsyncThunk('user/update', async (user: User) => {
+const updateUser = createAsyncThunk('user/update', async (user: User) => {
 	const response = await api.put(formatUserByIdRouteParam(user.id), user);
 	return response.data;
 });
@@ -46,24 +48,30 @@ const deleteUser = createAsyncThunk('user/delete', async (id: string) => {
 	return response.data;
 });
 
+// Slice
 const UserSlice = createSlice({
 	name: 'User',
 	initialState,
-	reducers: {},
+	reducers: {}, // For simple actions only
 	extraReducers: (builder) => {
+		// For async actions & more specific reducers. Each thunk has 3 types of actions: pending, fulfilled, rejected.
+
 		// GET USER BY ID
 		builder
 			.addCase(getUserById.pending, (state) => {
+				// pending: en cours => chargement à vrai, reset de l'erreur à indéfini, status sur pending
 				state.loading = true;
 				state.error = undefined;
 				state.status = StatusEnum.Pending;
 			})
 			.addCase(getUserById.fulfilled, (state, action) => {
+				// fulfilled: réussi => chargement à faux, User à l'action.payload, status sur succeeded
 				state.loading = false;
 				state.User = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(getUserById.rejected, (state, action) => {
+				// rejected: rejeté => chargement à faux, erreur à action.error.message, status sur failed
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
@@ -87,17 +95,17 @@ const UserSlice = createSlice({
 			});
 		// UPDATE
 		builder
-			.addCase(update.pending, (state) => {
+			.addCase(updateUser.pending, (state) => {
 				state.loading = true;
 				state.error = undefined;
 				state.status = StatusEnum.Pending;
 			})
-			.addCase(update.fulfilled, (state, action) => {
+			.addCase(updateUser.fulfilled, (state, action) => {
 				state.loading = false;
 				state.User = action.payload;
 				state.status = StatusEnum.Succeeded;
 			})
-			.addCase(update.rejected, (state, action) => {
+			.addCase(updateUser.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
@@ -111,7 +119,7 @@ const UserSlice = createSlice({
 			})
 			.addCase(deleteUser.fulfilled, (state, action) => {
 				state.loading = false;
-				state.User = null;
+				state.User = {} as User; // Reset User
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(deleteUser.rejected, (state, action) => {
@@ -122,5 +130,5 @@ const UserSlice = createSlice({
 	},
 });
 
-export { getUserById, getUserByMail, update, deleteUser };
+export { getUserById, getUserByMail, updateUser, deleteUser };
 export default UserSlice.reducer;

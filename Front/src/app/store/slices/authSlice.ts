@@ -14,7 +14,7 @@ import { jwtDecode } from 'jwt-decode';
 interface AuthState {
 	token: string | null;
 	loading: boolean;
-	error: string | undefined;
+	error: any | undefined;
 	status: StatusEnum;
 	userId: string;
 }
@@ -71,15 +71,16 @@ const AuthSlice = createSlice({
 			.addCase(postLogin.fulfilled, (state, action) => {
 				state.loading = false;
 				state.token = action.payload;
-				console.log('token slice', state.token);
+				// TODO: Trouver pourquoi le jwtDecode ne fonctionne pas (base64 have incorrect length)
+				// Probablement lié au problème d'intercepteur
 				state.userId = jwtDecode<{ id: string }>(action.payload).id;
+				console.log('userId', state.userId); // On peut faire des const et des log mais aucun intérêt pour autre chose que du debug
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(postLogin.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
-				console.log('token slice', state.error);
 			});
 
 		// REGISTER
@@ -100,6 +101,7 @@ const AuthSlice = createSlice({
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
+
 		// REQUEST RESET PASSWORD
 		builder
 			.addCase(postRequestResetPassword.pending, (state) => {
@@ -116,6 +118,7 @@ const AuthSlice = createSlice({
 				state.error = action.error.message;
 				state.status = StatusEnum.Failed;
 			});
+
 		// RESET PASSWORD
 		builder
 			.addCase(postResetPassword.pending, (state) => {

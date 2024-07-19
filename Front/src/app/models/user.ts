@@ -7,7 +7,7 @@ type CommonUser = Common & {
 	phone: string;
 };
 export type User = CommonUser & {
-	avatar: string;
+	avatar: string | File;
 	bio: string;
 };
 

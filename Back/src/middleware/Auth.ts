@@ -1,6 +1,4 @@
-import { json } from "body-parser";
 import * as jwt from "jsonwebtoken";
-import { env } from "process";
 
 export const CheckAuth = function (req, res, next) {
 	try {

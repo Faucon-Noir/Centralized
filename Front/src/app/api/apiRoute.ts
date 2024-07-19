@@ -1,3 +1,5 @@
+// Toutes les routes api utilisées
+
 // AUTH
 export const LOGIN = '/login';
 export const REGISTER = '/register';
@@ -27,11 +29,11 @@ export const SPECIFICATION_BY_PROJECT = `${SPECIFICATIONS}${PROJECT_BY_ID}`;
 // --- A traiter ---
 // TEAM
 export const TEAMS = '/team';
+export const CREATE_TEAM_WITH_USER_ID = `${TEAMS}/:id`;
 export const TEAM_BY_ID = `${TEAMS}/:id`;
-export const CREATE_TEAM_WITH_USER_ID = TEAM_BY_ID;
-export const TEAM_USER = '/teamuser';
-export const TEAM_USER_BY_ID = `${TEAM_USER}/:id`;
-export const TEAM_BY_USER = `${TEAMS}/user/:id`;
+export const TEAMUSER = '/teamuser';
+export const TEAMUSER_BY_ID = `${TEAMUSER}/:id`;
+export const TEAMUSER_BY_USER_ID = `${TEAMUSER}/user/:id`;
 // ---  ---
 
 // TICKET

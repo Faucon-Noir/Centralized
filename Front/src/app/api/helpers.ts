@@ -2,6 +2,8 @@ import { AxiosRequestConfig } from 'axios';
 import { ErrorType, HttpInterceptorsType } from './types';
 import { REQUEST_START_TIME_KEY } from './constants';
 
+// Pour le moment on s'en sert pas, mais ça sera utile à terme
+
 export const buildLogMessage = (
 	interceptorType: HttpInterceptorsType,
 	config: AxiosRequestConfig,

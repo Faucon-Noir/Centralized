@@ -9,13 +9,14 @@ import AuthWrapper from '@/app/components/AuthWrapper';
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
+	// TODO: Valider le AuthWrapper une fois le problème des intercepteurs réglé
 	return (
 		<Provider store={store}>
-			<AuthWrapper>
-				<main className={myFont.className}>
-					<Component {...pageProps} />
-				</main>
-			</AuthWrapper>
+			{/* <AuthWrapper> */}
+			<main className={myFont.className}>
+				<Component {...pageProps} />
+			</main>
+			{/* </AuthWrapper> */}
 		</Provider>
 	);
 }

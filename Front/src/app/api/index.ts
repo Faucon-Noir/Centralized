@@ -7,13 +7,24 @@ const api = axios.create({
 });
 
 // Intercepteur pour tous les appels sortants, sauf sur "/login"
+
+// TODO: Invalid Hook Call coté Front qui empeche la connexion
+// Le problème viendrait du useTypedSelector qui est unhook
+// Une solution serait de déplacer le useTypedSelector dans un composant react et serait entre le main et le AutWrapper dans _app.tx
+// Le composant pourrait ressembler voir intégrer le AuthWrapper
+// ça incluerait de modifier ce fichier pour l'englober dans un const createApi qui serait utilisé dans le composant
+
+// Un résultgat possible de cette modif dans le composant:
+// const token = useTypedSelector((state) => state.auth.token);
+// const api = createApi(token);
+
 api.interceptors.request.use((config) => {
 	const router = useRouter();
-	if (router.pathname !== '/login') {
-		const token = useTypedSelector((state) => state.auth.token);
-		// Ajout du token dans l'en-tête
-		// const token = localStorage.getItem('token');
+	const token = useTypedSelector((state) => state.auth.token);
+	if (config.url !== '/login') {
 		config.headers.Authorization = `Bearer ${token}`;
+	} else {
+		console.log('No token needed for this request');
 	}
 	return config;
 });
@@ -23,25 +34,25 @@ api.interceptors.request.use((config) => {
 
 // api.interceptors.response.use(
 // 	(response) => {
-// 		const { config, status } = response
-// 		const milliseconds = getDurationApi(config)
+// 		const { config, status } = response;
+// 		const milliseconds = getDurationApi(config);
 // 		const msg = buildLogMessage(
 // 			'Response',
 // 			config,
 // 			false,
 // 			status,
 // 			milliseconds
-// 		)
-// 		console.info(msg)
-// 		return response
+// 		);
+// 		console.info(msg);
+// 		return response;
 // 	},
 // 	(httpError: AxiosError<ErrorType>) => {
 // 		if (!httpError.response) {
-// 			throw httpError
+// 			throw httpError;
 // 		}
 
-// 		const { config, status, data } = httpError.response
-// 		const milliseconds = getDurationApi(config)
+// 		const { config, status, data } = httpError.response;
+// 		const milliseconds = getDurationApi(config);
 // 		const msg = buildLogMessage(
 // 			'Response',
 // 			config,
@@ -49,10 +60,10 @@ api.interceptors.request.use((config) => {
 // 			status,
 // 			milliseconds,
 // 			data
-// 		)
-// 		console.error(msg)
-// 		throw httpError
+// 		);
+// 		console.error(msg);
+// 		throw httpError;
 // 	}
-// )
+// );
 
 export default api;

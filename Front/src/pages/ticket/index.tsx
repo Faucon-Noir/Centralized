@@ -30,7 +30,6 @@ export default function Tickets() {
 	const tickets = useTypedSelector((state) => state.ticket.AllTickets);
 
 	const [open, setOpen] = useState<boolean>(false);
-	// const [tickets, setTickets] = useState<TicketType[]>([]);
 	const [selectedTaskId, setSelectedTaskId] = useState<any>(null);
 	const [ticketDetails, setTicketDetails] = useState<UpdateTicket>({});
 	const selected = tickets.find((ticket) => ticket.id === selectedTaskId);
@@ -129,8 +128,6 @@ export default function Tickets() {
 									sx={{ color: '#000000' }}
 								/>
 							</Button>
-							{/* TODO: Développer des filtres par niveau de criticité */}
-							{/* Créer un tri par ordre de criticité ? => A voir */}
 						</div>
 						<div className='card_container'>
 							{tickets.map((ticket: any) => (

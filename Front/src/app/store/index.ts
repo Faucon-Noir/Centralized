@@ -10,6 +10,7 @@ import teamReducer from './slices/teamSlice';
 import ticketReducer from './slices/ticketSlice';
 import userReducer from './slices/userSlice';
 
+// Ici on configure le store redux avec l'ensemble des slices
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
@@ -19,7 +20,7 @@ export const store = configureStore({
 		specification: specificationReducer,
 		team: teamReducer,
 		ticket: ticketReducer,
-		user: userReducer,
+		user: userReducer, // Cf le slice userSlice pour savoir comment c'est fait
 	},
 });
 

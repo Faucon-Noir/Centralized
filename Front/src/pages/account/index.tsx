@@ -13,7 +13,6 @@ import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import { useEffect, useState } from 'react';
 import { ModalContentStyle } from './style';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import {
@@ -33,22 +32,13 @@ import {
 import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
 import { User } from '@/app/models/user';
-import { getUserById, update } from '@/app/store/slices/userSlice';
+import { getUserById, updateUser } from '@/app/store/slices/userSlice';
 
 export default function AccountPage() {
 	const token = useTypedSelector((state) => state.auth.token);
-	// const user = useTypedSelector((state) => state.user.user);
+	const user = useTypedSelector((state) => state.user.User);
 	const dispatch: AppDispatch = useDispatch();
 
-	const [user, setUser] = useState<User>({
-		id: '',
-		avatar: '',
-		lastname: '',
-		firstname: '',
-		mail: '',
-		phone: '',
-		bio: '',
-	});
 	const [open, setOpen] = useState<boolean>(false);
 	let user_id: string = '';
 
@@ -64,7 +54,7 @@ export default function AccountPage() {
 			const allowedTypes: string[] = ['image/png', 'image/jpeg'];
 			const maxSize: number = 2 * 1024 * 1024; // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
-				setUser({ ...user, avatar: file });
+				user!.avatar = file;
 			} else {
 				alert(
 					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
@@ -92,7 +82,7 @@ export default function AccountPage() {
 		});
 
 		// TODO
-		dispatch(update(user)).catch(function (error) {
+		dispatch(updateUser(user)).catch(function (error) {
 			console.log(error);
 		});
 	};
@@ -143,7 +133,6 @@ export default function AccountPage() {
 									>
 										<CloseOutlinedIcon />
 									</IconButton>
-									{/* TODO: Faire une update de l'api pour prendre en charge le blob de l'image */}
 									<Input
 										type='file'
 										onChange={handleFileChange}
@@ -174,10 +163,7 @@ export default function AccountPage() {
 								placeholder={'Votre prénom'}
 								value={user?.firstname ? user.firstname : ''}
 								onChange={(e) =>
-									setUser({
-										...user,
-										firstname: e.target.value,
-									})
+									(user.firstname = e.target.value)
 								}
 							/>
 							<label data-cy={LastNameLabelCy} htmlFor='lastName'>
@@ -190,10 +176,7 @@ export default function AccountPage() {
 								placeholder={'Votre nom'}
 								value={user?.lastname ? user.lastname : ''}
 								onChange={(e) =>
-									setUser({
-										...user,
-										lastname: e.target.value,
-									})
+									(user.lastname = e.target.value)
 								}
 							/>
 						</Box>
@@ -206,9 +189,7 @@ export default function AccountPage() {
 							className='textField'
 							placeholder={'Votre adresse mail'}
 							value={user?.mail ? user.mail : ''}
-							onChange={(e) =>
-								setUser({ ...user, mail: e.target.value })
-							}
+							onChange={(e) => (user.mail = e.target.value)}
 						/>
 						<label data-cy={PhoneLabelCy} htmlFor='phone'>
 							Phone
@@ -219,9 +200,7 @@ export default function AccountPage() {
 							className='textField'
 							placeholder={'Votre numéro de téléphone'}
 							value={user?.phone ? user.phone : ''}
-							onChange={(e) =>
-								setUser({ ...user, phone: e.target.value })
-							}
+							onChange={(e) => (user.phone = e.target.value)}
 						/>
 						<label data-cy={BioLabelCy} htmlFor='bio'>
 							Bio
@@ -232,9 +211,7 @@ export default function AccountPage() {
 							className='textField'
 							placeholder={'Une courte description de vous-même'}
 							value={user?.bio ? user.bio : ''}
-							onChange={(e) =>
-								setUser({ ...user, bio: e.target.value })
-							}
+							onChange={(e) => (user.bio = e.target.value)}
 						/>
 						<Button
 							data-cy={SaveButtonCy}

@@ -1,5 +1,6 @@
 export type ProjetCardProps = {
-	name: string
-	totalTickets: number
-	id: number
-}
+	name: string;
+	totalTickets: number;
+	id: number;
+	projectId: string;
+};

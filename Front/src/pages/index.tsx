@@ -26,10 +26,7 @@ import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
 import { getAllProjectByUserId } from '@/app/store/slices/projectSlice';
 import { getUserById } from '@/app/store/slices/userSlice';
-import {
-	getAllTicketByProjectId,
-	getAllTicketByUserId,
-} from '@/app/store/slices/ticketSlice';
+import { getAllTicketByUserId } from '@/app/store/slices/ticketSlice';
 import { getAllSpecificationByProjectId } from '@/app/store/slices/specificationSlice';
 import { Project } from '@/app/models/project';
 import { getAllRexByProjectId } from '@/app/store/slices/rexSlice';
@@ -37,15 +34,19 @@ import { Ticket } from '@/app/models/ticket';
 import { Rex } from '@/app/models/rex';
 import { Specification } from '@/app/models/specification';
 import { User } from '@/app/models/user';
+import { getAllTeamsByUserId } from '@/app/store/slices/teamSlice';
 
 export default function Home(): JSX.Element {
+	// Mise en place du dispatch
 	const dispatch: AppDispatch = useDispatch();
 
-	// Typed Selector
+	// Typed Selector pour les constantes (certaines sont défini d'offices dans les slices, d'autres sont renommé pour facilier la mise enh place)
 	const project = useTypedSelector(
 		(state): Project[] => state.project.AllProjects
 	);
+	// constante déjà en place dans le slice Auth
 	const { userId } = useTypedSelector((state) => state.auth);
+	// constante renommé car user était déjà utilisé dans ce fichier. On lui donne donc la valeur User dans le slice User (state.user)
 	const user = useTypedSelector((state): User | null => state.user.User);
 	const specification = useTypedSelector(
 		(state): Specification[] => state.specification.AllSpecifications
@@ -54,6 +55,7 @@ export default function Home(): JSX.Element {
 	const ticket = useTypedSelector(
 		(state): Ticket[] => state.ticket.AllTickets
 	);
+	const teams = useTypedSelector((state) => state.team.Teams);
 
 	useEffect(() => {
 		try {
@@ -63,7 +65,7 @@ export default function Home(): JSX.Element {
 			// - Ticket ✨
 			// - Project ✨
 			// - Specification ✨
-			// - Teams
+			// - Teams ✨
 
 			// By User ID
 			dispatch(getUserById(userId)).then((res) => {
@@ -73,6 +75,7 @@ export default function Home(): JSX.Element {
 			});
 			dispatch(getAllProjectByUserId(userId));
 			dispatch(getAllTicketByUserId(userId));
+			dispatch(getAllTeamsByUserId(userId));
 
 			// By Project ID
 			if (project != null) {
@@ -82,9 +85,6 @@ export default function Home(): JSX.Element {
 				});
 			}
 
-			// TODO
-			// dispatch(getAllTeamByUserId(userId));
-
 			// LOGS
 			console.log('User', user);
 		} catch (error) {
@@ -92,12 +92,11 @@ export default function Home(): JSX.Element {
 		}
 	}, [dispatch, project, user, userId]);
 
-	// TODO: Ajouter les slices pour teams
-	const [teams, setTeams] = useState([]); // Liste de toutes les équipes de l'utilisateur
-
+	// TODO
 	// Nombre de ticket par projet => A enregistrer en base
 	// => A la base on appelait tous les tickets de chaque projet pour les compter
-	// TODO
+	// => On peut faire un count en base pour chaque projet
+	// => Faire la modif coté front pour afficher un nombre de ticket par projet depuis le typedSelector
 	const [ticketproject, setTicketProject] = useState<any>({});
 
 	let lastproject: any;
@@ -147,6 +146,7 @@ export default function Home(): JSX.Element {
 													<ProjetCard
 														name={item.name}
 														//  Calcul du nombre total de tickets par projet
+														// TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
 														totalTickets={
 															ticketproject[
 																item.id
