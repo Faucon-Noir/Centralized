@@ -51,87 +51,64 @@ function RegistrationForm() {
 
 		if (isRegister == false) {
 			setIsErrorLogin(0);
-			dispatch(postLogin({ mail: user.mail, password: user.password }))
-				.then((res) => {
-					console.log(res);
-					if (res.meta.requestStatus === 'fulfilled') {
+			axios
+				.post(`http://localhost:8000/api/login`, {
+					mail: user.mail.trim(),
+					password: user.password.trim(),
+				})
+				.then(function (response) {
+					console.log(response);
+					if (response.status === 200 && response.data.success) {
+						localStorage.setItem('token', response.data.token);
 						router.push('/');
 					} else {
 						setIsErrorLogin(1);
 					}
 				})
-				.catch((error) => {
+				.catch(function (error) {
 					console.log(error);
 					setIsErrorLogin(1);
 				});
-			// axios
-			// 	.post(`http://localhost:8000/api/login`, {
-			// 		mail: user.mail.trim(),
-			// 		password: user.password.trim(),
-			// 	})
-			// 	.then(function (response) {
-			// 		console.log(response);
-			// 		if (response.status === 200 && response.data.success) {
-			// 			localStorage.setItem('token', response.data.token);
-			// 			router.push('/');
-			// 		} else {
-			// 			setIsErrorLogin(1);
-			// 		}
-			// 	})
-			// 	.catch(function (error) {
-			// 		console.log(error);
-			// 		setIsErrorLogin(1);
-			// 	});
 		} else {
 			setIsErrorRegister(0);
-			dispatch(postRegister(user)).then((res) => {
-				console.log(res);
-				if (res.meta.requestStatus === 'fulfilled') {
-					router.push('/');
-				} else if (res.meta.requestStatus === 'rejected') {
-					console.log(res.payload.error);
+			axios
+				.post(`http://localhost:8000/api/register`, {
+					lastname: user.lastname.trim(),
+					firstname: user.firstname.trim(),
+					mail: user.mail.trim(),
+					phone: user.phone.trim(),
+					password: user.password.trim(),
+				})
+				.then(function (response) {
+					if (response.status === 200 && response.data.success) {
+						for (let index = 0; index < 20; index++) {
+							confetti({
+								origin: {
+									x: Math.random() - 0.1,
+									y: Math.random() - 0.1,
+								},
+							});
+						}
+
+						setTimeout(() => {
+							setIsErrorLogin(0);
+							setIsErrorRegister(0);
+							localStorage.setItem('token', response.data.token);
+							router.push('/');
+						}, 1000);
+					} else if (
+						response.data.error &&
+						response.data.error == 'Account existing. Please Login'
+					) {
+						setIsErrorRegister(1);
+					} else {
+						setIsErrorRegister(2);
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
 					setIsErrorRegister(1);
-				}
-			});
-
-			// axios
-			// 	.post(`http://localhost:8000/api/register`, {
-			// 		lastname: user.lastname.trim(),
-			// 		firstname: user.firstname.trim(),
-			// 		mail: user.mail.trim(),
-			// 		phone: user.phone.trim(),
-			// 		password: user.password.trim(),
-			// 	})
-			// 	.then(function (response) {
-			// 		if (response.status === 200 && response.data.success) {
-			// 			for (let index = 0; index < 20; index++) {
-			// 				confetti({
-			// 					origin: {
-			// 						x: Math.random() - 0.1,
-			// 						y: Math.random() - 0.1,
-			// 					},
-			// 				});
-			// 			}
-
-			// 			setTimeout(() => {
-			// 				setIsErrorLogin(0);
-			// 				setIsErrorRegister(0);
-			// 				localStorage.setItem('token', response.data.token);
-			// 				router.push('/');
-			// 			}, 1000);
-			// 		} else if (
-			// 			response.data.error &&
-			// 			response.data.error == 'Account existing. Please Login'
-			// 		) {
-			// 			setIsErrorRegister(1);
-			// 		} else {
-			// 			setIsErrorRegister(2);
-			// 		}
-			// 	})
-			// 	.catch(function (error) {
-			// 		console.log(error);
-			// 		setIsErrorRegister(1);
-			// 	});
+				});
 		}
 	}
 

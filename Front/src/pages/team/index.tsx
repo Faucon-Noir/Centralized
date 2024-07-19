@@ -32,13 +32,18 @@ function ListTeam() {
 		useData(setTeam, team, selectedTeamId, addUser);
 	let selected: any = {};
 
-	const token = useTypedSelector((state) => state.auth.token);
-
+	let token: string | null;
+	if (typeof window !== 'undefined') {
+		token = localStorage.getItem("token");
+	} else {
+		token = null
+	}
 	const handleOpen = (teamId: string) => {
 		let user_id = '';
-		const decodeToken: any = jwtDecode(token ?? '');
-		user_id = decodeToken['id'];
-
+		if (token != null) {
+			const decodeToken: any = jwtDecode(token);
+			user_id = decodeToken['id'];
+		}
 		setSelectedTeamId(teamId);
 
 		teamList.forEach((element: any) => {
@@ -46,7 +51,6 @@ function ListTeam() {
 				selected = element;
 			}
 		});
-
 		// TODO: Mettre à jour l'appel api pour utiliser le dispatch (cf l'index.tsx à la racine de pages/)
 		axios
 			.get(`http://localhost:8000/api/teamuser/${teamId}`, {
@@ -88,9 +92,6 @@ function ListTeam() {
 	async function handleEditSubmit(e: any) {
 		e.preventDefault();
 		const mail_array = addUser.split(/,\s?/);
-		console.log('addUser', addUser);
-		console.log('teamid', selectedTeamId);
-		console.log('mail_array', mail_array);
 
 		const formData = new FormData();
 		Object.keys(team).forEach((key) => {
@@ -103,53 +104,33 @@ function ListTeam() {
 					'Content-Type': 'multipart/form-data',
 				},
 			})
-			.then(function (response) {
-				console.log(response);
-				if (response.status === 200) {
-					mail_array.forEach((element, index) => {
-						axios
-							.get(
-								`http://localhost:8000/api/user/mail/${element}`,
-								{
-									headers: {
-										Authorization: `Bearer ${token}`,
-									},
-								}
-							)
-							.then(function (res) {
-								mail_array[index] = res.data.id;
-							});
-					});
-				}
-			})
 			.catch(function (error) {
 				console.log('error', error);
 				alert('Une erreur est survenue');
 			});
-
-		for (let index: number = 0; index < mail_array.length; index++) {
-			console.log(mail_array[index]);
-			axios
-				.post(
-					`http://localhost:8000/api/teamuser`,
-					{
-						user: mail_array[index],
-						team: selectedTeamId,
-					},
-					{
-						headers: {
-							Authorization: `Bearer ${token}`,
+		if (mail_array.length > 1) {
+			for (let index: number = 0; index < mail_array.length; index++) {
+				axios
+					.post(
+						`http://localhost:8000/api/teamuser`,
+						{
+							mail: mail_array[index],
+							team: selectedTeamId,
 						},
-					}
-				)
-				.then(function (res) {
-					console.log(res.data);
-					window.location.reload();
-				})
-				.catch(function (error) {
-					console.log('error', error);
-					alert('Une erreur est survenue');
-				});
+						{
+							headers: {
+								Authorization: `Bearer ${token}`,
+							},
+						}
+					)
+					.then(function (res) {
+						window.location.reload();
+					})
+					.catch(function (error) {
+						console.log('error', error);
+						alert('Une erreur est survenue');
+					});
+			}
 		}
 	}
 
