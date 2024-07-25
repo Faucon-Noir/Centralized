@@ -34,9 +34,9 @@ function ListTeam() {
 
 	let token: string | null;
 	if (typeof window !== 'undefined') {
-		token = localStorage.getItem("token");
+		token = localStorage.getItem('token');
 	} else {
-		token = null
+		token = null;
 	}
 	const handleOpen = (teamId: string) => {
 		let user_id = '';
@@ -52,6 +52,7 @@ function ListTeam() {
 			}
 		});
 		// TODO: Mettre à jour l'appel api pour utiliser le dispatch (cf l'index.tsx à la racine de pages/)
+		// GET ALL USER FROM TEAM BY TEAM ID
 		axios
 			.get(`http://localhost:8000/api/teamuser/${teamId}`, {
 				headers: { Authorization: `Bearer ${token}` },
@@ -72,6 +73,7 @@ function ListTeam() {
 	};
 
 	useEffect(() => {
+		// GET ALL TEAM BY USER ID
 		let user_id = '';
 		const decodeToken: any = jwtDecode(token ?? '');
 		user_id = decodeToken['id'];

@@ -3,12 +3,12 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import './style.scss';
 import { Grid } from '@mui/material';
-import axios, { AxiosResponse } from 'axios';
 import { MyRexType, RexType } from './type';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
 import { getAllProjectByUserId } from '@/app/store/slices/projectSlice';
+import { createRex } from '@/app/store/slices/rexSlice';
 
 export default function Page() {
 	// New
@@ -32,25 +32,7 @@ export default function Page() {
 		answer2: '',
 		answer3: '',
 	});
-	// const [project, setProject] = useState<ProjectType>({
-	// 	budget: '',
-	// 	constraint: '',
-	// 	description: '',
-	// 	end_date: '',
-	// 	forecast: '',
-	// 	functionality: '',
-	// 	id: '',
-	// 	name: '',
-	// 	start_date: '',
-	// 	status: false,
-	// 	team_user: '',
-	// 	technology: '',
-	// 	validation: '',
-	// 	team: '',
-	// 	user: '',
-	// 	template: '',
-	// 	constraints: '',
-	// });
+
 	const [isError, setIsError] = useState<number>(0);
 
 	function verificationRex() {
@@ -59,57 +41,6 @@ export default function Page() {
 		else if (myRex.rexAmelioration.trim() == '') return 3;
 		else return 0;
 	}
-
-	// if (typeof window !== 'undefined') {
-	// 	const isAuth: boolean = !!localStorage.getItem('token');
-	// 	let user_id: string = '';
-	// 	if (isAuth) {
-	// 		const token: any = localStorage.getItem('token');
-	// 		const decodeToken: any = jwtDecode(token);
-	// 		user_id = decodeToken['id'];
-
-	// 		useEffect(() => {
-	// 			//GET PROJECT OF ID
-	// 			try {
-	// 				const idProjet: string = new URL(
-	// 					window.location.href
-	// 				).pathname.split('/')[2];
-	// 				axios
-	// 					.get(`http://localhost:8000/api/project/${idProjet}`, {
-	// 						headers: { Authorization: `Bearer ${token}` },
-	// 					})
-	// 					.then((res) => {
-	// 						setProject(res.data);
-	// 						console.log('getProject', res.data);
-	// 						if (res.data.id) {
-	// 							if (res.data.status === true) {
-	// 								setIsForm(false);
-	// 								axios
-	// 									.get(
-	// 										`http://localhost:8000/api/rex/project/${idProjet}`,
-	// 										{
-	// 											headers: {
-	// 												Authorization: `Bearer ${token}`,
-	// 											},
-	// 										}
-	// 									)
-	// 									.then((res: any) => {
-	// 										setRex(res.data);
-	// 										console.log('getRex', res.data);
-	// 									});
-	// 							}
-	// 						} else {
-	// 							// router.push("/rex")
-	// 						}
-	// 					});
-	// 			} catch (error) {
-	// 				console.log(error);
-	// 			}
-	// 		}, [token]);
-	// 	} else {
-	// 		router.push('/login');
-	// 	}
-	// }
 
 	useEffect(() => {
 		try {
@@ -129,19 +60,27 @@ export default function Page() {
 		setIsError(statusError);
 
 		if (statusError == 0) {
-			axios
-				.post(
-					`http://localhost:8000/api/rex`,
-					{
-						project: project.id,
-						answer1: myRex.rexReussite.trim(),
-						answer2: myRex.rexProbleme.trim(),
-						answer3: myRex.rexAmelioration.trim(),
-					},
-					{ headers: { Authorization: `Bearer ${token}` } }
-				)
-				.then(function (response: AxiosResponse<any, any>) {
-					if (response.status === 200 && response.data.success) {
+			dispatch(
+				createRex({
+					project: project.id,
+					answer1: myRex.rexReussite.trim(),
+					answer2: myRex.rexProbleme.trim(),
+					answer3: myRex.rexAmelioration.trim(),
+				})
+			)
+				// axios
+				// .post(
+				// 	`http://localhost:8000/api/rex`,
+				// 	{
+				// 		project: project.id,
+				// 		answer1: myRex.rexReussite.trim(),
+				// 		answer2: myRex.rexProbleme.trim(),
+				// 		answer3: myRex.rexAmelioration.trim(),
+				// 	},
+				// 	{ headers: { Authorization: `Bearer ${token}` } }
+				// )
+				.then((res) => {
+					if (res.meta.requestStatus === 'fulfilled') {
 						window.location.reload();
 					} else {
 						setIsError(4);

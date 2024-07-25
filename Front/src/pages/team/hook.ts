@@ -5,14 +5,6 @@ import { useRouter } from 'next/router';
 import { useTypedSelector } from '@/app/store';
 import { AppDispatch } from '../../app/store/index';
 import { useDispatch } from 'react-redux';
-import { postCreateTeam } from '@/app/store/slices/teamSlice';
-import { getUserByMail } from '@/app/store/slices/userSlice';
-import { User } from '@/app/models/user';
-import { keys, height, width } from '@mui/system';
-import { log } from 'console';
-import { id } from 'date-fns/locale';
-import { type } from 'os';
-import { ChangeEvent } from 'react';
 
 export default function useData(
 	setTeam: any,

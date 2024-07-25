@@ -15,6 +15,7 @@ import { AppDispatch, useTypedSelector } from '@/app/store';
 import { CreateProject, Project } from '../../app/models/project';
 import AuthSlice from '../../app/store/slices/authSlice';
 import { createProject } from '@/app/store/slices/projectSlice';
+import { getAllTeamsByUserId } from '@/app/store/slices/teamSlice';
 
 export default function CreateSpecification() {
 	const router = useRouter();
@@ -85,81 +86,14 @@ export default function CreateSpecification() {
 				const token: any = localStorage.getItem('token');
 
 				dispatch(createProject(project));
-				// axios
-				// 	.post(
-				// 		`http://localhost:8000/api/project/${project.team}/${project.user}`,
-				// 		project,
-				// 		{ headers: { Authorization: `Bearer ${token}` } }
-				// 	)
-				// 	.then(function (response) {
-				// 		if (response.status === 200 && response.data.success) {
-				// 			setLoading(true);
-				// 			setTimeout(() => {
-				// 				setLoading(false);
-				// 				setLoading1(true);
-				// 				setTimeout(() => {
-				// 					setLoading1(false);
-				// 					for (let index = 0; index < 20; index++) {
-				// 						confetti({
-				// 							origin: {
-				// 								x: Math.random() - 0.1,
-				// 								y: Math.random() - 0.1,
-				// 							},
-				// 						});
-				// 						setTimeout(() => {
-				// 							router.push('/specification');
-				// 						}, 1000);
-				// 					}
-				// 				}, 60000);
-				// 			}, 60000);
-				// 		} else if (response.data && response.data.error) {
-				// 			//TODO
-				// 			setIsError(keys.length + 1);
-				// 		} else {
-				// 			setIsRunning(true);
-				// 		}
-				// 	})
-				// 	.catch(function (error) {
-				// 		console.log(error);
-				// 		setIsError(keys.length + 1);
-				// 	});
 			}
 			setLoad(false);
 		}
 	}
 
 	useEffect(() => {
-		dispatch(getAllTeamByUserId(userId)); // TODO
+		dispatch(getAllTeamsByUserId(userId)); // TODO
 	}, [dispatch, userId]);
-	// if (typeof window !== 'undefined') {
-	// 	const isAuth: boolean = !!localStorage.getItem('token');
-	// 	let user_id: string = '';
-	// 	if (isAuth) {
-	// 		const token: any = localStorage.getItem('token');
-	// 		const decodeToken: any = jwtDecode(token);
-	// 		user_id = decodeToken['id'];
-
-	// 		useEffect(() => {
-	// 			setProject({ ...project, user: user_id });
-	// 			try {
-	// 				axios
-	// 					.get(
-	// 						`http://localhost:8000/api/teamuser/user/${user_id}`,
-	// 						{
-	// 							headers: { Authorization: `Bearer ${token}` },
-	// 						}
-	// 					)
-	// 					.then((res: any) => {
-	// 						setTeam(res.data);
-	// 					});
-	// 			} catch (error) {
-	// 				console.log(error);
-	// 			}
-	// 		}, [token, user_id]);
-	// 	} else {
-	// 		router.push('/login');
-	// 	}
-	// }
 
 	console.log('project', project);
 	return (

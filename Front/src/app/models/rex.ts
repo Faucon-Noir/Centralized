@@ -1,6 +1,7 @@
 import { Common } from './common';
 
 export type CreateRex = {
+	project?: string;
 	answer1: string;
 	answer2: string;
 	answer3: string;

@@ -17,6 +17,7 @@ export type CreateProject = {
 	validation: string;
 	template: number;
 	status: boolean;
+	[key: string]: any;
 };
 export type Project = Common & CreateProject & { color: number };
 export type UpdateProject = Partial<Project>;
