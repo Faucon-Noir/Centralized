@@ -291,7 +291,7 @@ export default function CreateSpecification() {
                   <div className="containerPopup">
                     {fileContents.map((fileName, index) => (
                       <div key={index}>
-                        <input type="radio" id={fileName.name} name="template" value={fileName.name} />
+                        <input type="radio" id={fileName.name} name="template" className="input_radio_popup" value={fileName.name} />
                         <label htmlFor={fileName.name}>
                           <div className="boxPopup">
                             <p dangerouslySetInnerHTML={{ __html: fileName.content }} />
