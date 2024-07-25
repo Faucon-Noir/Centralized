@@ -28,9 +28,9 @@ jobs:
     - name: Install Yarn
       run: npm install -g yarn
     - name: Install dependencies
-      run: cd Front && yarn install
+      run: cd front_seo && yarn install
     - name: Build
-      run: cd Front && yarn build
+      run: cd front_seo && yarn build
     # - run: npm ci
     # - run: npm run build --if-present
     # - run: npm test
