@@ -142,26 +142,26 @@ export default function Home(): JSX.Element {
 									{/* mesprojets => liste des projets */}
 									{project
 										? project.map((item: Project) => (
-												<SwiperSlide key={item.id}>
-													<ProjetCard
-														name={item.name}
-														//  Calcul du nombre total de tickets par projet
-														// TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
-														totalTickets={
-															ticketproject[
-																item.id
+											<SwiperSlide key={item.id}>
+												<ProjetCard
+													name={item.name}
+													//  Calcul du nombre total de tickets par projet
+													// TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
+													totalTickets={
+														ticketproject[
+															item.id
+														]
+															? ticketproject[
+															item.id
 															]
-																? ticketproject[
-																		item.id
-																	]
-																: 0
-														}
-														key={item.id}
-														id={item.color}
-														projectId={item.id}
-													/>
-												</SwiperSlide>
-											))
+															: 0
+													}
+													key={item.id}
+													id={item.color}
+													projectId={item.id}
+												/>
+											</SwiperSlide>
+										))
 										: null}
 								</div>
 							</CustomSwiper>
@@ -183,8 +183,8 @@ export default function Home(): JSX.Element {
 										start_date={
 											lastproject
 												? new Date(
-														lastproject.start_date
-													)
+													lastproject.start_date
+												)
 												: new Date()
 										}
 										end_date={
@@ -286,14 +286,14 @@ export default function Home(): JSX.Element {
 									{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
 									{teams
 										? teams.map((item: any) => (
-												<SwiperSlide key={item.id}>
-													<TeamCard
-														key={item.id}
-														id={item.team.id}
-														prenom={item.team.name}
-													/>
-												</SwiperSlide>
-											))
+											<SwiperSlide key={item.id}>
+												<TeamCard
+													key={item.id}
+													id={item.team.id}
+													prenom={item.team.name}
+												/>
+											</SwiperSlide>
+										))
 										: null}
 								</div>
 							</CustomSwiper>
