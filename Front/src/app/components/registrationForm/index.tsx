@@ -26,14 +26,16 @@ import {
 	SubmitButtonCy,
 	RegistrationFormCy,
 } from './const';
-import { AppDispatch } from '@/app/store';
+import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
 import { postLogin, postRegister } from '@/app/store/slices/authSlice';
+import { jwtDecode } from 'jwt-decode';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '600' });
 
 function RegistrationForm() {
 	const dispatch: AppDispatch = useDispatch();
+	let { token, userId } = useTypedSelector((state) => state.auth);
 
 	const router = useRouter();
 	const [isRegister, setIsRegister] = useState<boolean>(false);
@@ -60,6 +62,11 @@ function RegistrationForm() {
 					console.log(response);
 					if (response.status === 200 && response.data.success) {
 						localStorage.setItem('token', response.data.token);
+						token = response.data.token;
+						const decoded: { id: string } = jwtDecode(
+							response.data.token
+						);
+						userId = decoded.id;
 						router.push('/');
 					} else {
 						setIsErrorLogin(1);

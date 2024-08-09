@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useTypedSelector } from '../store/index';
 
 const api = axios.create({
-	baseURL: process.env.API_URL ?? '',
+	baseURL: 'http://localhost:8000/api',
 });
 
 // Intercepteur pour tous les appels sortants, sauf sur "/login"
@@ -19,13 +19,8 @@ const api = axios.create({
 // const api = createApi(token);
 
 api.interceptors.request.use((config) => {
-	const router = useRouter();
-	const token = useTypedSelector((state) => state.auth.token);
-	if (config.url !== '/login') {
-		config.headers.Authorization = `Bearer ${token}`;
-	} else {
-		console.log('No token needed for this request');
-	}
+	const token = localStorage.getItem('token');
+	config.headers.Authorization = `Bearer ${token}`;
 	return config;
 });
 

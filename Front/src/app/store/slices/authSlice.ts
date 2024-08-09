@@ -70,11 +70,15 @@ const AuthSlice = createSlice({
 			})
 			.addCase(postLogin.fulfilled, (state, action) => {
 				state.loading = false;
-				state.token = action.payload;
+				localStorage.setItem('token', action.payload);
+				state.token = localStorage.getItem('token');
 				// TODO: Trouver pourquoi le jwtDecode ne fonctionne pas (base64 have incorrect length)
 				// Probablement lié au problème d'intercepteur
 				state.userId = jwtDecode<{ id: string }>(action.payload).id;
-				console.log('userId', state.userId); // On peut faire des const et des log mais aucun intérêt pour autre chose que du debug
+				console.log(
+					'userId',
+					jwtDecode<{ id: string }>(action.payload).id
+				); // On peut faire des const et des log mais aucun intérêt pour autre chose que du debug
 				state.status = StatusEnum.Succeeded;
 			})
 			.addCase(postLogin.rejected, (state, action) => {

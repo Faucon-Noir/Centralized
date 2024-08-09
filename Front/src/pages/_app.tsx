@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import './main_style.scss';
 import { store } from '@/app/store';
 import { Provider } from 'react-redux';
-import UserData from "@/utils/User/UserData"
+import UserData from '@/utils/User/UserData';
 
 import AuthWrapper from '@/app/components/AuthWrapper';
 

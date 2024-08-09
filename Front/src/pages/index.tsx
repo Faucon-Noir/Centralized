@@ -35,6 +35,7 @@ import { Rex } from '@/app/models/rex';
 import { Specification } from '@/app/models/specification';
 import { User } from '@/app/models/user';
 import { getAllTeamsByUserId } from '@/app/store/slices/teamSlice';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Home(): JSX.Element {
 	// Mise en place du dispatch
@@ -45,7 +46,15 @@ export default function Home(): JSX.Element {
 		(state): Project[] => state.project.AllProjects
 	);
 	// constante déjà en place dans le slice Auth
-	const { userId } = useTypedSelector((state) => state.auth);
+	// const { userId } = useTypedSelector((state) => state.auth);
+	let token = '';
+	if (typeof window !== 'undefined') {
+		token = localStorage.getItem('token') ?? '';
+	}
+	let userId: string = '';
+	if (token) {
+		userId = jwtDecode<{ id: string }>(token).id;
+	}
 	// constante renommé car user était déjà utilisé dans ce fichier. On lui donne donc la valeur User dans le slice User (state.user)
 	const user = useTypedSelector((state): User | null => state.user.User);
 	const specification = useTypedSelector(
@@ -70,7 +79,7 @@ export default function Home(): JSX.Element {
 			// By User ID
 			dispatch(getUserById(userId)).then((res) => {
 				if (res.meta.requestStatus) {
-					console.log('User', res.meta.requestStatus);
+					console.log('User', res);
 				}
 			});
 			dispatch(getAllProjectByUserId(userId));
@@ -140,28 +149,30 @@ export default function Home(): JSX.Element {
 							<CustomSwiper swiperId={1}>
 								<div className='ProjetCards'>
 									{/* mesprojets => liste des projets */}
-									{project
+									{Array.isArray(project) &&
+									project.length > 0
 										? project.map((item: Project) => (
-											<SwiperSlide key={item.id}>
-												<ProjetCard
-													name={item.name}
-													//  Calcul du nombre total de tickets par projet
-													// TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
-													totalTickets={
-														ticketproject[
-															item.id
-														]
-															? ticketproject[
-															item.id
+												// .map((item: Project) => (
+												<SwiperSlide key={item.id}>
+													<ProjetCard
+														name={item.name}
+														//  Calcul du nombre total de tickets par projet
+														// TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
+														totalTickets={
+															ticketproject[
+																item.id
 															]
-															: 0
-													}
-													key={item.id}
-													id={item.color}
-													projectId={item.id}
-												/>
-											</SwiperSlide>
-										))
+																? ticketproject[
+																		item.id
+																	]
+																: 0
+														}
+														key={item.id}
+														id={item.color}
+														projectId={item.id}
+													/>
+												</SwiperSlide>
+											))
 										: null}
 								</div>
 							</CustomSwiper>
@@ -183,8 +194,8 @@ export default function Home(): JSX.Element {
 										start_date={
 											lastproject
 												? new Date(
-													lastproject.start_date
-												)
+														lastproject.start_date
+													)
 												: new Date()
 										}
 										end_date={
@@ -212,19 +223,28 @@ export default function Home(): JSX.Element {
 											/>
 										</ButtonBase>
 									</div>
-									{ticket
-										.filter(
-											(task: any, idx: number) => idx < 3
-										)
-										.map((task: any) => (
-											<TaskCard
-												id={task.ticket_id}
-												title={task.ticket_title}
-												urgenceId={task.ticket_urgence}
-												date={task.ticket_start_date}
-												key={task.ticket_id}
-											/>
-										))}
+									{Array.isArray(ticket) && ticket.length > 0
+										? ticket
+												.filter(
+													(task: any, idx: number) =>
+														idx < 3
+												)
+												.map((task: any) => (
+													<TaskCard
+														id={task.ticket_id}
+														title={
+															task.ticket_title
+														}
+														urgenceId={
+															task.ticket_urgence
+														}
+														date={
+															task.ticket_start_date
+														}
+														key={task.ticket_id}
+													/>
+												))
+										: null}
 								</div>
 							</div>
 							<div className='DeuxEtapes second_line'>
@@ -286,14 +306,14 @@ export default function Home(): JSX.Element {
 									{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
 									{teams
 										? teams.map((item: any) => (
-											<SwiperSlide key={item.id}>
-												<TeamCard
-													key={item.id}
-													id={item.team.id}
-													prenom={item.team.name}
-												/>
-											</SwiperSlide>
-										))
+												<SwiperSlide key={item.id}>
+													<TeamCard
+														key={item.id}
+														id={item.team.id}
+														prenom={item.team.name}
+													/>
+												</SwiperSlide>
+											))
 										: null}
 								</div>
 							</CustomSwiper>
