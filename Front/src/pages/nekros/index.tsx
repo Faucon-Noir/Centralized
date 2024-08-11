@@ -1,18 +1,243 @@
-import UserData from '@/utils/User/UserData';
+/* eslint-disable react-hooks/rules-of-hooks */
+'use client';
+import SpecificationCard from '@/app/components/SpecificationCard';
+import TaskCard from '@/app/components/TaskCard';
+import CalendarBox from '@/app/components/CalendarBox';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+// Import Swiper
+import 'swiper/css';
+import { SwiperSlide } from 'swiper/react';
+
+import { ButtonBase } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import AddIcon from '@mui/icons-material/Add';
+import '../style.scss';
+import ProjetCard from '@/app/components/ProjectCard';
+import 'swiper/css/pagination';
+import Image from 'next/image';
+import TeamCard from '@/app/components/TeamCard';
+import RexCard from '@/app/components/rexCard';
+import Dashboard from '@/app/components/Dashboard/Dashboard';
+import CustomSwiper from '@/app/components/customSwiper';
 import { useEffect, useState } from 'react';
 
-// export default function Nekros() {
-//     const [user, setUser] = useState<any>();
-//     useEffect(() => {
-//         UserData().then(result => {
-//             setUser(result)
-//         })
-//     }, [])
-//     console.log(user);
+import { Project } from '@/app/models/project';
 
-//     return (
-//         <>
-//             <h1>Yo</h1>
-//         </>
-//     )
-// }
+import UserData from '@/utils/User/UserData';
+
+export default function Nekros() {
+    const [userData, setUserData] = useState<any>({
+        project: [{
+            rex: [],
+            ticket: []
+        }],
+        team: [],
+        user: [],
+        specification: []
+    });
+    useEffect(() => {
+        UserData().then(result => {
+            setUserData(result)
+        })
+    }, [])
+
+    console.log(userData);
+    return (
+        <>
+            <Grid container>
+                <Grid xs={2}>
+                    <Dashboard page='home' />
+                </Grid>
+                <Grid xs={10}>
+                    <div className='right_container'>
+                        <div className='Presentation'>
+                            <h1>Hello {userData.user ? userData.user.firstname : 'test'} 😎</h1>
+                        </div>
+                        <div className='MonProjet'>
+                            <div className='Entete'>
+                                <div className='TitleProjetCards'>
+                                    <h2>Mes projets</h2>
+                                    <ButtonBase href='/specification/create'>
+                                        <AddIcon
+                                            fontSize='medium'
+                                            sx={{ color: '#000000' }}
+                                        />
+                                    </ButtonBase>
+                                </div>
+                                <div className='fleches'>
+                                    <ChevronLeftIcon className='swiper-button-prev swiper-button-prev-1 fleche' />
+                                    <ChevronRightIcon className='swiper-button-next swiper-button-next-1 fleche' />
+                                </div>
+                            </div>
+                            <CustomSwiper swiperId={1}>
+                                <div className='ProjetCards'>
+                                    {/* mesprojets => liste des projets */}
+                                    {Array.isArray(userData.project) &&
+                                        userData.project.length > 0
+                                        ? userData.project.map((item: any) => (
+                                            // .map((item: Project) => (
+                                            <SwiperSlide key={item.id}>
+                                                <ProjetCard
+                                                    name={item.name}
+                                                    //  Calcul du nombre total de tickets par projet
+                                                    // TODO: Mettre à jour une fois que le back se charge de compter le nombre de tickets par projet
+                                                    totalTickets={item.ticket.count}
+                                                    key={item.id}
+                                                    id={item.color}
+                                                    projectId={item.id}
+                                                />
+                                            </SwiperSlide>
+                                        ))
+                                        : null}
+                                </div>
+                            </CustomSwiper>
+                        </div>
+                        <Grid
+                            container
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '50px',
+                            }}
+                        >
+                            <div className='DeuxEtapes'>
+                                <div className='calendar_container'>
+                                    <CalendarBox
+                                        name={
+                                            userData.project[userData.project.length - 1] ? userData.project[userData.project.length - 1].name : ''
+                                        }
+                                        start_date={
+                                            userData.project[userData.project.length - 1]
+                                                ? new Date(
+                                                    userData.project[userData.project.length - 1].start_date
+                                                )
+                                                : new Date()
+                                        }
+                                        end_date={
+                                            userData.project[userData.project.length - 1]
+                                                ? new Date(userData.project[userData.project.length - 1].end_date)
+                                                : new Date()
+                                        }
+                                        description={
+                                            userData.project[userData.project.length - 1]
+                                                ? userData.project[userData.project.length - 1].description
+                                                : ''
+                                        }
+                                    />
+                                </div>
+
+                                <div className='DernierTicket'>
+                                    <div className='entetedernierticket'>
+                                        <h2>Derniers tickets</h2>
+                                        <ButtonBase>
+                                            <Image
+                                                height={20}
+                                                width={20}
+                                                alt=''
+                                                src='/assets/arrow-narrow-right.svg'
+                                            />
+                                        </ButtonBase>
+                                    </div>
+                                    {Array.isArray(userData.project[userData.project.length - 1].ticket.ticket) && userData.project[userData.project.length - 1].ticket.ticket.length > 0
+                                        ? userData.project[userData.project.length - 1].ticket.ticket
+                                            .filter(
+                                                (task: any, idx: number) =>
+                                                    idx < 3
+                                            )
+                                            .map((task: any) => (
+                                                <TaskCard
+                                                    id={task.id}
+                                                    title={
+                                                        task.title
+                                                    }
+                                                    urgenceId={
+                                                        task.urgence
+                                                    }
+                                                    date={
+                                                        task.start_date
+                                                    }
+                                                    key={task.id}
+                                                />
+                                            ))
+                                        : null}
+                                </div>
+                            </div>
+                            <div className='DeuxEtapes second_line'>
+                                <div className='DernierTicket'>
+                                    <h2>Cahiers des charges</h2>
+                                    {userData.specification
+                                        .filter(
+                                            (value: any, idx: number) => idx < 3
+                                        )
+                                        .map((value: any) => (
+                                            <SpecificationCard
+                                                id={value.id}
+                                                title={value.name}
+                                                key={value.id}
+                                            />
+                                        ))}
+                                </div>
+                                <div className='DernierTicket'>
+                                    <h2>Retours d&apos;expériences</h2>
+                                    <RexCard
+                                        answer1={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer1 : ''}
+                                        answer2={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer2 : ''}
+                                        answer3={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer3 : ''}
+                                        name={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.name : ''}
+                                    />
+                                </div>
+                            </div>
+                        </Grid>
+                        <div className='MyTeam'>
+                            <div className='Entete'>
+                                <div className='TitleProjetCards'>
+                                    <h2>Mon équipe</h2>
+                                    <ButtonBase>
+                                        <AddIcon
+                                            fontSize='medium'
+                                            sx={{ color: '#000000' }}
+                                        />
+                                    </ButtonBase>
+                                </div>
+                                <div className='fleches'>
+                                    <Image
+                                        src='/assets/chevron-left.svg'
+                                        alt=''
+                                        width={20}
+                                        height={20}
+                                        className='swiper-button-prev swiper-button-prev-2 fleche'
+                                    ></Image>
+                                    <Image
+                                        src='/assets/chevron-right.svg'
+                                        alt=''
+                                        width={20}
+                                        height={20}
+                                        className='swiper-button-next swiper-button-next-2 fleche'
+                                    ></Image>
+                                </div>
+                            </div>
+                            <CustomSwiper swiperId={2}>
+                                <div className='ProjetCards'>
+                                    {/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
+                                    {userData.team
+                                        ? userData.team.map((item: any) => (
+                                            <SwiperSlide key={item.id}>
+                                                <TeamCard
+                                                    key={item.id}
+                                                    id={item.team.id}
+                                                    prenom={item.team.name}
+                                                />
+                                            </SwiperSlide>
+                                        ))
+                                        : null}
+                                </div>
+                            </CustomSwiper>
+                        </div>
+                    </div>
+                </Grid>
+            </Grid>
+        </>
+    );
+}
