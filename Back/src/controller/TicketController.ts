@@ -289,7 +289,8 @@ export class TicketController {
 				where: { project: { id: projectid } },
 			});
 			if (!planning) throw new Error("Ticket not found");
-			const ticket: TicketDto = await this.ticketRepository.find({
+
+			const ticket: Ticket = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
 			});
 			if (!ticket) throw new Error("Ticket not found");
@@ -340,9 +341,9 @@ export class TicketController {
 	 */
 	public async getAllTicketByUser(
 		@Param("userid") userid: string
-	): Promise<TicketDto[] | ErrorDto> {
+	) {
 		try {
-			const ticket = await this.ticketRepository
+			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
 				.innerJoin(
 					"ticket.planning",
@@ -353,8 +354,10 @@ export class TicketController {
 				.select(["ticket", "planning.project"])
 				.getRawMany();
 
-			if (!ticket) throw new Error("Ticket not found");
-			return ticket;
+
+			if (!tickets) throw new Error("Ticket not found");
+			return { ticket: tickets, count: tickets.length };
+
 		} catch (err) {
 			return { error: err.message };
 		}
