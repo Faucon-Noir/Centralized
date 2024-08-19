@@ -162,7 +162,7 @@ export default function Page() {
 				</Grid>
 				<Grid xs={10}>
 					{IsForm ? (
-						<form onSubmit={(e) => handleSubmit(e)}>
+						<form>
 							<div className='box'>
 								<h1 className='title'>
 									Retour d&apos;Expérience
@@ -249,7 +249,7 @@ export default function Page() {
 								) : (
 									''
 								)}
-								<button type='submit'>
+								<button type='submit' onSubmit={(e) => handleSubmit(e)}>
 									Cloturer le projet
 								</button>
 							</div>
