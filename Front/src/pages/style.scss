@@ -123,3 +123,46 @@
         margin-top: 50px;
     }
 }
+
+.no_project {
+    width: 90%;
+    height: 75vh;
+    border-radius: 15px;
+    background-color: #0294fc77;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10%;
+    color: white;
+    margin-top: -5%;
+
+    h2 {
+        text-align: center;
+        width: 33%;
+        letter-spacing: 4px;
+    }
+
+    p {
+        text-align: center;
+        letter-spacing: 4px;
+    }
+
+    .create_project {
+        border: none;
+        border-radius: 15px;
+        background-color: #0294fc;
+        color: white;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 25px;
+        font-weight: bold;
+        letter-spacing: 4px;
+        transition: all 350ms ease-in-out;
+    }
+
+    .create_project:hover {
+        transform: translateY(-10px);
+    }
+
+}
