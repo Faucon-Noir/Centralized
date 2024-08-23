@@ -23,8 +23,10 @@ import Dashboard from '@/app/components/Dashboard/Dashboard';
 import CustomSwiper from '@/app/components/customSwiper';
 import { useEffect, useState } from 'react';
 import UserData from '@/utils/User/UserData';
+import { useRouter } from 'next/router';
 
 export default function Nekros() {
+	const router = useRouter();
 	const [userData, setUserData] = useState<any>({
 		project: [{
 			rex: [],
@@ -39,7 +41,11 @@ export default function Nekros() {
 			setUserData(result)
 		})
 	}, [])
-	console.log(userData.project.length);
+
+	async function c_project() {
+		router.push('/specification/create');
+	}
+
 	return (
 		<>
 			<Grid container>
@@ -235,7 +241,7 @@ export default function Nekros() {
 								<h1>Bonjour {userData.user ? <>{userData.user.lastname} {userData.user.firstname}</> : 'test'}</h1>
 								<h2>Vous n&apos;avez pas encore de projets, ni d&apos;équipe, ni meme de planning, vous n&apos;êtes rien !</h2>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio tortor, blandit a eleifend et, bibendum non justo. Donec commodo turpis augue, id ultrices libero consectetur quis. Duis varius elementum bibendum. Etiam ligula mi, sagittis ac est at, tristique volutpat neque. Ut non erat diam. Aenean ullamcorper pharetra quam eget ultrices. Maecenas blandit venenatis aliquam. Sed sit amet augue quis metus rhoncus cursus at et elit. Curabitur aliquet aliquam erat vel vehicula. In efficitur id sapien id efficitur. Quisque hendrerit, nisi a venenatis condimentum, leo ante convallis urna, vel venenatis lorem ipsum in enim. Praesent consectetur ultricies tristique. Nunc porttitor vulputate dui, sollicitudin eleifend sem pellentesque in. Fusce maximus malesuada dui a tincidunt. Donec sit amet nulla vitae metus elementum consequat.</p>
-								<button className='create_project'>Laissez vous guider</button>
+								<button className='create_project' onClick={() => c_project()}>Laissez vous guider</button>
 							</div>
 						</>}
 					</div>
