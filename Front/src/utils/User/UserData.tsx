@@ -23,7 +23,8 @@ export default async function UserData() {
             lastname: "",
             email: "",
             password: "",
-            phone: ""
+            phone: "",
+            token: ""
         },
         project: [{
             id: "",
@@ -43,6 +44,7 @@ export default async function UserData() {
         userData.project = await getUserProject(user_id, token);
         userData.specification = await getUserSpecification(user_id, token);
         userData.team = await getUserTeam(user_id, token);
+        if (!userData.user || !userData.project || !userData.specification || !userData.team) window.location.href = "/login"
 
         //get rexs of projects
         for (let projectData of userData.project) {
@@ -50,6 +52,7 @@ export default async function UserData() {
             projectData.ticket = await getUserTicket(projectData.id, token);
 
         }
+        userData.user.token = token;
         return userData;
     } else {
         window.location.href = "/login"

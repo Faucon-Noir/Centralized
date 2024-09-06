@@ -9,7 +9,7 @@ import {
 	SurnameFieldCy,
 	SwitchLoginButtonCy,
 	SwitchRegisterButtonCy,
-} from '../../../src/app/components/registrationForm/const'
+} from '../../../src/app/components/Form/registrationForm/const'
 import {
 	BlueGridCy,
 	PlanningImgCy,
@@ -70,19 +70,19 @@ describe('LoginPage', () => {
 							.should('exist')
 							.should('be.visible')
 					})
-					;[
-						WhiteLogoLabelCy,
-						ProjectsLabelCy,
-						PlanningsLabelCy,
-						SpecificationLabelCy,
-						TicketsLabelCy,
-						TeamsLabelCy,
-						RexLabelCy,
-					].forEach((label) => {
-						cy.centralizedGet(label)
-							.should('exist')
-							.should('be.visible')
-					})
+						;[
+							WhiteLogoLabelCy,
+							ProjectsLabelCy,
+							PlanningsLabelCy,
+							SpecificationLabelCy,
+							TicketsLabelCy,
+							TeamsLabelCy,
+							RexLabelCy,
+						].forEach((label) => {
+							cy.centralizedGet(label)
+								.should('exist')
+								.should('be.visible')
+						})
 			}
 		})
 	})
@@ -94,12 +94,12 @@ describe('LoginPage', () => {
 			// On vérifie que le bouton cible est visible et on clique dessus
 			cy.centralizedGet(switchBtn).should('be.visible').click()
 
-			// Puis on vérifie que les éléments communs sont bien visibles
-			;[SubmitButtonCy, MailFieldCy, PasswordFieldCy].forEach(
-				(common) => {
-					cy.centralizedGet(common).should('be.visible')
-				}
-			)
+				// Puis on vérifie que les éléments communs sont bien visibles
+				;[SubmitButtonCy, MailFieldCy, PasswordFieldCy].forEach(
+					(common) => {
+						cy.centralizedGet(common).should('be.visible')
+					}
+				)
 			// On vérifie que les éléments spécifiques ont le comportement attendu
 			if (switchBtn === SwitchLoginButtonCy) {
 				// On s'attend a ce que le bouton d'oubli de mot de passe existe dans le dom et soit visible
@@ -107,32 +107,32 @@ describe('LoginPage', () => {
 					.should('exist')
 					.should('be.visible')
 
-				// On vérifie que les éléments spécifiques au register n'existent pas
-				;[
-					NameFieldCy,
-					SurnameFieldCy,
-					PhoneFieldCy,
-					CGUButtonCy,
-				].forEach((specific) => {
-					// Si la cible n'existe pas, elle ne peux pas s'afficher
-					cy.centralizedGet(specific).should('not.exist')
-				})
+					// On vérifie que les éléments spécifiques au register n'existent pas
+					;[
+						NameFieldCy,
+						SurnameFieldCy,
+						PhoneFieldCy,
+						CGUButtonCy,
+					].forEach((specific) => {
+						// Si la cible n'existe pas, elle ne peux pas s'afficher
+						cy.centralizedGet(specific).should('not.exist')
+					})
 			} else {
 				// Mode register
 				// On s'attend a ce que le bouton d'oubli de mot de passe n'existe pas
 				cy.centralizedGet(ForgotPasswordLinkCy).should('not.exist')
 
-				// On vérifie que les éléments spécifiques au register existent et soient visible
-				;[
-					NameFieldCy,
-					SurnameFieldCy,
-					PhoneFieldCy,
-					CGUButtonCy,
-				].forEach((specific) => {
-					cy.centralizedGet(specific)
-						.should('exist')
-						.should('be.visible')
-				})
+					// On vérifie que les éléments spécifiques au register existent et soient visible
+					;[
+						NameFieldCy,
+						SurnameFieldCy,
+						PhoneFieldCy,
+						CGUButtonCy,
+					].forEach((specific) => {
+						cy.centralizedGet(specific)
+							.should('exist')
+							.should('be.visible')
+					})
 			}
 		})
 	})

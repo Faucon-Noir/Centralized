@@ -5,7 +5,7 @@ import { store } from '@/app/store';
 import { Provider } from 'react-redux';
 import UserData from '@/utils/User/UserData';
 
-import AuthWrapper from '@/app/components/AuthWrapper';
+import AuthWrapper from '@/app/components/Middleware/AuthWrapper';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });

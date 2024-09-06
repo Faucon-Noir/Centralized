@@ -11,7 +11,6 @@ export default function ProjetCardPlanning({ name, id, totalTickets, color, onCl
 
     function SelectProject() {
         localStorage.setItem("SelectedProject", `${id}`);
-        window.location.reload()
     }
     return (
         <div onClick={() => SelectProject()}>

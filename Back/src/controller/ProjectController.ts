@@ -16,6 +16,8 @@ import "reflect-metadata";
 import * as dotenv from "dotenv";
 import { ErrorDto, SuccessDto } from "../dto/ResultDto";
 import { ProjectDto } from "../dto/ProjectDto";
+import { SpecificationDto } from "../dto/SpecificationDto";
+
 dotenv.config();
 
 @JsonController()
@@ -72,13 +74,16 @@ export class ProjectController {
 	 */
 	public async getOne(
 		@Param("id") id: string
-	): Promise<ProjectDto | ErrorDto> {
+	) {
 		try {
 			const project: ProjectDto = await this.projectRepository.findOne({
 				where: { id },
 			});
 			if (!project) throw new Error("Project not found");
-			return project;
+			const cdc: SpecificationDto = await this.cdcRepository.findOne({
+				where: { project: { id: id } },
+			});
+			return { projectData: project, cdcData: cdc };
 		} catch (err) {
 			return { error: err.message };
 		}
@@ -125,13 +130,19 @@ export class ProjectController {
 	 */
 	public async getAllPojectByUser(
 		@Param("userid") userid: string
-	): Promise<ProjectDto | ErrorDto> {
+	) {
 		try {
-			const project: ProjectDto = await this.projectRepository.find({
+			const project = await this.projectRepository.find({
 				where: { user: { id: userid } },
 				order: { start_date: "ASC" },
 			});
 			if (!project) throw new Error("Project not found");
+			for (let task of project) {
+				const cdc: SpecificationDto = await this.cdcRepository.findOne({
+					where: { project: { id: task.id } },
+				});
+				task.cdc = cdc ? cdc : "";
+			}
 			return project;
 		} catch (err) {
 			return { error: err.message };

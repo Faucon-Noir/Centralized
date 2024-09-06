@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-import SpecificationCard from '@/app/components/SpecificationCard';
-import TaskCard from '@/app/components/TaskCard';
+import SpecificationCard from '@/app/components/Card/SpecificationCard';
+import TaskCard from '@/app/components/Card/TaskCard';
 import CalendarBox from '@/app/components/CalendarBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -14,13 +14,13 @@ import { ButtonBase } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import AddIcon from '@mui/icons-material/Add';
 import './style.scss';
-import ProjetCard from '@/app/components/ProjectCard';
+import ProjetCard from '@/app/components/Card/ProjectCard';
 import 'swiper/css/pagination';
 import Image from 'next/image';
-import TeamCard from '@/app/components/TeamCard';
-import RexCard from '@/app/components/rexCard';
+import TeamCard from '@/app/components/Card/TeamCard';
+import RexCard from '@/app/components/Card/rexCard';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
-import CustomSwiper from '@/app/components/customSwiper';
+import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useEffect, useState } from 'react';
 import UserData from '@/utils/User/UserData';
 import { useRouter } from 'next/router';

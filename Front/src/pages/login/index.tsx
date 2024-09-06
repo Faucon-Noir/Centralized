@@ -1,4 +1,4 @@
-import RegistrationForm from "@/app/components/registrationForm";
+import RegistrationForm from "@/app/components/Form/registrationForm";
 import Grid from "@mui/material/Unstable_Grid2";
 import React from "react";
 import { BlueGrid, MainGridStyle } from "./style";
