@@ -1,4 +1,4 @@
-import TeamMateCard from "@/app/components/teamMate";
+import TeamMateCard from "@/app/components/Card/teamMate";
 import { Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import PermanentDrawerLeft from "@/app/components/PermanentDrawerLeft";

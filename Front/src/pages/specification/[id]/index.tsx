@@ -7,10 +7,13 @@ import { Grid } from "@mui/material";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CustomEditor from '@/app/components/customEditor';
+import dynamic from 'next/dynamic';
 import CheckIcon from '@mui/icons-material/Check';
 import { useCallback } from 'react';
 import Dashboard from "@/app/components/Dashboard/Dashboard";
+
+const CustomEditor = dynamic(() => import('@/app/components/customEditor'), { ssr: false });
+
 
 export default function SpecificationEdit() {
   const router = useRouter();

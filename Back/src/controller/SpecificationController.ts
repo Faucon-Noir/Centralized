@@ -27,6 +27,7 @@ import { Ticket } from "../entity/Ticket";
 import { StatusEnum } from "../enum";
 import { SuccessDto, ErrorDto } from "../dto/ResultDto";
 import { SpecificationDto } from "../dto/SpecificationDto";
+import { dirname } from "path";
 dotenv.config();
 
 // TODO: Retourner un statut pending tant que l'ia n'as aps terminé de créer un
@@ -154,8 +155,13 @@ async function createTicket(
 		console.log("Pas de durée trouvé, pas de ticket créé");
 	}
 }
+let requestStatus = {
+	finished: false,
+	data: null
+}
 @JsonController()
 export class SpecificationController {
+
 	constructor(
 		private planningRepository,
 		private projectRepository,
@@ -171,6 +177,7 @@ export class SpecificationController {
 		this.userRepository = AppDataSource.getRepository(User);
 		this.ticketRepository = AppDataSource.getRepository(Ticket);
 	}
+
 
 	/**
 	 * @swagger
@@ -261,7 +268,9 @@ export class SpecificationController {
 		@Req() req: any,
 		@Param("teamid") teamid: string,
 		@Param("userid") userid: string
-	): Promise<SuccessDto | ErrorDto> {
+	) {
+		requestStatus.finished = false;
+		requestStatus.data = null;
 		//On recherche l'id de la team pour l'attribuer au nouveau projet
 		const team: Team = await this.teamRepository.findOne({
 			where: { id: teamid },
@@ -296,7 +305,7 @@ export class SpecificationController {
 		try {
 			//On créé la requete a l'ia
 			const dataread = await fs.promises.readFile(
-				`../template/${params.getTemplate()}.txt`,
+				__filename + `/../../template/Template_1.txt`,
 				"utf8"
 			);
 			let content =
@@ -374,6 +383,8 @@ export class SpecificationController {
 					cdc_input.setProject(project_input);
 					this.cdcRepository.save(cdc_input);
 					console.log(`Cahier des charges créé`);
+					requestStatus.finished = true;
+					requestStatus.data = response.data;
 					return cdc;
 				})
 				.catch(async (error) => {
@@ -394,13 +405,14 @@ export class SpecificationController {
 						cdc_input.setProject(project_input);
 						this.cdcRepository.save(cdc_input);
 						console.log(`Cahier des charges créé (backup)`);
+						requestStatus.finished = true;
+						requestStatus.data = cdc_input;
 						return cdc;
 					} catch (backupError) {
 						console.error("Backup Error:", backupError);
 						// Handle the backup error appropriately (e.g., throw, log, or return a default value).
 					}
 				});
-
 			//On initie planning_input qu'on rentrera en base de donnée
 			const planning_input: Planning = new Planning(
 				params.getStartDate(),
@@ -421,12 +433,17 @@ export class SpecificationController {
 				this.ticketRepository
 			);
 
-			return { success: "Création du projet" };
+			return { status: requestStatus.finished };
 		} catch (error) {
 			return { error: error.message };
 		}
 	}
 
+	@Get("/specification/check-status")
+	@UseBefore(CheckAuth)
+	public async checkStatus() {
+		return { status: requestStatus.finished };
+	}
 	/**
 	 * @swagger
 	 * /cdc/{id}:
