@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Grid from '@mui/material/Unstable_Grid2';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
+import { Box, IconButton, Modal } from "@mui/material";
+import { urgenceIdToString } from "@/app/helpers";
+import { ModalContentStyle } from "./type";
 import './style.scss'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
@@ -91,6 +95,8 @@ export default function Planning() {
     const [ticketproject, setTicketProject] = useState<any>({});
     const [myList, setMyList] = useState([]);
     const [eventColor, setEventColor] = useState('');
+    const [open, setOpen] = useState<boolean>(false);
+    const [selectedEvent, setSelectedEvent] = useState<any>([]);
     function handleRedirect(e: any) {
         e.preventDefault();
         router.push('/ticket/create');
@@ -139,11 +145,17 @@ export default function Planning() {
                                     title: 'Début Projet',
                                     start: new Date(element.start_date),
                                     end: new Date(element.start_date),
+                                    description: "",
+                                    urgence: 0,
+                                    status: ""
                                 },
                                 {
                                     title: 'Fin projet',
                                     start: new Date(element.end_date),
                                     end: new Date(element.end_date),
+                                    description: "",
+                                    urgence: 0,
+                                    status: ""
                                 },
                             ];
                             try {
@@ -158,6 +170,9 @@ export default function Planning() {
                                                 title: element.ticket_title,
                                                 start: new Date(element.ticket_start_date),
                                                 end: new Date(element.ticket_end_date),
+                                                description: element.ticket_description,
+                                                urgence: element.ticket_urgenceId,
+                                                status: element.ticket_status
                                             })
                                         })
                                     }
@@ -188,6 +203,15 @@ export default function Planning() {
             }, [token, user_id]);
         }
     }
+      const handleClose = () => {
+        setOpen(false);
+      };
+    const handleSelectEvent = (event:any) => {
+        setSelectedEvent(event);
+        setOpen(true);
+        console.log(event.start)
+    };
+
     let handleEventSelection = useCallback((myevent: any, color: string) => {
         if (myevent != null) {
             setEventColor(color)
@@ -208,6 +232,19 @@ export default function Planning() {
 
     return (
         <>
+        <Modal open={open}>
+          <Box sx={ModalContentStyle}>
+            <IconButton onClick={handleClose} style={{ position: 'absolute', top: 10, right: 10 }}>
+              <CloseOutlinedIcon />
+            </IconButton>
+            <a style={{ textAlign: 'center', display: 'block', marginBottom: '50px' }}>{selectedEvent.title}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Début : {format(selectedEvent.start, 'dd/MM/yyyy HH:mm')}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Fin : {format(selectedEvent.end, 'dd/MM/yyyy HH:mm')}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Description : {selectedEvent.description}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Urgence : {urgenceIdToString(selectedEvent.urgence)}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Status : {selectedEvent.status}</a>
+          </Box>
+        </Modal >
             <Grid container>
                 <Grid xs={2}>
                     <Dashboard page='planning' />
@@ -255,6 +292,7 @@ export default function Planning() {
                                 style={{ height: 650, backgroundColor: '#FFFFFF' }}
                                 eventPropGetter={eventStyleGetter}
                                 components={{ toolbar: CustomToolbar }}
+                                onSelectEvent={handleSelectEvent}
                             />
                         </div>
                     </div>
