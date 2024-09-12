@@ -5,7 +5,6 @@ import TaskCard from '@/app/components/Card/TaskCard';
 import CalendarBox from '@/app/components/CalendarBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
 // Import Swiper
 import 'swiper/css';
 import { SwiperSlide } from 'swiper/react';
@@ -25,7 +24,7 @@ import { useEffect, useState } from 'react';
 import UserData from '@/utils/User/UserData';
 import { useRouter } from 'next/router';
 
-export default function Nekros() {
+export default function Specification() {
 	const router = useRouter();
 	const [userData, setUserData] = useState<any>({
 		project: [{
