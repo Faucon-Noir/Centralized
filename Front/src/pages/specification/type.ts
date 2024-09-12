@@ -17,7 +17,7 @@ export type ProjectType = {
 	validation: string
 	team_user: string
 	constraint: string
-	template: number
+	template: string
 	status: boolean
 	[keys: string]: string | boolean | undefined | number
 }

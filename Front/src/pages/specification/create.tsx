@@ -39,7 +39,7 @@ export default function CreateSpecification() {
     validation: "",
     team_user: "",
     constraint: "",
-    template: 0,
+    template: "",
     status: false,
   });
   const [isError, setIsError] = useState<number>(0);
@@ -57,6 +57,17 @@ export default function CreateSpecification() {
     return 0;
   }
 
+  const checkValue = (obj: ProjectType, ignoreKey: (string | null)[]): boolean => {
+    for (let key in obj) {
+      const value = obj[key as keyof ProjectType];
+      if ((value === "" || value === 0) && ignoreKey.indexOf(key) < 0) {
+        return true;
+      }
+    }
+    return false;
+  };
+  console.log(checkValue(project,["constraint","status"]))
+  console.log(project) 
   async function handleSubmit(e: any) {
     e.preventDefault();
     if (!load) {
@@ -68,8 +79,8 @@ export default function CreateSpecification() {
       if (statusError == 0) {
         const token: any = localStorage.getItem("token");
         axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project, { headers: { Authorization: `Bearer ${token}` } })
-          .then(function (response) {
-            if (response.status === 200 && response.data.success) {
+        .then(function (response) {
+          if (response.status === 200 && response.data.success) {
               setLoading(true);
               setTimeout(() => {
                 setLoading(false);
@@ -134,7 +145,7 @@ export default function CreateSpecification() {
         }
         ListFichierTemplate.forEach(fileName => {
           fetch(fileName.emplacement)
-            .then(response => response.text())
+            .then(response => response.text())  
             .then(data => {
               const formattedData = data.replace(/\n/g, '<br/>');
               setFileContents(prev => [...prev, { name: fileName.name, content: formattedData }]);
@@ -244,35 +255,12 @@ export default function CreateSpecification() {
                           <p className="error_message">{item.NameError}</p> : ""
                         }
                       </div>
-                    ) : item.type == "buttonGroup" ? (
-                      // Si le form est un groupe de bouton
-                      <div className="input_form">
-                        <label htmlFor={item.name}>{item.label}</label>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-                          {Array.from({ length: 4 }, (_, i) => (
-                            <div key={i} style={{ width: '50%' }}>
-                              <Tooltip key={i} title={templateList[i] ? templateList[i].text : 'No text available'} arrow>
-                                <Button
-                                  variant={project.template == i + 1 ? "outlined" : "text"}
-                                  size="small"
-                                  onClick={() => setProject({ ...project, [item.name as string]: i + 1 })}
-                                >
-                                  Template {i + 1}
-                                </Button>
-                              </Tooltip>
-                            </div>
-                          ))}
-                        </div>
-                        {isError == item.idError ?
-                          <p className="error_message">{item.NameError}</p> : ""
-                        }
-                      </div>
                     ) : null}
                   </>
                 ))}
 
                 <div className="btn_container">
-                  <div className="fake-btn" onClick={() => handleOpen()}>
+                  <div className={`fake-btn ${checkValue(project,["template","constraint","status"]) ? 'disabled' : ''}`} onClick={!checkValue(project,["template","constraint","status"]) ? handleOpen : undefined}>
                     <p>Suivant</p>
                   </div>
                 </div>
@@ -291,20 +279,19 @@ export default function CreateSpecification() {
                   <div className="containerPopup">
                     {fileContents.map((fileName, index) => (
                       <div key={index}>
-                        <input type="radio" id={fileName.name} name="template" className="input_radio_popup" value={fileName.name} />
+                        <input type="radio" id={fileName.name} name="template" className="input_radio_popup" value={index+1} onChange={e => setProject({ ...project, template : e.target.value })}/>
                         <label htmlFor={fileName.name}>
                           <div className="boxPopup">
                             <p dangerouslySetInnerHTML={{ __html: fileName.content }} />
                           </div>
                         </label>
                         <h2></h2>
-
+ 
                       </div>
                     ))}
                   </div>
-
-                  <div className="btn_container">
-                    <button type="submit" disabled={load} onClick={e => handleSubmit(e)}>Générer</button>
+                  <div className="btn_container"> 
+                    <button type="submit" className={`fake-btn ${checkValue(project,["constraint","status"]) ? 'disabled' : ''}`} onClick={!checkValue(project,["constraint","status"]) ? handleOpen : undefined}>Générer</button>
                   </div>
                 </div>
               </Box >

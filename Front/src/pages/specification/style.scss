@@ -288,6 +288,11 @@ button:disabled {
   transition: all 350ms ease-in-out;
 }
 
+.fake-btn.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .input_radio_popup{
   display: none;
 }
