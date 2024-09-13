@@ -6,35 +6,16 @@ import './Dashboard.scss';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import { AppDispatch, useTypedSelector } from '@/app/store';
-import { useDispatch } from 'react-redux';
-import { getProjectById } from '@/app/store/slices/projectSlice';
-
-export default function Dashboard({ page = '' }) {
+import UserData from '@/utils/User/UserData';
+// { userData, setIsRequesting }: { userData: any, setIsRequesting: (value: String) => void }
+export default function Dashboard({ page = '', userData }: { page: String, userData: any }) {
 	const router = useRouter();
-	// const [project, setProject] = useState({});
-
-	const dispatch: AppDispatch = useDispatch();
-	let token = useTypedSelector((state) => state.auth.token);
-	const selectedProjectId = useTypedSelector(
-		(state) => state.project.SelectedProject
-	);
-	const project = useTypedSelector((state) => state.project.Project);
 
 	function logout() {
 		localStorage.removeItem('token');
 		localStorage.setItem('connected', 'false');
-		token = null;
 		router.push('/login');
 	}
-
-	useEffect(() => {
-		const isSelected: boolean = !!localStorage.getItem('SelectedProject');
-		if (isSelected) {
-			dispatch(getProjectById(selectedProjectId));
-		}
-	}, [dispatch, selectedProjectId]);
 
 	return (
 		<>
@@ -85,9 +66,9 @@ export default function Dashboard({ page = '' }) {
 							Équipes
 						</button>
 					</a>
-					{project && Object.keys(project).length != 0 ? (
+					{userData.project && Object.keys(userData.project).length != 0 ? (
 						<>
-							<p className='project_name'>{project?.name}</p>
+							<p className='project_name'>{userData.project?.name}</p>
 							<a>
 								<button
 									className={
@@ -97,7 +78,7 @@ export default function Dashboard({ page = '' }) {
 									}
 									onClick={(e) =>
 										router.push(
-											`/specification/${project?.id}`
+											`/specification/${userData.project?.id}`
 										)
 									}
 								>
@@ -123,7 +104,7 @@ export default function Dashboard({ page = '' }) {
 									Tickets
 								</button>
 							</a>
-							<a href={'/rex/' + project?.id}>
+							<a href={'/rex/' + userData.project?.id}>
 								<button
 									className={
 										page == 'rex'

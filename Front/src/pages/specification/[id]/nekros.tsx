@@ -79,19 +79,13 @@ export default function Specification() {
 
     return (
         <>
-            <Grid container>
-                <Grid xs={2}>
-                    <Dashboard page="specification" />
-                </Grid>
-                <Grid xs={10}>
-                    <div className="right_container">
-                        <div className="Presentation">
-                            <div className='TitrePage' style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}> {project ? <h1>Mon cahier des charges</h1> : null}</div>
-                        </div>
-                        <div className="box-specification" onClick={(e) => router.push(`/specification/${project.id}/edit`)} style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}></div>
-                    </div>
-                </Grid>
-            </Grid>
+
+            <div className="right_container">
+                <div className="Presentation">
+                    <div className='TitrePage' style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}> {project ? <h1>Mon cahier des charges</h1> : null}</div>
+                </div>
+                <div className="box-specification" onClick={(e) => router.push(`/specification/${project.id}/edit`)} style={{ color: numberToColor(project.color !== undefined ? project.color : 0) }}></div>
+            </div>
         </>
     );
 }

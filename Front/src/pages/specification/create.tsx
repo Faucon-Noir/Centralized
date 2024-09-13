@@ -6,39 +6,17 @@ import UserData from '@/utils/User/UserData';
 import { Grid } from '@mui/material';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import SpecificationForm from '@/app/components/Form/specificationForm';
+import { TaskProvider, useTask } from "../../app/contexts/isReq"; // Importation du contexte
 
-export default function CreateSpecification({ setIsRequesting }: any) {
-    const router = useRouter();
-    const [userData, setUserData] = useState<any>({
-        project: [{
-            rex: [],
-            ticket: []
-        }],
-        team: [],
-        user: [],
-        specification: []
-    });
-    useEffect(() => {
-        UserData().then(result => {
-            setUserData(result)
-        })
-    }, [])
-
-
+export default function CreateSpecification({ userData }: any) {
     return (
         <>
-            <Grid container>
-                <Grid xs={2} item={true}>
-                    <Dashboard />
-                </Grid>
-                <Grid xs={10} item={true}>
-                    <div className='container'>
-                        <div className='wrapper'>
-                            <SpecificationForm userData={userData} setIsRequesting={setIsRequesting} />
-                        </div>
-                    </div>
-                </Grid>
-            </Grid>
+            <div className='container'>
+                <div className='wrapper'>
+                    <SpecificationForm userData={userData} />
+                </div>
+            </div>
+
         </>
     );
 }

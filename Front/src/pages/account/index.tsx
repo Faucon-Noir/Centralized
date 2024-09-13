@@ -98,133 +98,127 @@ export default function AccountPage() {
 
 	return (
 		<>
-			<Grid container>
-				<Grid xs={2}>
-					<Dashboard page='account' />
-				</Grid>
-				<Grid xs={10}>
-					<div className='accent' />
-					<div style={{ display: 'block' }}>
-						<div
-							data-cy={AvartarImageCy}
-							className='profile-photo'
-							style={{ position: 'relative' }}
-						>
-							<Avatar
-								src={`/media/${user.avatar}`}
-								sx={{ height: '100%', width: '100%' }}
-							/>
-							<div
-								id='inner'
-								className='inner'
-								onClick={handleClickOpen}
-							>
-								<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
-							</div>
-							<Modal open={open}>
-								<Box sx={ModalContentStyle}>
-									<IconButton
-										onClick={handleClose}
-										style={{
-											position: 'absolute',
-											top: 10,
-											right: 10,
-										}}
-									>
-										<CloseOutlinedIcon />
-									</IconButton>
-									<Input
-										type='file'
-										onChange={handleFileChange}
-									/>
-								</Box>
-							</Modal>
-						</div>
-					</div>
 
-					<form>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								flexGrow: 1,
-							}}
-						>
-							<label
-								data-cy={FirstNameLabelCy}
-								htmlFor='firstName'
+			<div className='accent' />
+			<div style={{ display: 'block' }}>
+				<div
+					data-cy={AvartarImageCy}
+					className='profile-photo'
+					style={{ position: 'relative' }}
+				>
+					<Avatar
+						src={`/media/${user.avatar}`}
+						sx={{ height: '100%', width: '100%' }}
+					/>
+					<div
+						id='inner'
+						className='inner'
+						onClick={handleClickOpen}
+					>
+						<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
+					</div>
+					<Modal open={open}>
+						<Box sx={ModalContentStyle}>
+							<IconButton
+								onClick={handleClose}
+								style={{
+									position: 'absolute',
+									top: 10,
+									right: 10,
+								}}
 							>
-								First Name
-							</label>
-							<TextField
-								data-cy={FirstNameFielCy}
-								size='small'
-								className='textField'
-								placeholder={'Votre prénom'}
-								value={user?.firstname ? user.firstname : ''}
-								onChange={(e) =>
-									(user.firstname = e.target.value)
-								}
-							/>
-							<label data-cy={LastNameLabelCy} htmlFor='lastName'>
-								Last Name
-							</label>
-							<TextField
-								data-cy={LastNameFielCy}
-								size='small'
-								className='textField'
-								placeholder={'Votre nom'}
-								value={user?.lastname ? user.lastname : ''}
-								onChange={(e) =>
-									(user.lastname = e.target.value)
-								}
+								<CloseOutlinedIcon />
+							</IconButton>
+							<Input
+								type='file'
+								onChange={handleFileChange}
 							/>
 						</Box>
-						<label data-cy={EmailLabelCy} htmlFor='email'>
-							Email
-						</label>
-						<TextField
-							data-cy={EmailFielCy}
-							size='small'
-							className='textField'
-							placeholder={'Votre adresse mail'}
-							value={user?.mail ? user.mail : ''}
-							onChange={(e) => (user.mail = e.target.value)}
-						/>
-						<label data-cy={PhoneLabelCy} htmlFor='phone'>
-							Phone
-						</label>
-						<TextField
-							data-cy={PhoneFielCy}
-							size='small'
-							className='textField'
-							placeholder={'Votre numéro de téléphone'}
-							value={user?.phone ? user.phone : ''}
-							onChange={(e) => (user.phone = e.target.value)}
-						/>
-						<label data-cy={BioLabelCy} htmlFor='bio'>
-							Bio
-						</label>
-						<TextField
-							data-cy={BioFielCy}
-							multiline
-							className='textField'
-							placeholder={'Une courte description de vous-même'}
-							value={user?.bio ? user.bio : ''}
-							onChange={(e) => (user.bio = e.target.value)}
-						/>
-						<Button
-							data-cy={SaveButtonCy}
-							disabled={!user}
-							className='cta-primary'
-							type='submit'
-							onClick={(e) => handleUpdate(e)}
-						>
-							Sauvegarder
-						</Button>
-					</form>
-				</Grid>
-			</Grid>
+					</Modal>
+				</div>
+			</div>
+
+			<form>
+				<Box
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						flexGrow: 1,
+					}}
+				>
+					<label
+						data-cy={FirstNameLabelCy}
+						htmlFor='firstName'
+					>
+						First Name
+					</label>
+					<TextField
+						data-cy={FirstNameFielCy}
+						size='small'
+						className='textField'
+						placeholder={'Votre prénom'}
+						value={user?.firstname ? user.firstname : ''}
+						onChange={(e) =>
+							(user.firstname = e.target.value)
+						}
+					/>
+					<label data-cy={LastNameLabelCy} htmlFor='lastName'>
+						Last Name
+					</label>
+					<TextField
+						data-cy={LastNameFielCy}
+						size='small'
+						className='textField'
+						placeholder={'Votre nom'}
+						value={user?.lastname ? user.lastname : ''}
+						onChange={(e) =>
+							(user.lastname = e.target.value)
+						}
+					/>
+				</Box>
+				<label data-cy={EmailLabelCy} htmlFor='email'>
+					Email
+				</label>
+				<TextField
+					data-cy={EmailFielCy}
+					size='small'
+					className='textField'
+					placeholder={'Votre adresse mail'}
+					value={user?.mail ? user.mail : ''}
+					onChange={(e) => (user.mail = e.target.value)}
+				/>
+				<label data-cy={PhoneLabelCy} htmlFor='phone'>
+					Phone
+				</label>
+				<TextField
+					data-cy={PhoneFielCy}
+					size='small'
+					className='textField'
+					placeholder={'Votre numéro de téléphone'}
+					value={user?.phone ? user.phone : ''}
+					onChange={(e) => (user.phone = e.target.value)}
+				/>
+				<label data-cy={BioLabelCy} htmlFor='bio'>
+					Bio
+				</label>
+				<TextField
+					data-cy={BioFielCy}
+					multiline
+					className='textField'
+					placeholder={'Une courte description de vous-même'}
+					value={user?.bio ? user.bio : ''}
+					onChange={(e) => (user.bio = e.target.value)}
+				/>
+				<Button
+					data-cy={SaveButtonCy}
+					disabled={!user}
+					className='cta-primary'
+					type='submit'
+					onClick={(e) => handleUpdate(e)}
+				>
+					Sauvegarder
+				</Button>
+			</form>
 		</>
 	);
 }

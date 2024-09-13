@@ -84,21 +84,15 @@ export default function SpecificationEdit() {
 
   return (
     <div>
-      <Grid container>
-        <Grid xs={2}>
-          <Dashboard page="specification" />
-        </Grid>
-        <Grid xs={10}>
-          <form onSubmit={handleSubmit}>
-            <div className="box-specification">
-              <CustomEditor content={mySpecification.charge} onChange={(value: string) => handleChangeContentText(value)} />
-              <button type="submit">
-                <CheckIcon />
-              </button>
-            </div>
-          </form>
-        </Grid>
-      </Grid>
+
+      <form onSubmit={handleSubmit}>
+        <div className="box-specification">
+          <CustomEditor content={mySpecification.charge} onChange={(value: string) => handleChangeContentText(value)} />
+          <button type="submit">
+            <CheckIcon />
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

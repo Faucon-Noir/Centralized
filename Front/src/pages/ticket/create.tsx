@@ -83,237 +83,230 @@ export default function CreateTicketPage() {
 
 	return (
 		<>
-			<Grid container>
-				<Grid xs={2}>
-					<Dashboard page='ticket' />
-				</Grid>
-				<Grid xs={10}>
-					<form>
-						<div className='box'>
-							<h1 className='title'>Nouveau ticket</h1>
-							<div className='form_container'>
-								{creationTicket.map((item) => (
-									<>
-										{item.type == 'textarea' ? (
-											// Si le form est un textarea
-											<div className='input_form'>
-												<label htmlFor={item.name}>
-													{item.label}
-												</label>
-												<textarea
-													id={item.name}
-													name={item.name}
-													required
-													onChange={(e) =>
-														setTicket({
-															...ticket,
-															[item.name as string]:
-																e.target.value,
-														})
-													}
-												/>
-												{isError == item.idError ? (
-													<Typography sx={ErrorStyle}>
-														{item.NameError}
-													</Typography>
-												) : (
-													''
-												)}
-											</div>
-										) : item.type == 'text' ? (
-											// Si le form est un simple texte
-											<div className='input_form'>
-												<label htmlFor={item.name}>
-													{item.label}
-												</label>
-												<input
-													type='text'
-													id={item.name}
-													name={item.name}
-													required
-													onChange={(e) =>
-														setTicket({
-															...ticket,
-															[item.name as string]:
-																e.target.value,
-														})
-													}
-												/>
-												{isError == item.idError ? (
-													<Typography sx={ErrorStyle}>
-														{item.NameError}
-													</Typography>
-												) : (
-													''
-												)}
-											</div>
-										) : item.type == 'date' ? (
-											// Si le form est un groupe de date
-											<div className='box_date'>
-												{item.input.map((item) => (
-													<>
-														<div className='input_date'>
-															<label
-																htmlFor={
-																	item.name
-																}
-															>
-																{item.label}
-															</label>
-															<input
-																type='date'
-																id={item.name}
-																name={item.name}
-																required
-																defaultValue={
-																	new Date()
-																		.toISOString()
-																		.split(
-																			'T'
-																		)[0]
-																}
-																onChange={(e) =>
-																	setTicket({
-																		...ticket,
-																		[item.name as string]:
-																			e
-																				.target
-																				.value,
-																	})
-																}
-															/>
-															{isError ==
-															item.idError ? (
-																<Typography
-																	sx={
-																		ErrorStyle
-																	}
-																>
-																	{
-																		item.NameError
-																	}
-																</Typography>
-															) : (
-																''
-															)}
-														</div>
-													</>
-												))}
-											</div>
-										) : item.type == 'select' ? (
-											// Si c'est un select
-											item.name == 'urgenceId' ? (
-												<div className='input_form'>
-													<label htmlFor={item.name}>
-														{item.label}
-													</label>
-													<select
-														name={item.name}
-														id={item.name}
-														required
-														onChange={(e) =>
-															setTicket({
-																...ticket,
-																[item.name as string]:
-																	parseInt(
-																		e.target
-																			.value
-																	),
-															})
+			<form>
+				<div className='box'>
+					<h1 className='title'>Nouveau ticket</h1>
+					<div className='form_container'>
+						{creationTicket.map((item) => (
+							<>
+								{item.type == 'textarea' ? (
+									// Si le form est un textarea
+									<div className='input_form'>
+										<label htmlFor={item.name}>
+											{item.label}
+										</label>
+										<textarea
+											id={item.name}
+											name={item.name}
+											required
+											onChange={(e) =>
+												setTicket({
+													...ticket,
+													[item.name as string]:
+														e.target.value,
+												})
+											}
+										/>
+										{isError == item.idError ? (
+											<Typography sx={ErrorStyle}>
+												{item.NameError}
+											</Typography>
+										) : (
+											''
+										)}
+									</div>
+								) : item.type == 'text' ? (
+									// Si le form est un simple texte
+									<div className='input_form'>
+										<label htmlFor={item.name}>
+											{item.label}
+										</label>
+										<input
+											type='text'
+											id={item.name}
+											name={item.name}
+											required
+											onChange={(e) =>
+												setTicket({
+													...ticket,
+													[item.name as string]:
+														e.target.value,
+												})
+											}
+										/>
+										{isError == item.idError ? (
+											<Typography sx={ErrorStyle}>
+												{item.NameError}
+											</Typography>
+										) : (
+											''
+										)}
+									</div>
+								) : item.type == 'date' ? (
+									// Si le form est un groupe de date
+									<div className='box_date'>
+										{item.input.map((item) => (
+											<>
+												<div className='input_date'>
+													<label
+														htmlFor={
+															item.name
 														}
 													>
-														<option value='-1'>
-															--Please choose an
-															option--
-														</option>
-														{options}
-													</select>
-													{isError == item.idError ? (
-														<Typography
-															sx={ErrorStyle}
-														>
-															{item.NameError}
-														</Typography>
-													) : (
-														''
-													)}
-												</div>
-											) : (
-												<div className='input_form'>
-													<label htmlFor={item.name}>
 														{item.label}
 													</label>
-													<select
-														name={item.name}
+													<input
+														type='date'
 														id={item.name}
+														name={item.name}
 														required
+														defaultValue={
+															new Date()
+																.toISOString()
+																.split(
+																	'T'
+																)[0]
+														}
 														onChange={(e) =>
 															setTicket({
 																...ticket,
 																[item.name as string]:
-																	e.target
+																	e
+																		.target
 																		.value,
 															})
 														}
-													>
-														<option value=''>
-															--Please choose an
-															option--
-														</option>
-														{projectList
-															? projectList.map(
-																	(item) => (
-																		<option
-																			key={
-																				item.id
-																			}
-																			value={
-																				item.id
-																			}
-																		>
-																			{
-																				item.name
-																			}
-																		</option>
-																	)
-																)
-															: null}
-													</select>
-													{isError == item.idError ? (
+													/>
+													{isError ==
+														item.idError ? (
 														<Typography
-															sx={ErrorStyle}
+															sx={
+																ErrorStyle
+															}
 														>
-															{item.NameError}
+															{
+																item.NameError
+															}
 														</Typography>
 													) : (
 														''
 													)}
 												</div>
-											)
-										) : null}
-									</>
-								))}
-								<div className='btn_container'>
-									<button
-										type='submit'
-										disabled={load}
-										onClick={(e) => handleSubmit(e)}
-									>
-										Créer
-									</button>
-								</div>
-							</div>
-							{isError == 7 ? (
-								<Typography sx={ErrorStyle}>
-									Une erreur est survenue
-								</Typography>
-							) : (
-								''
-							)}
+											</>
+										))}
+									</div>
+								) : item.type == 'select' ? (
+									// Si c'est un select
+									item.name == 'urgenceId' ? (
+										<div className='input_form'>
+											<label htmlFor={item.name}>
+												{item.label}
+											</label>
+											<select
+												name={item.name}
+												id={item.name}
+												required
+												onChange={(e) =>
+													setTicket({
+														...ticket,
+														[item.name as string]:
+															parseInt(
+																e.target
+																	.value
+															),
+													})
+												}
+											>
+												<option value='-1'>
+													--Please choose an
+													option--
+												</option>
+												{options}
+											</select>
+											{isError == item.idError ? (
+												<Typography
+													sx={ErrorStyle}
+												>
+													{item.NameError}
+												</Typography>
+											) : (
+												''
+											)}
+										</div>
+									) : (
+										<div className='input_form'>
+											<label htmlFor={item.name}>
+												{item.label}
+											</label>
+											<select
+												name={item.name}
+												id={item.name}
+												required
+												onChange={(e) =>
+													setTicket({
+														...ticket,
+														[item.name as string]:
+															e.target
+																.value,
+													})
+												}
+											>
+												<option value=''>
+													--Please choose an
+													option--
+												</option>
+												{projectList
+													? projectList.map(
+														(item) => (
+															<option
+																key={
+																	item.id
+																}
+																value={
+																	item.id
+																}
+															>
+																{
+																	item.name
+																}
+															</option>
+														)
+													)
+													: null}
+											</select>
+											{isError == item.idError ? (
+												<Typography
+													sx={ErrorStyle}
+												>
+													{item.NameError}
+												</Typography>
+											) : (
+												''
+											)}
+										</div>
+									)
+								) : null}
+							</>
+						))}
+						<div className='btn_container'>
+							<button
+								type='submit'
+								disabled={load}
+								onClick={(e) => handleSubmit(e)}
+							>
+								Créer
+							</button>
 						</div>
-					</form>
-				</Grid>
-			</Grid>
+					</div>
+					{isError == 7 ? (
+						<Typography sx={ErrorStyle}>
+							Une erreur est survenue
+						</Typography>
+					) : (
+						''
+					)}
+				</div>
+			</form>
 		</>
 	);
 }

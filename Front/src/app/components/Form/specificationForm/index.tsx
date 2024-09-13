@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import checkFilledForm from '@/utils/checkFilledForm';
-import PopConfetti from '@/utils/popConfetti';
-import { Mosaic } from 'react-loading-indicators';
+import { useTask } from "../../../contexts/isReq";
 
-function SpecificationForm({ userData, setIsRequesting }: { userData: any, setIsRequesting: (value: String) => void }) {
+
+function SpecificationForm({ userData }: any) {
     const router = useRouter();
-    const [timer, setTimer] = useState(0);
+    const { startTask } = useTask();
     const [project, setProject] = useState<any>({
         team: '',
         user: '',
@@ -26,39 +26,16 @@ function SpecificationForm({ userData, setIsRequesting }: { userData: any, setIs
         status: false,
     });
 
-    async function sleep(ms: number) {
-        return new Promise((resolve, reject) => {
-            setTimeout(resolve, ms);
-        })
-    }
-
-    async function checkReq() {
-        await sleep(10000)
-        let responseStatus = await axios.get(`http://localhost:8000/api/specification/check-status`, { headers: { Authorization: `Bearer ${userData.user.token}` } })
-        if (responseStatus.data.status === true) return true;
-        return false
-    }
-
     async function handleSubmit() {
         // add user to project
         setProject({ ...project, user: userData.user.id })
         if (await checkFilledForm(project)) {
-            let checkReqFinished = false
-            setIsRequesting("true");
-            localStorage.setItem("isREQ", "true")
             //start the request create specification
             await axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project,
                 { headers: { Authorization: `Bearer ${userData.user.token}` } })
 
-            while (!checkReqFinished) {
-                checkReqFinished = await checkReq();
-                setTimer(timer => timer + 10);
-            }
-
-            router.push('/specification');
-            setIsRequesting("false");
-            localStorage.setItem("isREQ", "false")
-            PopConfetti();
+            startTask(); // Met à jour l'état global que la tâche a démarré
+            router.push('/');
         }
     }
 

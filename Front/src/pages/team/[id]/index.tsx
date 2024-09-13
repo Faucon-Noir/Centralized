@@ -31,32 +31,28 @@ function TeamPage() {
 
   return (
     <Box sx={MainBox}>
-      <Grid container>
-        <Grid xs={2} id="Drawer">
-          <Dashboard page="team" />
-        </Grid>
-        <Grid xs={10} id="Affichage-Equipe">
-          <div style={{ width: '100%', marginTop: "100px", marginLeft: '150px' }}>
-            <Typography variant="h4" sx={{ margin: 1, color: '#0293FC', fontSize: '24px', fontWeight: '600' }}>
-              {/* Chef de Projets ({switchApi.filter((item) => item.grade === 1).length}) */}
-              Membres ({teamUser.length})
-            </Typography>
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-              {teamUser
-                // .filter((item) => item.grade === 1)
-                .map((item: any) => (
-                  <div key={item.user.id} style={{ display: "flex", margin: '10px' }}>
-                    <TeamMateCard
-                      avatar={item.user.avatar}
-                      firstName={item.user.firstname}
-                      lastName={item.user.lastname}
-                      grade={0}
-                      bio={item.user.bio}
-                    />
-                  </div>
-                ))}
-            </div>
-            {/*<Typography variant="h4" sx={{ margin: 1, color: '#0293FC', fontSize: '24px', fontWeight: '600' }}>
+
+      <div style={{ width: '100%', marginTop: "100px", marginLeft: '150px' }}>
+        <Typography variant="h4" sx={{ margin: 1, color: '#0293FC', fontSize: '24px', fontWeight: '600' }}>
+          {/* Chef de Projets ({switchApi.filter((item) => item.grade === 1).length}) */}
+          Membres ({teamUser.length})
+        </Typography>
+        <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+          {teamUser
+            // .filter((item) => item.grade === 1)
+            .map((item: any) => (
+              <div key={item.user.id} style={{ display: "flex", margin: '10px' }}>
+                <TeamMateCard
+                  avatar={item.user.avatar}
+                  firstName={item.user.firstname}
+                  lastName={item.user.lastname}
+                  grade={0}
+                  bio={item.user.bio}
+                />
+              </div>
+            ))}
+        </div>
+        {/*<Typography variant="h4" sx={{ margin: 1, color: '#0293FC', fontSize: '24px', fontWeight: '600' }}>
               Architectes ({switchApi.filter((item) => item.grade === 2).length})
             </Typography>
             <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -92,10 +88,7 @@ function TeamPage() {
                   </div>
                 ))}
             </div>*/}
-          </div>
-
-        </Grid>
-      </Grid>
+      </div>
     </Box>
   );
 }

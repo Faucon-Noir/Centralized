@@ -37,39 +37,33 @@ function Specification() {
 	console.log(userData.project)
 	return (
 		<Box>
-			<Grid container>
-				<Grid xs={2} id='Drawer'>
-					<Dashboard page='specification' />
-				</Grid>
-				<Grid xs={9} id='Affichage-Equipe'>
-					<div className='specification_title'>
-						<div className='specification_title_cross'>
-							<h1>Mes cahiers des charges</h1>
-							<ButtonBase href='/specification/create'>
-								<AddIcon
-									fontSize='medium'
-									sx={{ color: '#000000' }}
-								/>
-							</ButtonBase>
-						</div>
-						<hr style={{ marginLeft: 0 }} />
-					</div>
-					<div className='specification_container'>
-						{userData.project.map((item: any) => (
-							<SpecificationHomeCard
-								key={item?.id}
-								id={item?.id}
-								name={item?.name}
-								color={item?.color}
-								start={item?.start_date}
-								end={item?.end_date}
-								budget={item?.budget}
-								desc={item?.description}
-							/>
-						))}
-					</div>
-				</Grid>
-			</Grid>
+
+			<div className='specification_title'>
+				<div className='specification_title_cross'>
+					<h1>Mes cahiers des charges</h1>
+					<ButtonBase href='/specification/create'>
+						<AddIcon
+							fontSize='medium'
+							sx={{ color: '#000000' }}
+						/>
+					</ButtonBase>
+				</div>
+				<hr style={{ marginLeft: 0 }} />
+			</div>
+			<div className='specification_container'>
+				{userData.project.map((item: any) => (
+					<SpecificationHomeCard
+						key={item?.id}
+						id={item?.id}
+						name={item?.name}
+						color={item?.color}
+						start={item?.start_date}
+						end={item?.end_date}
+						budget={item?.budget}
+						desc={item?.description}
+					/>
+				))}
+			</div>
 		</Box>
 	);
 }

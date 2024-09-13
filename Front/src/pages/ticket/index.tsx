@@ -107,158 +107,151 @@ export default function Tickets() {
 
 	return (
 		<>
-			<Grid container>
-				<Grid xs={2}>
-					<Dashboard page='ticket' />
-				</Grid>
-				<Grid xs={9}>
-					<div className='ticket_container'>
-						<div
-							className='header'
-							style={{
-								width: '100%',
-								marginTop: '100px',
-								marginLeft: '20px',
-							}}
-						>
-							<h1>Mes tickets</h1>
-							<Button href='/ticket/create'>
-								<AddIcon
-									fontSize='medium'
-									sx={{ color: '#000000' }}
-								/>
-							</Button>
-						</div>
-						<div className='card_container'>
-							{tickets.map((ticket: any) => (
-								<>
-									<TaskItem
-										id={ticket.ticket_id}
-										title={ticket.ticket_title}
-										urgenceLevel={ticket.ticket_urgenceId}
-										date={ticket.ticket_start_date}
-										status={ticket.ticket_status}
-										onOpen={() =>
-											handleOpen(ticket.ticket_id)
-										}
-										onArchive={() =>
-											handleArchive(ticket.ticket_id)
-										}
-										onRedirect={() =>
-											handleToSpecification(
-												ticket.projectId
-											)
-										}
-									/>
-								</>
-							))}
-						</div>
-					</div>
-				</Grid>
-				<Modal open={open}>
-					<Box sx={ModalContentStyle}>
-						<IconButton
-							onClick={handleClose}
-							style={{ position: 'absolute', top: 10, right: 10 }}
-						>
-							<CloseOutlinedIcon />
-						</IconButton>
-						{/* Titre du ticket */}
-						<TextField
-							autoFocus
-							defaultValue={selected?.title}
-							onChange={(event) =>
+			<div className='ticket_container'>
+				<div
+					className='header'
+					style={{
+						width: '100%',
+						marginTop: '100px',
+						marginLeft: '20px',
+					}}
+				>
+					<h1>Mes tickets</h1>
+					<Button href='/ticket/create'>
+						<AddIcon
+							fontSize='medium'
+							sx={{ color: '#000000' }}
+						/>
+					</Button>
+				</div>
+				<div className='card_container'>
+					{tickets.map((ticket: any) => (
+						<>
+							<TaskItem
+								id={ticket.ticket_id}
+								title={ticket.ticket_title}
+								urgenceLevel={ticket.ticket_urgenceId}
+								date={ticket.ticket_start_date}
+								status={ticket.ticket_status}
+								onOpen={() =>
+									handleOpen(ticket.ticket_id)
+								}
+								onArchive={() =>
+									handleArchive(ticket.ticket_id)
+								}
+								onRedirect={() =>
+									handleToSpecification(
+										ticket.projectId
+									)
+								}
+							/>
+						</>
+					))}
+				</div>
+			</div>
+			<Modal open={open}>
+				<Box sx={ModalContentStyle}>
+					<IconButton
+						onClick={handleClose}
+						style={{ position: 'absolute', top: 10, right: 10 }}
+					>
+						<CloseOutlinedIcon />
+					</IconButton>
+					{/* Titre du ticket */}
+					<TextField
+						autoFocus
+						defaultValue={selected?.title}
+						onChange={(event) =>
+							setTicketDetails({
+								...ticketDetails,
+								title: event.target.value,
+							})
+						}
+						sx={{ margin: '20px' }}
+					/>
+					<Box sx={UnderTitleBoxStyle}>
+						{/* Niveau d'urgence du ticket */}
+						{/* Liste déroulante pour le niveau d'urgence du ticket */}
+						Urgence:{' '}
+						<select
+							style={inputStyle}
+							defaultValue={selected?.urgenceId}
+							onChange={(e) =>
 								setTicketDetails({
 									...ticketDetails,
-									title: event.target.value,
+									urgenceId: parseInt(e.target.value),
 								})
 							}
-							sx={{ margin: '20px' }}
-						/>
-						<Box sx={UnderTitleBoxStyle}>
-							{/* Niveau d'urgence du ticket */}
-							{/* Liste déroulante pour le niveau d'urgence du ticket */}
-							Urgence:{' '}
-							<select
-								style={inputStyle}
-								defaultValue={selected?.urgenceId}
-								onChange={(e) =>
-									setTicketDetails({
-										...ticketDetails,
-										urgenceId: parseInt(e.target.value),
-									})
-								}
-							>
-								{options}
-							</select>
-							{/* Status du ticket */}
-							{/* Liste déroulante pour le statut */}
-							Status:{' '}
-							<select
-								style={inputStyle}
-								defaultValue={selected?.status}
-								onChange={(e) =>
-									setTicketDetails({
-										...ticketDetails,
-										status: e.target.value,
-									})
-								}
-							>
-								{statusList}
-							</select>
-							{/* Date de création du ticket */}
-							Posté le:
-							<input
-								style={inputStyle}
-								defaultValue={selected?.start_date}
-								type='date'
-								onChange={(e) =>
-									setTicketDetails({
-										...ticketDetails,
-										start_date: e.target.value,
-									})
-								}
-							/>
-							{/* Date de fin du ticket */}
-							Terminé le:
-							<input
-								style={inputStyle}
-								defaultValue={selected?.end_date}
-								type='date'
-								onChange={(e) =>
-									setTicketDetails({
-										...ticketDetails,
-										end_date: e.target.value,
-									})
-								}
-							/>
-						</Box>
-						{/* Description du ticket */}
-						<Box sx={{ margin: '20px', width: '100%' }}>
-							Description: <br />
-							<TextField
-								multiline
-								fullWidth
-								defaultValue={selected?.description}
-								onChange={(e) =>
-									setTicketDetails({
-										...ticketDetails,
-										description: e.target.value,
-									})
-								}
-								sx={{ minWidth: '500px' }}
-							/>
-						</Box>
-						<Button
-							variant='contained'
-							onClick={handleSave}
-							sx={SaveButtonStyle}
 						>
-							Sauvegarder
-						</Button>
+							{options}
+						</select>
+						{/* Status du ticket */}
+						{/* Liste déroulante pour le statut */}
+						Status:{' '}
+						<select
+							style={inputStyle}
+							defaultValue={selected?.status}
+							onChange={(e) =>
+								setTicketDetails({
+									...ticketDetails,
+									status: e.target.value,
+								})
+							}
+						>
+							{statusList}
+						</select>
+						{/* Date de création du ticket */}
+						Posté le:
+						<input
+							style={inputStyle}
+							defaultValue={selected?.start_date}
+							type='date'
+							onChange={(e) =>
+								setTicketDetails({
+									...ticketDetails,
+									start_date: e.target.value,
+								})
+							}
+						/>
+						{/* Date de fin du ticket */}
+						Terminé le:
+						<input
+							style={inputStyle}
+							defaultValue={selected?.end_date}
+							type='date'
+							onChange={(e) =>
+								setTicketDetails({
+									...ticketDetails,
+									end_date: e.target.value,
+								})
+							}
+						/>
 					</Box>
-				</Modal>
-			</Grid>
+					{/* Description du ticket */}
+					<Box sx={{ margin: '20px', width: '100%' }}>
+						Description: <br />
+						<TextField
+							multiline
+							fullWidth
+							defaultValue={selected?.description}
+							onChange={(e) =>
+								setTicketDetails({
+									...ticketDetails,
+									description: e.target.value,
+								})
+							}
+							sx={{ minWidth: '500px' }}
+						/>
+					</Box>
+					<Button
+						variant='contained'
+						onClick={handleSave}
+						sx={SaveButtonStyle}
+					>
+						Sauvegarder
+					</Button>
+				</Box>
+			</Modal>
 		</>
 	);
 }

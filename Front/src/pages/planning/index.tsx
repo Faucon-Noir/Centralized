@@ -204,59 +204,51 @@ export default function Planning() {
 
 	return (
 		<>
-			<Grid container>
-				<Grid xs={2}>
-					<Dashboard page='planning' />
-				</Grid>
-				<Grid xs={10}>
-					<div className="right_container">
-						<div className="Presentation">
-							<h1 className='TitrePage'>Mon Planning</h1>
-							<div className="affichage_bouton">
-								<button className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
-									Nouveau Ticket
-								</button>
-							</div>
-						</div>
-						<div className="Projet">
-							<div className="fleches">
-								<ChevronLeftIcon className="swiper-button-prev swiper-button-prev-1 fleche" />
-								<ChevronRightIcon className="swiper-button-next swiper-button-next-1 fleche" />
-							</div>
-							<CustomSwiperPlanning swiperId={1}>
-								<div className="ProjetCards">
-									{projectview ? projectview.map((item: any) => (
-										<SwiperSlide key={item.id}>
-											<ProjetCardPlanning
-												name={item.name}
-												key={item.id}
-												totalTickets={ticketproject[item.id] ? ticketproject[item.id] : 0}
-												id={item.id}
-												color={item.color}
-												onClick={() => handleEventSelection(item.event, numberToColor(item.color))} />
-										</SwiperSlide>
-									)) : null}
-								</div>
-							</CustomSwiperPlanning>
-						</div>
-						<div className='Calendar'>
-							<Calendar
-								culture="fr"
-								messages={messages}
-								localizer={localizer}
-								events={myList}
-								startAccessor="start"
-								endAccessor="end"
-								views={['month', 'week', 'day']}
-								style={{ height: 650, backgroundColor: '#FFFFFF' }}
-								eventPropGetter={eventStyleGetter}
-								components={{ toolbar: CustomToolbar }}
-							/>
-						</div>
+			<div className="right_container">
+				<div className="Presentation">
+					<h1 className='TitrePage'>Mon Planning</h1>
+					<div className="affichage_bouton">
+						<button className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
+							Nouveau Ticket
+						</button>
 					</div>
-				</Grid>
-			</Grid >
-
+				</div>
+				<div className="Projet">
+					<div className="fleches">
+						<ChevronLeftIcon className="swiper-button-prev swiper-button-prev-1 fleche" />
+						<ChevronRightIcon className="swiper-button-next swiper-button-next-1 fleche" />
+					</div>
+					<CustomSwiperPlanning swiperId={1}>
+						<div className="ProjetCards">
+							{projectview ? projectview.map((item: any) => (
+								<SwiperSlide key={item.id}>
+									<ProjetCardPlanning
+										name={item.name}
+										key={item.id}
+										totalTickets={ticketproject[item.id] ? ticketproject[item.id] : 0}
+										id={item.id}
+										color={item.color}
+										onClick={() => handleEventSelection(item.event, numberToColor(item.color))} />
+								</SwiperSlide>
+							)) : null}
+						</div>
+					</CustomSwiperPlanning>
+				</div>
+				<div className='Calendar'>
+					<Calendar
+						culture="fr"
+						messages={messages}
+						localizer={localizer}
+						events={myList}
+						startAccessor="start"
+						endAccessor="end"
+						views={['month', 'week', 'day']}
+						style={{ height: 650, backgroundColor: '#FFFFFF' }}
+						eventPropGetter={eventStyleGetter}
+						components={{ toolbar: CustomToolbar }}
+					/>
+				</div>
+			</div>
 		</>
 	);
 }
