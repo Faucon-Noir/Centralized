@@ -145,17 +145,17 @@ export default function Planning() {
                                     title: 'Début Projet',
                                     start: new Date(element.start_date),
                                     end: new Date(element.start_date),
-                                    description: "",
+                                    description: "Ceci est la date du début du projet.",
                                     urgence: 0,
-                                    status: ""
+                                    status: "Ouvert"
                                 },
                                 {
                                     title: 'Fin projet',
                                     start: new Date(element.end_date),
                                     end: new Date(element.end_date),
-                                    description: "",
+                                    description: "Ceci est la date de la fin du projet.",
                                     urgence: 0,
-                                    status: ""
+                                    status: "Ouvert"
                                 },
                             ];
                             try {
@@ -207,9 +207,10 @@ export default function Planning() {
         setOpen(false);
       };
     const handleSelectEvent = (event:any) => {
+        event.start = `${event.start.getDate().toString().padStart(2, '0')}/${(event.start.getMonth() + 1).toString().padStart(2, '0')}/${event.start.getFullYear()} ${event.start.getHours().toString().padStart(2, '0')}:${event.start.getMinutes().toString().padStart(2, '0')}`;
+        event.end = `${event.end.getDate().toString().padStart(2, '0')}/${(event.end.getMonth() + 1).toString().padStart(2, '0')}/${event.end.getFullYear()} ${event.end.getHours().toString().padStart(2, '0')}:${event.end.getMinutes().toString().padStart(2, '0')}`;
         setSelectedEvent(event);
         setOpen(true);
-        console.log(event.start)
     };
 
     let handleEventSelection = useCallback((myevent: any, color: string) => {
@@ -238,8 +239,8 @@ export default function Planning() {
               <CloseOutlinedIcon />
             </IconButton>
             <a style={{ textAlign: 'center', display: 'block', marginBottom: '50px' }}>{selectedEvent.title}</a>
-            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Début : {format(selectedEvent.start, 'dd/MM/yyyy HH:mm')}</a>
-            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Fin : {format(selectedEvent.end, 'dd/MM/yyyy HH:mm')}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Début : {selectedEvent.start}</a>
+            <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Date de Fin : {selectedEvent.end}</a>
             <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Description : {selectedEvent.description}</a>
             <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Urgence : {urgenceIdToString(selectedEvent.urgence)}</a>
             <a style={{ textAlign: 'left', display: 'block', marginBottom: '10px' , width: '100%'}}>Status : {selectedEvent.status}</a>
