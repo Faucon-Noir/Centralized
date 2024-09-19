@@ -20,7 +20,8 @@ export default function App({ Component, pageProps }: AppProps) {
 		}],
 		team: [],
 		user: [],
-		specification: []
+		specification: [],
+		selectedProjects: []
 	});
 
 	useEffect(() => {
@@ -30,24 +31,26 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [])
 
 	return (
-		<TaskProvider>
-			<AuthWrapper>
+		<AuthWrapper>
+			<TaskProvider>
 				<main className={myFont.className}>
-					{Component.name === "LoginPage" ? <>
-						<Component {...pageProps} userData={userData} />
-						<GlobalPollingComponent />
-					</> : <Grid container>
-						<Grid xs={2} item={true}>
-							<Dashboard page={Component.name} userData={userData} />
-						</Grid>
-						<Grid xs={10} item={true}>
+					{Component.name === "LoginPage" ? (
+						<>
 							<Component {...pageProps} userData={userData} />
-							<GlobalPollingComponent />
+						</>
+					) : (
+						<Grid container>
+							<Grid xs={2} item={true}>
+								<Dashboard page={Component.name} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
+							</Grid>
+							<Grid xs={10} item={true}>
+								<Component {...pageProps} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
+								<GlobalPollingComponent />
+							</Grid>
 						</Grid>
-					</Grid>}
+					)}
 				</main>
-			</AuthWrapper >
-		</TaskProvider >
-
+			</TaskProvider>
+		</AuthWrapper>
 	);
 }

@@ -45,7 +45,7 @@
         padding: 12px 24px;
         font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
         cursor: pointer;
-        font-size: 16px;
+        font-size: 14px;
         transition: all 350ms ease-in-out;
         color: white;
 
@@ -70,6 +70,69 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        .selectedContainer {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+
+            .projectOpen {
+                background-color: white;
+                width: 90%;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                box-shadow: 20px 4px 25px 0px rgba(0, 0, 0, 0.25);
+                cursor: pointer;
+                position: relative;
+
+                a {
+                    height: fit-content;
+                    width: fit-content;
+                    padding: 0;
+                    margin: 0;
+                    height: 90%;
+                }
+
+                .pName {
+                    background-color: transparent;
+                    border: none;
+                    display: flex;
+                    gap: 10px;
+
+                    .cross {
+                        z-index: 10;
+                        width: 15px;
+                        position: absolute;
+                        top: -12%;
+                        right: -2%;
+                        cursor: pointer;
+                        display: none;
+                        animation: fade-inout 1s;
+
+                    }
+
+                    img {
+                        width: 30px;
+                    }
+
+                    p {
+                        color: black;
+                        margin-top: 10px;
+                        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+                        font-size: 12px;
+                    }
+
+                }
+            }
+
+            .projectOpen:hover {
+                .cross {
+                    display: inline;
+                }
+            }
+        }
     }
 
     .dashboard_profile {
@@ -85,10 +148,13 @@
 
 }
 
-.project_name {
-    color: black;
-    background-color: white;
-    width: fit-content;
-    padding: 5px 20px;
-    border-radius: 10px;
+
+@keyframes fade-inout {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

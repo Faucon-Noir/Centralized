@@ -12,6 +12,7 @@ interface JwtPayload {
 
 export default async function UserData() {
     const token = localStorage.getItem("token");
+    if (token == null) return null
     var user_id = ""
     var userData = {
         user: {
@@ -33,6 +34,7 @@ export default async function UserData() {
         }],
         team: [{}],
         specification: [{}],
+        selectedProjects: []
     }
     if (token) {
         //Decode the token and define it as JwtPayload so it contain id poperty

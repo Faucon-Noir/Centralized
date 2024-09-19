@@ -19,7 +19,7 @@ import RexCard from '@/app/components/Card/rexCard';
 import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useRouter } from 'next/router';
 
-export default function HomePage({ userData }: any) {
+export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const router = useRouter();
 
 	async function c_project() {
@@ -61,6 +61,8 @@ export default function HomePage({ userData }: any) {
 												key={item.id}
 												id={item.color}
 												projectId={item.id}
+												updateUserData={updateUserData}
+												userData={userData}
 											/>
 										</SwiperSlide>
 									))
