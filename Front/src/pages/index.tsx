@@ -24,6 +24,12 @@ import CustomSwiper from "@/app/components/customSwiper";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { addMonths, format } from 'date-fns';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
 
 export default function Home(): JSX.Element {
   const [user, setUser] = useState(null);
@@ -35,6 +41,8 @@ export default function Home(): JSX.Element {
   const [specification, setSpecification] = useState([]);
   const [teams, setTeams] = useState([]);
   const [ticketproject, setTicketProject] = useState<any>({});
+  const [datagraphique, setDataGraphique] = useState(null);
+  const [optionsgraphique, setOptionsGraphique] = useState({});
   let lastproject: any
   let lastrex: any = null
   if (typeof window !== 'undefined') {
@@ -98,28 +106,6 @@ export default function Home(): JSX.Element {
           console.log(error);
         }
 
-        //GET TEAM OF USER
-        // try {
-        //   axios.get(`http://localhost:8000/api/team/${user_id}`, {
-        //     headers: { Authorization: `Bearer ${token}` }
-        //   }).then(res => {
-        //     setTeam(res.data.team);
-        //     if (team) {
-        //       try {
-        //         axios.get(`http://localhost:8000/api/teamuser/${team.id}`, {
-        //           headers: { Authorization: `Bearer ${token}` }
-        //         }).then(res => {
-        //           setTeamUser(res.data);
-        //         })
-        //       } catch (error) {
-        //         console.log(error);
-        //       }
-        //     }
-        //   })
-        // } catch (error) {
-        //   console.log(error);
-        // }
-
         //GET TICKET INFO
         try {
           axios.get(`http://localhost:8000/api/ticket/user/${user_id}`, {
@@ -152,6 +138,31 @@ export default function Home(): JSX.Element {
         } catch (error) {
           console.log(error);
         }
+        const labels = Array.from({ length: 12 }, (_, i) => format(addMonths(new Date(), i), 'MMM yyyy'));
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+            label: 'Ventes',
+            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            },
+          ],
+          };
+          setDataGraphique(data);
+          const options = {
+          indexAxis: "x" as const, // 'x' pour un graphique en barre vertical
+          scales: {
+            y: {
+            beginAtZero: true,
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          };
+          setOptionsGraphique(options);
       }, []);
 
     }
@@ -162,6 +173,8 @@ export default function Home(): JSX.Element {
     if (rex.length > 0) {
       lastrex = rex[0];
     }
+
+    
   }
   return (
     <>
@@ -257,6 +270,13 @@ export default function Home(): JSX.Element {
                   )) : null}
                 </div>
               </CustomSwiper>
+              <div className='DeuxEtapes'>
+							<div className='calendar_container'>
+                <div className="chart-container">
+                  {datagraphique && <Bar data={datagraphique} options={optionsgraphique} />}
+                </div>
+							</div>
+						</div>
             </div>
           </div>
         </Grid>
