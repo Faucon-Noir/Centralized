@@ -64,7 +64,6 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 					delete updatedSelctedMap[id]; // Supprimer l'entrée correspondant à `id`
 					return updatedSelctedMap; // Retourner l'objet mis à jour
 				});
-				console.log("ok")
 			}
 		}
 	}
