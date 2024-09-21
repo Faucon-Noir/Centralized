@@ -41,13 +41,10 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 					}
 				}
 			}
-
 			// Mettre à jour l'état `selctedMap` une fois toutes les données collectées
 			setSelctedMap(tempSelectedMap);
 		}
-
 		setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
-
 	}, [userData]);
 
 	function deleteSelected(id: any) {
@@ -64,6 +61,7 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 					delete updatedSelctedMap[id]; // Supprimer l'entrée correspondant à `id`
 					return updatedSelctedMap; // Retourner l'objet mis à jour
 				});
+				window.location.reload()
 			}
 		}
 	}
@@ -94,17 +92,31 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 								<div className='projectOpen' key={index}>
 									<button className='pName'>
 										<img src="/assets/icons/icon-cross.svg" alt="" className='cross' onClick={() => deleteSelected(project.id)} />
-										<Icon
-											sx={{
-												color: numberToColor(project.color),
-												height: '35px',
-												width: '35px',
-											}}
-										>
+										<Icon sx={{ color: numberToColor(project.color), height: '35px', width: '35px', }}>
 											<FolderCopyIcon fontSize='large' />
 										</Icon>
 										<p>{project.name}</p>
 									</button>
+									<div className='submenu'>
+										<a href={"/specification/" + project.id}>
+											<button className="submenu_btn">
+												<img src="/assets/icons/project.svg" alt="" />
+												<p>Cahier des charges</p>
+											</button>
+										</a>
+										<a href={"/ticket/" + project.id}>
+											<button className="submenu_btn">
+												<img src="/assets/icons/tickets.svg" alt="" />
+												<p>Tickets</p>
+											</button>
+										</a>
+										<a href={"/ticket/" + project.id}>
+											<button className="submenu_btn">
+												<img src="/assets/icons/rex.svg" alt="" />
+												<p>Rex</p>
+											</button>
+										</a>
+									</div>
 								</div>
 							))}
 						</div>

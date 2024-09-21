@@ -25,9 +25,11 @@ export default function App({ Component, pageProps }: AppProps) {
 	});
 
 	useEffect(() => {
-		UserData().then(result => {
-			setUserData(result)
-		})
+		if (Component.name != "LoginPage") {
+			UserData().then(result => {
+				setUserData(result)
+			})
+		}
 	}, [])
 
 	return (

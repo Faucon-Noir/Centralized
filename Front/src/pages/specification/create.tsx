@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import './style.scss';
+import './create.scss';
 import UserData from '@/utils/User/UserData';
 import { Grid } from '@mui/material';
 import Dashboard from '@/app/components/Dashboard/Dashboard';

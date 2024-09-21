@@ -1,70 +1,66 @@
-import SpecificationHomeCard from '@/app/components/Card/SpecificationHomeCard';
-import Grid from '@mui/material/Unstable_Grid2';
 import './style.scss';
-import { Box } from '@mui/system';
 import { useEffect, useState } from 'react';
-import Dashboard from '@/app/components/Dashboard/Dashboard';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import UserData from '@/utils/User/UserData';
+import MyProjectCard from '@/app/components/Card/MyProjectCard';
 
-function Specification() {
-	const [userData, setUserData] = useState<any>({
-		project: [{
-			rex: [],
-			ticket: []
-		}],
-		team: [],
-		user: [],
-		specification: []
-	});
+function Specification({ userData }: any) {
+	const [openedP, setOpenedP] = useState<any[]>([]);
+	const [closedP, setClosedP] = useState<any[]>([]);
+
 	useEffect(() => {
-		UserData().then(result => {
-			setUserData(result)
-		})
-	}, [])
+		let opened_tmp = [];
+		let closed_tmp = [];
+		for (let line of userData.project) {
+			if (new Date().toISOString() > line.end_date) {
+				closed_tmp.push(line);
+			} else {
+				opened_tmp.push(line)
+			}
+		}
+		setOpenedP(opened_tmp);
+		setClosedP(closed_tmp);
+	}, [userData.project])
 
-	const [specification, setSpecification] = useState({
-		id: '',
-		name: '',
-		color: 0,
-		start_date: '',
-		end_date: '',
-		budget: '',
-		description: '',
-	});
-
-	console.log(userData.project)
 	return (
-		<Box>
-
-			<div className='specification_title'>
-				<div className='specification_title_cross'>
-					<h1>Mes cahiers des charges</h1>
-					<ButtonBase href='/specification/create'>
-						<AddIcon
-							fontSize='medium'
-							sx={{ color: '#000000' }}
-						/>
-					</ButtonBase>
+		<>
+			<div className='specification_wrapper'>
+				<div className='specification_title'>
+					<div className='specification_title_cross'>
+						<h1>Mes Projets</h1>
+						<ButtonBase href='/specification/create'>
+							<AddIcon
+								fontSize='medium'
+								sx={{ color: '#000000' }}
+							/>
+						</ButtonBase>
+					</div>
+					<hr style={{ marginLeft: 0 }} />
 				</div>
-				<hr style={{ marginLeft: 0 }} />
+				<div className='specification_container'>
+					<div className='opened_container'>
+						<h2>Projets en cours</h2>
+						<div className='card_container'>
+							{openedP.length > 0 ?
+								openedP.map((item: any) => (
+									<MyProjectCard key={item.key} project={item} />
+								))
+								: null}
+						</div>
+					</div>
+					<div className='closed_container'>
+						<h2>Projets terminés</h2>
+						<div className='card_container'>
+							{closedP.length > 0 ?
+								closedP.map((item: any) => (
+									<MyProjectCard key={item.key} project={item} />
+								))
+								: null}
+						</div>
+					</div>
+				</div>
 			</div>
-			<div className='specification_container'>
-				{userData.project.map((item: any) => (
-					<SpecificationHomeCard
-						key={item?.id}
-						id={item?.id}
-						name={item?.name}
-						color={item?.color}
-						start={item?.start_date}
-						end={item?.end_date}
-						budget={item?.budget}
-						desc={item?.description}
-					/>
-				))}
-			</div>
-		</Box>
+		</>
 	);
 }
 

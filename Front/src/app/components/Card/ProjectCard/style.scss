@@ -6,6 +6,7 @@
     padding: 20px;
     background-color: #FFFFFF;
     height: 130px;
+    transition: all 350ms ease-in-out;
 
     h2 {
         font-size: 20px;
@@ -24,4 +25,8 @@
 h2,
 p {
     margin: 0;
+}
+
+.projetcard:hover {
+    transform: translateY(-10px);
 }

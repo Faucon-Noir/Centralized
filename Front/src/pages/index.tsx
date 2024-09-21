@@ -29,9 +29,9 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 	return (
 		<>
 			<div className='right_container'>
-				{userData.project.length > 0 ? <>
+				{userData?.project?.length > 0 ? <>
 					<div className='Presentation'>
-						<h1>Hello {userData.user ? userData.user.firstname : 'test'} 😎</h1>
+						<h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😎</h1>
 					</div>
 					<div className='MonProjet'>
 						<div className='Entete'>
@@ -51,9 +51,9 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 						</div>
 						<CustomSwiper swiperId={1}>
 							<div className='ProjetCards'>
-								{userData.project && Array.isArray(userData.project) &&
-									userData.project.length > 0
-									? userData.project.map((item: any) => (
+								{userData?.project && Array.isArray(userData?.project) &&
+									userData?.project.length > 0
+									? userData?.project.map((item: any) => (
 										<SwiperSlide key={item.id}>
 											<ProjetCard
 												name={item.name}
@@ -82,23 +82,23 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 							<div className='calendar_container'>
 								<CalendarBox
 									name={
-										userData.project[userData.project.length - 1] ? userData.project[userData.project.length - 1].name : ''
+										userData?.project[userData?.project.length - 1] ? userData?.project[userData?.project.length - 1].name : ''
 									}
 									start_date={
-										userData.project[userData.project.length - 1]
+										userData?.project[userData?.project.length - 1]
 											? new Date(
-												userData.project[userData.project.length - 1].start_date
+												userData?.project[userData?.project.length - 1].start_date
 											)
 											: new Date()
 									}
 									end_date={
-										userData.project[userData.project.length - 1]
-											? new Date(userData.project[userData.project.length - 1].end_date)
+										userData?.project[userData?.project.length - 1]
+											? new Date(userData?.project[userData?.project.length - 1].end_date)
 											: new Date()
 									}
 									description={
-										userData.project[userData.project.length - 1]
-											? userData.project[userData.project.length - 1].description
+										userData?.project[userData?.project.length - 1]
+											? userData?.project[userData?.project.length - 1].description
 											: ''
 									}
 								/>
@@ -116,8 +116,8 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 										/>
 									</ButtonBase>
 								</div>
-								{userData.project && userData.project[userData.project.length - 1].ticket.ticket && Array.isArray(userData.project[userData.project.length - 1].ticket.ticket) && userData.project[userData.project.length - 1].ticket.ticket.length > 0
-									? userData.project[userData.project.length - 1].ticket.ticket
+								{userData?.project && userData?.project[userData?.project.length - 1].ticket.ticket && Array.isArray(userData?.project[userData?.project.length - 1].ticket.ticket) && userData?.project[userData?.project.length - 1].ticket.ticket.length > 0
+									? userData?.project[userData?.project.length - 1].ticket.ticket
 										.filter(
 											(task: any, idx: number) =>
 												idx < 3
@@ -143,7 +143,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 						<div className='DeuxEtapes second_line'>
 							<div className='DernierTicket'>
 								<h2>Cahiers des charges</h2>
-								{userData.specification
+								{userData?.specification
 									.filter(
 										(value: any, idx: number) => idx < 3
 									)
@@ -158,9 +158,9 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 							<div className='DernierTicket'>
 								<h2>Retours d&apos;expériences</h2>
 								<RexCard
-									answer1={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer1 : ''}
-									answer2={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer2 : ''}
-									answer3={userData.project[userData.project.length - 1].rex ? userData.project[userData.project.length - 1].rex.answer3 : ''}
+									answer1={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer1 : ''}
+									answer2={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer2 : ''}
+									answer3={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer3 : ''}
 									name="REX"
 								/>
 							</div>
@@ -197,8 +197,8 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 						<CustomSwiper swiperId={2}>
 							<div className='ProjetCards'>
 								{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
-								{userData.team
-									? userData.team.map((item: any) => (
+								{userData?.team
+									? userData?.team.map((item: any) => (
 										<SwiperSlide key={item.id}>
 											<TeamCard
 												key={item.id}
@@ -214,7 +214,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 
 				</> : <>
 					<div className='no_project'>
-						<h1>Bonjour {userData.user ? <>{userData.user.lastname} {userData.user.firstname}</> : 'test'}</h1>
+						<h1>Bonjour {userData?.user ? <>{userData?.user.lastname} {userData?.user.firstname}</> : 'test'}</h1>
 						<h2>Vous n&apos;avez pas encore de projets, ni d&apos;équipe, ni meme de planning, vous n&apos;êtes rien !</h2>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio tortor, blandit a eleifend et, bibendum non justo. Donec commodo turpis augue, id ultrices libero consectetur quis. Duis varius elementum bibendum. Etiam ligula mi, sagittis ac est at, tristique volutpat neque. Ut non erat diam. Aenean ullamcorper pharetra quam eget ultrices. Maecenas blandit venenatis aliquam. Sed sit amet augue quis metus rhoncus cursus at et elit. Curabitur aliquet aliquam erat vel vehicula. In efficitur id sapien id efficitur. Quisque hendrerit, nisi a venenatis condimentum, leo ante convallis urna, vel venenatis lorem ipsum in enim. Praesent consectetur ultricies tristique. Nunc porttitor vulputate dui, sollicitudin eleifend sem pellentesque in. Fusce maximus malesuada dui a tincidunt. Donec sit amet nulla vitae metus elementum consequat.</p>
 						<button className='create_project' onClick={() => c_project()}>Laissez vous guider</button>
