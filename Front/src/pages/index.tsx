@@ -18,6 +18,8 @@ import TeamCard from '@/app/components/Card/TeamCard';
 import RexCard from '@/app/components/Card/rexCard';
 import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useRouter } from 'next/router';
+import GraphiquePie from '@/app/components/GraphiquePie';
+import GraphiqueLine from '@/app/components/GraphiqueLine';
 
 export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const router = useRouter();
@@ -69,6 +71,23 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 									: null}
 							</div>
 						</CustomSwiper>
+					</div>
+					<div className='stat'>
+						<h4>Vous avez {userData?.stat?.nbrTicket  ? userData.stat.nbrTicket : 0 } tickets ouverts sur ce projet</h4>
+						<h4>Vous avez {userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 } tickets ouverts en tout</h4>
+						{userData?.stat?.nbrTicketByUser ?
+						<GraphiquePie 
+							labels = {userData.stat.nbrTicketByUser.map(x => x.userName)} 
+							data = {userData.stat.nbrTicketByUser.map(row => (row.nbr_ticket))}
+							title = 'Nombre de ticket non fini par utilisateur'
+							hover = 'Nombre de ticket'
+						/> : null}
+						{userData?.stat?.nbrTicketByUser ?
+							<GraphiqueLine
+								labels={userData.stat.nbrTicketByUser.map(x => x.userName)} 
+								data={userData.stat.nbrTicketByUser.map(row => (row.nbr_ticket))}
+							/> : null
+						}
 					</div>
 					<Grid
 						container

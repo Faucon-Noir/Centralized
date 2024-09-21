@@ -182,3 +182,9 @@ export function numberToColor(num: number): string {
 	}
 	return colorName
 }
+
+export function numberToArrayColor(num: number): Array<string> {
+	let colorName: Array<string> = ['#FB2C39', '#8BC729', '#FAC602', '#8129C7', '#0A122A', '#698F3F', '#074F57', '#9ECE9A', '#9AD1D4', '#CCDBDC', '#0293FC']
+	colorName.splice(0, 11 - num)
+	return colorName
+}

@@ -420,4 +420,151 @@ export class TicketController {
 			return { error: err.message };
 		}
 	}
+
+	/**
+	 * @swagger
+	 * /ticket/user/{userid}/project/{projectid}:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le nombre de ticket par parsonne pour un  d'un utilisateur spécifique
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Les tickets ont été récupérés avec succès
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/user/:userid/project/:projectid")
+	@UseBefore(CheckAuth)
+	/**
+	 * Retrieves the number of tickets per user of a specific user's groups for .
+	 * @param userid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getCountAllTicketByUserOneProject(
+		@Param("userid") userid: string,
+		@Param("projectid") projectid: string
+	) {
+		try {
+			const tickets = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin(
+					"ticket.planning",
+					"planning",
+					"ticket.status != 'résolu'"
+				)
+				.innerJoin(
+					"ticket.user",
+					"user"
+				)
+				.innerJoin(
+					"planning.project",
+					"project",
+					"planning.project = :projectid",
+					{ projectid: projectid }
+				)
+				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
+				.innerJoin(
+					"project.team",
+					"team"
+				)
+				.innerJoin(
+					"team.teamUser",
+					"teamUser",
+				)
+				.innerJoin(
+					"teamUser.user",
+					"TeamLimit",
+					"teamUser.user = :userid",
+					{ userid: userid }
+				)
+				.select(["concat(user.firstname,' ', user.lastname) as userName", "COUNT(ticket.id) as nbr_ticket"])
+				.groupBy("user.id")
+				.getRawMany();
+
+			console.log(tickets);
+			if (!tickets) throw new Error("Ticket not found");
+			return tickets;
+
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
+
+	
+	/**
+	 * @swagger
+	 * /ticket/user/:userid/count:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Compte tous les tickets associés à un utilisateur spécifique.
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Les tickets ont été récupérés avec succès
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/user/:userid/count")
+	@UseBefore(CheckAuth)
+	/**
+	 * Counts all tickets associated with a specific user.
+	 * @param userid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getCountAllTicketByUser(
+		@Param("userid") userid: string
+	) {
+		try {
+			const tickets = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin(
+					"ticket.planning",
+					"planning",
+					"ticket.user = :userid",
+					{ userid: userid }
+				)
+				.where("ticket.status != :status", { status: "résolu" })
+				.select(["COUNT(ticket.id) as nbr_ticket"])
+				.getRawOne();
+
+
+			if (!tickets) throw new Error("Ticket not found");
+			return tickets;
+
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
+
 }
