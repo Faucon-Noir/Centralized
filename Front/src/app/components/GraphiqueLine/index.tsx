@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { numberToArrayColor } from '@/app/helpers';
 
-function GraphiqueLine({ labels, data }: { labels: Array<string>, data: Array<any> }) {
+function GraphiqueLine({ labels, data, title, hover }: { labels: Array<string>, data: Array<any>, title: string, hover: string }) {
     const [datagraphique, setDataGraphique] = useState({});
     const [optionsgraphique, setOptionsGraphique] = useState({});
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
@@ -13,8 +13,8 @@ function GraphiqueLine({ labels, data }: { labels: Array<string>, data: Array<an
             labels: labels,
             datasets: [
                 {
-                    label: 'Ventes',
-                    data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+                    label: hover,
+                    data: data,
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1,
@@ -25,11 +25,35 @@ function GraphiqueLine({ labels, data }: { labels: Array<string>, data: Array<an
         const options = { 
           indexAxis: "x" as const, // 'x' pour un graphique en barre vertical
           scales: {
+            x: {
+                display: true,
+                title: {
+                    display: true,
+                    text: 'Semaine',
+                    padding: {top: 20, left: 0, right: 0, bottom: 0},
+                    align: 'end',
+                }
+            },
             y: {
-            beginAtZero: true,
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'tickets ouverts',
+                    padding: {top: 20, left: 0, right: 0, bottom: 0},
+                    align: 'end',
+                }
             },
           },
           responsive: true,
+          plugins: {
+                title: {
+                  display: true,
+                  text: title
+                },
+                legend: {
+                    display: false
+                }
+          }
         //   maintainAspectRatio: false,
         };
         setOptionsGraphique(options);

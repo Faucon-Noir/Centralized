@@ -84,8 +84,10 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 						/> : null}
 						{userData?.stat?.nbrTicketByUser ?
 							<GraphiqueLine
-								labels={userData.stat.nbrTicketByUser.map(x => x.userName)} 
-								data={userData.stat.nbrTicketByUser.map(row => (row.nbr_ticket))}
+								labels={userData.stat.nbrTicketPerWeek.week} 
+								data={userData.stat.nbrTicketPerWeek.nbr_ticket}
+								title="Nombre de tickets ouverts par semaine"
+								hover="Nombre de tickets"
 							/> : null
 						}
 					</div>
