@@ -5,14 +5,14 @@ import { numberToColor, urgenceIdToString } from "@/app/helpers";
 import { Icon } from "@mui/material";
 import FolderIcon from '@mui/icons-material/Folder';
 
-export default function TaskCard({ id, urgenceId, title, date }: TaskCardProps) {
+export default function TaskCard({ id, urgenceId, title, date, color }: any) {
     let dateString = new Date(date);
     let dateFormat = dateString.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
     return (
         <>
             <div className="container">
                 <div className="container_title">
-                    <Icon sx={{ color: numberToColor(id) }}>
+                    <Icon sx={{ color: numberToColor(color) }}>
                         <FolderIcon />
                     </Icon>
                     <h2 className="task-title">{title}</h2>

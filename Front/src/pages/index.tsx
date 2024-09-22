@@ -18,14 +18,55 @@ import TeamCard from '@/app/components/Card/TeamCard';
 import RexCard from '@/app/components/Card/rexCard';
 import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
+	const [lastP, setLastP] = useState({
+		name: "",
+		start_date: "",
+		end_date: "",
+		description: "",
+		color: 0,
+		ticket: {
+			count: 0,
+			ticket: [{}]
+		},
+		rex: {
+			answer1: "",
+			answer2: "",
+			answer3: "",
+		}
+	});
+
 	const router = useRouter();
 
 	async function c_project() {
 		router.push('/specification/create');
 	}
-
+	useEffect(() => {
+		let tmp_lastP = {
+			name: "",
+			start_date: "",
+			end_date: "",
+			description: "",
+			color: 0,
+			ticket: {
+				count: 0,
+				ticket: [{}]
+			},
+			rex: {
+				answer1: "",
+				answer2: "",
+				answer3: "",
+			}
+		}
+		for (let i = 0; i < userData?.project?.length; i++) {
+			if (i == 0) tmp_lastP = userData.project[i]
+			if (tmp_lastP.end_date < userData.project[i].end_date) tmp_lastP = userData.project[i];
+		}
+		setLastP(tmp_lastP);
+	}, [userData]);
+	console.log(userData);
 	return (
 		<>
 			<div className='right_container'>
@@ -82,25 +123,26 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 							<div className='calendar_container'>
 								<CalendarBox
 									name={
-										userData?.project[userData?.project.length - 1] ? userData?.project[userData?.project.length - 1].name : ''
+										lastP ? lastP.name : ''
 									}
 									start_date={
-										userData?.project[userData?.project.length - 1]
+										lastP
 											? new Date(
-												userData?.project[userData?.project.length - 1].start_date
+												lastP.start_date
 											)
 											: new Date()
 									}
 									end_date={
-										userData?.project[userData?.project.length - 1]
-											? new Date(userData?.project[userData?.project.length - 1].end_date)
+										lastP
+											? new Date(lastP.end_date)
 											: new Date()
 									}
 									description={
-										userData?.project[userData?.project.length - 1]
-											? userData?.project[userData?.project.length - 1].description
+										lastP
+											? lastP.description
 											: ''
 									}
+									color={lastP.color}
 								/>
 							</div>
 
@@ -116,41 +158,42 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 										/>
 									</ButtonBase>
 								</div>
-								{userData?.project && userData?.project[userData?.project.length - 1].ticket.ticket && Array.isArray(userData?.project[userData?.project.length - 1].ticket.ticket) && userData?.project[userData?.project.length - 1].ticket.ticket.length > 0
-									? userData?.project[userData?.project.length - 1].ticket.ticket
-										.filter(
-											(task: any, idx: number) =>
-												idx < 3
-										)
-										.map((task: any) => (
-											<TaskCard
-												id={task.id}
-												title={
-													task.title
-												}
-												urgenceId={
-													task.urgence
-												}
-												date={
-													task.start_date
-												}
-												key={task.id}
-											/>
-										))
+								{lastP.ticket.count > 0 ? lastP.ticket.ticket
+									.filter(
+										(task: any, idx: number) =>
+											idx < 3
+									)
+									.map((task: any) => (
+										<TaskCard
+											id={task.id}
+											title={
+												task.title
+											}
+											urgenceId={
+												task.urgence
+											}
+											date={
+												task.start_date
+											}
+											color={lastP.color}
+											key={task.id}
+										/>
+									))
 									: null}
 							</div>
 						</div>
 						<div className='DeuxEtapes second_line'>
 							<div className='DernierTicket'>
 								<h2>Cahiers des charges</h2>
-								{userData?.specification
+								{userData?.project
 									.filter(
 										(value: any, idx: number) => idx < 3
 									)
 									.map((value: any) => (
 										<SpecificationCard
 											id={value.id}
-											title="Specification"
+											title={value.name}
+											color={value.color}
 											key={value.id}
 										/>
 									))}
@@ -158,9 +201,10 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 							<div className='DernierTicket'>
 								<h2>Retours d&apos;expériences</h2>
 								<RexCard
-									answer1={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer1 : ''}
-									answer2={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer2 : ''}
-									answer3={userData?.project[userData?.project.length - 1].rex ? userData?.project[userData?.project.length - 1].rex.answer3 : ''}
+									answer1={lastP.rex.answer1 != undefined ? lastP.rex.answer1 : "Votre dernier projet n'a pas de rex"}
+									answer2={lastP.rex.answer2 != undefined ? lastP.rex.answer2 : 'Continuer et vous y arriverez'}
+									answer3={lastP.rex.answer3 != undefined ? lastP.rex.answer3 : 'Croyez en vous'}
+									color={lastP.color}
 									name="REX"
 								/>
 							</div>

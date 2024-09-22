@@ -5,14 +5,14 @@ import { ButtonBase, Icon } from '@mui/material';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import { numberToColor } from '@/app/helpers';
 
-function ProjetCard({ answer1, answer2, answer3, name }: RexCardProps) {
+function ProjetCard({ name, answer1, answer2, answer3, color }: any) {
     return (
         <>
             {name ?
                 <div className="rexCard">
                     <div className='enteterexcard'>
                         <div className='titrerexcard'>
-                            <Icon sx={{ color: numberToColor(1), height: '35px', width: '35px' }}>
+                            <Icon sx={{ color: numberToColor(color), height: '35px', width: '35px' }}>
                                 <ArchiveIcon fontSize='large' />
                             </Icon>
                             <h2>{name ? name : ""}</h2>

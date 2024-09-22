@@ -1,6 +1,4 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Grid from '@mui/material/Unstable_Grid2';
-import Dashboard from '@/app/components/Dashboard/Dashboard';
 import './style.scss'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
@@ -15,14 +13,9 @@ import ProjetCardPlanning from '@/app/components/Card/ProjectCardPlanning';
 import CustomSwiperPlanning from '@/app/components/Swiper/customSwiperPlanning';
 import { useCallback, useState, useEffect } from 'react';
 import { numberToColor } from "@/app/helpers";
-import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useRouter } from "next/router";
-import { UserType } from '../account/type';
-import { ProjectType } from '../specification/type';
-import { ProjectViewType } from './type';
 
 
 const messages = {
@@ -83,116 +76,41 @@ const CustomToolbar = ({ label, onNavigate, onView }: { label: string, onNavigat
 	);
 };
 
-export default function Planning() {
+export default function Planning({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const router = useRouter();
-	const [user, setUser] = useState<UserType[]>([]);
-	const [project, setProject] = useState<ProjectType[]>([]);
-	const [projectview, setProjectView] = useState<ProjectViewType[]>([]);
-	const [ticketproject, setTicketProject] = useState<any>({});
+
+	const [myList, setMyList] = useState([{
+		id: 0,
+		start: new Date(),
+		end: new Date(),
+		title: ""
+	}])
+	const [eventColor, setEventColor] = useState('blue');
+
 	function handleRedirect(e: any) {
 		e.preventDefault();
 		router.push('/ticket/create');
 	};
-	if (typeof window !== 'undefined') {
-		const isAuth: boolean = !!localStorage.getItem("token");
-		let user_id: string = "";
-		var ticket_number_liste = {};
-		if (isAuth) {
-			const token: any = localStorage.getItem("token");
-			const decodeToken: any = jwtDecode(token);
-			user_id = decodeToken["id"];
 
-			useEffect(() => {
-				let project_liste: any[] = [];
-				//GET USER INFO
-				try {
-					axios.get(`http://localhost:8000/api/user/${user_id}`, {
-						headers: { Authorization: `Bearer ${token}` }
-					}).then(res => {
-						setUser(res.data);
-					})
-				} catch (error) {
-					console.log(error);
-				}
-
-				try {
-					axios.get(`http://localhost:8000/api/project/user/${user_id}`, {
-						headers: { Authorization: `Bearer ${token}` }
-					}).then(res => {
-						setProject(res.data);
-					});
-				} catch (error) {
-					console.log(error);
-				}
-
-				//GET PROJECT OF USER
-				try {
-					axios.get(`http://localhost:8000/api/project/user/${user_id}`, {
-						headers: { Authorization: `Bearer ${token}` }
-					}).then(res => {
-						res.data.forEach((element: any) => {
-							let ticket_liste: any[] = [
-								{
-									title: 'Début Projet',
-									start: new Date(element.start_date),
-									end: new Date(element.start_date),
-								},
-								{
-									title: 'Fin projet',
-									start: new Date(element.end_date),
-									end: new Date(element.end_date),
-								},
-							];
-							try {
-								axios.get(`http://localhost:8000/api/ticket/project/${element.id}`, {
-									headers: { Authorization: `Bearer ${token}` }
-								}).then(res => {
-									if (res.data) {
-										console.log(res.data)
-										ticket_number_liste = { ...ticket_number_liste, [element.id]: res.data.count }
-										setTicketProject(ticket_number_liste);
-										res.data.ticket ? Array.prototype.forEach.call(res.data.ticket, element => {
-											ticket_liste.push({
-												title: element.title,
-												start: new Date(element.start_date),
-												end: new Date(element.end_date),
-											})
-										}) : null
-
-									}
-								})
-							} catch (error) {
-								console.log(error);
-							}
-
-							project_liste.push({
-								id: element.id,
-								name: element.name,
-								color: element.color,
-								event: ticket_liste,
-								finished: false,
-							})
-
-						});
-					})
-					setProjectView(project_liste);
-				} catch (error) {
-					console.log(error);
-				}
-			}, [token, user_id]);
-		}
-	}
-	const [myList, setMyList] = useState([])
 	let handleEventSelection = useCallback((myevent: any, color: string) => {
 		if (myevent != null) {
 			setEventColor(color)
-			setMyList(myevent)
+			let tmp_list = [];
+			let i = 0;
+			for (let line of myevent) {
+				i++;
+				tmp_list.push({
+					id: i,
+					start: new Date(line.start_date),
+					end: new Date(line.end_date),
+					title: line.title
+				})
+			}
+			setMyList(tmp_list);
 		}
 		return myList
-	},
-		[myList]
-	);
-	const [eventColor, setEventColor] = useState('blue');
+	}, [myList]);
+
 	const eventStyleGetter = () => {
 		var style = {
 			backgroundColor: eventColor
@@ -201,7 +119,6 @@ export default function Planning() {
 			style: style
 		};
 	}
-
 	return (
 		<>
 			<div className="right_container">
@@ -220,15 +137,15 @@ export default function Planning() {
 					</div>
 					<CustomSwiperPlanning swiperId={1}>
 						<div className="ProjetCards">
-							{projectview ? projectview.map((item: any) => (
+							{userData?.project ? userData?.project.map((item: any) => (
 								<SwiperSlide key={item.id}>
 									<ProjetCardPlanning
 										name={item.name}
 										key={item.id}
-										totalTickets={ticketproject[item.id] ? ticketproject[item.id] : 0}
+										totalTickets={item.ticket?.count ? item.ticket?.count : 0}
 										id={item.id}
 										color={item.color}
-										onClick={() => handleEventSelection(item.event, numberToColor(item.color))} />
+										onClick={() => handleEventSelection(item.ticket.ticket, numberToColor(item.color))} />
 								</SwiperSlide>
 							)) : null}
 						</div>

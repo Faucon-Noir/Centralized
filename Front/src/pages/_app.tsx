@@ -30,7 +30,8 @@ export default function App({ Component, pageProps }: AppProps) {
 				setUserData(result)
 			})
 		}
-	}, [])
+	}, [Component.name])
+
 
 	return (
 		<AuthWrapper>
