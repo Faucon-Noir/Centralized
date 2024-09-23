@@ -1,6 +1,6 @@
 import { Chip } from "@mui/material"
 import { jwtDecode } from "jwt-decode"
-import { addMonths, addWeeks, format, getISOWeekYear,   } from 'date-fns';
+import { addMonths, addWeeks, format, getISOWeekYear, startOfISOWeek } from 'date-fns';
 
 export function gradeToString(grade: number): string {
 	let teamRole: string
@@ -191,11 +191,11 @@ export function numberToArrayColor(num: number): Array<string> {
 }
 
 export function GenerateDataWeekTicket(tickets: any) {
-	const labels = Array.from({ length: 9 }, (_, i) => format(addWeeks(new Date(), i - 4 ), 'I RRRR'));
+	const labels = Array.from({ length: 9 }, (_, i) => format(startOfISOWeek(addWeeks(new Date(), i - 4 )), 'dd/MM/yyyy'));
 	const data = Array.from({ length: 9 }, (_, i) => 0);
 	for(let ticket of tickets) {
 		if(ticket.status != 'résolu') {
-			const FindElement = (element: any) => element == format(new Date(ticket.end_date), 'I RRRR');
+			const FindElement = (element: any) => element == format(startOfISOWeek(new Date(ticket.end_date)), 'dd/MM/yyyy');
 			const index = labels.findIndex(FindElement);
 			if(index != -1) {
 				data[index]++;

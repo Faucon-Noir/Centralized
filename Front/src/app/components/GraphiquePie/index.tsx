@@ -15,7 +15,8 @@ function GraphiquePie({ labels, data, title, hover }: { labels: Array<string>, d
                 {
                     label: hover,
                     backgroundColor: numberToArrayColor(data.length),
-                    data: data
+                    data: data,
+                    hoverOffset: 32
                 }
             ]
         };
