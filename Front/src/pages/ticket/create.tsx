@@ -5,7 +5,6 @@ import './style.scss';
 import { creationTicket } from '@/app/constant';
 import { Grid, Typography } from '@mui/material';
 import { urgenceIdToString } from '@/app/helpers';
-import { ErrorStyle } from './style';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import { useDispatch } from 'react-redux';
 import { Project } from '@/app/models/project';

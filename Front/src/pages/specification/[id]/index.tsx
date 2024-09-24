@@ -141,7 +141,7 @@ export default function SpecificationEdit({ userData, updateUserData }: { userDa
   }
 
   return (
-    <>
+    <div className="spec_id">
       <div className="right_container">
         <div className="Presentation">
           <div className='TitrePage' style={{ color: numberToColor(projectMap[projectPageID]?.color !== undefined ? projectMap[projectPageID]?.color : 0) }}> {projectMap[projectPageID] ? <h1>Mon cahier des charges</h1> : null}</div>
@@ -163,7 +163,7 @@ export default function SpecificationEdit({ userData, updateUserData }: { userDa
           : null}
 
       </div>
-    </>
+    </div>
   );
 }
 

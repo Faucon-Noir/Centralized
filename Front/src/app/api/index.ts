@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useTypedSelector } from '../store/index';
 
 const api = axios.create({
 	baseURL: 'http://localhost:8000/api',

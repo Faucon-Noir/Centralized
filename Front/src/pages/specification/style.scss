@@ -1,7 +1,7 @@
 .specification_wrapper {
   margin-top: 5%;
   margin-left: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
 }
 
 .specification_title {
@@ -19,6 +19,20 @@
   hr {
     width: 25%;
     border: 1px solid #0293FC;
+  }
+}
+
+.opened_container,
+.closed_container {
+  h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
   }
 }
 

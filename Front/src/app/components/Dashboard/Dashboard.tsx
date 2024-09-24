@@ -6,6 +6,8 @@ import './Dashboard.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
+import Link from 'next/link'
+
 export default function Dashboard({ page = '', userData, updateUserData }: { page: String, userData: any, updateUserData: any }) {
 	const [selctedMap, setSelctedMap] = useState<{ [key: string]: any }>({});
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
@@ -14,7 +16,7 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 	function logout() {
 		localStorage.removeItem('token');
 		localStorage.setItem('connected', 'false');
-		router.push('/login');
+		router.push('/');
 	}
 
 	useEffect(() => {
@@ -77,15 +79,15 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 					<img src='/assets/logo/WhiteLogoLeft.png' alt='Logo' className='logo' />
 				</div>
 				<div className='home_button'>
-					<a href='/'>
+					<Link href='/home'>
 						<button className={page == 'HomePage' ? 'dashboard_button active' : 'dashboard_button'}>
 							<img src='/assets/icons/home_icon.svg' alt='' /> Tableau de bord
 						</button>
-					</a>
+					</Link>
 				</div>
 				<div className='dashboard_nav'>
-					<a href="/planning"><button className={page == 'Planning' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/planning.svg" alt="" />Mon Planning</button></a>
-					<a href="/specification"><button className={page == 'Specification' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/specification.svg" alt="" />Mes projets</button></a>
+					<Link href="/planning"><button className={page == 'Planning' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/planning.svg" alt="" />Mon Planning</button></Link>
+					<Link href="/specification"><button className={page == 'Specification' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/specification.svg" alt="" />Mes projets</button></Link>
 					{Object.keys(selctedMap).length > 0 ? (
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
@@ -98,24 +100,24 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 										<p>{project.name}</p>
 									</button>
 									<div className='submenu'>
-										<a href={"/specification/" + project.id}>
+										<Link href={"/specification/" + project.id}>
 											<button className="submenu_btn">
 												<img src="/assets/icons/project.svg" alt="" />
 												<p>Cahier des charges</p>
 											</button>
-										</a>
-										<a href={"/ticket/" + project.id}>
+										</Link>
+										<Link href={"/ticket/" + project.id}>
 											<button className="submenu_btn">
 												<img src="/assets/icons/tickets.svg" alt="" />
 												<p>Tickets</p>
 											</button>
-										</a>
-										<a href={"/ticket/" + project.id}>
+										</Link>
+										<Link href={"/ticket/" + project.id}>
 											<button className="submenu_btn">
 												<img src="/assets/icons/rex.svg" alt="" />
 												<p>Rex</p>
 											</button>
-										</a>
+										</Link>
 									</div>
 								</div>
 							))}
@@ -123,11 +125,11 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 					) : null}
 				</div>
 				<div className='dashboard_profile'>
-					<a href='/account'>
+					<Link href='/account'>
 						<button className={page == 'account' ? 'dashboard_button active' : 'dashboard_button'}>
 							<img src='/assets/icons/user.svg' alt='' /> Mon compte
 						</button>
-					</a>
+					</Link>
 					<button className='dashboard_button red' onClick={() => logout()}>
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
 					</button>

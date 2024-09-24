@@ -1,6 +1,7 @@
 import './style.scss';
 import { SpecificationHomeCardProps } from './type';
 import { numberToColor } from '@/app/helpers';
+import Link from 'next/link'
 
 export default function SpecificationHomCard({ id, name, color, start, end, budget, desc }: SpecificationHomeCardProps) {
     var startDate: String;
@@ -25,7 +26,7 @@ export default function SpecificationHomCard({ id, name, color, start, end, budg
                         <p>Description : {desc}</p>
                     </div>
                     <div className='line'>
-                        <button><a href={`/specification/${id}`} style={{ backgroundColor: numberToColor(color !== undefined ? color : 0) }}>En savoir plus</a></button>
+                        <button><Link href={`/specification/${id}`} style={{ backgroundColor: numberToColor(color !== undefined ? color : 0) }}>En savoir plus</Link></button>
                     </div>
                 </div>
             </div>

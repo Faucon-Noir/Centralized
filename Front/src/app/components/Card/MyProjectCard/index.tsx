@@ -2,6 +2,8 @@ import './style.scss';
 import FolderIcon from '@mui/icons-material/Folder';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
+import Link from 'next/link'
+
 export default function MyProjectCard({ project, userData, updateUserData }: { project: any, userData: any, updateUserData: any }) {
     function addSelectedProject() {
         let selectedP = localStorage.getItem("selectedP");
@@ -34,7 +36,7 @@ export default function MyProjectCard({ project, userData, updateUserData }: { p
                     </div>
                 </div>
                 <p>Fin du projet le : <strong>{project?.end_date?.substring(0, 10)}</strong></p>
-                <a href={"/specification/" + project?.id} style={{ backgroundColor: numberToColor(project?.color) }}>Voir les cachier des charges</a>
+                <Link href={"/specification/" + project?.id} style={{ backgroundColor: numberToColor(project?.color) }}>Voir les cachier des charges</Link>
             </div>
         </>
     );

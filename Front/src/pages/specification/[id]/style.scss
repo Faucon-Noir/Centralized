@@ -1,67 +1,69 @@
-.box-specification {
-  display: flex;
-  flex-direction: column;
-  padding: 32px;
-  box-shadow: 5px 4px 20px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 12px;
-  width: 70%;
-  margin: auto;
-  cursor: pointer;
-}
-
-.cercle {
-  border-radius: 90px;
-  background: #f0f0f0;
-  width: 50px;
-  height: 50px;
-}
-
-.input_form {
-  width: 100%;
-}
-
-textarea {
-  border-radius: 5px;
-  background-color: #eceeee;
-  height: 838px;
-}
-
-
-.right_container {
-  margin-top: 12%;
-
-  h2,
-  h3,
-  p {
-    color: black !important;
-  }
-
-  .Presentation {
+.spec_id {
+  .box-specification {
     display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-
-    h1 {
-      font-size: 2em;
-      margin: 0;
-      text-align: center;
-      margin-bottom: 50px
-    }
+    flex-direction: column;
+    padding: 32px;
+    box-shadow: 5px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    width: 70%;
+    margin: auto;
+    cursor: pointer;
   }
 
-  .reqLoad {
-    box-shadow: 20px 4px 25px 0px rgba(0, 0, 0, 0.25);
+  .cercle {
+    border-radius: 90px;
+    background: #f0f0f0;
+    width: 50px;
+    height: 50px;
+  }
 
-    img {
-      top: -8%;
-      right: 0;
-      position: absolute;
+  .input_form {
+    width: 100%;
+  }
+
+  textarea {
+    border-radius: 5px;
+    background-color: #eceeee;
+    height: 838px;
+  }
+
+
+  .right_container {
+    margin-top: 12%;
+
+    h2,
+    h3,
+    p {
+      color: black !important;
     }
 
-    p {
-      color: white !important
+    .Presentation {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+
+      h1 {
+        font-size: 2em;
+        margin: 0;
+        text-align: center;
+        margin-bottom: 50px
+      }
+    }
+
+    .reqLoad {
+      box-shadow: 20px 4px 25px 0px rgba(0, 0, 0, 0.25);
+
+      img {
+        top: -8%;
+        right: 0;
+        position: absolute;
+      }
+
+      p {
+        color: white !important
+      }
     }
   }
 }

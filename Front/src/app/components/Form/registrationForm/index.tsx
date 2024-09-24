@@ -56,7 +56,7 @@ function RegistrationForm() {
 					if (response.status === 200 && response.data.success) {
 						localStorage.setItem("token", response.data.token);
 						console.log('logged in')
-						router.push('/')
+						router.push('/home')
 					} else {
 						setIsErrorLogin(1);
 					}
@@ -90,7 +90,7 @@ function RegistrationForm() {
 							setIsErrorLogin(0);
 							setIsErrorRegister(0);
 							localStorage.setItem("token", response.data.token);
-							router.push('/')
+							router.push('/home')
 						}, 1000);
 
 

@@ -6,6 +6,7 @@ import { TaskItemProps } from './type';
 import { iconSectionStyle } from './style';
 import { chipVariant, urgenceIdToString, numberToColorTicket, numberToColorTicketBorder } from '@/app/helpers';
 import "./style.scss"
+
 function TaskItem({ id, title, urgenceLevel, date, status, onOpen, onArchive, onRedirect }: TaskItemProps) {
     let formatedDate: string = ''
     formatedDate = new Date(date).toLocaleDateString();

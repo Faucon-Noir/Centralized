@@ -2,17 +2,15 @@ import TeamMateCard from "@/app/components/Card/teamMate";
 import { Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import PermanentDrawerLeft from "@/app/components/PermanentDrawerLeft";
-import { MainBox } from "./style";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { TeamType } from "../type";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
 
 function TeamPage() {
   // TODO: Compléter le back pour récupérer un grade et si possible une bio de l'utilisateur
-  const [teamUser, setTeamUser] = useState<TeamType[]>([]);
+  const [teamUser, setTeamUser] = useState([]);
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
@@ -30,7 +28,7 @@ function TeamPage() {
   }, [id, setTeamUser]);
 
   return (
-    <Box sx={MainBox}>
+    <Box>
 
       <div style={{ width: '100%', marginTop: "100px", marginLeft: '150px' }}>
         <Typography variant="h4" sx={{ margin: 1, color: '#0293FC', fontSize: '24px', fontWeight: '600' }}>

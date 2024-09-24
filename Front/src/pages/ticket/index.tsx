@@ -1,11 +1,5 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box, Button, IconButton, Modal, TextField } from '@mui/material';
-import {
-	ModalContentStyle,
-	SaveButtonStyle,
-	UnderTitleBoxStyle,
-	inputStyle,
-} from './style';
 import { urgenceIdToString } from '@/app/helpers';
 import { useEffect, useState } from 'react';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';

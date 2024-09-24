@@ -4,24 +4,22 @@ import './style.css';
 import { useState } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import useData from './hook';
-import { CreateTeamProps } from './type';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 
 function CreateTeam() {
-	const [team, setTeam] = useState<CreateTeamProps>({
-		avatar: null,
-		name: '',
-		users: [],
-	});
-	const [formError, setFormError] = useState<boolean>(false);
-	const [addUserCreate, setaddUserCreate] = useState<string>('');
-	const { handleFileChange, handleCreateSubmit, VisuallyHiddenInput } =
-		useData(setTeam, team, addUserCreate);
+	// const [team, setTeam] = useState<CreateTeamProps>({
+	// 	avatar: null,
+	// 	name: '',
+	// 	users: [],
+	// });
+	// const [formError, setFormError] = useState<boolean>(false);
+	// const [addUserCreate, setaddUserCreate] = useState<string>('');
+	// const { handleFileChange, handleCreateSubmit, VisuallyHiddenInput } = useData(setTeam, team, addUserCreate);
 
 	return (
 		<>
 
-			<form>
+			{/* <form>
 				<div className='box'>
 					<h1 className='title'>Modifier mon équipe</h1>
 
@@ -85,7 +83,7 @@ function CreateTeam() {
 						Créer
 					</button>
 				</div>
-			</form>
+			</form> */}
 		</>
 	);
 }

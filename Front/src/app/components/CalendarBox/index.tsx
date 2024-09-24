@@ -7,6 +7,7 @@ import { CalendarBoxProps } from './type';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
 import { numberToColor, urgenceIdToString } from "@/app/helpers";
+import Link from 'next/link'
 
 type ValuePiece = Date | null;
 
@@ -40,7 +41,7 @@ function CalendarBox({ name, start_date, end_date, description, color }: any) {
         }
     };
     return (
-        <div>
+        <div className='calendar_component'>
             <h2 className='planning-title'>Derniers projet en cours</h2>
             {name ?
                 <div className='calendarBox'>

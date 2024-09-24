@@ -1,168 +1,292 @@
-.ProjetCards {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+// clear css default
+body {
+    background: none;
 }
 
-.projetcard {
-    cursor: pointer;
+.MuiGrid-root {
+    display: block;
+    max-width: 100% !important;
+    width: 100% !important;
+    flex-basis: 100% !important;
 }
 
-
-.TitleProjetCards {
-    display: flex;
-    gap: 10px;
+.dashboard {
+    display: none;
 }
 
-.Entete {
-    display: flex;
-    justify-content: space-between;
+.css-1o7apob-MuiGrid-root {
+    display: none;
 }
 
-
-.DernierTicket {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.css-17p3wh3-MuiGrid-root {
+    display: block;
+    max-width: 100%;
+    width: 100%;
 }
 
-.entetedernierticket {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 22px;
+// scss de la page 
 
-    h2 {
-        margin: 0;
+.header {
+    display: grid;
+    position: fixed;
+    column-gap: 50px;
+    grid-template-columns: auto auto;
+    height: 60px;
+    width: calc(100% - 600px);
+    background-color: white;
+    // border: 1px solid black;
+    padding: 0 300px 0 300px;
+    box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+
+    .connexion {
+        text-align: right;
+        font-size: 1.2rem;
+        margin: auto 0 auto 0;
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+
+    .logo {
+        margin: 5px 0 5px 0;
+        height: 50px;
     }
 }
 
-.fleches {
-    margin-top: auto;
-    margin-bottom: 10px;
-}
+.first {
+    background-color: #138EFF;
+    background-image: url("/assets/vitrine/V1.png");
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: auto auto;
+    width: calc(100% - 400px);
+    padding: 0 200px 0 200px;
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    /* Do not repeat the image */
+    background-size: contain;
+    z-index: 1000;
 
-.swiper-button-prev-1:hover,
-.swiper-button-next-1:hover,
-.swiper-button-prev-2:hover,
-.swiper-button-next-2:hover {
-    cursor: pointer;
-}
+    .text {
+        padding: 130px 16px 130px 16px;
+        color: white;
+        animation: fade-in 2s;
 
-.swiper-button-disabled {
-    color: rgb(128, 128, 128);
-    cursor: auto !important;
-}
-
-.right_container {
-    margin-top: 12%;
-    margin-left: 100px;
-
-    .Presentation {
-        margin-bottom: 20px;
+        h1 {
+            font-weight: 500;
+            font-size: 3rem;
+            line-height: 1.25;
+            animation: fade-in 2s;
+        }
     }
 
-    .Entete {
+    img {
+        margin-top: 100px;
+        max-width: 500px;
+        animation: fade-in 2s;
+    }
+
+    #email {
+        font-size: 1rem;
+        padding: 0.75rem;
+        border: 1px solid rgb(223, 225, 230);
+        border-radius: 0.3rem;
+        max-width: 300px;
+        transition: 250ms ease-out;
+        width: 376px;
+        margin: 20px 0 20px 0;
+    }
+
+    #submit {
+        text-decoration: none;
+        cursor: pointer;
+        appearance: none;
+        -moz-box-align: center;
+        align-items: center;
+        border-radius: 0.3rem;
+        display: inline-flex;
+        text-align: center;
+        transition: 250ms ease-out;
+        border: 1px solid #015C9E;
+        background-color: #015C9E;
+        color: white !important;
+        font-size: 1rem;
+        padding: 0.9rem;
+        border-radius: 10px;
+        animation: fade-in 4s;
+    }
+
+    #submit:hover {
+        transform: translateY(-10px);
+        background-color: white;
+        color: #015C9E !important;
+    }
+}
+
+.second {
+    color: #001220;
+    width: calc(100% - 432px);
+    padding: 75px 216px 0 216px;
+    padding-bottom: 100px;
+
+    h3 {
+        font-weight: normal;
+        max-width: 70%;
+        margin-bottom: 50px;
+    }
+
+    .container {
         display: flex;
         justify-content: space-between;
-        padding-right: 30px;
-    }
+        align-items: flex-start;
 
-    .swiper-horizontal {
-        padding-left: 20px;
-        margin-left: -20px;
-        padding-right: 30px;
-    }
+        .textList {
+            flex: 1;
 
-    .swiper-wrapper {
-        margin-top: 32px;
-        margin-bottom: 50px;
-        overflow: visible !important;
-    }
+            .box {
+                // margin: 20px;
+                // border: 1p x solid black;
+                cursor: pointer;
+                // font-weight: 100;
+            }
 
-    h1 {
-        font-size: 36px;
-        margin: 0;
-    }
+            p {
+                cursor: pointer;
+                margin: 10px 0;
+                font-weight: bold;
+                transition: color 0.3s ease;
 
-    h2 {
-        font-size: 24px;
-        margin: 0;
-    }
+                &:hover {
+                    color: #007bff;
+                }
+            }
 
-    /* TODO: Trouver un nom plus explicite */
-    .DeuxEtapes {
-        display: flex;
-        flex-direction: row;
-        gap: 10%;
-        width: 100%;
+            .selected {
+                // margin: 20px;
+                margin-right: 20px;
+                background-color: white;
+                color: #001220;
+                box-shadow: rgba(9, 30, 66, 0.15) 0px 0.5rem 1rem 0px;
+                border-radius: 0.3rem;
+                border: 0px;
+                height: 100%;
+                padding: 1rem 1rem 1rem 1.5rem;
+                text-align: left;
+                border-left: #007bff solid 8px;
+                z-index: 900;
+            }
 
-        .calendar_container {
-            width: 35%;
+            .Test {
+                // margin: 20px;
+                padding: 1rem 1rem 1rem 1.5rem;
+                margin-right: 20px;
+                border-left: white solid 8px;
+            }
         }
 
-        .DernierTicket {
-            width: 40%;
-            padding-right: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+        .imageContainer {
+            flex: 2;
 
-    }
-
-    .second_line {
-        gap: 12% !important;
-
-        .DernierTicket {
-            width: 30% !important;
+            img {
+                max-width: 100%;
+                border: 2px solid #ddd;
+                border-radius: 10px;
+            }
         }
     }
 
-    .MyTeam {
-        margin-top: 50px;
+}
+
+.price {
+    text-align: center;
+    padding: 0 200px 0 200px;
+    margin-bottom: 100px;
+
+    .gridprice {
+        display: grid;
+        column-gap: 0px;
+        grid-template-columns: 33% 34% 33%;
+
+
+        .box {
+            // border: 1px solid black;
+            display: inline-block;
+            // height: 100px;
+            border-top: 1px solid rgb(223, 225, 230);
+            border-left: 1px solid rgb(223, 225, 230);
+            border-bottom: 1px solid rgb(223, 225, 230);
+            padding: 20px 16px;
+            text-align: left;
+
+            h3 {
+                text-align: left;
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 0;
+
+                .currency {
+                    font-size: 1.5rem;
+                }
+            }
+
+            .info {
+                margin: 0;
+                font-size: 0.7rem;
+                color: gray;
+            }
+
+            .limite {
+                color: gray;
+            }
+        }
+
+        .right {
+            border-right: 1px solid rgb(223, 225, 230);
+        }
+
+        button {
+            background-color: rgb(230, 252, 255);
+            border-color: rgb(0, 184, 217);
+            color: rgb(23, 43, 77) !important;
+            text-decoration: none;
+            user-select: none;
+            -moz-box-align: center;
+            align-items: center;
+            cursor: pointer;
+            display: inline-flex;
+            text-align: center;
+            transition: 250ms ease-out;
+            text-decoration: none;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(0, 184, 217);
+            color: rgb(23, 43, 77) !important;
+            font-size: 1rem;
+            padding: 0.7rem 1rem 0.8rem;
+            margin-top: 50px;
+            transition: all 350ms ease-in-out;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: rgb(0, 184, 217);
+            color: white !important;
+            transform: translateY(-10px);
+        }
     }
 }
 
-.no_project {
-    width: 90%;
-    height: 75vh;
-    border-radius: 15px;
-    background-color: #0294fc77;
-    padding: 20px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10%;
-    color: white;
-    margin-top: -5%;
-
-    h2 {
-        text-align: center;
-        width: 33%;
-        letter-spacing: 4px;
+@keyframes fade-in {
+    0% {
+        opacity: 0;
     }
 
-    p {
-        text-align: center;
-        letter-spacing: 4px;
+    100% {
+        opacity: 1;
     }
-
-    .create_project {
-        border: none;
-        border-radius: 15px;
-        background-color: #0294fc;
-        color: white;
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 25px;
-        font-weight: bold;
-        letter-spacing: 4px;
-        transition: all 350ms ease-in-out;
-    }
-
-    .create_project:hover {
-        transform: translateY(-10px);
-    }
-
 }

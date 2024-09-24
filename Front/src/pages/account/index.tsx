@@ -11,24 +11,9 @@ import './style.css';
 import Grid from '@mui/material/Unstable_Grid2';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import { useEffect, useState } from 'react';
-import { ModalContentStyle } from './style';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { jwtDecode } from 'jwt-decode';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
-import {
-	AvartarImageCy,
-	BioFielCy,
-	BioLabelCy,
-	EmailFielCy,
-	EmailLabelCy,
-	FirstNameFielCy,
-	FirstNameLabelCy,
-	LastNameFielCy,
-	LastNameLabelCy,
-	PhoneFielCy,
-	PhoneLabelCy,
-	SaveButtonCy,
-} from './const';
 import { useDispatch } from 'react-redux';
 import { User } from '@/app/models/user';
 

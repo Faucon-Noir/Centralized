@@ -2,6 +2,7 @@ import './style.scss';
 import { TeamCardProps } from './type';
 import { Icon } from "@mui/material";
 import GroupsIcon from '@mui/icons-material/Groups';
+import Link from 'next/link'
 
 
 export default function TeamCard({ id, prenom }: TeamCardProps) {
@@ -15,7 +16,7 @@ export default function TeamCard({ id, prenom }: TeamCardProps) {
                     <h2>{prenom}</h2>
                 </div>
                 <div className='second_line'>
-                    <button><a href={"/team/" + id}>Voir mon Équipe</a></button>
+                    <button><Link href={"/team/" + id}>Voir mon Équipe</Link></button>
                 </div>
                 {/* <h2>
                     {prenom}

@@ -35,7 +35,7 @@ function SpecificationForm({ userData }: any) {
                 { headers: { Authorization: `Bearer ${userData.user.token}` } })
 
             startTask(); // Met à jour l'état global que la tâche a démarré
-            router.push('/');
+            router.push('/home');
         }
     }
 

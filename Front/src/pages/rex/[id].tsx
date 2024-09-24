@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import './style.scss';
 import { Grid } from '@mui/material';
 import axios, { AxiosResponse } from 'axios';
-import { MyRexType, RexType } from './type';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import { useDispatch } from 'react-redux';
 
