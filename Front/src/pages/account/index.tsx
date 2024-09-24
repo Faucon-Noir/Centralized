@@ -29,76 +29,72 @@ import {
 	PhoneLabelCy,
 	SaveButtonCy,
 } from './const';
-import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
 import { User } from '@/app/models/user';
-import { getUserById, updateUser } from '@/app/store/slices/userSlice';
 
 export default function AccountPage() {
-	const token = useTypedSelector((state) => state.auth.token);
-	const user = useTypedSelector((state) => state.user.User);
-	const dispatch: AppDispatch = useDispatch();
+	// const dispatch: AppDispatch = useDispatch();
 
-	const [open, setOpen] = useState<boolean>(false);
-	let user_id: string = '';
+	// const [open, setOpen] = useState<boolean>(false);
+	// let user_id: string = '';
 
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
-	const handleClose = () => {
-		setOpen(false);
-	};
-	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const file: File | undefined = event.target.files?.[0];
-		if (file) {
-			const allowedTypes: string[] = ['image/png', 'image/jpeg'];
-			const maxSize: number = 2 * 1024 * 1024; // 2Mo
-			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
-				user!.avatar = file;
-			} else {
-				alert(
-					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
-				);
-			}
-		} else {
-			console.log('No file selected');
-		}
-	};
+	// const handleClickOpen = () => {
+	// 	setOpen(true);
+	// };
+	// const handleClose = () => {
+	// 	setOpen(false);
+	// };
+	// const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	// 	const file: File | undefined = event.target.files?.[0];
+	// 	if (file) {
+	// 		const allowedTypes: string[] = ['image/png', 'image/jpeg'];
+	// 		const maxSize: number = 2 * 1024 * 1024; // 2Mo
+	// 		if (allowedTypes.includes(file.type) && file.size <= maxSize) {
+	// 			user!.avatar = file;
+	// 		} else {
+	// 			alert(
+	// 				'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
+	// 			);
+	// 		}
+	// 	} else {
+	// 		console.log('No file selected');
+	// 	}
+	// };
 
-	const handleUpdate = (
-		e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-	) => {
-		e.preventDefault();
+	// const handleUpdate = (
+	// 	e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+	// ) => {
+	// 	e.preventDefault();
 
-		const decodeToken: any = jwtDecode(token ?? '');
-		user_id = decodeToken['id'];
+	// 	const decodeToken: any = jwtDecode(token ?? '');
+	// 	user_id = decodeToken['id'];
 
-		const formData = new FormData();
-		Object.keys(user).forEach((key: string) => {
-			const value = user[key as keyof User];
-			if (value !== undefined) {
-				formData.append(key, value);
-			}
-		});
+	// 	const formData = new FormData();
+	// 	Object.keys(user).forEach((key: string) => {
+	// 		const value = user[key as keyof User];
+	// 		if (value !== undefined) {
+	// 			formData.append(key, value);
+	// 		}
+	// 	});
 
-		// TODO
-		dispatch(updateUser(user)).catch(function (error) {
-			console.log(error);
-		});
-	};
+	// 	// TODO
+	// 	dispatch(updateUser(user)).catch(function (error) {
+	// 		console.log(error);
+	// 	});
+	// };
 
-	useEffect(() => {
-		try {
-			dispatch(getUserById(user_id));
-		} catch (error) {
-			console.log('error', error);
-		}
-	}, [dispatch, user_id]);
-	console.log('user', user);
+	// useEffect(() => {
+	// 	try {
+	// 		dispatch(getUserById(user_id));
+	// 	} catch (error) {
+	// 		console.log('error', error);
+	// 	}
+	// }, [dispatch, user_id]);
+	// console.log('user', user);
 
 	return (
 		<>
-
+			{/* 
 			<div className='accent' />
 			<div style={{ display: 'block' }}>
 				<div
@@ -218,7 +214,7 @@ export default function AccountPage() {
 				>
 					Sauvegarder
 				</Button>
-			</form>
+			</form> */}
 		</>
 	);
 }

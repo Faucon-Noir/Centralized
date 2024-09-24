@@ -8,82 +8,79 @@ import { urgenceIdToString } from '@/app/helpers';
 import { ErrorStyle } from './style';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
 import { useDispatch } from 'react-redux';
-import { AppDispatch, useTypedSelector } from '@/app/store';
-import { getAllProjectByUserId } from '@/app/store/slices/projectSlice';
 import { Project } from '@/app/models/project';
-import { createTicket } from '@/app/store/slices/ticketSlice';
 import { CreateTicket } from '@/app/models/ticket';
 
 export default function CreateTicketPage() {
-	// NEW
-	const dispatch: AppDispatch = useDispatch();
-	const { userId } = useTypedSelector((state) => state.auth);
-	const projectList = useTypedSelector(
-		(state): Project[] => state.project.AllProjects
-	);
+	// // NEW
+	// const dispatch: AppDispatch = useDispatch();
+	// const { userId } = useTypedSelector((state) => state.auth);
+	// const projectList = useTypedSelector(
+	// 	(state): Project[] => state.project.AllProjects
+	// );
 
-	useEffect(() => {
-		dispatch(getAllProjectByUserId(userId));
-	});
-	const router = useRouter();
-	const [load, setLoad] = useState<boolean>(false);
+	// useEffect(() => {
+	// 	dispatch(getAllProjectByUserId(userId));
+	// });
+	// const router = useRouter();
+	// const [load, setLoad] = useState<boolean>(false);
 
-	const [ticket, setTicket] = useState<CreateTicket>({
-		start_date: new Date().toISOString().split('T')[0],
-		end_date: new Date().toISOString().split('T')[0],
-		planningId: '',
-		userId: '',
-		title: '',
-		urgenceId: -1,
-		description: '',
-		status: '',
-	});
-	const [isError, setIsError] = useState<number>(0);
-	const options: any = [];
-	for (let id: number = 0; id <= 4; id++) {
-		options.push(
-			<option key={id} value={id}>
-				{urgenceIdToString(id)}
-			</option>
-		);
-	}
+	// const [ticket, setTicket] = useState<CreateTicket>({
+	// 	start_date: new Date().toISOString().split('T')[0],
+	// 	end_date: new Date().toISOString().split('T')[0],
+	// 	planningId: '',
+	// 	userId: '',
+	// 	title: '',
+	// 	urgenceId: -1,
+	// 	description: '',
+	// 	status: '',
+	// });
+	// const [isError, setIsError] = useState<number>(0);
+	// const options: any = [];
+	// for (let id: number = 0; id <= 4; id++) {
+	// 	options.push(
+	// 		<option key={id} value={id}>
+	// 			{urgenceIdToString(id)}
+	// 		</option>
+	// 	);
+	// }
 
-	function verificationTicket() {
-		if (ticket.title?.trim() == '') return 1;
-		else if (ticket.start_date?.trim() == '') return 2;
-		else if (ticket.end_date?.trim() == '') return 3;
-		else if (ticket.planningId == '') return 4;
-		else if (ticket.urgenceId == -1) return 5;
-		else if (ticket.description?.trim() == '') return 6;
-		else return 0;
-	}
+	// function verificationTicket() {
+	// 	if (ticket.title?.trim() == '') return 1;
+	// 	else if (ticket.start_date?.trim() == '') return 2;
+	// 	else if (ticket.end_date?.trim() == '') return 3;
+	// 	else if (ticket.planningId == '') return 4;
+	// 	else if (ticket.urgenceId == -1) return 5;
+	// 	else if (ticket.description?.trim() == '') return 6;
+	// 	else return 0;
+	// }
 
-	async function handleSubmit(e: any) {
-		e.preventDefault();
-		if (!load) {
-			setLoad(true);
+	// async function handleSubmit(e: any) {
+	// 	e.preventDefault();
+	// 	if (!load) {
+	// 		setLoad(true);
 
-			let statusError = verificationTicket();
-			setIsError(statusError);
-			if (statusError == 0) {
-				dispatch(createTicket(ticket))
-					.then((res) => {
-						if (res.meta.requestStatus === 'fulfilled')
-							router.push('/ticket');
-					})
-					.catch(function (error) {
-						console.log('error', error);
-						alert('Une erreur est survenue');
-						setIsError(7);
-					});
-			}
-			setLoad(false);
-		}
-	}
+	// 		let statusError = verificationTicket();
+	// 		setIsError(statusError);
+	// 		if (statusError == 0) {
+	// 			dispatch(createTicket(ticket))
+	// 				.then((res) => {
+	// 					if (res.meta.requestStatus === 'fulfilled')
+	// 						router.push('/ticket');
+	// 				})
+	// 				.catch(function (error) {
+	// 					console.log('error', error);
+	// 					alert('Une erreur est survenue');
+	// 					setIsError(7);
+	// 				});
+	// 		}
+	// 		setLoad(false);
+	// 	}
+	// }
 
 	return (
 		<>
-			<form>
+			{/* <form>
 				<div className='box'>
 					<h1 className='title'>Nouveau ticket</h1>
 					<div className='form_container'>
@@ -306,7 +303,7 @@ export default function CreateTicketPage() {
 						''
 					)}
 				</div>
-			</form>
+			</form> */}
 		</>
 	);
 }

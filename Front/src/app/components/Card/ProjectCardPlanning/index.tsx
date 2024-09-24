@@ -22,7 +22,7 @@ export default function ProjetCardPlanning({ name, id, totalTickets, color, onCl
                     {name}
                 </h2>
                 <p>
-                    {totalTickets = !0 ? totalTickets : 0} tickets
+                    {totalTickets = !0 ? totalTickets : 0} tickets restants
                 </p>
             </div>
         </div>

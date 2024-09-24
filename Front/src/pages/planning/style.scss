@@ -4,7 +4,6 @@
 }
 
 .Calendar {
-    margin: 20px;
     padding-top: 20px;
 }
 
@@ -12,6 +11,10 @@
 .rbc-continues-prior,
 .rbc-header {
     text-transform: capitalize;
+}
+
+.rbc-month-row * {
+    border-radius: 15px;
 }
 
 .fleches {
@@ -90,18 +93,28 @@ button.rbc-button-link.rbc-show-more {
 }
 
 .right_container {
-    margin-top: 12%;
-    margin-left: 100px;
+    margin-top: 5%;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    margin-right: 100px;
+
 
     .Presentation {
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
+        flex-direction: column;
 
         h1 {
             font-size: 2em;
             margin: 0;
         }
+
+        hr {
+            width: 25%;
+            border-bottom: 1px solid #0293FC;
+        }
+
     }
 
 }

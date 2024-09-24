@@ -3,27 +3,25 @@ import './style.scss';
 import RexItem from '@/app/components/LongCard/RexItem';
 import { useEffect } from 'react';
 import Dashboard from '@/app/components/Dashboard/Dashboard';
-import { AppDispatch, useTypedSelector } from '@/app/store';
 import { useDispatch } from 'react-redux';
-import { getAllProjectByUserId } from '@/app/store/slices/projectSlice';
 import { Rex } from '@/app/models/rex';
 
 function RexPage() {
-	const dispatch: AppDispatch = useDispatch();
-	const project = useTypedSelector((state): Rex[] => state.rex.AllRexs);
-	const { userId } = useTypedSelector((state) => state.auth);
+	// const dispatch: AppDispatch = useDispatch();
+	// const project = useTypedSelector((state): Rex[] => state.rex.AllRexs);
+	// const { userId } = useTypedSelector((state) => state.auth);
 
-	useEffect(() => {
-		try {
-			dispatch(getAllProjectByUserId(userId));
-		} catch (error) {
-			console.log(error);
-		}
-	}, [dispatch, userId]);
+	// useEffect(() => {
+	// 	try {
+	// 		dispatch(getAllProjectByUserId(userId));
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// }, [dispatch, userId]);
 
 	return (
 		<>
-			<div className='rex_container'>
+			{/* <div className='rex_container'>
 				<div
 					className='header'
 					style={{
@@ -45,7 +43,7 @@ function RexPage() {
 						</>
 					))}
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 }

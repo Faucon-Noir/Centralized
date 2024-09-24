@@ -4,7 +4,7 @@ import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import MyProjectCard from '@/app/components/Card/MyProjectCard';
 
-function Specification({ userData }: any) {
+function Specification({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const [openedP, setOpenedP] = useState<any[]>([]);
 	const [closedP, setClosedP] = useState<any[]>([]);
 
@@ -43,7 +43,7 @@ function Specification({ userData }: any) {
 						<div className='card_container'>
 							{openedP.length > 0 ?
 								openedP.map((item: any) => (
-									<MyProjectCard key={item.key} project={item} />
+									<MyProjectCard key={item.key} project={item} updateUserData={updateUserData} userData={userData} />
 								))
 								: null}
 						</div>
@@ -53,7 +53,7 @@ function Specification({ userData }: any) {
 						<div className='card_container'>
 							{closedP.length > 0 ?
 								closedP.map((item: any) => (
-									<MyProjectCard key={item.key} project={item} />
+									<MyProjectCard key={item.key} project={item} updateUserData={updateUserData} userData={userData} />
 								))
 								: null}
 						</div>

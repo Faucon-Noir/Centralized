@@ -34,26 +34,31 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
 	return (
-		<AuthWrapper>
-			<TaskProvider>
-				<main className={myFont.className}>
-					{Component.name === "LoginPage" ? (
-						<>
-							<Component {...pageProps} userData={userData} />
-						</>
-					) : (
-						<Grid container>
-							<Grid xs={2} item={true}>
-								<Dashboard page={Component.name} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
-							</Grid>
-							<Grid xs={10} item={true}>
-								<Component {...pageProps} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
-								<GlobalPollingComponent />
-							</Grid>
-						</Grid>
-					)}
-				</main>
-			</TaskProvider>
-		</AuthWrapper>
+		<>
+			<main className={myFont.className}>
+				{Component.name == "LoginPage" || Component.name == "WelcomePage" ?
+					(<Component {...pageProps} userData={userData} />)
+					: <AuthWrapper>
+						<TaskProvider>
+							{Component.name === "LoginPage" ? (
+								<>
+									<Component {...pageProps} userData={userData} />
+								</>
+							) : (
+								<Grid container>
+									<Grid xs={2} item={true}>
+										<Dashboard page={Component.name} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
+									</Grid>
+									<Grid xs={10} item={true}>
+										<Component {...pageProps} userData={userData?.user ? userData : {}} updateUserData={setUserData} />
+										<GlobalPollingComponent />
+									</Grid>
+								</Grid>
+							)}
+						</TaskProvider>
+					</AuthWrapper>}
+			</main>
+		</>
+
 	);
 }

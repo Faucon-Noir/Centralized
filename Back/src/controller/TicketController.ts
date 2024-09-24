@@ -292,6 +292,7 @@ export class TicketController {
 
 			const ticket: Ticket = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
+				order: { start_date: "ASC" }
 			});
 			if (!ticket) throw new Error("Ticket not found");
 			let count = 0;

@@ -8,13 +8,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import fr from "date-fns/locale/fr";
 import 'swiper/css/pagination';
-import { SwiperSlide } from 'swiper/react';
-import ProjetCardPlanning from '@/app/components/Card/ProjectCardPlanning';
-import CustomSwiperPlanning from '@/app/components/Swiper/customSwiperPlanning';
 import { useCallback, useState, useEffect } from 'react';
-import { numberToColor } from "@/app/helpers";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useRouter } from "next/router";
 
 
@@ -85,35 +79,66 @@ export default function Planning({ userData, updateUserData }: { userData: any, 
 		end: new Date(),
 		title: ""
 	}])
-	const [eventColor, setEventColor] = useState('blue');
+
+	useEffect(() => {
+		let displayTicket: any = [];
+		let idx = 0;
+
+		for (let project of userData.project) {
+			if (project.ticket != undefined && project.ticket.ticket != undefined && project.ticket.error == undefined) {
+				for (let line of project.ticket.ticket) {
+					let shouldAddTicket = true;  // On part du principe qu'on va ajouter le ticket
+					let newStart = new Date(line.start_date);
+					let newEnd = new Date(line.end_date);
+
+					// On vérifie le ticket par rapport à tous les tickets déjà ajoutés dans displayTicket
+					for (let existingTicket of displayTicket) {
+						const existingStart = existingTicket.start;
+						const existingEnd = existingTicket.end;
+
+						// Cas 1 : Si le ticket actuel est totalement contenu dans un autre ticket, on le saute
+						if (newStart >= existingStart && newEnd <= existingEnd) {
+							shouldAddTicket = false;
+							break; // On sort de la boucle car ce ticket ne doit pas être ajouté
+						}
+
+						// Cas 2 : Si le ticket chevauche le début d'un autre, on ajuste la date de début
+						if (newStart <= existingEnd && newEnd > existingEnd) {
+							newStart = new Date(existingEnd); // Ajuster le début
+						}
+
+						// Cas 3 : Si le ticket chevauche la fin d'un autre, on ajuste la date de fin
+						if (newEnd >= existingStart && newStart < existingStart) {
+							newEnd = existingStart;
+						}
+					}
+
+					// Ajouter le ticket si shouldAddTicket est toujours vrai
+					if (shouldAddTicket) {
+						displayTicket.push({
+							id: idx,
+							start: newStart,
+							end: newEnd,
+							title: project.name
+						});
+						idx++;
+					}
+				}
+			}
+		}
+
+		console.log(displayTicket);
+		setMyList(displayTicket);
+	}, [userData]);
 
 	function handleRedirect(e: any) {
 		e.preventDefault();
 		router.push('/ticket/create');
 	};
 
-	let handleEventSelection = useCallback((myevent: any, color: string) => {
-		if (myevent != null) {
-			setEventColor(color)
-			let tmp_list = [];
-			let i = 0;
-			for (let line of myevent) {
-				i++;
-				tmp_list.push({
-					id: i,
-					start: new Date(line.start_date),
-					end: new Date(line.end_date),
-					title: line.title
-				})
-			}
-			setMyList(tmp_list);
-		}
-		return myList
-	}, [myList]);
-
 	const eventStyleGetter = () => {
 		var style = {
-			backgroundColor: eventColor
+			backgroundColor: "black"
 		};
 		return {
 			style: style
@@ -124,32 +149,13 @@ export default function Planning({ userData, updateUserData }: { userData: any, 
 			<div className="right_container">
 				<div className="Presentation">
 					<h1 className='TitrePage'>Mon Planning</h1>
+					<hr style={{ marginLeft: 0 }} />
+
 					<div className="affichage_bouton">
 						<button className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
 							Nouveau Ticket
 						</button>
 					</div>
-				</div>
-				<div className="Projet">
-					<div className="fleches">
-						<ChevronLeftIcon className="swiper-button-prev swiper-button-prev-1 fleche" />
-						<ChevronRightIcon className="swiper-button-next swiper-button-next-1 fleche" />
-					</div>
-					<CustomSwiperPlanning swiperId={1}>
-						<div className="ProjetCards">
-							{userData?.project ? userData?.project.map((item: any) => (
-								<SwiperSlide key={item.id}>
-									<ProjetCardPlanning
-										name={item.name}
-										key={item.id}
-										totalTickets={item.ticket?.count ? item.ticket?.count : 0}
-										id={item.id}
-										color={item.color}
-										onClick={() => handleEventSelection(item.ticket.ticket, numberToColor(item.color))} />
-								</SwiperSlide>
-							)) : null}
-						</div>
-					</CustomSwiperPlanning>
 				</div>
 				<div className='Calendar'>
 					<Calendar

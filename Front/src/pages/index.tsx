@@ -184,7 +184,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 						</div>
 						<div className='DeuxEtapes second_line'>
 							<div className='DernierTicket'>
-								<h2>Cahiers des charges</h2>
+								<h2>Mes derniers cahiers des charges</h2>
 								{userData?.project
 									.filter(
 										(value: any, idx: number) => idx < 3
@@ -199,7 +199,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 									))}
 							</div>
 							<div className='DernierTicket'>
-								<h2>Retours d&apos;expériences</h2>
+								<h2>Derniers retours d&apos;expériences</h2>
 								<RexCard
 									answer1={lastP.rex.answer1 != undefined ? lastP.rex.answer1 : "Votre dernier projet n'a pas de rex"}
 									answer2={lastP.rex.answer2 != undefined ? lastP.rex.answer2 : 'Continuer et vous y arriverez'}
@@ -213,7 +213,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 					<div className='MyTeam'>
 						<div className='Entete'>
 							<div className='TitleProjetCards'>
-								<h2>Mon équipe</h2>
+								<h2>Mes équipes</h2>
 								<ButtonBase>
 									<AddIcon
 										fontSize='medium'

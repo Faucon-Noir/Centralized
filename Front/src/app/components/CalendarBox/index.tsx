@@ -41,7 +41,7 @@ function CalendarBox({ name, start_date, end_date, description, color }: any) {
     };
     return (
         <div>
-            <h2 className='planning-title'>Mon planning</h2>
+            <h2 className='planning-title'>Derniers projet en cours</h2>
             {name ?
                 <div className='calendarBox'>
 
