@@ -144,7 +144,8 @@ async function createTicket(
 				StatusEnum.Open, // status
 				planning.getId(), // planningId
 				project_input.getStartDate(), // start_date
-				date // end_date
+				date, // end_date
+				new Date()
 			);
 			ticket.setUser(user);
 			ticket.setPlanning(planning);

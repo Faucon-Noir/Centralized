@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Planning } from "./Planning";
 import { User } from "./User";
@@ -40,6 +41,9 @@ export class Ticket {
   @ManyToOne(() => User, (user) => user.ticket)
   public user: User;
 
+  @UpdateDateColumn()
+  private updated_at: Date;
+
   constructor(
     title: string,
     description: string,
@@ -47,7 +51,8 @@ export class Ticket {
     status: StatusEnum,
     planningId: string,
     start_date: Date,
-    end_date: Date
+    end_date: Date,
+    updated_at: Date
   ) {
     this.title = title;
     this.description = description;
@@ -56,6 +61,7 @@ export class Ticket {
     this.planningId = planningId;
     this.start_date = start_date;
     this.end_date = end_date;
+    this.updated_at = updated_at
   }
 
   public getId(): string {
@@ -115,4 +121,12 @@ export class Ticket {
   public setUser(user: User) {
     this.user = user;
   }
+
+  public setUpdated_at(updated_at: Date): void {
+    this.updated_at = updated_at;
+  }
+  public getUpdated_at(): Date {
+    return this.updated_at;
+  }
 }
+
