@@ -112,7 +112,7 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 												<p>Tickets</p>
 											</button>
 										</Link>
-										<Link href={"/ticket/" + project.id}>
+										<Link href={"/rex/" + project.id}>
 											<button className="submenu_btn">
 												<img src="/assets/icons/rex.svg" alt="" />
 												<p>Rex</p>

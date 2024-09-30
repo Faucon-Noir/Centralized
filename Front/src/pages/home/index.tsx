@@ -19,6 +19,8 @@ import RexCard from '@/app/components/Card/rexCard';
 import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import GraphiquePie from '@/app/components/GraphiquePie';
+import GraphiqueLine from '@/app/components/GraphiqueLine';
 
 export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
     const [lastP, setLastP] = useState({
@@ -40,9 +42,6 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 
     const router = useRouter();
 
-    async function c_project() {
-        router.push('/specification/create');
-    }
     useEffect(() => {
         let tmp_lastP = {
             name: "",
@@ -66,7 +65,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
         }
         setLastP(tmp_lastP);
     }, [userData]);
-    console.log(userData);
+    console.log(userData)
     return (
         <>
             <div className='right_container'>
@@ -98,7 +97,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                         <SwiperSlide key={item.id}>
                                             <ProjetCard
                                                 name={item.name}
-                                                totalTickets={item.ticket.count}
+                                                totalTickets={item.ticket?.count}
                                                 key={item.id}
                                                 id={item.color}
                                                 projectId={item.id}
@@ -111,14 +110,28 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                             </div>
                         </CustomSwiper>
                     </div>
-                    <Grid
-                        container
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '50px',
-                        }}
-                    >
+                    <Grid container sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
+                        {userData?.stat?.error ? <></> : <div className='stat'>
+                            <h2>Statistique du dernier projet</h2>
+                            <div className='graph_div'>
+                                {userData?.stat?.nbrTicketByUser ?
+                                    <GraphiquePie
+                                        labels={userData.stat.nbrTicketByUser.map((x: { userName: any; }) => x.userName)}
+                                        data={userData.stat.nbrTicketByUser.map((row: { nbr_ticket: any; }) => (row.nbr_ticket))}
+                                        title='Nombre de ticket non fini par utilisateur'
+                                        hover='Nombre de ticket'
+                                    /> : null}
+                                {userData?.stat?.nbrTicketByUser ?
+                                    <GraphiqueLine
+                                        labels={userData.stat.nbrTicketPerWeek.week}
+                                        data={userData.stat.nbrTicketPerWeek.nbr_ticket}
+                                        title="Nombre de tickets ouverts par semaine"
+                                        hover="Nombre de tickets"
+                                    /> : null
+                                }
+                            </div>
+                        </div>}
+
                         <div className='DeuxEtapes'>
                             <div className='calendar_container'>
                                 <CalendarBox
@@ -261,7 +274,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                         <h1>Bonjour {userData?.user ? <>{userData?.user.lastname} {userData?.user.firstname}</> : 'test'}</h1>
                         <h2>Vous n&apos;avez pas encore de projets, ni d&apos;équipe, ni meme de planning, vous n&apos;êtes rien !</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio tortor, blandit a eleifend et, bibendum non justo. Donec commodo turpis augue, id ultrices libero consectetur quis. Duis varius elementum bibendum. Etiam ligula mi, sagittis ac est at, tristique volutpat neque. Ut non erat diam. Aenean ullamcorper pharetra quam eget ultrices. Maecenas blandit venenatis aliquam. Sed sit amet augue quis metus rhoncus cursus at et elit. Curabitur aliquet aliquam erat vel vehicula. In efficitur id sapien id efficitur. Quisque hendrerit, nisi a venenatis condimentum, leo ante convallis urna, vel venenatis lorem ipsum in enim. Praesent consectetur ultricies tristique. Nunc porttitor vulputate dui, sollicitudin eleifend sem pellentesque in. Fusce maximus malesuada dui a tincidunt. Donec sit amet nulla vitae metus elementum consequat.</p>
-                        <button className='create_project' onClick={() => c_project()}>Laissez vous guider</button>
+                        <button className='create_project' onClick={() => router.push('/specification/create')}>Laissez vous guider</button>
                     </div>
                 </>}
             </div>

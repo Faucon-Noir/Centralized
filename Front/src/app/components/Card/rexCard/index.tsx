@@ -5,7 +5,7 @@ import { ButtonBase, Icon } from '@mui/material';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import { numberToColor } from '@/app/helpers';
 
-function ProjetCard({ name, answer1, answer2, answer3, color }: any) {
+function RexCard({ name, answer1, answer2, answer3, color }: any) {
     return (
         <>
             {name ?
@@ -31,4 +31,4 @@ function ProjetCard({ name, answer1, answer2, answer3, color }: any) {
         </>
     );
 }
-export default ProjetCard;
+export default RexCard;

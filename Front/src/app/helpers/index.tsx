@@ -1,5 +1,6 @@
 import { Chip } from "@mui/material"
 import { jwtDecode } from "jwt-decode"
+import { addMonths, addWeeks, format, getISOWeekYear, startOfISOWeek } from 'date-fns';
 
 export function gradeToString(grade: number): string {
 	let teamRole: string
@@ -180,5 +181,35 @@ export function numberToColor(num: number): string {
 			colorName = '#0293FC'
 			break
 	}
+	return colorName
+}
+
+export function GenerateDataWeekTicket(tickets: any) {
+	const labels = Array.from({ length: 9 }, (_, i) => format(startOfISOWeek(addWeeks(new Date(), i - 4)), 'dd/MM/yyyy'));
+	const data = Array.from({ length: 9 }, (_, i) => 0);
+	for (let ticket of tickets) {
+		if (ticket.status != 'résolu') {
+			const FindElement = (element: any) => element == format(startOfISOWeek(new Date(ticket.end_date)), 'dd/MM/yyyy');
+			const index = labels.findIndex(FindElement);
+			if (index != -1) {
+				data[index]++;
+			}
+		}
+	}
+	return { week: labels, nbr_ticket: data }
+}
+
+export function findNumberTicketByUserName(name: string, tickets: any) {
+	for (let userDetail of tickets) {
+		if (name == userDetail.userName) {
+			return userDetail.nbr_ticket;
+		}
+	}
+	return 0;
+}
+
+export function numberToArrayColor(num: number): Array<string> {
+	let colorName: Array<string> = ['#FB2C39', '#8BC729', '#FAC602', '#8129C7', '#0A122A', '#698F3F', '#074F57', '#9ECE9A', '#9AD1D4', '#CCDBDC', '#0293FC']
+	colorName.splice(0, 11 - num)
 	return colorName
 }

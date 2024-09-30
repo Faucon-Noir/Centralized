@@ -166,3 +166,20 @@
     }
 
 }
+
+.stat {
+    display: flex;
+    flex-direction: column;
+
+    canvas {
+        height: 300px !important;
+        width: 300px !important;
+    }
+
+    .graph_div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30%
+    }
+}
