@@ -1,59 +1,195 @@
-import {
-	Avatar,
-	Box,
-	Button,
-	IconButton,
-	Input,
-	Modal,
-	TextField,
-} from '@mui/material';
+import { Avatar, Box, Button, IconButton, Input, Modal, TextField } from "@mui/material";
 import './style.scss';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from "@mui/material/Unstable_Grid2";
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from "react";
+import { ModalContentStyle } from './style';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import { jwtDecode } from 'jwt-decode';
-import Dashboard from '@/app/components/Dashboard/Dashboard';
-import { useDispatch } from 'react-redux';
-import { User } from '@/app/models/user';
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import Dashboard from "@/app/components/Dashboard/Dashboard";
 
-export default function AccountPage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
+
+
+export default function AccountPage() {
+	const ModalContentStyle = {
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+		backgroundColor: 'white',
+		padding: '30px',
+		borderRadius: '10px',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	}
+	const [user, setUser] = useState({
+		id: '',
+		avatar: '',
+		lastname: '',
+		firstname: '',
+		mail: '',
+		phone: '',
+		bio: '',
+		password: '',
+	})
+	const [open, setOpen] = useState<boolean>(false)
+	let user_id: string = ''
+
+	const handleClickOpen = () => {
+		setOpen(true)
+	}
+	const handleClose = () => {
+		setOpen(false)
+	}
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const file: File | undefined = event.target.files?.[0]
+		if (file) {
+			const allowedTypes: string[] = ['image/png', 'image/jpeg']
+			const maxSize: number = 2 * 1024 * 1024 // 2Mo
+			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
+				setUser({ ...user, avatar: file })
+			} else {
+				alert(
+					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
+				)
+			}
+		} else {
+			console.log('No file selected')
+		}
+	}
+
+	const handleUpdate = (e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+		e.preventDefault()
+		const token: any = localStorage.getItem('token')
+		const decodeToken: any = jwtDecode(token)
+		user_id = decodeToken['id']
+
+		const formData = new FormData();
+		Object.keys(user).forEach((key: string) => {
+			const value = user[key as keyof UserType];
+			if (value !== undefined) {
+				formData.append(key, value);
+			}
+		});
+		axios
+			.patch(`http://localhost:8000/api/user/${user_id}`, formData, {
+				headers: {
+					'Authorization': `Bearer ${token}`,
+					'Content-Type': 'multipart/form-data',
+				},
+			})
+			.then(function (response) {
+				window.location.reload()
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+	}
+
+	if (typeof window !== 'undefined') {
+		const isAuth: boolean = !!localStorage.getItem("token");
+		if (isAuth) {
+			const token: any = localStorage.getItem("token");
+			const decodeToken: any = jwtDecode(token);
+			user_id = decodeToken["id"];
+			useEffect(() => {
+				try {
+					axios.get(`http://localhost:8000/api/user/${user_id}`, {
+						headers: { Authorization: `Bearer ${token}` }
+					}).then(res => {
+						setUser(res.data);
+					})
+				} catch (error) {
+					console.log('error', error);
+				}
+			}, [token, user_id])
+		}
+	}
+	console.log('user', user);
 
 	return (
-		<div className='AccountPage'>
-			<div className='header'>
-				<h1>Mon profil</h1>
-			</div>
-			<hr style={{ marginLeft: 0 }} />
+		<>
 
-			<div className='form_container'>
-				<div className='form'>
-					<div className='avatar_input'>
-						<img src="/assets/avatar.png" alt="" />
+			<div className="accent" />
+			<div style={{ display: 'block' }}>
+				<div className="profile-photo" style={{ position: 'relative' }}>
+					<Avatar src={`/media/${user.avatar}`} sx={{ height: '100%', width: '100%' }} />
+					<div id='inner' className="inner" onClick={handleClickOpen}>
+						<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
 					</div>
-					<div className='second_input'>
-						<p>Prénom</p>
-						<input type="text" />
-					</div>
-					<div className='second_input'>
-						<p>Nom de famille</p>
-						<input type="text" />
-					</div>
-					<div className='second_input'>
-						<p>Email</p>
-						<input type="text" />
-					</div>
-					<div className='second_input'>
-						<p>Téléphone</p>
-						<input type="text" />
-					</div>
-					<div className='second_input'>
-						<p>Biographie</p>
-						<input type="text" />
-					</div>
+					<Modal open={open}>
+						<Box sx={ModalContentStyle}>
+							<IconButton onClick={handleClose} style={{ position: 'absolute', top: 10, right: 10 }}>
+								<CloseOutlinedIcon />
+							</IconButton>
+							{/* TODO: Faire une update de l'api pour prendre en charge le blob de l'image */}
+							<Input type="file" onChange={handleFileChange} />
+						</Box>
+					</Modal>
 				</div>
-
 			</div>
-		</div>
-	);
+
+			<form>
+				<Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+					<label htmlFor='firstName'>
+						First Name
+					</label>
+					<TextField
+						size="small"
+						className="textField"
+						placeholder={'Votre prénom'}
+						value={user?.firstname ? user.firstname : ''}
+						onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+					/>
+					<label htmlFor='lastName'>
+						Last Name
+					</label>
+					<TextField
+						size="small"
+						className="textField"
+						placeholder={'Votre nom'}
+						value={user?.lastname ? user.lastname : ''}
+						onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+					/>
+					<label htmlFor='email'>
+						Email
+					</label>
+					<TextField
+						size="small"
+						className="textField"
+						placeholder={'Votre adresse mail'}
+						value={user?.mail ? user.mail : ''}
+						onChange={(e) => setUser({ ...user, mail: e.target.value })}
+					/>
+					<label htmlFor='phone'>
+						Phone
+					</label>
+					<TextField
+						size="small"
+						className="textField"
+						placeholder={'Votre numéro de téléphone'}
+						value={user?.phone ? user.phone : ''}
+						onChange={(e) => setUser({ ...user, phone: e.target.value })}
+					/>
+					<label htmlFor='bio'>
+						Bio
+					</label>
+					<TextField
+						multiline
+						className="textField"
+						placeholder={'Une courte description de vous-même'}
+						value={user?.bio ? user.bio : ''}
+						onChange={(e) => setUser({ ...user, bio: e.target.value })}
+					/>
+				</Box>
+
+				<Button disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
+					Sauvegarder
+				</Button>
+			</form>
+		</>
+
+	)
 }

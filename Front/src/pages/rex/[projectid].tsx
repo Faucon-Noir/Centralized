@@ -45,7 +45,6 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 	useEffect(() => {
 		for (let project of userData.project) {
 			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
-				console.log(project)
 				if (Object.keys(project?.rex).length < 1) setIsForm(true)
 				setProject(project);
 				setRex(project.rex);

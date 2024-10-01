@@ -558,7 +558,6 @@ export class TicketController {
 				.groupBy("user.id")
 				.getRawMany();
 
-			console.log(tickets);
 			if (!tickets) throw new Error("Ticket not found");
 			return tickets;
 

@@ -128,27 +128,6 @@
 
 }
 
-.rex_container {
-  margin-top: 12%;
-  margin-left: 100px;
-
-  .header {
-    display: flex;
-  }
-
-  .card_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 50px;
-
-    .card {
-      width: 20%;
-    }
-  }
-}
-
 
 .noRex {
   margin-top: 5%;
@@ -171,5 +150,26 @@
   hr {
     width: 30%;
     border: 1px solid #0293FC;
+  }
+}
+
+.rex_container {
+  margin-top: 12%;
+  margin-left: 100px;
+
+  .header {
+    display: flex;
+  }
+
+  .card_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+
+    .card {
+      width: 20%;
+    }
   }
 }

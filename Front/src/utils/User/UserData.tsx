@@ -83,7 +83,6 @@ export default async function UserData() {
                 } else {
                     let lastSelected = tempSelectedMap[tempSelectedMap.length - 1]
                     //Sert à compter les tickets par semaine
-                    console.log(tempSelectedMap)
 
                     const dataWeek = GenerateDataWeekTicket(lastSelected?.ticket?.ticket)
                     userData.stat.nbrTicketPerWeek.week = dataWeek.week;

@@ -88,6 +88,8 @@ export default function Dashboard({ page = '', userData, updateUserData }: { pag
 				<div className='dashboard_nav'>
 					<Link href="/planning"><button className={page == 'Planning' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/planning.svg" alt="" />Mon Planning</button></Link>
 					<Link href="/specification"><button className={page == 'Specification' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/specification.svg" alt="" />Mes projets</button></Link>
+					<Link href="/team"><button className={page == 'Team' ? 'dashboard_button active' : 'dashboard_button'}><img src="/assets/icons/teams.svg" alt="" />Mes équipes</button></Link>
+
 					{Object.keys(selctedMap).length > 0 ? (
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
