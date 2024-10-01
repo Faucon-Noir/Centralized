@@ -3,7 +3,6 @@ import './style.scss';
 import Grid from "@mui/material/Unstable_Grid2";
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import { MouseEvent, useEffect, useState } from "react";
-import { ModalContentStyle } from './style';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
@@ -11,7 +10,7 @@ import Dashboard from "@/app/components/Dashboard/Dashboard";
 
 
 
-export default function AccountPage() {
+export default function AccountPage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const ModalContentStyle = {
 		position: 'absolute',
 		top: '50%',
@@ -49,7 +48,6 @@ export default function AccountPage() {
 			const allowedTypes: string[] = ['image/png', 'image/jpeg']
 			const maxSize: number = 2 * 1024 * 1024 // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
-				setUser({ ...user, avatar: file })
 			} else {
 				alert(
 					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
@@ -62,21 +60,19 @@ export default function AccountPage() {
 
 	const handleUpdate = (e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
 		e.preventDefault()
-		const token: any = localStorage.getItem('token')
-		const decodeToken: any = jwtDecode(token)
 		user_id = decodeToken['id']
 
 		const formData = new FormData();
-		Object.keys(user).forEach((key: string) => {
-			const value = user[key as keyof UserType];
+		Object.keys(user).forEach((key) => {
+			const value = user[key as keyof typeof user];
 			if (value !== undefined) {
-				formData.append(key, value);
+				formData.append(key, value as string); // Ajoute un casting si nécessaire pour FormData
 			}
 		});
 		axios
 			.patch(`http://localhost:8000/api/user/${user_id}`, formData, {
 				headers: {
-					'Authorization': `Bearer ${token}`,
+					'Authorization': `Bearer ${userData.user.token}`,
 					'Content-Type': 'multipart/form-data',
 				},
 			})
@@ -88,26 +84,20 @@ export default function AccountPage() {
 			})
 	}
 
-	if (typeof window !== 'undefined') {
-		const isAuth: boolean = !!localStorage.getItem("token");
-		if (isAuth) {
-			const token: any = localStorage.getItem("token");
-			const decodeToken: any = jwtDecode(token);
-			user_id = decodeToken["id"];
-			useEffect(() => {
-				try {
-					axios.get(`http://localhost:8000/api/user/${user_id}`, {
-						headers: { Authorization: `Bearer ${token}` }
-					}).then(res => {
-						setUser(res.data);
-					})
-				} catch (error) {
-					console.log('error', error);
-				}
-			}, [token, user_id])
+	const token: any = localStorage.getItem("token");
+	const decodeToken: any = jwtDecode(token);
+	user_id = decodeToken["id"];
+	useEffect(() => {
+		try {
+			axios.get(`http://localhost:8000/api/user/${userData.user.id}`, {
+				headers: { Authorization: `Bearer ${userData.user.token}` }
+			}).then(res => {
+				setUser(res.data);
+			})
+		} catch (error) {
+			console.log('error', error);
 		}
-	}
-	console.log('user', user);
+	}, [userData])
 
 	return (
 		<>

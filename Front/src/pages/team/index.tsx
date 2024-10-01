@@ -2,10 +2,10 @@
 import './style.scss';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-
+import TeamCard from '@/app/components/Card/TeamCard';
 function Team({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 
-
+	console.log(userData)
 	return (
 		<div className='teamPage'>
 			<div className='header'>
@@ -19,10 +19,11 @@ function Team({ userData, updateUserData }: { userData: any, updateUserData: any
 			</div>
 			<hr style={{ marginLeft: 0 }} />
 			<div className='teams_container'>
-				{/* {userData.team.length > 0 ?
+				{userData.team.length > 0 ?
 					userData.team.map((item: any) => (
+						<TeamCard name={item.team.name} key={item.team.id} />
 					))
-					: null} */}
+					: null}
 			</div>
 		</div>
 	);

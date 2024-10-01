@@ -5,6 +5,7 @@ import './style.scss';
 import 'swiper/css/pagination';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 export default function WelcomePage() {
 	const [currentImage, setCurrentImage] = useState('/assets/vitrine/second-1.png');
@@ -40,7 +41,10 @@ export default function WelcomePage() {
 		<>
 			<div className='header'>
 				<img src="/assets/logo/ColorLogoLineBlack.png" alt="Logo" className='logo' />
-				<div className='connexion'><div className='hover'><a href='/login'>Connexion</a></div></div>
+				<div className='connexion'><div className='hover'>
+					<Link href="/login">Connexion</Link>
+				</div>
+				</div>
 			</div>
 			<div className='first'>
 				<div className='text'>
@@ -73,7 +77,7 @@ export default function WelcomePage() {
 						>
 							<div className='box'>
 								<h4 className='title'>Plannifiez vos projet</h4>
-								<h5 className='description'>Générez automatiquement vos tickets pour gagner du temps, et gagner du temps sur l'organisation.</h5>
+								<h5 className='description'>Générez automatiquement vos tickets pour gagner du temps, et gagner du temps sur l&pos;organisation.</h5>
 							</div>
 						</div>
 						<div
@@ -158,7 +162,7 @@ export default function WelcomePage() {
 						<p className='info'>par utilisateur et par mois</p><br></br>
 						<p className='user'>Pour les petites équipes qui ont peu de projet à la fois.</p>
 						<p className='limite'>Les utilisateur sont limités à la création de 5 projets par mois.</p>
-						<a href='#'><button>S'inscrire</button></a>
+						<a href='#'><button>S&pos;inscrire</button></a>
 					</div>
 					<div className='box premium'>
 						<h3>PREMIUM</h3>
@@ -166,7 +170,7 @@ export default function WelcomePage() {
 						<p className='info'>par utilisateur et par mois</p><br></br>
 						<p className='user'>Pour les équipes qui ont besoins de gérer plusieurs projet à la fois.</p>
 						<p className='limite'>Les utilisateur sont limités à la création de 20 projets par mois.</p>
-						<a href='#'><button>S'inscrire</button></a>
+						<a href='#'><button>S&pos;inscrire</button></a>
 					</div>
 					<div className='box right'>
 						<h3>ENTERPRISE</h3>
@@ -195,20 +199,20 @@ export default function WelcomePage() {
 					</div>
 					<div className='box'>
 						<div className='inbox'>
-							<a href='/login'>Connexion</a>
+							<Link href="/login">Connexion</Link>
 						</div>
 					</div>
 					<div className='box'>
 						<div className='inbox'>
 							<a href='#'>A propos de Centralized
-								<h6>Qui sommes nous? Découvrez tout ce qu'il y a à savoir sur nous</h6>
+								<h6>Qui sommes nous? Découvrez tout ce qu&pos;il y a à savoir sur nous</h6>
 							</a>
 						</div>
 					</div>
 					<div className='box'>
 						<div className='inbox'>
 							<a href='#'>Nous contacter
-								<h6>Besoin d'aide? Contactez-nous!</h6>
+								<h6>Besoin d&pos;aide? Contactez-nous!</h6>
 							</a>
 						</div>
 					</div>
