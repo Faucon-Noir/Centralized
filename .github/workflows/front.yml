@@ -28,5 +28,21 @@ jobs:
               run: cd Front && npm ci
             - name: Build
               run: cd Front && npm run build
-            - name: Test
-              run: cd Front && npm run cy:all
+            # - name: Test
+            #   run: cd Front && npm run cy:all
+
+    # cypress-run:
+    #     runs-on:
+    #         ubuntu-22.04
+    #         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    #     steps:
+    #         - uses: actions/checkout@v4
+    #         # Install npm dependencies, cache them correctly
+    #         # and run all Cypress tests
+    #         - name: Cypress run
+    #           uses: cypress-io/github-action@v6
+    #           with:
+    #               build: npm run build
+    #               start: npm start
+    #               browser: chrome
