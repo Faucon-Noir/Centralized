@@ -29,4 +29,4 @@ jobs:
             - name: Build
               run: cd Front && npm run build
             - name: Test
-              run: npm run cy:all
+              run: cd Front && npm run cy:all
