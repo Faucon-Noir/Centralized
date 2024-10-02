@@ -26,8 +26,8 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - name: Install dependencies
               run: cd Back && npm ci
-            # - name: Test
-            #   run: cd Back && npm test
+            - name: Test
+              run: cd Back && npm test
             # - name: Start server and check for errors
             #   run: |
             #       cd Back

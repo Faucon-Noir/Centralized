@@ -27,6 +27,6 @@ jobs:
             - name: Install dependencies
               run: cd Front && npm ci
             - name: Build
-              run: cd Front && npm build
-            # - name: Test
-            #   run: npm cy:all
+              run: cd Front && npm run build
+            - name: Test
+              run: npm cy:all
