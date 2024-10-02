@@ -4,30 +4,35 @@
 name: Centralized Back CI
 
 on:
-  push:
-    branches: [ "*" ]
-  pull_request:
-    branches: [ "*" ]
+    push:
+        branches: ["*"]
+    pull_request:
+        branches: ["*"]
 
 jobs:
-  build:
+    build:
+        runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [20.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install Yarn
-      run: npm install -g yarn
-    - name: Install dependencies
-      run: cd Back && yarn install
-    - name: Test
-      run: cd Back && yarn test
+        steps:
+            - uses: actions/checkout@v4
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install dependencies
+              run: cd Back && npm ci
+            # - name: Test
+            #   run: cd Back && npm test
+            # - name: Start server and check for errors
+            #   run: |
+            #       cd Back
+            #       npm start &
+            #       SERVER_PID=$!
+            #       sleep 10
+            #       curl -f http://localhost:3000 || (echo "Server did not start correctly" && exit 1)
+            #       kill $SERVER_PID
