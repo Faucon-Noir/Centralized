@@ -27,7 +27,7 @@ jobs:
             - name: Install dependencies
               run: cd Back && npm ci
             - name: Test
-              run: cd Back && npm test
+              run: cd Back && npm run test
             # - name: Start server and check for errors
             #   run: |
             #       cd Back
