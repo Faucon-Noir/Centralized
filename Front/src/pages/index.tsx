@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { addMonths, format } from 'date-fns';
+import { addMonths, format, parseISO } from 'date-fns';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -43,10 +43,13 @@ export default function Home(): JSX.Element {
   const [ticketproject, setTicketProject] = useState<any>({});
   const [datagraphique, setDataGraphique] = useState(null);
   const [optionsgraphique, setOptionsGraphique] = useState({});
+  const [resultgraphique, setResultGraphique] = useState({});
+  const [delay, setdelay] = useState(true);
+
   let lastproject: any
   let lastrex: any = null
   if (typeof window !== 'undefined') {
-
+    
     const isAuth: boolean = !!localStorage.getItem("token");
     let user_id: string = "";
     let ticket_liste = {};
@@ -55,8 +58,9 @@ export default function Home(): JSX.Element {
       const token: any = localStorage.getItem("token");
       const decodeToken: any = jwtDecode(token);
       user_id = decodeToken["id"];
-
+      
       useEffect(() => {
+        const labels = Array.from({ length: 12 }, (_, i) => format(addMonths(new Date(), i), 'MMM yyyy'));
         //GET USER INFO
         try {
           axios.get(`http://localhost:8000/api/user/${user_id}`, {
@@ -82,6 +86,21 @@ export default function Home(): JSX.Element {
                 }).then(function (res) {
                   ticket_liste = { ...ticket_liste, [element.id]: res.data.length }
                   setTicketProject(ticket_liste);
+                  interface TicketCount {
+                    [key: string]: number;
+                  }
+                  var ticket_trier: TicketCount = {};
+                  res.data.forEach(ticket => { 
+                    var date = format(new Date(ticket.ticket_end_date), 'MMM yyyy')
+                    if(labels.includes(date)){
+                      if (!ticket_trier[date]) {
+                        ticket_trier[date] = 0;
+                      }
+                      ticket_trier[date]++;
+                    }
+                    
+                  });
+                  setResultGraphique(ticket_trier)
                 })
               } catch (error) {
                 console.log(error);
@@ -101,6 +120,7 @@ export default function Home(): JSX.Element {
                 console.log(error);
               }
             });
+            
           })
         } catch (error) {
           console.log(error);
@@ -138,13 +158,12 @@ export default function Home(): JSX.Element {
         } catch (error) {
           console.log(error);
         }
-        const labels = Array.from({ length: 12 }, (_, i) => format(addMonths(new Date(), i), 'MMM yyyy'));
         const data = {
-          labels: labels,
+          labels: labels, 
           datasets: [
             {
-            label: 'Ventes',
-            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+            label: user ? user.firstname+' '+user.lastname : ' ',
+            data: resultgraphique,
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
@@ -157,14 +176,20 @@ export default function Home(): JSX.Element {
           scales: {
             y: {
             beginAtZero: true,
-            },
+            }, 
           },
           responsive: true,
           maintainAspectRatio: false,
+          plugins: {
+            title: {
+                display: true,
+                text: 'Nombre de ticket non fini par projet durant les 12 prochains mois'
+            }
+        }
           };
           setOptionsGraphique(options);
+          setdelay(false)
       }, []);
-
     }
 
     if (project) {
@@ -175,6 +200,11 @@ export default function Home(): JSX.Element {
     }
 
     
+  }
+  if(delay == true){
+    return(
+      <div>Chargement en cours ...</div>
+    )
   }
   return (
     <>

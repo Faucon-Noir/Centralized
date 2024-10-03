@@ -37,7 +37,7 @@
 		"babel-plugin-macros": "^3.1.0",
 		"canvas-confetti": "^1.9.2",
 		"chart.js": "^4.4.4",
-		"date-fns": "^2.30.0",
+		"date-fns": "^3.6.0",
 		"dayjs": "^1.11.10",
 		"draft-js": "^0.11.7",
 		"draftjs-to-html": "^0.9.1",
