@@ -1,180 +1,181 @@
 body {
-    background-position: top left -20% !important
+	background-position: top left -20% !important;
 }
 
-
 .login_container {
-    display: flex;
-    min-height: 100vh;
+	display: flex;
+	min-height: 100vh;
 
-    .main_container {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+	.main_container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-    .logo_container {
-        background-color: #0293FC;
-        color: white;
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-    }
+	.logo_container {
+		background-color: #0293fc;
+		color: white;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
+	}
 
-    .logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 30%;
+	.logo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-top: 30%;
 
-        img {
-            width: 30%;
-        }
+		img {
+			width: 30%;
+		}
 
-        p {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 16px;
-            font-style: normal;
-            line-height: normal;
-        }
-    }
+		p {
+			text-align: center;
+			margin-top: 40px;
+			font-size: 16px;
+			font-style: normal;
+			line-height: normal;
+		}
+	}
 
-    .icons {
-        margin-top: 60px;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0 50px;
+	.icons {
+		margin-top: 60px;
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0 50px;
 
-        .common {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 50px;
-            flex: 50%;
+		.common {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: 50px;
+			flex: 50%;
 
-            img {
-                width: 40px;
-                height: 40px;
-            }
+			img {
+				width: 40px;
+				height: 40px;
+			}
 
-            p {
-                text-align: center;
-                font-size: 16px;
-                font-style: normal;
-                line-height: normal;
-            }
-        }
-    }
+			p {
+				text-align: center;
+				font-size: 16px;
+				font-style: normal;
+				line-height: normal;
+			}
+		}
+	}
 
-    .css-cuefkz-MuiContainer-root {
-        h1 {
-            text-align: center;
-            color: #000;
-            font-size: 36px;
-            font-style: normal;
-            line-height: normal;
-        }
-    }
+	.css-cuefkz-MuiContainer-root {
+		h1 {
+			text-align: center;
+			color: #000;
+			font-size: 36px;
+			font-style: normal;
+			line-height: normal;
+		}
+	}
 
-    .css-w5hc3h-MuiButtonGroup-root {
-        .auth_button {
-            display: flex;
-            padding: 8px 40px;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            border-radius: 12px;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            font-style: normal;
-            line-height: 28px;
-            /* 140% */
-        }
-    }
+	.css-w5hc3h-MuiButtonGroup-root {
+		.auth_button {
+			display: flex;
+			padding: 8px 40px;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+			border-radius: 12px;
+			border: none;
+			cursor: pointer;
+			font-size: 18px;
+			font-style: normal;
+			line-height: 28px;
+			/* 140% */
+		}
+	}
 
-    .css-1fom3nx {
-        padding: 4px;
-    }
+	.css-1fom3nx {
+		padding: 4px;
+	}
 
-    .form_container {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        margin-top: 5%;
-        padding: 32px;
-        box-shadow: 5px 4px 20px 0px rgba(0, 0, 0, 0.25);
-        border-radius: 12px;
+	.form_container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: 100%;
+		margin-top: 5%;
+		padding: 32px;
+		box-shadow: 5px 4px 20px 0px rgba(0, 0, 0, 0.25);
+		border-radius: 12px;
 
-        .line {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 5%;
-        }
+		.line {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 5%;
+		}
 
-        .row {
-            display: flex;
-            flex-direction: column;
-            width: 49%;
-        }
+		.row {
+			display: flex;
+			flex-direction: column;
+			width: 49%;
+		}
 
-        .full {
-            width: 100% !important;
-        }
+		.full {
+			width: 100% !important;
+		}
 
-        input {
-            border-radius: 5px;
-            background: #ECEEEE;
-            border: none;
-            justify-content: center;
-            align-items: stretch;
-            border-radius: 0.375rem;
-            padding: 12px;
+		input {
+			border-radius: 5px;
+			background: #eceeee;
+			border: none;
+			justify-content: center;
+			align-items: stretch;
+			border-radius: 0.375rem;
+			padding: 12px;
+		}
 
-        }
+		input::placeholder {
+			font-size: 12px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 22px;
+			color: #435254;
+			/* 137.5% */
+		}
+	}
 
-        input::placeholder {
-            font-size: 12px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 22px;
-            color: #435254;
-            /* 137.5% */
-        }
-    }
+	.auth_button {
+		font-size: 16px;
+		color: white;
+		padding: 12px 24px;
+		display: flex;
+		justify-content: center;
+		align-items: stretch;
+		gap: 10px;
+		border-radius: 12px;
+		background: #0293fc;
+		border: none;
+		align-self: center;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		cursor: pointer;
+	}
 
-    .auth_button {
-        font-size: 16px;
-        color: white;
-        padding: 12px 24px;
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        gap: 10px;
-        border-radius: 12px;
-        background: #0293FC;
-        border: none;
-        align-self: center;
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-        cursor: pointer;
-    }
-
-    .login_button {
-        font-size: 16px;
-        color: white;
-        padding: 12px 24px;
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        gap: 10px;
-        border-radius: 12px;
-        background: #0293FC;
-        border: none;
-        align-self: center;
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-        cursor: pointer;
-    }
+	.login_button {
+		font-size: 16px;
+		color: white;
+		padding: 12px 24px;
+		display: flex;
+		justify-content: center;
+		align-items: stretch;
+		gap: 10px;
+		border-radius: 12px;
+		background: #0293fc;
+		border: none;
+		align-self: center;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		cursor: pointer;
+	}
 }

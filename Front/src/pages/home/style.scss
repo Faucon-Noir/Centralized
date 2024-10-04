@@ -1,185 +1,185 @@
 .ProjetCards {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
 }
 
 .projetcard {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-
 .TitleProjetCards {
-    display: flex;
-    gap: 10px;
+	display: flex;
+	gap: 10px;
 }
 
 .Entete {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
-
 .DernierTicket {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .entetedernierticket {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 22px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	margin-bottom: 22px;
 
-    h2 {
-        margin: 0;
-    }
+	h2 {
+		margin: 0;
+	}
 }
 
 .fleches {
-    margin-top: auto;
-    margin-bottom: 10px;
+	margin-top: auto;
+	margin-bottom: 10px;
 }
 
 .swiper-button-prev-1:hover,
 .swiper-button-next-1:hover,
 .swiper-button-prev-2:hover,
 .swiper-button-next-2:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .swiper-button-disabled {
-    color: rgb(128, 128, 128);
-    cursor: auto !important;
+	color: rgb(128, 128, 128);
+	cursor: auto !important;
 }
 
 .right_container {
-    margin-top: 12%;
-    margin-left: 100px;
+	margin-top: 12%;
+	margin-left: 100px;
 
-    .Presentation {
-        margin-bottom: 20px;
-    }
+	.Presentation {
+		margin-bottom: 20px;
+	}
 
-    .Entete {
-        display: flex;
-        justify-content: space-between;
-        padding-right: 30px;
-    }
+	.Entete {
+		display: flex;
+		justify-content: space-between;
+		padding-right: 30px;
+	}
 
-    .swiper-horizontal {
-        padding-left: 20px;
-        margin-left: -20px;
-        padding-right: 30px;
-    }
+	.swiper-horizontal {
+		padding-left: 20px;
+		margin-left: -20px;
+		padding-right: 30px;
+	}
 
-    .swiper-wrapper {
-        margin-top: 32px;
-        margin-bottom: 50px;
-        overflow: visible !important;
-    }
+	.swiper-wrapper {
+		margin-top: 32px;
+		margin-bottom: 50px;
+		overflow: visible !important;
+	}
 
-    h1 {
-        font-size: 36px;
-        margin: 0;
-    }
+	h1 {
+		font-size: 36px;
+		margin: 0;
+	}
 
-    h2 {
-        font-size: 24px;
-        margin: 0;
-    }
+	h2 {
+		font-size: 24px;
+		margin: 0;
+	}
 
-    /* TODO: Trouver un nom plus explicite */
-    .DeuxEtapes {
-        display: flex;
-        flex-direction: row;
-        gap: 10%;
-        width: 100%;
+	/* TODO: Trouver un nom plus explicite */
+	.DeuxEtapes {
+		display: flex;
+		flex-direction: row;
+		gap: 10%;
+		width: 100%;
 
-        .calendar_container {
-            width: 35%;
-        }
+		.calendar_container {
+			width: 35%;
+		}
 
-        .DernierTicket {
-            width: 40%;
-            padding-right: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+		.DernierTicket {
+			width: 40%;
+			padding-right: 50px;
+			display: flex;
+			flex-direction: column;
+			gap: 25px;
+		}
+	}
 
-    }
+	.second_line {
+		gap: 12% !important;
 
-    .second_line {
-        gap: 12% !important;
+		.DernierTicket {
+			width: 30% !important;
+		}
+	}
 
-        .DernierTicket {
-            width: 30% !important;
-        }
-    }
-
-    .MyTeam {
-        margin-top: 50px;
-    }
+	.MyTeam {
+		margin-top: 50px;
+	}
 }
 
 .no_project {
-    width: 90%;
-    height: 75vh;
-    border-radius: 15px;
-    background-color: #0294fc77;
-    padding: 20px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10%;
-    color: white;
-    margin-top: -5%;
+	width: 90%;
+	height: 75vh;
+	border-radius: 15px;
+	background-color: #0294fc77;
+	padding: 20px 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10%;
+	color: white;
+	margin-top: -5%;
 
-    h2 {
-        text-align: center;
-        width: 33%;
-        letter-spacing: 4px;
-    }
+	h2 {
+		text-align: center;
+		width: 33%;
+		letter-spacing: 4px;
+	}
 
-    p {
-        text-align: center;
-        letter-spacing: 4px;
-    }
+	p {
+		text-align: center;
+		letter-spacing: 4px;
+	}
 
-    .create_project {
-        border: none;
-        border-radius: 15px;
-        background-color: #0294fc;
-        color: white;
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 25px;
-        font-weight: bold;
-        letter-spacing: 4px;
-        transition: all 350ms ease-in-out;
-    }
+	.create_project {
+		border: none;
+		border-radius: 15px;
+		background-color: #0294fc;
+		color: white;
+		padding: 10px 15px;
+		cursor: pointer;
+		font-size: 25px;
+		font-weight: bold;
+		letter-spacing: 4px;
+		transition: all 350ms ease-in-out;
+	}
 
-    .create_project:hover {
-        transform: translateY(-10px);
-    }
-
+	.create_project:hover {
+		transform: translateY(-10px);
+	}
 }
 
 .stat {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    canvas {
-        height: 300px !important;
-        width: 300px !important;
-    }
+	canvas {
+		height: 300px !important;
+		max-width: 600px !important;
+	}
 
-    .graph_div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30%
-    }
+	.graph_div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-top: 25px;
+		gap: 50px;
+		@media (min-width: 1680px) {
+			gap: 250px;
+		}
+	}
 }
