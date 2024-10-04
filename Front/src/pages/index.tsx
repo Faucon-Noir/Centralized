@@ -4,11 +4,14 @@ import 'swiper/css';
 import './style.scss';
 import 'swiper/css/pagination';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 export default function WelcomePage() {
-	const [currentImage, setCurrentImage] = useState('/assets/vitrine/second-1.png');
+	const [currentImage, setCurrentImage] = useState(
+		'/assets/vitrine/second-1.png'
+	);
 	const [selectedText, setSelectedText] = useState('Text 1');
 
 	const handleTextClick = (image: string, text: string) => {
@@ -40,66 +43,128 @@ export default function WelcomePage() {
 	return (
 		<>
 			<div className='header'>
-				<img src="/assets/logo/ColorLogoLineBlack.png" alt="Logo" className='logo' />
-				<div className='connexion'><div className='hover'>
-					<Link href="/login">Connexion</Link>
-				</div>
+				<img
+					src='/assets/logo/ColorLogoLineBlack.png'
+					alt='Logo'
+					className='logo'
+				/>
+				<div className='connexion'>
+					<div className='hover'>
+						<Link href='/login'>Connexion</Link>
+					</div>
 				</div>
 			</div>
 			<div className='first'>
 				<div className='text'>
 					<h1>Travailler ensemble plus facilement</h1>
-					<h3>Simplifier votre quotidien en gérant vos projet plus simplement</h3>
+					<h3>
+						Simplifier votre quotidien en gérant vos projet plus
+						simplement
+					</h3>
 					<form className='input'>
-						<input type='text' id='email' name='E-mail' placeholder='E-mail'></input><br></br>
-						<input type='submit' value='Inscrivez-vous !' id='submit'></input>
+						<input
+							type='text'
+							id='email'
+							name='E-mail'
+							placeholder='E-mail'
+						></input>
+						<br></br>
+						<input
+							type='submit'
+							value='Inscrivez-vous !'
+							id='submit'
+						></input>
 					</form>
 				</div>
-				<img src="/assets/vitrine/MacBook_Air_2022.png" alt="ordi" className='ordi' />
+				<img
+					src='/assets/vitrine/MacBook_Air_2022.png'
+					alt='ordi'
+					className='ordi'
+				/>
 			</div>
 			<div className='second'>
 				<h1>Centralisez vos besoins</h1>
-				<h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h3>
+				<h3>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+					do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				</h3>
 				<div className='container'>
 					<div className='textList'>
 						<div
-							onClick={() => handleTextClick('/assets/vitrine/second-1.png', 'Text 1')}
-							className={selectedText === 'Text 1' ? 'selected' : 'Test'}
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-1.png',
+									'Text 1'
+								)
+							}
+							className={
+								selectedText === 'Text 1' ? 'selected' : 'Test'
+							}
 						>
 							<div className='box'>
 								<h4 className='title'>Cahier des charges</h4>
-								<h5 className='description'>Gagnez du temps sur la création de vos cahiers des charges grace à notre Intelligence artificielle!</h5>
+								<h5 className='description'>
+									Gagnez du temps sur la création de vos
+									cahiers des charges grace à notre
+									Intelligence artificielle!
+								</h5>
 							</div>
 						</div>
 						<div
-							onClick={() => handleTextClick('/assets/vitrine/second-2.png', 'Text 2')}
-							className={selectedText === 'Text 2' ? 'selected' : 'Test'}
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-2.png',
+									'Text 2'
+								)
+							}
+							className={
+								selectedText === 'Text 2' ? 'selected' : 'Test'
+							}
 						>
 							<div className='box'>
 								<h4 className='title'>Plannifiez vos projet</h4>
-								<h5 className='description'>Générez automatiquement vos tickets pour gagner du temps, et gagner du temps sur l&pos;organisation.</h5>
+								<h5 className='description'>
+									Générez automatiquement vos tickets pour
+									gagner du temps, et gagner du temps sur
+									l&pos;organisation.
+								</h5>
 							</div>
 						</div>
 						<div
-							onClick={() => handleTextClick('/assets/vitrine/second-3.png', 'Text 3')}
-							className={selectedText === 'Text 3' ? 'selected' : 'Test'}
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-3.png',
+									'Text 3'
+								)
+							}
+							className={
+								selectedText === 'Text 3' ? 'selected' : 'Test'
+							}
 						>
 							<div className='box'>
 								<h4 className='title'>Gérer vos équipes</h4>
-								<h5 className='description'>Créer et gérer vos équipes et vos projet avec simplicité.</h5>
+								<h5 className='description'>
+									Créer et gérer vos équipes et vos projet
+									avec simplicité.
+								</h5>
 							</div>
 						</div>
 					</div>
 					<div className='imageContainer'>
-						<img src={currentImage} alt="Displayed Image" />
+						<img src={currentImage} alt='Displayed Image' />
 					</div>
 				</div>
 			</div>
 			<div className='third'>
 				<h1>Améliorer votre manière de travailler</h1>
 				<button onClick={handleNextClick} className='arrow'>
-					<div className='round'><p>&gt;</p></div>
-				</button><br></br>
+					<div className='round'>
+						<p>&gt;</p>
+					</div>
+				</button>
+				<br></br>
 				<div className='container'>
 					<div className='listContainer' ref={listContainerRef}>
 						<div className='block'>
@@ -174,11 +239,24 @@ export default function WelcomePage() {
 					</div>
 					<div className='box right'>
 						<h3>ENTERPRISE</h3>
-						<h1>15<span className="currency">€</span></h1>
-						<p className='info'>par utilisateur et par mois, facturation annuelle</p><br></br>
-						<p className='user'>Pour les entreprises qui produisent plusieurs projets à la fois.</p>
-						<p className='limite'>Les utilisateur sont limités à la création de 50 projets par mois.</p>
-						<a href='#'><button>Contacter notre équipe</button></a>
+						<h1>
+							15<span className='currency'>€</span>
+						</h1>
+						<p className='info'>
+							par utilisateur et par mois, facturation annuelle
+						</p>
+						<br></br>
+						<p className='user'>
+							Pour les entreprises qui produisent plusieurs
+							projets à la fois.
+						</p>
+						<p className='limite'>
+							Les utilisateur sont limités à la création de 50
+							projets par mois.
+						</p>
+						<a href='#'>
+							<button>Contacter notre équipe</button>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -188,43 +266,65 @@ export default function WelcomePage() {
 					<h3>Accompagner vos projet dès maintenant</h3>
 				</div>
 				<form className='input'>
-					<input type='text' id='email' name='E-mail' placeholder='E-mail'></input>
-					<input type='submit' value='Inscrivez-vous !' id='submit'></input>
+					<input
+						type='text'
+						id='email'
+						name='E-mail'
+						placeholder='E-mail'
+					></input>
+					<input
+						type='submit'
+						value='Inscrivez-vous !'
+						id='submit'
+					></input>
 				</form>
 			</div>
 			<div className='footer'>
 				<div className='container debut'>
 					<div className='box'>
-						<img src="/assets/logo/WhiteLogoLeft.png" alt="Logo" className='logo' /><br></br>
+						<img
+							src='/assets/logo/WhiteLogoLeft.png'
+							alt='Logo'
+							className='logo'
+						/>
+						<br></br>
 					</div>
 					<div className='box'>
 						<div className='inbox'>
-							<Link href="/login">Connexion</Link>
+							<Link href='/login'>Connexion</Link>
 						</div>
 					</div>
 					<div className='box'>
 						<div className='inbox'>
-							<a href='#'>A propos de Centralized
-								<h6>Qui sommes nous? Découvrez tout ce qu&pos;il y a à savoir sur nous</h6>
+							<a href='#'>
+								A propos de Centralized
+								<h6>
+									Qui sommes nous? Découvrez tout ce qu&pos;il
+									y a à savoir sur nous
+								</h6>
 							</a>
 						</div>
 					</div>
 					<div className='box'>
 						<div className='inbox'>
-							<a href='#'>Nous contacter
+							<a href='#'>
+								Nous contacter
 								<h6>Besoin d&pos;aide? Contactez-nous!</h6>
 							</a>
 						</div>
 					</div>
-
 				</div>
 				<div className='container bottom'>
 					<div className='box bottom line'>
 						<div className='inbox'>
-							<a href='#'><h6>Conditions</h6></a>
+							<a href='#'>
+								<h6>Conditions</h6>
+							</a>
 						</div>
 						<div className='inbox'>
-							<a href='#'><h6>Politique de confidentialité</h6></a>
+							<a href='#'>
+								<h6>Politique de confidentialité</h6>
+							</a>
 						</div>
 					</div>
 					<div className='box bottom'>
@@ -234,22 +334,52 @@ export default function WelcomePage() {
 					</div>
 					<div className='box bottom media'>
 						<div className='social'>
-							<div className="container">
-								<div className="effect thurio">
-									<div className="buttons">
-										<a href="https://x.com/Centralized_app" target='_blank' className="tw" title="Join us on Twitter"><img src='/assets/vitrine/twitter.png' className="fa fa-twitter" aria-hidden="true" /></a>
-										<a href="#" target='_blank' className="insta" title="Join us on Instagram"><img src='/assets/vitrine/instagram.png' className="fa fa-instagram" aria-hidden="true" /></a>
-										<a href="https://www.linkedin.com/in/Centralized/" target='_blank' className="in" title="Join us on Linked In"><img src='/assets/vitrine/linkedin.png' className="fa fa-linkedin" aria-hidden="true" /></a>
+							<div className='container'>
+								<div className='effect thurio'>
+									<div className='buttons'>
+										<a
+											href='https://x.com/Centralized_app'
+											target='_blank'
+											className='tw'
+											title='Join us on Twitter'
+										>
+											<img
+												src='/assets/vitrine/twitter.png'
+												className='fa fa-twitter'
+												aria-hidden='true'
+											/>
+										</a>
+										<a
+											href='#'
+											target='_blank'
+											className='insta'
+											title='Join us on Instagram'
+										>
+											<img
+												src='/assets/vitrine/instagram.png'
+												className='fa fa-instagram'
+												aria-hidden='true'
+											/>
+										</a>
+										<a
+											href='https://www.linkedin.com/in/Centralized/'
+											target='_blank'
+											className='in'
+											title='Join us on Linked In'
+										>
+											<img
+												src='/assets/vitrine/linkedin.png'
+												className='fa fa-linkedin'
+												aria-hidden='true'
+											/>
+										</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 		</>
 	);
 }

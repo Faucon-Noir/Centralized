@@ -21,6 +21,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import GraphiquePie from '@/app/components/GraphiquePie';
 import GraphiqueLine from '@/app/components/GraphiqueLine';
+import React from 'react';
 import FirstStep from '@/app/components/Form/firstStep';
 import SecondStep from '@/app/components/Form/secondStep';
 import ThirdStep from '@/app/components/Form/thirdStep';
@@ -141,32 +142,26 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                             </div>
                         </div>}
 
-                        <div className='DeuxEtapes'>
-                            <div className='calendar_container'>
-                                <CalendarBox
-                                    name={
-                                        lastP ? lastP.name : ''
-                                    }
-                                    start_date={
-                                        lastP
-                                            ? new Date(
-                                                lastP.start_date
-                                            )
-                                            : new Date()
-                                    }
-                                    end_date={
-                                        lastP
-                                            ? new Date(lastP.end_date)
-                                            : new Date()
-                                    }
-                                    description={
-                                        lastP
-                                            ? lastP.description
-                                            : ''
-                                    }
-                                    color={lastP.color}
-                                />
-                            </div>
+							<div className='DeuxEtapes'>
+								<div className='calendar_container'>
+									<CalendarBox
+										name={lastP ? lastP.name : ''}
+										start_date={
+											lastP
+												? new Date(lastP.start_date)
+												: new Date()
+										}
+										end_date={
+											lastP
+												? new Date(lastP.end_date)
+												: new Date()
+										}
+										description={
+											lastP ? lastP.description : ''
+										}
+										color={lastP.color}
+									/>
+								</div>
 
                             <div className='DernierTicket'>
                                 <div className='entetedernierticket'>
