@@ -21,105 +21,103 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import GraphiquePie from '@/app/components/GraphiquePie';
 import GraphiqueLine from '@/app/components/GraphiqueLine';
+import ProjectData from '@/utils/User/ProjectData';
+import { projet } from '../../../public/faker/index';
+import TeamMateCard from '@/app/components/Card/teamMate';
+import RexForm from '@/app/components/Form/rexForm';
+import UserData from '@/utils/User/UserData';
+import { color } from '@mui/system';
 
 export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
-    const [lastP, setLastP] = useState({
-        name: "",
-        start_date: "",
-        end_date: "",
-        description: "",
-        color: 0,
+    const [project, setProject] = useState({
+        project: {
+            name: "",
+            start_date: "",
+            end_date: "",
+            color: "",
+            description: "",
+            id: ""
+        },
+        cdc: {},
+        rex: {
+            rexProbleme: "",
+            rexReussite: "",
+            rexAmelioration: "",
+            isForm: false
+        },
         ticket: {
             count: 0,
             ticket: [{}]
         },
-        rex: {
-            answer1: "",
-            answer2: "",
-            answer3: "",
-        }
+        userTeam: [{}],
+        stat: {
+            nbrAllTicket: 0,
+            nbrTicketByUser: [{ userName: "", nbr_ticket: 0 }],
+            nbrTicket: 0,
+            nbrTicketPerWeek: { week: [""], nbr_ticket: [0] }
+        },
     });
 
-    const router = useRouter();
-
     useEffect(() => {
-        let tmp_lastP = {
-            name: "",
-            start_date: "",
-            end_date: "",
-            description: "",
-            color: 0,
-            ticket: {
-                count: 0,
-                ticket: [{}]
-            },
-            rex: {
-                answer1: "",
-                answer2: "",
-                answer3: "",
-            }
-        }
-        for (let i = 0; i < userData?.project?.length; i++) {
-            if (i == 0) tmp_lastP = userData.project[i]
-            if (tmp_lastP.end_date < userData.project[i].end_date) tmp_lastP = userData.project[i];
-        }
-        setLastP(tmp_lastP);
+        ProjectData(new URL(window.location.href).pathname.split('/')[2]).then(result => {
+            setProject(result)
+        })
     }, [userData]);
-    console.log(userData)
     return (
         <>
             <div className='right_container'>
-                {userData?.project?.length > 0 ? <>
+                <>
                     <div className='Presentation'>
-                        <h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😎</h1>
+                        <h1>{project?.project ? project.project.name : ''}</h1>
                     </div>
                     <Grid container sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-                        {userData?.stat?.error ? <></> : <div className='stat'>
-                            <h2>Statistique du dernier projet</h2>
+                        <div className='stat'>
                             <div className='graph_div'>
-                                {userData?.stat?.nbrTicketByUser ?
+                                {project?.stat?.nbrTicketByUser ?
                                     <GraphiquePie
-                                        labels={userData.stat.nbrTicketByUser.map((x: { userName: any; }) => x.userName)}
-                                        data={userData.stat.nbrTicketByUser.map((row: { nbr_ticket: any; }) => (row.nbr_ticket))}
+                                        labels={project.stat.nbrTicketByUser.map((x: { userName: any; }) => x.userName)}
+                                        data={project.stat.nbrTicketByUser.map((row: { nbr_ticket: any; }) => (row.nbr_ticket))}
                                         title='Nombre de ticket non fini par utilisateur'
                                         hover='Nombre de ticket'
                                     /> : null}
-                                {userData?.stat?.nbrTicketByUser ?
+                                {project?.stat?.nbrTicketByUser ?
                                     <GraphiqueLine
-                                        labels={userData.stat.nbrTicketPerWeek.week}
-                                        data={userData.stat.nbrTicketPerWeek.nbr_ticket}
+                                        labels={project.stat.nbrTicketPerWeek.week}
+                                        data={project.stat.nbrTicketPerWeek.nbr_ticket}
                                         title="Nombre de tickets ouverts par semaine"
                                         hover="Nombre de tickets"
                                     /> : null
                                 }
                             </div>
-                        </div>}
+                        </div>
 
                         <div className='DeuxEtapes'>
-                            <div className='calendar_container'>
+                            <div className='calendar_container'>{
+                                project.project ? 
                                 <CalendarBox
                                     name={
-                                        lastP ? lastP.name : ''
+                                        project.project ? project.project.name : ''
                                     }
                                     start_date={
-                                        lastP
+                                        project
                                             ? new Date(
-                                                lastP.start_date
+                                                project.project.start_date
                                             )
                                             : new Date()
                                     }
                                     end_date={
-                                        lastP
-                                            ? new Date(lastP.end_date)
+                                        project
+                                            ? new Date(project.project.end_date)
                                             : new Date()
                                     }
                                     description={
-                                        lastP
-                                            ? lastP.description
+                                        project
+                                            ? project.project.description
                                             : ''
                                     }
-                                    color={lastP.color}
-                                />
+                                    color={project.project.color}
+                                />:  <></>
+                            }
                             </div>
 
                             <div className='DernierTicket'>
@@ -134,7 +132,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                         />
                                     </ButtonBase>
                                 </div>
-                                {lastP.ticket.count > 0 ? lastP.ticket.ticket
+                                {project.ticket.count > 0 ? project.ticket.ticket
                                     .filter(
                                         (task: any, idx: number) =>
                                             idx < 3
@@ -151,38 +149,17 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                             date={
                                                 task.start_date
                                             }
-                                            color={lastP.color}
+                                            color={project.project.color}
                                             key={task.id}
                                         />
                                     ))
-                                    : null}
+                                    : <> Aucun ticket n'est ouvert</>}
                             </div>
                         </div>
                         <div className='DeuxEtapes second_line'>
                             <div className='DernierTicket'>
-                                <h2>Mes derniers cahiers des charges</h2>
-                                {userData?.project
-                                    .filter(
-                                        (value: any, idx: number) => idx < 3
-                                    )
-                                    .map((value: any) => (
-                                        <SpecificationCard
-                                            id={value.id}
-                                            title={value.name}
-                                            color={value.color}
-                                            key={value.id}
-                                        />
-                                    ))}
-                            </div>
-                            <div className='DernierTicket'>
-                                <h2>Derniers retours d&apos;expériences</h2>
-                                <RexCard
-                                    answer1={lastP.rex.answer1 != undefined ? lastP.rex.answer1 : "Votre dernier projet n'a pas de rex"}
-                                    answer2={lastP.rex.answer2 != undefined ? lastP.rex.answer2 : 'Continuer et vous y arriverez'}
-                                    answer3={lastP.rex.answer3 != undefined ? lastP.rex.answer3 : 'Croyez en vous'}
-                                    color={lastP.color}
-                                    name="REX"
-                                />
+                                <h2>Retour d&apos;expériences</h2>
+                                <RexForm userData={userData} RexData={project.rex} idProject={project.project.id} color={project.project.color}/>
                             </div>
                         </div>
                     </Grid>
@@ -217,13 +194,15 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                         <CustomSwiper swiperId={2}>
                             <div className='ProjetCards'>
                                 {/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
-                                {userData?.team
-                                    ? userData?.team.map((item: any) => (
+                                {project?.userTeam
+                                    ? project?.userTeam.map((item: any) => (
                                         <SwiperSlide key={item.id}>
-                                            <TeamCard
-                                                key={item.id}
-                                                id={item.team.id}
-                                                prenom={item.team.name}
+                                            <TeamMateCard
+                                                avatar={item.avatar}
+                                                firstName={item.user_firstname}
+                                                lastName={item.user_lastname}
+                                                bio={item.user_bio}
+                                                grade={0}
                                             />
                                         </SwiperSlide>
                                     ))
@@ -232,14 +211,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                         </CustomSwiper>
                     </div>
 
-                </> : <>
-                    <div className='no_project'>
-                        <h1>Bonjour {userData?.user ? <>{userData?.user.lastname} {userData?.user.firstname}</> : 'test'}</h1>
-                        <h2>Vous n&apos;avez pas encore de projets, ni d&apos;équipe, ni meme de planning, vous n&apos;êtes rien !</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio tortor, blandit a eleifend et, bibendum non justo. Donec commodo turpis augue, id ultrices libero consectetur quis. Duis varius elementum bibendum. Etiam ligula mi, sagittis ac est at, tristique volutpat neque. Ut non erat diam. Aenean ullamcorper pharetra quam eget ultrices. Maecenas blandit venenatis aliquam. Sed sit amet augue quis metus rhoncus cursus at et elit. Curabitur aliquet aliquam erat vel vehicula. In efficitur id sapien id efficitur. Quisque hendrerit, nisi a venenatis condimentum, leo ante convallis urna, vel venenatis lorem ipsum in enim. Praesent consectetur ultricies tristique. Nunc porttitor vulputate dui, sollicitudin eleifend sem pellentesque in. Fusce maximus malesuada dui a tincidunt. Donec sit amet nulla vitae metus elementum consequat.</p>
-                        <button className='create_project' onClick={() => router.push('/specification/create')}>Laissez vous guider</button>
-                    </div>
-                </>}
+                </>
             </div>
         </>
     );

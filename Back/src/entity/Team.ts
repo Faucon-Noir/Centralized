@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { TeamUser } from "./TeamUser";
 import { Cdc } from "./Specification";
+import { Project } from "./Project";
 
 @Entity()
 export class Team {
@@ -27,6 +28,9 @@ export class Team {
 
   @OneToMany(() => Cdc, (cdc) => cdc.team)
   public cdc: Cdc[];
+
+  @OneToMany(() => Project, (project) => project.team)
+  public project: Project[];
 
   constructor(avatar: string, name: string) {
     this.avatar = avatar;

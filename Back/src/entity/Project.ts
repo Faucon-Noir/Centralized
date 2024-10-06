@@ -61,7 +61,7 @@ export class Project {
 
   @ManyToOne((type) => Team) // Init many to one relation with Localisation
   @JoinColumn()
-  private team: Team; // Join user table with Localisation table
+  public team: Team; // Join user table with Localisation table
 
   constructor(
     name: string,
