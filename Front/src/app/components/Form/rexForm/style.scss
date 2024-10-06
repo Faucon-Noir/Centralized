@@ -32,7 +32,9 @@
 }
 
 .input_form {
-  margin-left: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
 
 }
 .showRex {

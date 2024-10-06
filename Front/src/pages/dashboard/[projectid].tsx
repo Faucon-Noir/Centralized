@@ -166,7 +166,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                     <div className='MyTeam'>
                         <div className='Entete'>
                             <div className='TitleProjetCards'>
-                                <h2>Mes équipes</h2>
+                                <h2>Membres de l'équipe</h2>
                                 <ButtonBase>
                                     <AddIcon
                                         fontSize='medium'
