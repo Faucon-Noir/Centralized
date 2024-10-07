@@ -1,0 +1,36 @@
+[
+    {
+        "id": 3,
+        "team": {
+            "avatar": "null",
+            "id": "8327bda4-6bc5-4f2c-9b61-c6cfcc5df290",
+            "name":"TemplateDevTeam"
+        },
+        "user": {
+            "id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+            "lastname": "M 2048",
+            "firstname": "B JDC",
+            "mail": "beuret_m@etna-alternance.net",
+            "bio": "Je suis un petit suisse",
+            "phone": "+33 7 01 21 94 14"
+        }
+        
+    },
+    {
+        "id": 6,
+        "team": {
+            "avatar": "null",
+            "id": "72e46816-5ff4-42ef-a000-8c95e9c6c38b",
+            "name":"CentralizedDevTeam"
+        },
+        "user": {
+            "id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+            "lastname": "M 2048",
+            "firstname": "B JDC",
+            "mail": "beuret_m@etna-alternance.net",
+            "bio": "Je suis un petit suisse",
+            "phone": "+33 7 01 21 94 14"
+        }
+        
+    }
+]
