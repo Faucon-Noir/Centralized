@@ -3,7 +3,7 @@ import './style.css';
 import { RexCardProps } from './type';
 import { ButtonBase, Icon } from '@mui/material';
 import ArchiveIcon from '@mui/icons-material/Archive';
-import { numberToColor } from '@/app/helpers';
+import { numberToColor } from '../../../helpers';
 
 function RexCard({ name, answer1, answer2, answer3, color }: any) {
     return (

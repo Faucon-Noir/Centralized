@@ -1,7 +1,8 @@
+import { numberToColor } from '../../../helpers';
 import './style.scss';
 import FolderIcon from '@mui/icons-material/Folder';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+// import { numberToColor } from '@/app/helpers';
 import Link from 'next/link'
 
 export default function MyProjectCard({ project, userData, updateUserData }: { project: any, userData: any, updateUserData: any }) {
@@ -21,6 +22,8 @@ export default function MyProjectCard({ project, userData, updateUserData }: { p
         updateUserData({ ...userData, selectedProjects: [...userData.selectedProjects, project.id] })
     }
     console.log(project)
+    console.log(userData)
+    console.log(updateUserData)
     return (
         <>
             <div className='project_card' onClick={() => addSelectedProject()}>

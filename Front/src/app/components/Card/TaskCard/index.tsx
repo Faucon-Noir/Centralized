@@ -1,7 +1,7 @@
 "use client";
 import "./style.scss"
 import { TaskCardProps } from './type';
-import { numberToColor, urgenceIdToString } from "@/app/helpers";
+import { numberToColor, urgenceIdToString } from "../../../helpers";
 import { Icon } from "@mui/material";
 import FolderIcon from '@mui/icons-material/Folder';
 
