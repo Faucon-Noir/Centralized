@@ -5,7 +5,7 @@ describe('<TaskCard />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
     cy.mount(<TaskCard id={65}
-      title={"13a59846-03ab-45da-8bbd-fffff09c5dd5"}
+      title={"Gpe ticket"}
       urgenceId={"1"}
       date={"2024-12-12"}
       color={1}
