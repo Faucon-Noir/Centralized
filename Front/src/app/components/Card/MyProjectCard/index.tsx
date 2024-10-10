@@ -22,8 +22,6 @@ export default function MyProjectCard({ project, userData, updateUserData }: { p
         updateUserData({ ...userData, selectedProjects: [...userData.selectedProjects, project.id] })
     }
     console.log(project)
-    console.log(userData)
-    console.log(updateUserData)
     return (
         <>
             <div className='project_card' onClick={() => addSelectedProject()}>
@@ -38,7 +36,7 @@ export default function MyProjectCard({ project, userData, updateUserData }: { p
                         <img src="/assets/icons/tickets.svg" alt="" />
                     </div>
                 </div>
-                <p>Fin du projet le : <strong>{project?.end_date?.substring(0, 10)}</strong></p>
+                <p>Fin du projet le : <strong id='end_date'>{project?.end_date?.substring(0, 10)}</strong></p>
                 <Link href={"/specification/" + project?.id} style={{ backgroundColor: numberToColor(project?.color) }}>Voir les cachier des charges</Link>
             </div>
         </>

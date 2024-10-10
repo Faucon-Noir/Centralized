@@ -12,14 +12,14 @@ export default function TaskCard({ id, urgenceId, title, date, color }: any) {
         <>
             <div className="container">
                 <div className="container_title">
-                    <Icon sx={{ color: numberToColor(color) }}>
+                    <Icon id="icon" sx={{ color: numberToColor(color) }}>
                         <FolderIcon />
                     </Icon>
                     <h2 className="task-title">{title}</h2>
                 </div>
                 <div className="container_infos">
-                    <p>Urgence: {urgenceIdToString(urgenceId)} </p>
-                    <p>posté le {dateFormat}</p>
+                    <p id="urgence" >Urgence: {urgenceIdToString(urgenceId)} </p>
+                    <p id="date">posté le {dateFormat}</p>
 
                 </div>
             </div>

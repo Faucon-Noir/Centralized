@@ -15,8 +15,8 @@ function TaskItem({ id, title, urgenceLevel, date, status, onOpen, onArchive, on
         <div className='card' style={{ backgroundColor: numberToColorTicket(urgenceLevel), border: `2px solid ${numberToColorTicketBorder(urgenceLevel)}` }}>
             <h2>Niveau d&apos;urgence : {chipVariant(urgenceLevel)}</h2>
             <h3 >{title}</h3>
-            {status == "résolu" ? <p>Le ticket est résolu</p> : <p>Le ticket est actuellement en cours</p>}
-            <p>{formatedDate}</p>
+            {status == "résolu" ? <p id='status'>Le ticket est résolu</p> : <p id='status'>Le ticket est actuellement en cours</p>}
+            <p id="date">{formatedDate}</p>
             <Grid xs={4} sx={iconSectionStyle}>
                 <IconButton onClick={onArchive}>
                     {/* Cloturer un ticket */}

@@ -12,7 +12,7 @@ function RexCard({ name, answer1, answer2, answer3, color }: any) {
                 <div className="rexCard">
                     <div className='enteterexcard'>
                         <div className='titrerexcard'>
-                            <Icon sx={{ color: numberToColor(color), height: '35px', width: '35px' }}>
+                            <Icon id="icon" sx={{ color: numberToColor(color), height: '35px', width: '35px' }}>
                                 <ArchiveIcon fontSize='large' />
                             </Icon>
                             <h2>{name ? name : ""}</h2>
