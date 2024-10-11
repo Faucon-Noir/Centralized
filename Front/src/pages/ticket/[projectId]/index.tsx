@@ -3,6 +3,7 @@ import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import './style.scss';
 import TicketCard from '@/app/components/Card/TicketCard';
+import { ButtonCreateTicketCy, TicketModalButtonCloseCy, TicketModalButtonSaveCy, TicketModalCy, TicketModalDescriptionFieldCy, TicketModalEndDateFieldCy, TicketModalStartDateFieldCy, TicketModalStatusFieldCy, TicketModalTitleCy, TicketModalUrgenceFieldCy } from './const';
 
 // Définir un type pour vos tickets
 type Ticket = {
@@ -59,7 +60,7 @@ export default function Tickets({ userData, updateUserData }: { userData: any, u
             <div className='ticketPage'>
                 <div className='header'>
                     <h1>Gestion des tickets</h1>
-                    <ButtonBase href='/specification/create'>
+                    <ButtonBase data-cy={ButtonCreateTicketCy} href='/specification/create'>
                         <AddIcon
                             fontSize='medium'
                             sx={{ color: '#000000' }}
