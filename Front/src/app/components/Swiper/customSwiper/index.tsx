@@ -17,6 +17,14 @@ export default function CustomSwiper({
 				nextEl: `.swiper-button-next-${swiperId}`,
 			}}
 			breakpoints={{
+				// 360: {
+				// 	slidesPerView: 1,
+				// 	spaceBetween: 10,
+				// },
+				550: {
+					slidesPerView: 1.5,
+					spaceBetween: 15,
+				},
 				640: {
 					slidesPerView: 2,
 					spaceBetween: 20,

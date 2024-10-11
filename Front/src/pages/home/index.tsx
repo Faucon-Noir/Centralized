@@ -48,7 +48,15 @@ export default function HomePage({
 	});
 
 	const router = useRouter();
+	const [windowWidth, setWindowWidth] = useState<number>(0);
 
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 	useEffect(() => {
 		let tmp_lastP = {
 			name: '',
@@ -130,146 +138,308 @@ export default function HomePage({
 								</div>
 							</CustomSwiper>
 						</div>
-						<Grid
-							container
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '50px',
-							}}
-						>
-							{userData?.stat?.error ? (
-								<></>
-							) : (
-								<div className='stat'>
-									<h2>Statistique du dernier projet</h2>
-									<div className='graph_div'>
-										{userData?.stat?.nbrTicketByUser ? (
-											<GraphiquePie
-												labels={userData.stat.nbrTicketByUser.map(
-													(x: { userName: any }) =>
-														x.userName
-												)}
-												data={userData.stat.nbrTicketByUser.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket non fini par utilisateur'
-												hover='Nombre de ticket'
-											/>
-										) : null}
-										{userData?.stat?.nbrTicketByUser ? (
-											<GraphiqueLine
-												labels={
-													userData.stat
-														.nbrTicketPerWeek.week
-												}
-												data={
-													userData.stat
-														.nbrTicketPerWeek
-														.nbr_ticket
-												}
-												title='Nombre de tickets ouverts par semaine'
-												hover='Nombre de tickets'
-											/>
-										) : null}
+						{windowWidth >= 660 ? (
+							<Grid
+								container
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									gap: '50px',
+								}}
+							>
+								{userData?.stat?.error ? (
+									<></>
+								) : (
+									<div className='stat'>
+										<h2>Statistique du dernier projet</h2>
+										<div className='graph_div'>
+											{userData?.stat?.nbrTicketByUser ? (
+												<GraphiquePie
+													labels={userData.stat.nbrTicketByUser.map(
+														(x: {
+															userName: any;
+														}) => x.userName
+													)}
+													data={userData.stat.nbrTicketByUser.map(
+														(row: {
+															nbr_ticket: any;
+														}) => row.nbr_ticket
+													)}
+													title='Nombre de ticket non fini par utilisateur'
+													hover='Nombre de ticket'
+												/>
+											) : null}
+											{userData?.stat?.nbrTicketByUser ? (
+												<GraphiqueLine
+													labels={
+														userData.stat
+															.nbrTicketPerWeek
+															.week
+													}
+													data={
+														userData.stat
+															.nbrTicketPerWeek
+															.nbr_ticket
+													}
+													title='Nombre de tickets ouverts par semaine'
+													hover='Nombre de tickets'
+												/>
+											) : null}
+										</div>
+									</div>
+								)}
+
+								<div className='BlocDouble'>
+									<div className='calendar_container'>
+										<CalendarBox
+											name={lastP ? lastP.name : ''}
+											start_date={
+												lastP
+													? new Date(lastP.start_date)
+													: new Date()
+											}
+											end_date={
+												lastP
+													? new Date(lastP.end_date)
+													: new Date()
+											}
+											description={
+												lastP ? lastP.description : ''
+											}
+											color={lastP.color}
+										/>
+									</div>
+
+									<div className='DernierTicket'>
+										<div className='entetedernierticket'>
+											<h2>Derniers tickets</h2>
+											<ButtonBase>
+												<Image
+													height={20}
+													width={20}
+													alt=''
+													src='/assets/arrow-narrow-right.svg'
+												/>
+											</ButtonBase>
+										</div>
+										{lastP.ticket.count > 0
+											? lastP.ticket.ticket
+													.filter(
+														(
+															task: any,
+															idx: number
+														) => idx < 3
+													)
+													.map((task: any) => (
+														<TaskCard
+															id={task.id}
+															title={task.title}
+															urgenceId={
+																task.urgence
+															}
+															date={
+																task.start_date
+															}
+															color={lastP.color}
+															key={task.id}
+														/>
+													))
+											: null}
 									</div>
 								</div>
-							)}
-
-							<div className='DeuxEtapes'>
-								<div className='calendar_container'>
-									<CalendarBox
-										name={lastP ? lastP.name : ''}
-										start_date={
-											lastP
-												? new Date(lastP.start_date)
-												: new Date()
-										}
-										end_date={
-											lastP
-												? new Date(lastP.end_date)
-												: new Date()
-										}
-										description={
-											lastP ? lastP.description : ''
-										}
-										color={lastP.color}
-									/>
-								</div>
-
-								<div className='DernierTicket'>
-									<div className='entetedernierticket'>
-										<h2>Derniers tickets</h2>
-										<ButtonBase>
-											<Image
-												height={20}
-												width={20}
-												alt=''
-												src='/assets/arrow-narrow-right.svg'
-											/>
-										</ButtonBase>
+								<div className='BlocDouble second_line'>
+									<div className='DernierTicket'>
+										<h2>
+											Mes derniers cahiers des charges
+										</h2>
+										{userData?.project
+											.filter(
+												(value: any, idx: number) =>
+													idx < 3
+											)
+											.map((value: any) => (
+												<SpecificationCard
+													id={value.id}
+													title={value.name}
+													color={value.color}
+													key={value.id}
+												/>
+											))}
 									</div>
-									{lastP.ticket.count > 0
-										? lastP.ticket.ticket
-												.filter(
-													(task: any, idx: number) =>
-														idx < 3
-												)
-												.map((task: any) => (
-													<TaskCard
-														id={task.id}
-														title={task.title}
-														urgenceId={task.urgence}
-														date={task.start_date}
-														color={lastP.color}
-														key={task.id}
-													/>
-												))
-										: null}
+									<div className='DernierTicket'>
+										<h2>
+											Derniers retours d&apos;expériences
+										</h2>
+										<RexCard
+											answer1={
+												lastP.rex.answer1 != undefined
+													? lastP.rex.answer1
+													: "Votre dernier projet n'a pas de rex"
+											}
+											answer2={
+												lastP.rex.answer2 != undefined
+													? lastP.rex.answer2
+													: 'Continuer et vous y arriverez'
+											}
+											answer3={
+												lastP.rex.answer3 != undefined
+													? lastP.rex.answer3
+													: 'Croyez en vous'
+											}
+											color={lastP.color}
+											name='REX'
+										/>
+									</div>
 								</div>
-							</div>
-							<div className='DeuxEtapes second_line'>
-								<div className='DernierTicket'>
-									<h2>Mes derniers cahiers des charges</h2>
-									{userData?.project
-										.filter(
-											(value: any, idx: number) => idx < 3
-										)
-										.map((value: any) => (
-											<SpecificationCard
-												id={value.id}
-												title={value.name}
-												color={value.color}
-												key={value.id}
-											/>
-										))}
+							</Grid>
+						) : (
+							<>
+								{userData?.stat?.error ? (
+									<></>
+								) : (
+									<div className='stat'>
+										<h2>Statistique du dernier projet</h2>
+										<div className='graph_div'>
+											{userData?.stat?.nbrTicketByUser ? (
+												<GraphiquePie
+													labels={userData.stat.nbrTicketByUser.map(
+														(x: {
+															userName: any;
+														}) => x.userName
+													)}
+													data={userData.stat.nbrTicketByUser.map(
+														(row: {
+															nbr_ticket: any;
+														}) => row.nbr_ticket
+													)}
+													title='Nombre de ticket non fini par utilisateur'
+													hover='Nombre de ticket'
+												/>
+											) : null}
+											{userData?.stat?.nbrTicketByUser ? (
+												<GraphiqueLine
+													labels={
+														userData.stat
+															.nbrTicketPerWeek
+															.week
+													}
+													data={
+														userData.stat
+															.nbrTicketPerWeek
+															.nbr_ticket
+													}
+													title='Nombre de tickets ouverts par semaine'
+													hover='Nombre de tickets'
+												/>
+											) : null}
+										</div>
+									</div>
+								)}
+								<div className='BlocDouble'>
+									<div className='calendar_container'>
+										<CalendarBox
+											name={lastP ? lastP.name : ''}
+											start_date={
+												lastP
+													? new Date(lastP.start_date)
+													: new Date()
+											}
+											end_date={
+												lastP
+													? new Date(lastP.end_date)
+													: new Date()
+											}
+											description={
+												lastP ? lastP.description : ''
+											}
+											color={lastP.color}
+										/>
+									</div>
+
+									<div className='DernierTicket'>
+										<div className='entetedernierticket'>
+											<h2>Derniers tickets</h2>
+											<ButtonBase>
+												<Image
+													height={20}
+													width={20}
+													alt=''
+													src='/assets/arrow-narrow-right.svg'
+												/>
+											</ButtonBase>
+										</div>
+										{lastP.ticket.count > 0
+											? lastP.ticket.ticket
+													.filter(
+														(
+															task: any,
+															idx: number
+														) => idx < 3
+													)
+													.map((task: any) => (
+														<TaskCard
+															id={task.id}
+															title={task.title}
+															urgenceId={
+																task.urgence
+															}
+															date={
+																task.start_date
+															}
+															color={lastP.color}
+															key={task.id}
+														/>
+													))
+											: null}
+									</div>
 								</div>
-								<div className='DernierTicket'>
-									<h2>Derniers retours d&apos;expériences</h2>
-									<RexCard
-										answer1={
-											lastP.rex.answer1 != undefined
-												? lastP.rex.answer1
-												: "Votre dernier projet n'a pas de rex"
-										}
-										answer2={
-											lastP.rex.answer2 != undefined
-												? lastP.rex.answer2
-												: 'Continuer et vous y arriverez'
-										}
-										answer3={
-											lastP.rex.answer3 != undefined
-												? lastP.rex.answer3
-												: 'Croyez en vous'
-										}
-										color={lastP.color}
-										name='REX'
-									/>
+								<div className='BlocDouble second_line'>
+									<div className='DernierTicket'>
+										<h2>
+											Mes derniers cahiers des charges
+										</h2>
+										{userData?.project
+											.filter(
+												(value: any, idx: number) =>
+													idx < 3
+											)
+											.map((value: any) => (
+												<SpecificationCard
+													id={value.id}
+													title={value.name}
+													color={value.color}
+													key={value.id}
+												/>
+											))}
+									</div>
+									<div className='DernierTicket'>
+										<h2>
+											Derniers retours d&apos;expériences
+										</h2>
+										<RexCard
+											answer1={
+												lastP.rex.answer1 != undefined
+													? lastP.rex.answer1
+													: "Votre dernier projet n'a pas de rex"
+											}
+											answer2={
+												lastP.rex.answer2 != undefined
+													? lastP.rex.answer2
+													: 'Continuer et vous y arriverez'
+											}
+											answer3={
+												lastP.rex.answer3 != undefined
+													? lastP.rex.answer3
+													: 'Croyez en vous'
+											}
+											color={lastP.color}
+											name='REX'
+										/>
+									</div>
 								</div>
-							</div>
-						</Grid>
+							</>
+						)}
+
 						<div className='MyTeam'>
 							<div className='Entete'>
 								<div className='TitleProjetCards'>

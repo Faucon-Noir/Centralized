@@ -85,9 +85,9 @@ function GraphiqueLine({ labels, data, title, hover }: GraphiqueLineProps) {
 	}
 
 	return (
-		<>
+		<div className='graph_line'>
 			<Line data={datagraphique} options={optionsgraphique} />
-		</>
+		</div>
 	);
 }
 
