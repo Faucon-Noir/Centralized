@@ -27,6 +27,15 @@ export default function App({ Component, pageProps }: AppProps) {
 		specification: [],
 		selectedProjects: [],
 	});
+	const [windowWidth, setWindowWidth] = useState<number>(0);
+
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener('resize', handleResize);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (Component.name != "LoginPage") {
@@ -60,17 +69,23 @@ export default function App({ Component, pageProps }: AppProps) {
 										userData={userData}
 									/>
 								</>
-							) : (
+							) : windowWidth >= 600 ? (
 								<Grid container>
-									<Grid xs={2} item={true}>
-										<Dashboard
-											page={Component.name}
-											userData={
-												userData?.user ? userData : {}
-											}
-											updateUserData={setUserData}
-										/>
-									</Grid>
+									{windowWidth >= 1080 ? (
+										<Grid xs={2} item={true}>
+											<Dashboard
+												page={Component.name}
+												userData={
+													userData?.user
+														? userData
+														: {}
+												}
+												updateUserData={setUserData}
+											/>
+										</Grid>
+									) : (
+										<></>
+									)}
 									<Grid xs={10} item={true}>
 										<Component
 											{...pageProps}
@@ -82,6 +97,17 @@ export default function App({ Component, pageProps }: AppProps) {
 										<GlobalPollingComponent />
 									</Grid>
 								</Grid>
+							) : (
+								<>
+									<Component
+										{...pageProps}
+										userData={
+											userData?.user ? userData : {}
+										}
+										updateUserData={setUserData}
+									/>
+									<GlobalPollingComponent />
+								</>
 							)}
 						</TaskProvider>
 					</AuthWrapper>
