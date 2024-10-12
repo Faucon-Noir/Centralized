@@ -59,7 +59,6 @@ describe('AccountPage', () => {
 
 	it('should display user information', () => {
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
-		cy.wait('@getUserById')
 		const fieldValues = [
 			{ field: FirstNameFielCy, value: 'B JDC' },
 			{ field: LastNameFielCy, value: 'M 2048' },
