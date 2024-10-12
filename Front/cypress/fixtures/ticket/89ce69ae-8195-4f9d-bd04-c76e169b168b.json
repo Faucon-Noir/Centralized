@@ -1,12 +1,13 @@
 {
-    "ticket_id": "89ce69ae-8195-4f9d-bd04-c76e169b168b",
-    "ticket_title": "enregistrer les tickets 2 semaines",
-    "ticket_description": "",
-    "ticket_urgenceId": 0,
-    "ticket_status": "ouvert",
-    "ticket_start_date": "2024-04-08T22:00:00.000Z",
-    "ticket_end_date": "2024-04-22T22:00:00.000Z",
-    "ticket_planningId": "8d854790-e0b5-47b7-a038-a58c8c834e4e",
-    "ticket_userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+    "id": "89ce69ae-8195-4f9d-bd04-c76e169b168b",
+    "title": "enregistrer les tickets 2 semaines",
+    "description": "",
+    "urgenceId": 0,
+    "status": "ouvert",
+    "start_date": "2024-04-08T22:00:00.000Z",
+    "end_date": "2024-04-22T22:00:00.000Z",
+    "updated_at": "2024-04-08T12:00:00.000Z",
+    "planningId": "8d854790-e0b5-47b7-a038-a58c8c834e4e",
+    "userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
     "projectId": "c896afae-0532-4ee5-8385-110ccecf72d0"
 }

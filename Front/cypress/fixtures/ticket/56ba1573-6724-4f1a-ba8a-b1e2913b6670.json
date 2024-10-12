@@ -1,12 +1,13 @@
 {
-    "ticket_id": "56ba1573-6724-4f1a-ba8a-b1e2913b6670",
-    "ticket_title": "Create home page 1 week",
-    "ticket_description": "test 3",
-    "ticket_urgenceId": 0,
-    "ticket_status": "ouvert",
-    "ticket_start_date": "2024-07-12T12:00:00.000Z",
-    "ticket_end_date": "2024-05-20T12:00:00.000Z",
-    "ticket_planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
-    "ticket_userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+    "id": "56ba1573-6724-4f1a-ba8a-b1e2913b6670",
+    "title": "Create home page 1 week",
+    "description": "test 3",
+    "urgenceId": 0,
+    "status": "ouvert",
+    "start_date": "2024-07-12T12:00:00.000Z",
+    "end_date": "2024-09-20T12:00:00.000Z",
+    "updated_at": "2024-07-30T12:00:00.000Z",
+    "planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+    "userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
     "projectId": "24411468-8707-4773-9af0-0e483cbaa459"
 }
