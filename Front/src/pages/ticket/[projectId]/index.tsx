@@ -3,7 +3,7 @@ import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import './style.scss';
 import TicketCard from '@/app/components/Card/TicketCard';
-import { ButtonCreateTicketCy, TicketModalButtonCloseCy, TicketModalButtonSaveCy, TicketModalCy, TicketModalDescriptionFieldCy, TicketModalEndDateFieldCy, TicketModalStartDateFieldCy, TicketModalStatusFieldCy, TicketModalTitleCy, TicketModalUrgenceFieldCy } from './const';
+import { ButtonCreateTicketCy  } from './const';
 
 // Définir un type pour vos tickets
 type Ticket = {
