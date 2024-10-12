@@ -47,6 +47,7 @@ describe('TicketHomePage', () => {
 			cy.centralizedGet(BoxTicketCardCy).eq(element.index).find(`[data-cy="${PeriodTicketCardCy}"]`).should('contain', `${element.start} - ${element.end}`);
 			//TODO Je sais pas encore comment calculer le difference in days
 			// cy.centralizedGet(BoxTicketCardCy).eq(element.index).find(`[data-cy="${MajTicketCardCy}"]`).should('contain', `${element.formated_start}`);
+			//TODO Je ne sais pas comment savoir quel ticket est dans quel colonne
 		})
 	})
 
