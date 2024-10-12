@@ -84,6 +84,7 @@ import { numberToColor } from '@/app/helpers';
 import dynamic from 'next/dynamic';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from "axios";
+import { ButtonSubmitSpecificationCy, EditorCy } from "../const";
 const CustomEditor = dynamic(() => import('@/app/components/customEditor'), { ssr: false });
 
 export default function SpecificationEdit({ userData, updateUserData }: { userData: any, updateUserData: any }) {
@@ -100,7 +101,8 @@ export default function SpecificationEdit({ userData, updateUserData }: { userDa
       for (let line of userData.project) {
         tempMap[line.id] = line;
       }
-      setProjectMap(tempMap);
+      setProjectMap(tempMap['24411468-8707-4773-9af0-0e483cbaa459']);
+      console.log(tempMap);
     }
     setprojectPageID(new URL(window.location.href).pathname.split('/')[2])
     setLoading(false);
@@ -148,8 +150,8 @@ export default function SpecificationEdit({ userData, updateUserData }: { userDa
         </div>
         <form onSubmit={handleSubmit}>
           <div className="box-specification">
-            <CustomEditor content={projectMap[projectPageID]?.cdc?.cdc} onChange={(value: string) => handleChangeContentText(value)} />
-            <button type="submit">
+            <CustomEditor data-cy={EditorCy} content={projectMap[projectPageID]?.cdc?.cdc} onChange={(value: string) => handleChangeContentText(value)} />
+            <button data-cy={ButtonSubmitSpecificationCy} type="submit">
               <CheckIcon />
             </button>
           </div>

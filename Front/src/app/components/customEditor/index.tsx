@@ -4,6 +4,7 @@ import draftToHtml from "draftjs-to-html";
 import { CustomEditorProps } from "./type";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import useData from "./hook";
+import { EditorCy, TextareaSpecificationCy } from "@/pages/specification/const";
 
 /* La librairie utilisée est une des plus populaires pour les éditeurs WYSIWYG
  Elle est construite sur Draft.JS, et permet de rapidement déployer un éditeur customisé et customisable
@@ -99,6 +100,7 @@ const CustomEditor = ({ content, onChange }: CustomEditorProps) => {
         }}
       />
       <textarea
+        dara-cy={TextareaSpecificationCy}
         hidden // pour debug le retour editeur
         disabled
         value={
