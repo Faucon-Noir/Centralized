@@ -1,5 +1,5 @@
 import { mockGetProjectByUserIdHttpCall, mockGetRexByProjectIdHttpCall, mockGetSpecificationByProjectHttpCall, mockGetSpecificationByUserHttpCall, mockGetTeamUserByUserIdHttpCall, mockGetTicketByProjectIdHttpCall, mockGetUserByIdHttpCall, mockPatchUpdateSpecificationHttpCall } from '../../support/helper'
-import { ButtonSubmitSpecificationCy, EditorCy, TextareaSpecificationCy } from '../../../src/pages/specification/const';
+import { ButtonSubmitSpecificationCy, EditorCy, PopUpSpecificationCy, TextareaSpecificationCy, TitleSpecificationCy } from '../../../src/pages/specification/const';
 
 // Collection de tests
 // TODO On a un problème connu avec l'editeur
@@ -15,6 +15,8 @@ describe('SpecificationPage', () => {
 		mockGetRexByProjectIdHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
 		mockGetTicketByProjectIdHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		mockGetTicketByProjectIdHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
+		mockGetSpecificationByProjectHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
+		mockGetSpecificationByProjectHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 	 	mockGetSpecificationByProjectHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		cy.visit('http://localhost:3000/specification/24411468-8707-4773-9af0-0e483cbaa459')
@@ -23,14 +25,17 @@ describe('SpecificationPage', () => {
 	it('should display all page elements except debug', () => {
 		;[
 			ButtonSubmitSpecificationCy,
-			TextareaSpecificationCy
+			TitleSpecificationCy
 		].forEach((element) => {
-			if (element === TextareaSpecificationCy) {
-				cy.centralizedGet(element).should('not.exist')
-			} else {
-				cy.centralizedGet(element).should('exist').should('be.visible')
-			}
+			cy.centralizedGet(element).should('exist').should('be.visible')
 		})
+		;[
+			TextareaSpecificationCy,
+			PopUpSpecificationCy
+		].forEach((element) => {
+			cy.centralizedGet(element).should('not.exist')
+		})
+		
 		;[
 			'.rdw-storybook-toolbar',
 			'.rdw-storybook-wrapper',
@@ -38,12 +43,22 @@ describe('SpecificationPage', () => {
 		].forEach((element) => {
 			cy.get(element).should('exist').should('be.visible')
 		})
-		cy.get('.rdw-storybook-editor').should('have.value', '<h1>&nbsp;Cahier des charges: Template generator</h1>');
+		cy.get('.rdw-storybook-editor').should('contain', 'Cahier des charges: Taverne des citations');
 	})
 
 	// TODO Test compliqué car bloqué et pas de input prévu
 	it('should update specification', () => {
-		mockPatchUpdateSpecificationHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
-
+		mockPatchUpdateSpecificationHttpCall('623e3bbf-5650-45f2-b06c-f673d08e4c0a')
+		cy.get('.rdw-storybook-editor').should('contain', 'Cahier des charges: Taverne des citations');
+		cy.get('.rdw-storybook-editor').find('span').first().clear().type('value').should('contain', 'value');
+		cy.centralizedGet(ButtonSubmitSpecificationCy).click();
+		cy.centralizedGet(PopUpSpecificationCy).should('exist').should('be.visible');
+		cy.centralizedGet(PopUpSpecificationCy).click();
+		cy.centralizedGet(PopUpSpecificationCy).should('not.exist');
+		
+		cy.centralizedGet(ButtonSubmitSpecificationCy).click();
+		cy.centralizedGet(PopUpSpecificationCy).should('exist').should('be.visible');
+		cy.wait(10001);
+		cy.centralizedGet(PopUpSpecificationCy).should('not.exist');
 	})
 })
