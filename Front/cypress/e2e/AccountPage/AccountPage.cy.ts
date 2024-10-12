@@ -1,4 +1,4 @@
-import { mockGetProjectByUserIdHttpCall, mockGetRexByProjectIdHttpCall, mockGetSpecificationByUserHttpCall, mockGetTeamUserByUserIdHttpCall, mockGetTicketByProjectIdHttpCall, mockGetUserByIdHttpCall } from '../../support/helper'
+import { mockGetProjectByUserIdHttpCall, mockGetRexByProjectIdHttpCall, mockGetSpecificationByUserHttpCall, mockGetTeamUserByUserIdHttpCall, mockGetTicketByProjectIdHttpCall, mockGetUserByIdHttpCall, mockPatchUpdateUserHttpCall } from '../../support/helper'
 import {
 	AvartarImageCy,
 	BioFielCy,
@@ -18,7 +18,6 @@ import {
 describe('AccountPage', () => {
 	beforeEach(() => {
 		cy.login()
-		cy.visit('http://localhost:3000/account')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 		mockGetProjectByUserIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 		mockGetSpecificationByUserHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
@@ -27,10 +26,11 @@ describe('AccountPage', () => {
 		mockGetRexByProjectIdHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
 		mockGetTicketByProjectIdHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		mockGetTicketByProjectIdHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
+		cy.visit('http://localhost:3000/account')
 	})
+
 	// Test pour vérifier que la page de l'utilisateur s'affiche correctement
 	it('should display all page elements', () => {
-
 		;[
 			AvartarImageCy,
 			FirstNameLabelCy,
@@ -70,7 +70,30 @@ describe('AccountPage', () => {
 		  fieldValues.forEach(({ field, value }) => {
 			// On récupère le field a tester, on trouve la saisie et on vérifie que la valeur est bien celle attendue
 			// Si on test un champ de saisie et qu'une erreur apparait, c'est une méthode de résolution
-			cy.centralizedGet(field).find('input, textarea').should('have.value', value);
+			if(field != BioFielCy)
+				cy.centralizedGet(field).find('input').should('have.value', value);
+			else
+				cy.centralizedGet(field).find('input, textarea').should('have.value', value);
 		  });
+	})
+	
+	it('should can change user information', () => {
+		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e');
+		cy.wait(4000);
+		const fieldValues = [
+			{ field: FirstNameFielCy, value: 'C JDC' },
+			{ field: LastNameFielCy, value: 'D 2048' },
+			{ field: EmailFielCy, value: 'beuret_s@etna-alternance.net' },
+			{ field: PhoneFielCy, value: '+33 2 01 21 94 14' },
+			{ field: BioFielCy, value: 'Je suis un petit belge' },
+		];
+		  
+		fieldValues.forEach(({ field, value }) => {
+			// On récupère le field a tester, on trouve la saisie, on la clear et on écrit du texte avant de la vérifier
+			if(field != BioFielCy)
+				cy.centralizedGet(field).find('input').clear().type(value).should('have.value', value);
+			else
+				cy.centralizedGet(field).find('textarea').first().clear().type(value).should('have.value', value);
+		});
 	})
 })

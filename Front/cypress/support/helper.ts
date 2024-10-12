@@ -13,6 +13,15 @@ export const mockGetUserByIdHttpCall = (id: string) => {
 	}).as('getUserById')
 }
 
+export const mockPatchUpdateUserHttpCall = (id: string) => {
+	cy.intercept('PATCH', `http://localhost:8000/api/user/${id}`, {
+		statusCode: 200,
+		body: {
+			success: "User updated",
+		},
+	}).as('patchUpdateUser')
+}
+
 export const mockGetProjectByIdHttpCall = (id: string) => {
 	cy.intercept('GET', `http://localhost:8000/api/project/${id}`, {
 		fixture: `project/${id}.json`,
