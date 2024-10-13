@@ -226,4 +226,16 @@
 			flex-direction: column;
 		}
 	}
+	.text_stat {
+		display: flex;
+        justify-content: space-evenly;
+		gap: 50px;
+        text-align: center;
+		@media (min-width: 1680px) {
+			gap: 250px;
+		}
+		@media (max-width: 660px) {
+			flex-direction: column;
+		}
+	}
 }

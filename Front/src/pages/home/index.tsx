@@ -152,7 +152,19 @@ export default function HomePage({
 								) : (
 									<div className='stat'>
 										<h2>Statistique du dernier projet</h2>
-										<div className='graph_div'>
+										<div className='text_stat'>
+                                            <div>
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrTicket  ? userData.stat.nbrTicket : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
+                                            </div>
+                                            <div>
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets ouverts en tout</p>
+                                            </div>
+                                        </div>
+                                        <div className='graph_div'>
 											{userData?.stat?.nbrTicketByUser ? (
 												<GraphiquePie
 													labels={userData.stat.nbrTicketByUser.map(
@@ -299,7 +311,19 @@ export default function HomePage({
 								) : (
 									<div className='stat'>
 										<h2>Statistique du dernier projet</h2>
-										<div className='graph_div'>
+										<div className='text_stat'>
+                                            <div>
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrTicket  ? userData.stat.nbrTicket : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
+                                            </div>
+                                            <div>
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets ouverts en tout</p>
+                                            </div>
+                                        </div>
+                                        <div className='graph_div'>
 											{userData?.stat?.nbrTicketByUser ? (
 												<GraphiquePie
 													labels={userData.stat.nbrTicketByUser.map(
