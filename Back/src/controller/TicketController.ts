@@ -424,7 +424,7 @@ export class TicketController {
 
 	/**
 	 * @swagger
-	 * /ticket/user/:userid/count:
+	 * /ticket/user/{userid}/count:
 	 *   get:
 	 *     tags:
 	 *       - Ticket

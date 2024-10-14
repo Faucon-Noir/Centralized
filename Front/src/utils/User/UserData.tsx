@@ -63,6 +63,7 @@ export default async function UserData() {
         if (!userData.user || !userData.project || !userData.specification || !userData.team) window.location.href = "/login"
 
 
+        userData.stat.nbrAllTicket = (await getCountAllTicketOneUser(user_id, token)). nbr_ticket;
         let selectedP = localStorage.getItem("selectedP");
         let tempSelectedMap: { [key: string]: any } = []; // Crée un objet temporaire pour stocker les projets
 

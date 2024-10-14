@@ -16,9 +16,9 @@ interface JwtPayload {
     id: string
 }
 
-export default async function ProjectData(id: string) {
+export default async function ProjectData(id: string, userData: any) {
     const token = localStorage.getItem("token");
-    if (token == null) return null
+
     var user_id = ""
     var projectData = {
         project: {
@@ -42,7 +42,6 @@ export default async function ProjectData(id: string) {
         },
         userTeam: [{}],
         stat: {
-            nbrAllTicket: 0,
             nbrTicketByUser: [{ userName: "", nbr_ticket: 0 }],
             nbrTicket: 0,
             nbrTicketPerWeek: { week: [""], nbr_ticket: [0] }
@@ -73,7 +72,10 @@ export default async function ProjectData(id: string) {
 
 
         projectData.stat.nbrTicketByUser = await getCountAllTicketByUserOneProject(user_id, token, id);
-
-        return projectData;
+        //Récuperer le nombre de ticket de l'utilisateur sur le projet
+        //Une alternative plus sur serait de passer directement à travers une requete (pas de problème si 2 utilisateurs ont le même nom/prénom)
+        const userName = userData.user.firstname + ' ' + userData.user.lastname;
+        projectData.stat.nbrTicket = findNumberTicketByUserName(userName, projectData.stat.nbrTicketByUser);
     }
+    return projectData;
 }

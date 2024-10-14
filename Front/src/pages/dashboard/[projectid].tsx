@@ -52,7 +52,6 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
         },
         userTeam: [{}],
         stat: {
-            nbrAllTicket: 0,
             nbrTicketByUser: [{ userName: "", nbr_ticket: 0 }],
             nbrTicket: 0,
             nbrTicketPerWeek: { week: [""], nbr_ticket: [0] }
@@ -67,7 +66,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 		};
 	}, []);
     useEffect(() => {
-        ProjectData(new URL(window.location.href).pathname.split('/')[2]).then(result => {
+        ProjectData(new URL(window.location.href).pathname.split('/')[2], userData).then(result => {
             console.log(result);
             setProject(result)
         })
