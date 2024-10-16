@@ -42,19 +42,15 @@ export default function WelcomePage() {
 	};
 	return (
 		<>
-			<div className='header'>
+			<header className='header'>
 				<img
 					src='/assets/logo/ColorLogoLineBlack.png'
 					alt='Logo'
 					className='logo'
 				/>
-				<div className='connexion'>
-					<div className='hover'>
-						<Link href='/login'>Connexion</Link>
-					</div>
-				</div>
-			</div>
-			<div className='first'>
+				<Link href='/login'>Connexion</Link>
+			</header>
+			<section className='first'>
 				<div className='text'>
 					<h1>Travailler ensemble plus facilement</h1>
 					<h3>
