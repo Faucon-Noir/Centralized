@@ -79,81 +79,81 @@ export default function WelcomePage() {
 					/>
 				</div>
 			</section>
-			{/*<section className='second'>*/}
-			{/*	<h1>Centralisez vos besoins</h1>*/}
-			{/*	<h3>*/}
-			{/*		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed*/}
-			{/*		do eiusmod tempor incididunt ut labore et dolore magna*/}
-			{/*		aliqua. Ut enim ad minim veniam, quis nostrud exercitation*/}
-			{/*		ullamco laboris nisi ut aliquip ex ea commodo consequat.*/}
-			{/*	</h3>*/}
-			{/*	<div className='container'>*/}
-			{/*		<div className='textList'>*/}
-			{/*			<div*/}
-			{/*				onClick={() =>*/}
-			{/*					handleTextClick(*/}
-			{/*						'/assets/vitrine/second-1.png',*/}
-			{/*						'Text 1'*/}
-			{/*					)*/}
-			{/*				}*/}
-			{/*				className={*/}
-			{/*					selectedText === 'Text 1' ? 'selected' : 'Test'*/}
-			{/*				}*/}
-			{/*			>*/}
-			{/*				<div className='box'>*/}
-			{/*					<h4 className='title'>Cahier des charges</h4>*/}
-			{/*					<h5 className='description'>*/}
-			{/*						Gagnez du temps sur la création de vos*/}
-			{/*						cahiers des charges grace à notre*/}
-			{/*						Intelligence artificielle!*/}
-			{/*					</h5>*/}
-			{/*				</div>*/}
-			{/*			</div>*/}
-			{/*			<div*/}
-			{/*				onClick={() =>*/}
-			{/*					handleTextClick(*/}
-			{/*						'/assets/vitrine/second-2.png',*/}
-			{/*						'Text 2'*/}
-			{/*					)*/}
-			{/*				}*/}
-			{/*				className={*/}
-			{/*					selectedText === 'Text 2' ? 'selected' : 'Test'*/}
-			{/*				}*/}
-			{/*			>*/}
-			{/*				<div className='box'>*/}
-			{/*					<h4 className='title'>Plannifiez vos projet</h4>*/}
-			{/*					<h5 className='description'>*/}
-			{/*						Générez automatiquement vos tickets pour*/}
-			{/*						gagner du temps, et gagner du temps sur*/}
-			{/*						l&pos;organisation.*/}
-			{/*					</h5>*/}
-			{/*				</div>*/}
-			{/*			</div>*/}
-			{/*			<div*/}
-			{/*				onClick={() =>*/}
-			{/*					handleTextClick(*/}
-			{/*						'/assets/vitrine/second-3.png',*/}
-			{/*						'Text 3'*/}
-			{/*					)*/}
-			{/*				}*/}
-			{/*				className={*/}
-			{/*					selectedText === 'Text 3' ? 'selected' : 'Test'*/}
-			{/*				}*/}
-			{/*			>*/}
-			{/*				<div className='box'>*/}
-			{/*					<h4 className='title'>Gérer vos équipes</h4>*/}
-			{/*					<h5 className='description'>*/}
-			{/*						Créer et gérer vos équipes et vos projet*/}
-			{/*						avec simplicité.*/}
-			{/*					</h5>*/}
-			{/*				</div>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*		<div className='imageContainer'>*/}
-			{/*			<img src={currentImage} alt='Displayed Image' />*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</section>*/}
+			<section className='second'>
+				<h1>Centralisez vos besoins</h1>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+					do eiusmod tempor incididunt ut labore et dolore magna
+					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+					ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				</p>
+				<div className='container'>
+					<div className='textList'>
+						<div
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-1.png',
+									'Text 1'
+								)
+							}
+							className={
+								selectedText === 'Text 1' ? 'selected' : 'Test'
+							}
+						>
+							<div className='box'>
+								<h4 className='title'>Cahier des charges</h4>
+								<h5 className='description'>
+									Gagnez du temps sur la création de vos
+									cahiers des charges grace à notre
+									Intelligence artificielle!
+								</h5>
+							</div>
+						</div>
+						<div
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-2.png',
+									'Text 2'
+								)
+							}
+							className={
+								selectedText === 'Text 2' ? 'selected' : 'Test'
+							}
+						>
+							<div className='box'>
+								<h4 className='title'>Plannifiez vos projet</h4>
+								<h5 className='description'>
+									Générez automatiquement vos tickets pour
+									gagner du temps, et gagner du temps sur
+									l&pos;organisation.
+								</h5>
+							</div>
+						</div>
+						<div
+							onClick={() =>
+								handleTextClick(
+									'/assets/vitrine/second-3.png',
+									'Text 3'
+								)
+							}
+							className={
+								selectedText === 'Text 3' ? 'selected' : 'Test'
+							}
+						>
+							<div className='box'>
+								<h4 className='title'>Gérer vos équipes</h4>
+								<h5 className='description'>
+									Créer et gérer vos équipes et vos projet
+									avec simplicité.
+								</h5>
+							</div>
+						</div>
+					</div>
+					<div className='img-container'>
+						<img src={currentImage} alt='Displayed Image' />
+					</div>
+				</div>
+			</section>
 			{/*<section className='third'>*/}
 			{/*	<h1>Améliorer votre manière de travailler</h1>*/}
 			{/*	<button onClick={handleNextClick} className='arrow'>*/}
