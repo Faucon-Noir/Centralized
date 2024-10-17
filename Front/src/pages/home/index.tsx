@@ -209,7 +209,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 								</div>
 							</Grid>
 						) : (
-							<>
+							<div className='mobile'>
 								{userData?.stat?.error ? (
 									<></>
 								) : (

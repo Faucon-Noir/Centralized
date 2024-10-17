@@ -48,8 +48,8 @@ function GraphiqueLine({ labels, data, title, hover }: GraphiqueLineProps) {
 						align: 'end',
 					},
 					ticks: {
-						maxRotation: 25,
-						minRotation: 25,
+						maxRotation: 45,
+						minRotation: 45,
 					},
 				},
 				y: {

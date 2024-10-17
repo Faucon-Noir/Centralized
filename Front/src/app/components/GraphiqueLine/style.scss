@@ -1,3 +1,8 @@
 .graph_line {
-	aspect-ratio: 2 !important;
+	@media (min-width: 660px) {
+		aspect-ratio: 2 !important;
+	}
+	@media (max-width: 660px) {
+		aspect-ratio: 1.5 !important;
+	}
 }
