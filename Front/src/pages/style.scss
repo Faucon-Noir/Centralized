@@ -22,6 +22,7 @@ body {
 
 // scss de la page
 $primary-color: #138eff;
+$secondary-color: #015c9e;
 
 header.header {
 	display: flex;
@@ -29,7 +30,6 @@ header.header {
 	justify-content: space-evenly;
 	position: sticky;
 	top: 0;
-	width: 100%;
 	background-color: white;
 	box-shadow: rgba(9, 30, 66, 0.15) 0 0.5rem 1rem 0;
 
@@ -55,97 +55,89 @@ header.header {
 	}
 }
 
-	.logo {
-		margin: 5px 0 5px 0;
-		height: 50px;
-	}
-}
-
-.first {
-	background-color: #138eff;
+section.first {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2rem;
+	padding: 2rem;
 	background-image: url('/assets/vitrine/V1.png');
-	display: grid;
-	column-gap: 10px;
-	grid-template-columns: auto auto;
-	width: calc(100% - 200px);
-	@media (min-width: 1280px) {
-		width: calc(100% - 400px);
-		padding: 0 200px 0 200px;
-	}
-	padding: 0 100px 0 100px;
+	background-color: $primary-color;
 	background-position: center;
-	/* Center the image */
 	background-repeat: no-repeat;
-	/* Do not repeat the image */
 	background-size: contain;
-	z-index: 1000;
+
+	@media screen and (min-width: 1024px) {
+		padding: 2rem 10%;
+	}
+
+	@media screen and (min-width: 1440px) {
+		padding: 2rem 20%;
+	}
+
+	&>div {
+		@media screen and (min-width: 768px) {
+			width: 50%;
+		}
+	}
 
 	.text {
-		padding: 130px 16px 130px 16px;
 		color: white;
 		animation: fade-in 2s;
-		// width: 100%;
-		// position: relative;
-		// z-index: 1;
 
 		h1 {
 			font-weight: 500;
 			font-size: 3rem;
 			line-height: 1.25;
-			animation: fade-in 2s;
+		}
+
+		form.input {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		#email {
+			width: 300px;
+			margin: 20px 0;
+			padding: 0.75rem;
+			border: 1px solid rgb(223, 225, 230);
+			border-radius: 0.3rem;
+			font-size: 1rem;
+		}
+
+		#submit {
+			cursor: pointer;
+			text-decoration: none;
+			appearance: none;
+			border-radius: 0.3rem;
+			transition: 250ms ease-out;
+			border: 1px solid $secondary-color;
+			background-color: $secondary-color;
+			color: white;
+			font-size: 1rem;
+			padding: 1rem;
+		}
+
+		#submit:hover {
+			transform: translateY(-10px);
+			background-color: white;
+			color: $secondary-color;
 		}
 	}
 
-	.ordi {
-		// position: absolute;
-		right: 0;
-		top: 0;
-		// z-index: 0;
-		// background-color: #007bff;
-	}
+	.img-container {
+		display: none;
 
-	img {
-		margin-top: 100px;
-		max-width: 500px;
-		animation: fade-in 2s;
-	}
+		@media screen and (min-width: 768px) {
+			display: block;
+			animation: fade-in 2s;
+		}
 
-	#email {
-		font-size: 1rem;
-		padding: 0.75rem;
-		border: 1px solid rgb(223, 225, 230);
-		border-radius: 0.3rem;
-		max-width: 300px;
-		transition: 250ms ease-out;
-		width: 376px;
-		margin: 20px 0 20px 0;
-		animation: fade-in 3s;
-	}
-
-	#submit {
-		text-decoration: none;
-		cursor: pointer;
-		appearance: none;
-		-moz-box-align: center;
-		align-items: center;
-		border-radius: 0.3rem;
-		display: inline-flex;
-		text-align: center;
-		transition: 250ms ease-out;
-		border: 1px solid #015c9e;
-		background-color: #015c9e;
-		color: white !important;
-		font-size: 1rem;
-		padding: 0.9rem;
-		border-radius: 10px;
-		animation: fade-in 4s;
-		transition: all 350ms ease-in-out;
-	}
-
-	#submit:hover {
-		transform: translateY(-10px);
-		background-color: white;
-		color: #015c9e !important;
+		img {
+			width: 100%;
+			height: auto;
+		}
 	}
 }
 
