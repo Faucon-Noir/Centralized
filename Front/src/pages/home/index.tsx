@@ -293,7 +293,7 @@ export default function HomePage({
 								</div>
 							</Grid>
 						) : (
-							<>
+							<div className='mobile'>
 								{userData?.stat?.error ? (
 									<></>
 								) : (
@@ -437,7 +437,7 @@ export default function HomePage({
 										/>
 									</div>
 								</div>
-							</>
+							</div>
 						)}
 
 						<div className='MyTeam'>

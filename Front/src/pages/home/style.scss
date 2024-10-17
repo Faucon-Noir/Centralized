@@ -73,18 +73,31 @@
 
 	.Presentation {
 		margin-bottom: 20px;
+		h1 {
+			@media (max-width: 550px) {
+				margin-left: 16px;
+			}
+		}
 	}
 
 	.Entete {
 		display: flex;
 		justify-content: space-between;
 		padding-right: 30px;
+		@media (max-width: 550px) {
+			margin-left: 16px;
+		}
 	}
 
 	.swiper-horizontal {
 		// padding-left: 20px;
 		// margin-left: -20px;
 		padding-right: 30px;
+		padding-left: 16px;
+
+		@media (min-width: 550px) {
+			margin-left: -16px;
+		}
 	}
 
 	.swiper-wrapper {
@@ -131,8 +144,10 @@
 
 		.calendar_container {
 			width: 35%;
+
 			@media (max-width: 660px) {
 				width: 70%;
+				margin-bottom: 24px;
 			}
 			@media (max-width: 550px) {
 				width: 90%;
@@ -145,6 +160,9 @@
 			display: flex;
 			flex-direction: column;
 			gap: 25px;
+			@media (max-width: 660px) {
+				margin-bottom: 24px;
+			}
 		}
 	}
 
@@ -210,20 +228,26 @@
 	canvas {
 		height: 300px !important;
 		max-width: 600px !important;
-		// @media (max-width: 660px) {
-		// 	max-width: 600px !important;
-		// 	// height: 350px !important;
-		// }
+		@media (max-width: 660px) {
+			max-width: 600px !important;
+			max-height: 200px !important;
+		}
 	}
 
 	.graph_div {
 		display: flex;
+		align-items: center;
 		gap: 50px;
 		@media (min-width: 1680px) {
 			gap: 250px;
 		}
-		@media (max-width: 660px) {
+		@media (max-width: 768px) {
 			flex-direction: column;
+			margin-bottom: 24px;
 		}
 	}
+}
+
+.mobile {
+	margin: 0 16px;
 }
