@@ -162,7 +162,7 @@ export default function WelcomePage() {
 						<p className='info'>par utilisateur et par mois</p><br></br>
 						<p className='user'>Pour les petites équipes qui ont peu de projet à la fois.</p>
 						<p className='limite'>Les utilisateur sont limités à la création de 5 projets par mois.</p>
-						<a href='#'><button>S&pos;inscrire</button></a>
+						<a href='#'><button>S&apos;inscrire</button></a>
 					</div>
 					<div className='box premium'>
 						<h3>PREMIUM</h3>
@@ -170,7 +170,7 @@ export default function WelcomePage() {
 						<p className='info'>par utilisateur et par mois</p><br></br>
 						<p className='user'>Pour les équipes qui ont besoins de gérer plusieurs projet à la fois.</p>
 						<p className='limite'>Les utilisateur sont limités à la création de 20 projets par mois.</p>
-						<a href='#'><button>S&pos;inscrire</button></a>
+						<a href='#'><button>S&apos;inscrire</button></a>
 					</div>
 					<div className='box right'>
 						<h3>ENTERPRISE</h3>
