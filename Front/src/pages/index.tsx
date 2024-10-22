@@ -213,72 +213,80 @@ export default function WelcomePage() {
 			{/*		</div>*/}
 			{/*	</div>*/}
 			{/*</section>*/}
-			{/*<section className='price'>*/}
-			{/*	<h1>Des prix adaptés à vos besoins</h1>*/}
-			{/*	<h3></h3>*/}
-			{/*	/!* <button className='offer'>Comparaison</button> *!/*/}
-			{/*	<div className='gridprice'>*/}
-			{/*		<div className='box'>*/}
-			{/*			<h3>STANDARD</h3>*/}
-			{/*			<h1>*/}
-			{/*				6<span className='currency'>€</span>*/}
-			{/*			</h1>*/}
-			{/*			<p className='info'>par utilisateur et par mois</p>*/}
-			{/*			<br></br>*/}
-			{/*			<p className='user'>*/}
-			{/*				Pour les petites équipes qui ont peu de projet à la*/}
-			{/*				fois.*/}
-			{/*			</p>*/}
-			{/*			<p className='limite'>*/}
-			{/*				Les utilisateur sont limités à la création de 5*/}
-			{/*				projets par mois.*/}
-			{/*			</p>*/}
-			{/*			<a href='#'>*/}
-			{/*				<button>S&pos;inscrire</button>*/}
-			{/*			</a>*/}
-			{/*		</div>*/}
-			{/*		<div className='box premium'>*/}
-			{/*			<h3>PREMIUM</h3>*/}
-			{/*			<h1>*/}
-			{/*				12<span className='currency'>€</span>*/}
-			{/*			</h1>*/}
-			{/*			<p className='info'>par utilisateur et par mois</p>*/}
-			{/*			<br></br>*/}
-			{/*			<p className='user'>*/}
-			{/*				Pour les équipes qui ont besoins de gérer plusieurs*/}
-			{/*				projet à la fois.*/}
-			{/*			</p>*/}
-			{/*			<p className='limite'>*/}
-			{/*				Les utilisateur sont limités à la création de 20*/}
-			{/*				projets par mois.*/}
-			{/*			</p>*/}
-			{/*			<a href='#'>*/}
-			{/*				<button>S&pos;inscrire</button>*/}
-			{/*			</a>*/}
-			{/*		</div>*/}
-			{/*		<div className='box right'>*/}
-			{/*			<h3>ENTERPRISE</h3>*/}
-			{/*			<h1>*/}
-			{/*				15<span className='currency'>€</span>*/}
-			{/*			</h1>*/}
-			{/*			<p className='info'>*/}
-			{/*				par utilisateur et par mois, facturation annuelle*/}
-			{/*			</p>*/}
-			{/*			<br></br>*/}
-			{/*			<p className='user'>*/}
-			{/*				Pour les entreprises qui produisent plusieurs*/}
-			{/*				projets à la fois.*/}
-			{/*			</p>*/}
-			{/*			<p className='limite'>*/}
-			{/*				Les utilisateur sont limités à la création de 50*/}
-			{/*				projets par mois.*/}
-			{/*			</p>*/}
-			{/*			<a href='#'>*/}
-			{/*				<button>Contacter notre équipe</button>*/}
-			{/*			</a>*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</section>*/}
+			<section className='price'>
+				<h2>Des prix adaptés à vos besoins</h2>
+				{/* <button className='offer'>Comparaison</button> */}
+				<div className='grid-price'>
+					<article className='box'>
+						<div className="edition">
+							Standard
+							<div className="price">
+								6<span className="currency">€</span>
+							</div>
+							<p className="info">Par utilisateur et par mois</p>
+						</div>
+						<div className="description">
+							<p className="user">
+								Pour les petites équipes qui ont peu de projet à la
+								fois.
+							</p>
+							<p className="limit">
+								Les utilisateur sont limités à la création de 5
+								projets par mois.
+							</p>
+						</div>
+						<a href="#">
+							S'inscrire
+						</a>
+					</article>
+					<article className="box premium">
+						<div className="edition">
+							Premium
+							<div className="price">
+								12<span className="currency">€</span>
+							</div>
+							<p className="info">Par utilisateur et par mois</p>
+						</div>
+						<div className="description">
+							<p className="user">
+								Pour les équipes qui ont besoins de gérer plusieurs
+								projet à la fois.
+							</p>
+							<p className="limit">
+								Les utilisateur sont limités à la création de 20
+								projets par mois.
+							</p>
+						</div>
+						<a href="#">
+							S'inscrire
+						</a>
+					</article>
+					<article className="box">
+						<div className="edition">
+							Entreprise
+							<div className="price">
+								15<span className="currency">€</span>
+							</div>
+							<p className="info">
+								Par utilisateur et par mois, facturation annuelle
+							</p>
+						</div>
+						<div className="description">
+							<p className="user">
+								Pour les entreprises qui produisent plusieurs
+								projets à la fois.
+							</p>
+							<p className="limit">
+								Les utilisateur sont limités à la création de 50
+								projets par mois.
+							</p>
+						</div>
+						<a href="#">
+							Contacter notre équipe
+						</a>
+					</article>
+				</div>
+			</section>
 			{/*<section className='pre-footer'>*/}
 			{/*	<div className='text'>*/}
 			{/*		<h1>Simplifier, Centraliser, Ameliorer</h1>*/}
