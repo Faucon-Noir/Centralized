@@ -287,25 +287,21 @@ export default function WelcomePage() {
 					</article>
 				</div>
 			</section>
-			{/*<section className='pre-footer'>*/}
-			{/*	<div className='text'>*/}
-			{/*		<h1>Simplifier, Centraliser, Ameliorer</h1>*/}
-			{/*		<h3>Accompagner vos projet dès maintenant</h3>*/}
-			{/*	</div>*/}
-			{/*	<form className='input'>*/}
-			{/*		<input*/}
-			{/*			type='text'*/}
-			{/*			id='email'*/}
-			{/*			name='E-mail'*/}
-			{/*			placeholder='E-mail'*/}
-			{/*		></input>*/}
-			{/*		<input*/}
-			{/*			type='submit'*/}
-			{/*			value='Inscrivez-vous !'*/}
-			{/*			id='submit'*/}
-			{/*		></input>*/}
-			{/*	</form>*/}
-			{/*</section>*/}
+			<section className='pre-footer'>
+				<div className='text'>
+					<h2>Simplifier, Centraliser, Ameliorer</h2>
+					<p>Accompagner vos projet dès maintenant</p>
+				</div>
+				<form className='inputs'>
+					<input
+						type='text'
+						id='email'
+						name='E-mail'
+						placeholder='E-mail'
+					></input>
+					<button id='submit' type="submit">Inscrivez-vous !</button>
+				</form>
+			</section>
 			{/*<footer className='footer'>*/}
 			{/*	<div className='container debut'>*/}
 			{/*		<div className='box'>*/}

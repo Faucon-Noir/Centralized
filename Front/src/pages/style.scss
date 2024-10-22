@@ -367,6 +367,51 @@ section.price {
 	}
 }
 
+section.pre-footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 2rem;
+	padding: 2rem 0;
+	text-align: center;
+	color: white;
+	background-color: #138eff;
+
+	h2 {
+		margin: 0;
+	}
+
+	form.inputs {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+
+		#email {
+			width: 300px;
+			padding: 0.75rem;
+			border: 1px solid rgb(223, 225, 230);
+			border-radius: 0.3rem;
+			font-size: 1rem;
+			animation: fade-in 3s;
+			transition: 250ms ease-out;
+		}
+
+		#submit {
+			padding: 0.9rem;
+			border: 1px solid $secondary-color;
+			border-radius: 0.3rem;
+			background-color: $secondary-color;
+			color: white;
+			cursor: pointer;
+			font-size: 1rem;
+			animation: fade-in 4s;
+			transition: all 350ms ease-in-out;
+		}
+	}
+}
+
 @keyframes fade-in {
 	0% {
 		opacity: 0;
@@ -374,52 +419,6 @@ section.price {
 
 	100% {
 		opacity: 1;
-	}
-}
-
-.pre-footer {
-	height: 150px;
-	background-color: #138eff;
-	padding: 80px 216px 80px 216px;
-	text-align: center;
-	color: white;
-
-	h1,
-	h3 {
-		margin: 0;
-	}
-
-	#email {
-		font-size: 1rem;
-		padding: 0.75rem;
-		border: 1px solid rgb(223, 225, 230);
-		border-radius: 0.3rem;
-		max-width: 300px;
-		transition: 250ms ease-out;
-		width: 376px;
-		margin: 20px 0 20px 0;
-		animation: fade-in 3s;
-	}
-
-	#submit {
-		text-decoration: none;
-		cursor: pointer;
-		appearance: none;
-		-moz-box-align: center;
-		align-items: center;
-		border-radius: 0.3rem;
-		display: inline-flex;
-		text-align: center;
-		transition: 250ms ease-out;
-		border: 1px solid #015c9e;
-		background-color: #015c9e;
-		color: white !important;
-		font-size: 1rem;
-		padding: 0.9rem;
-		border-radius: 10px;
-		animation: fade-in 4s;
-		transition: all 350ms ease-in-out;
-		margin-left: 10px;
 	}
 }
 
