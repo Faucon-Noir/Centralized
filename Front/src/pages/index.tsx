@@ -80,7 +80,7 @@ export default function WelcomePage() {
 				</div>
 			</section>
 			<section className='second'>
-				<h1>Centralisez vos besoins</h1>
+				<h2>Centralisez vos besoins</h2>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna
@@ -88,7 +88,7 @@ export default function WelcomePage() {
 					ullamco laboris nisi ut aliquip ex ea commodo consequat.
 				</p>
 				<div className='container'>
-					<div className='textList'>
+					<div className='box-container'>
 						<div
 							onClick={() =>
 								handleTextClick(
@@ -97,16 +97,16 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 1' ? 'selected' : 'Test'
+								selectedText === 'Text 1' ? 'selected-box' : 'unselected-box'
 							}
 						>
 							<div className='box'>
-								<h4 className='title'>Cahier des charges</h4>
-								<h5 className='description'>
+								<h3 className='title'>Cahier des charges</h3>
+								<p className='description'>
 									Gagnez du temps sur la création de vos
 									cahiers des charges grace à notre
 									Intelligence artificielle!
-								</h5>
+								</p>
 							</div>
 						</div>
 						<div
@@ -117,16 +117,16 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 2' ? 'selected' : 'Test'
+								selectedText === 'Text 2' ? 'selected-box' : 'unselected-box'
 							}
 						>
 							<div className='box'>
-								<h4 className='title'>Plannifiez vos projet</h4>
-								<h5 className='description'>
+								<h3 className='title'>Plannifiez vos projet</h3>
+								<p className='description'>
 									Générez automatiquement vos tickets pour
 									gagner du temps, et gagner du temps sur
-									l&pos;organisation.
-								</h5>
+									l'organisation.
+								</p>
 							</div>
 						</div>
 						<div
@@ -137,15 +137,15 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 3' ? 'selected' : 'Test'
+								selectedText === 'Text 3' ? 'selected-box' : 'unselected-box'
 							}
 						>
 							<div className='box'>
-								<h4 className='title'>Gérer vos équipes</h4>
-								<h5 className='description'>
+								<h3 className='title'>Gérer vos équipes</h3>
+								<p className='description'>
 									Créer et gérer vos équipes et vos projet
 									avec simplicité.
-								</h5>
+								</p>
 							</div>
 						</div>
 					</div>
