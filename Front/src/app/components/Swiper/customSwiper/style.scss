@@ -13,3 +13,15 @@
     margin-top: auto;
     margin-bottom: 10px;
 }
+
+.swiper-button-prev-1:hover,
+.swiper-button-next-1:hover,
+.swiper-button-prev-2:hover,
+.swiper-button-next-2:hover {
+    cursor: pointer;
+}
+
+.swiper-button-disabled {
+    color: rgb(128, 128, 128);
+    cursor: auto !important;
+}
