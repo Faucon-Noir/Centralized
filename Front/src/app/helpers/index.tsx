@@ -1,6 +1,9 @@
 import { Chip } from "@mui/material"
 import { jwtDecode } from "jwt-decode"
-import { addMonths, addWeeks, format, getISOWeekYear, startOfISOWeek } from 'date-fns';
+// import { addMonths, addWeeks, format, getISOWeekYear, startOfISOWeek } from 'date-fns';
+import addWeeks from 'date-fns/addWeeks/index.js';
+import format from 'date-fns/format/index.js';
+import startOfISOWeek from 'date-fns/startOfISOWeek/index.js';
 
 export function gradeToString(grade: number): string {
 	let teamRole: string
