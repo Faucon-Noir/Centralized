@@ -23,10 +23,22 @@
 
 	.ticket_container {
 		display: flex;
-		gap: 32px;
+		flex-direction: row;
 		margin-top: 32px;
 		width: 100%;
+		gap: 32px;
 
+		.debut_container, .fin_container{
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			gap: 32px;
+
+			@media (max-width:870px){
+				display: flex;
+				flex-direction: column !important;
+			}
+		}
 		.todo_container {
 			background-color: #8ac72960;
 		}
@@ -50,13 +62,14 @@
 			border-radius: 10px;
 			display: flex;
 			flex-direction: column;
-			width: 30%;
+			width: 50%;
 			padding: 16px 32px;
 			gap: 16px;
 			max-height: 75vh;
 			overflow-y: auto;
 			scrollbar-width: thin;
 			scrollbar-color: #ffffff transparent;
+			min-width: 200px;
 
 			h2 {
 				font-size: 24px;
@@ -68,17 +81,26 @@
 				gap: 16px;
 			}
 
-			@media (max-width: 1679px) {
-				padding: 16px;
+			// @media (max-width: 1679px) {
+			// 	padding: 16px;
+			// }
+			@media (max-width:870px){
+				display: flex;
+				align-items: center;
 			}
 		}
-		@media (max-width: 1679px) {
-			gap: 16px;
+
+		
+		// @media (max-width: 1679px) {
+		// 	gap: 16px;
+		// }
+		@media (max-width:1500px){
+			display: flex;
+			flex-direction: column !important;
 		}
 	}
 
 	@media (max-width: 1280px) {
-		margin-left: 20px;
-		margin-right: 20px;
+		margin: 0px 20px;
 	}
 }
