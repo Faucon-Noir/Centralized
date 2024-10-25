@@ -2,14 +2,14 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import './Dashboard.scss';
+import '../Navigation.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
 import Link from 'next/link';
 import React from 'react';
 
-export default function Dashboard({
+export default function DesktopNavigation({
 	page = '',
 	userData,
 	updateUserData,
@@ -83,7 +83,7 @@ export default function Dashboard({
 
 	return (
 		<>
-			<div className='dashboard'>
+			<div className='navigation'>
 				<div className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'
@@ -96,8 +96,8 @@ export default function Dashboard({
 						<button
 							className={
 								page == 'HomePage'
-									? 'dashboard_button active'
-									: 'dashboard_button'
+									? 'navigation_button active'
+									: 'navigation_button'
 							}
 						>
 							<img src='/assets/icons/home_icon.svg' alt='' />{' '}
@@ -105,13 +105,13 @@ export default function Dashboard({
 						</button>
 					</Link>
 				</div>
-				<div className='dashboard_nav'>
+				<div className='navigation_nav'>
 					<Link href='/planning'>
 						<button
 							className={
 								page == 'Planning'
-									? 'dashboard_button active'
-									: 'dashboard_button'
+									? 'navigation_button active'
+									: 'navigation_button'
 							}
 						>
 							<img src='/assets/icons/planning.svg' alt='' />
@@ -122,8 +122,8 @@ export default function Dashboard({
 						<button
 							className={
 								page == 'Specification'
-									? 'dashboard_button active'
-									: 'dashboard_button'
+									? 'navigation_button active'
+									: 'navigation_button'
 							}
 						>
 							<img src='/assets/icons/specification.svg' alt='' />
@@ -134,8 +134,8 @@ export default function Dashboard({
 						<button
 							className={
 								page == 'Team'
-									? 'dashboard_button active'
-									: 'dashboard_button'
+									? 'navigation_button active'
+									: 'navigation_button'
 							}
 						>
 							<img src='/assets/icons/teams.svg' alt='' />
@@ -207,13 +207,13 @@ export default function Dashboard({
 						</div>
 					) : null}
 				</div>
-				<div className='dashboard_profile'>
+				<div className='navigation_profile'>
 					<Link href='/account'>
 						<button
 							className={
 								page == 'account'
-									? 'dashboard_button active'
-									: 'dashboard_button'
+									? 'navigation_button active'
+									: 'navigation_button'
 							}
 						>
 							<img src='/assets/icons/user.svg' alt='' /> Mon
@@ -221,7 +221,7 @@ export default function Dashboard({
 						</button>
 					</Link>
 					<button
-						className='dashboard_button red'
+						className='navigation_button red'
 						onClick={() => logout()}
 					>
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
