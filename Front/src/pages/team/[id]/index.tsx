@@ -6,7 +6,6 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import Dashboard from "@/app/components/Dashboard/Dashboard";
 
 function TeamPage() {
   // TODO: Compléter le back pour récupérer un grade et si possible une bio de l'utilisateur
