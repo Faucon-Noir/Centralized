@@ -147,28 +147,35 @@ export default function DesktopNavigation({
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
 								<div className='projectOpen' key={index}>
-									<button className='pName'>
-										<img
-											src='/assets/icons/icon-cross.svg'
-											alt=''
-											className='cross'
-											onClick={() =>
-												deleteSelected(project.id)
-											}
-										/>
-										<Icon
-											sx={{
-												color: numberToColor(
-													project.color
-												),
-												height: '35px',
-												width: '35px',
-											}}
-										>
-											<FolderCopyIcon fontSize='large' />
-										</Icon>
-										<p>{project.name}</p>
-									</button>
+									<Link
+										className='ProjectBlocName'
+										href={
+											'/dashboard/' + project.id
+										}
+									>
+										<button className='pName'>
+											<img
+												src='/assets/icons/icon-cross.svg'
+												alt=''
+												className='cross'
+												onClick={() =>
+													deleteSelected(project.id)
+												}
+											/>
+											<Icon
+												sx={{
+													color: numberToColor(
+														project.color
+													),
+													height: '35px',
+													width: '35px',
+												}}
+											>
+												<FolderCopyIcon fontSize='large' />
+											</Icon>
+											<p>{project.name}</p>
+										</button>
+									</Link>
 									<div className='submenu'>
 										<Link
 											href={
