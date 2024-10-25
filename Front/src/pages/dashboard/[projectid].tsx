@@ -198,7 +198,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                         key={task.id}
                                                     />
                                                 ))
-                                        : <> Aucun ticket n'est ouvert</>}
+                                        : <> Aucun ticket n&apos;est ouvert</>}
                                 </div>
                             </div>
                             <div className='BlocDouble second_line'>
@@ -325,7 +325,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                         key={task.id}
                                                     />
                                                 ))
-                                        : <> Aucun ticket n'est ouvert</>}
+                                        : <> Aucun ticket n&apos;est ouvert</>}
                                 </div>
                             </div>
                             <div className='BlocDouble second_line'>
@@ -346,7 +346,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                     <div className='MyTeam'>
                         <div className='Entete'>
                             <div className='TitleProjetCards'>
-                                <h2>Membres de l'équipe</h2>
+                                <h2>Membres de l&apos;équipe</h2>
                                 <ButtonBase>
                                     <AddIcon
                                         fontSize='medium'
