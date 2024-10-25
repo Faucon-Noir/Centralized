@@ -31,7 +31,6 @@
 		.debut_container, .fin_container{
 			display: flex;
 			flex-direction: row;
-			width: 100%;
 			gap: 32px;
 
 			@media (max-width:870px){
@@ -62,7 +61,7 @@
 			border-radius: 10px;
 			display: flex;
 			flex-direction: column;
-			width: 50%;
+			width: 100%;
 			padding: 16px 32px;
 			gap: 16px;
 			max-height: 75vh;
@@ -85,8 +84,8 @@
 			// 	padding: 16px;
 			// }
 			@media (max-width:870px){
-				display: flex;
-				align-items: center;
+				margin: 0 16px;
+				width: 0 !important;
 			}
 		}
 
@@ -94,7 +93,7 @@
 		// @media (max-width: 1679px) {
 		// 	gap: 16px;
 		// }
-		@media (max-width:1500px){
+		@media (max-width:1440px){
 			display: flex;
 			flex-direction: column !important;
 		}
