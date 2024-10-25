@@ -153,12 +153,12 @@ export default function HomePage({
 									<div className='stat'>
 										<h2>Statistique du dernier projet</h2>
 										<div className='text_stat'>
-                                            <div>
+                                            <div className="stat_container">
                                                 <p>Vous avez</p>
                                                 <h3>{userData?.stat?.nbrTicket  ? userData.stat.nbrTicket : 0 }</h3>
                                                 <p>tickets ouverts sur ce projet</p>
                                             </div>
-                                            <div>
+                                            <div className="stat_container">
                                                 <p>Vous avez</p>
                                                 <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
                                                 <p>tickets ouverts en tout</p>
@@ -312,12 +312,12 @@ export default function HomePage({
 									<div className='stat'>
 										<h2>Statistique du dernier projet</h2>
 										<div className='text_stat'>
-                                            <div>
+                                            <div className="stat_container">
                                                 <p>Vous avez</p>
                                                 <h3>{userData?.stat?.nbrTicket  ? userData.stat.nbrTicket : 0 }</h3>
                                                 <p>tickets ouverts sur ce projet</p>
                                             </div>
-                                            <div>
+                                            <div className="stat_container">
                                                 <p>Vous avez</p>
                                                 <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
                                                 <p>tickets ouverts en tout</p>
