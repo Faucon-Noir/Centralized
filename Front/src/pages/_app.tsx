@@ -7,13 +7,15 @@ import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingCompon
 import UserData from '@/utils/User/UserData';
 import { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
-import Dashboard from '@/app/components/Dashboard/Dashboard';
+import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNavigation';
 import React from 'react';
+import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
+	const [showMobileNav, setShowMobileNav] = useState(false);
 	const [userData, setUserData] = useState<any>({
 		project: [
 			{
@@ -60,11 +62,11 @@ export default function App({ Component, pageProps }: AppProps) {
 										userData={userData}
 									/>
 								</>
-							) : windowWidth >= 600 ? (
+							) : windowWidth >= 1280 ? (
 								<Grid container>
-									{windowWidth >= 1080 ? (
+									{windowWidth >= 1280 ? (
 										<Grid xs={2} item={true}>
-											<Dashboard
+											<DesktopNavigation
 												page={Component.name}
 												userData={
 													userData?.user
@@ -75,7 +77,17 @@ export default function App({ Component, pageProps }: AppProps) {
 											/>
 										</Grid>
 									) : (
-										<></>
+										showMobileNav && (
+											<MobileNavigation
+												page={Component.name}
+												userData={
+													userData?.user
+														? userData
+														: {}
+												}
+												updateUserData={setUserData}
+											/>
+										)
 									)}
 									<Grid xs={10} item={true}>
 										<Component
