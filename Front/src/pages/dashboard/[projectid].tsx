@@ -92,18 +92,6 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                             ) : (
                                 <div className='stat'>
                                     <h2>Statistique du dernier projet</h2>
-                                    <div className='text_stat'>
-                                        <div className="stat_container">
-                                            <p>Vous avez</p>
-                                            <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
-                                            <p>tickets ouverts sur ce projet</p>
-                                        </div>
-                                        <div className="stat_container">
-                                            <p>Vous avez</p>
-                                            <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
-                                            <p>tickets ouverts en tout</p>
-                                        </div>
-                                    </div>
                                     <div className='graph_div'>
                                         {project?.stat?.nbrTicketByUser ? (
                                             <GraphiquePie
@@ -137,6 +125,18 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                 hover='Nombre de tickets'
                                             />
                                         ) : null}
+                                        <div className='text_stat'>
+                                            <div className="stat_container">
+                                                <p>Vous avez</p>
+                                                <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
+                                            </div>
+                                            <div className="stat_container">
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets ouverts en tout</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
@@ -216,24 +216,12 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                             </div>
                         </Grid>
                     ) : (
-                        <>
+                        <div className='mobile'>
                             {!project?.stat ? (
                                 <></>
                             ) : (
                                 <div className='stat'>
                                     <h2>Statistique du dernier projet</h2>
-                                    <div className='text_stat'>
-                                        <div className="stat_container">
-                                            <p>Vous avez</p>
-                                            <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
-                                            <p>tickets ouverts sur ce projet</p>
-                                        </div>
-                                        <div className="stat_container">
-                                            <p>Vous avez</p>
-                                            <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
-                                            <p>tickets ouverts en tout</p>
-                                        </div>
-                                    </div>
                                     <div className='graph_div'>
                                         {project?.stat?.nbrTicketByUser ? (
                                             <GraphiquePie
@@ -267,6 +255,18 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                 hover='Nombre de tickets'
                                             />
                                         ) : null}
+                                        <div className='text_stat'>
+                                            <div className="stat_container">
+                                                <p>Vous avez</p>
+                                                <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
+                                            </div>
+                                            <div className="stat_container">
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets ouverts en tout</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}
@@ -341,8 +341,9 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                     />
                                 </div>
                             </div>
-                        </>
+                        </div>
                     )}
+
                     <div className='MyTeam'>
                         <div className='Entete'>
                             <div className='TitleProjetCards'>

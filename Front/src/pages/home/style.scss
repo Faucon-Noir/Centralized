@@ -236,10 +236,10 @@
 
 	.graph_div {
 		display: flex;
-		align-items: center;
+		flex-flow: wrap;
 		gap: 50px;
 		@media (min-width: 1680px) {
-			gap: 250px;
+			gap: 50px;
 		}
 		@media (max-width: 768px) {
 			flex-direction: column;
@@ -251,12 +251,16 @@
         justify-content: space-evenly;
         gap: 50px;
         text-align: center;
-        @media (min-width: 1680px) {
-            gap: 250px;
-        }
-        @media (max-width: 660px) {
-            flex-direction: column;
-        }
+		@media (min-width: 1680px) {
+			flex-direction: column;
+		}
+		@media (max-width: 660px) {
+			flex-direction: column;
+			margin-bottom: 30px;
+		}
+		@media (max-width: 1680px) and (min-width: 660px){
+			width: 100%;
+		}
 		.stat_container {
 			background-color: white;
 			border-radius: 20px;
@@ -269,6 +273,13 @@
 			transition: all 350ms ease-in-out;
 			min-width: 275px;
 			max-width: 500px;
+			text-align: center;
+			p {
+				margin: 0;
+			}
+			h3 {
+				margin: 0;
+			}
 		}
     }
 }
