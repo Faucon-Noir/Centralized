@@ -58,7 +58,6 @@
 .right_container {
 	margin-top: 12%;
 	margin-left: 100px;
-	width: 100% !important;
 
 	@media (max-width: 1024px) {
 		margin: 10% 25px;
@@ -237,6 +236,8 @@
 	.graph_div {
 		display: flex;
 		flex-flow: wrap;
+		justify-content: space-between;
+
 		gap: 50px;
 		@media (min-width: 1680px) {
 			gap: 50px;
@@ -251,15 +252,17 @@
         justify-content: space-evenly;
 		gap: 50px;
         text-align: center;
-		@media (min-width: 1680px) {
+		@media (min-width: 2537px) {
+			flex-direction: column;
+		}
+		@media (min-width: 1680px) and (max-width: 1773px) {
+			flex-direction: column;
+		}
+		@media (min-width: 1356px) and (max-width: 1680px) {
 			flex-direction: column;
 		}
 		@media (max-width: 660px) {
 			flex-direction: column;
-			margin-bottom: 30px;
-		}
-		@media (max-width: 1680px) and (min-width: 660px){
-			width: 100%;
 		}
 		.stat_container {
 			background-color: white;
@@ -280,6 +283,31 @@
 			h3 {
 				margin: 0;
 			}
+		}
+	}
+	.stat_container_1 {
+		@media (min-width: 1680px) {
+			order: 3;
+		}
+		@media (min-width: 1356px) and (max-width: 1679px) {
+			order: 4;
+		}
+		@media (min-width: 1337px) and (max-width: 1356px) and (not (width:  1356px)) {
+			order: 4;
+			width: 100%;
+		}
+		@media (min-width: 1280px) and (max-width: 1337px) and (not (width:  1337px)) {
+			order: 4;
+		}
+		@media (min-width: 1114px) and (max-width: 1280px) and (not (width:  1280px)) {
+			order: 4;
+			width: 100%;
+		}
+		@media (min-width: 660px) and (max-width: 1114px) and (not (width:  1114px)) {
+			order: 4;
+		}
+		@media (max-width: 660px) {
+			order: 4;
 		}
 	}
 }

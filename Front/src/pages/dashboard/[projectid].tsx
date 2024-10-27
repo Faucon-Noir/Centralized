@@ -28,7 +28,7 @@ import RexForm from '@/app/components/Form/rexForm';
 import UserData from '@/utils/User/UserData';
 import { color } from '@mui/system';
 
-export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
+export default function DashboardPage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const [windowWidth, setWindowWidth] = useState<number>(0);
     const [project, setProject] = useState({
         project: {
@@ -54,7 +54,10 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
         stat: {
             nbrTicketByUser: [{ userName: "", nbr_ticket: 0 }],
             nbrTicket: 0,
-            nbrTicketPerWeek: { week: [""], nbr_ticket: [0] }
+            nbrTicketPerWeek: { week: [""], nbr_ticket: [0] },
+            nbrTicketByStatus: [{ status: "", nbr_ticket: 0 }],
+            nbrTicketOpenProject: 0,
+            nbrTicketProject: 0
         },
     });
 
@@ -67,7 +70,6 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
 	}, []);
     useEffect(() => {
         ProjectData(new URL(window.location.href).pathname.split('/')[2], userData).then(result => {
-            console.log(result);
             setProject(result)
         })
     }, [userData]);
@@ -107,6 +109,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                 )}
                                                 title='Nombre de ticket non fini par utilisateur'
                                                 hover='Nombre de ticket'
+                                                order= {1}
                                             />
                                         ) : null}
                                         {project?.stat?.nbrTicketByUser ? (
@@ -123,18 +126,48 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                 }
                                                 title='Nombre de tickets ouverts par semaine'
                                                 hover='Nombre de tickets'
+                                                order= {1}
                                             />
                                         ) : null}
-                                        <div className='text_stat'>
-                                            <div className="stat_container">
+                                        <div className='text_stat stat_container_1'>
+                                            <div className='stat_container'>
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets en tout sur ce projet</p>
+                                            </div>
+                                            <div className='stat_container'>
                                                 <p>Vous avez</p>
                                                 <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
                                                 <p>tickets ouverts sur ce projet</p>
                                             </div>
+                                        </div>
+                                        {project?.stat?.nbrTicketByStatus ? (
+                                            <GraphiquePie
+                                                labels={project.stat.nbrTicketByStatus.map(
+                                                    (x: {
+                                                        status: any;
+                                                    }) => x.status
+                                                )}
+                                                data={project.stat.nbrTicketByStatus.map(
+                                                    (row: {
+                                                        nbr_ticket: any;
+                                                    }) => row.nbr_ticket
+                                                )}
+                                                title='Nombre de ticket par état'
+                                                hover='Nombre de ticket'
+                                                order= {2}
+                                            />
+                                        ) : null}
+                                        <div className='text_stat stat_container_2'>
                                             <div className="stat_container">
-                                                <p>Vous avez</p>
-                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
-                                                <p>tickets ouverts en tout</p>
+                                                <p>Il y a</p>
+                                                <h3>{project?.stat?.nbrTicketProject ? project.stat.nbrTicketProject : 0 }</h3>
+                                                <p>tickets en tout sur ce projet</p>
+                                            </div>
+                                            <div className="stat_container">
+                                                <p>Il y a</p>
+                                                <h3>{project?.stat?.nbrTicketOpenProject ? project.stat.nbrTicketOpenProject : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
                                             </div>
                                         </div>
                                     </div>
@@ -255,16 +288,45 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                                 hover='Nombre de tickets'
                                             />
                                         ) : null}
-                                        <div className='text_stat'>
+                                        <div className='text_stat stat_container_1'>
+                                            <div className="stat_container">
+                                                <p>Vous avez</p>
+                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
+                                                <p>tickets en tout sur ce projet</p>
+                                            </div>
                                             <div className="stat_container">
                                                 <p>Vous avez</p>
                                                 <h3>{project?.stat?.nbrTicket  ? project.stat.nbrTicket : 0 }</h3>
                                                 <p>tickets ouverts sur ce projet</p>
                                             </div>
+                                        </div>
+                                        {project?.stat?.nbrTicketByStatus ? (
+                                            <GraphiquePie
+                                                labels={project.stat.nbrTicketByStatus.map(
+                                                    (x: {
+                                                        status: any;
+                                                    }) => x.status
+                                                )}
+                                                data={project.stat.nbrTicketByStatus.map(
+                                                    (row: {
+                                                        nbr_ticket: any;
+                                                    }) => row.nbr_ticket
+                                                )}
+                                                title='Nombre de ticket par état'
+                                                hover='Nombre de ticket'
+                                                order= {2}
+                                            />
+                                        ) : null}
+                                        <div className='text_stat stat_container_2'>
                                             <div className="stat_container">
-                                                <p>Vous avez</p>
-                                                <h3>{userData?.stat?.nbrAllTicket  ? userData.stat.nbrAllTicket : 0 }</h3>
-                                                <p>tickets ouverts en tout</p>
+                                                <p>Il y a</p>
+                                                <h3>{project?.stat?.nbrTicketProject  ? project.stat.nbrTicketProject : 0 }</h3>
+                                                <p>tickets en tout sur ce projet</p>
+                                            </div>
+                                            <div className="stat_container">
+                                                <p>Il y a</p>
+                                                <h3>{project?.stat?.nbrTicketOpenProject  ? project.stat.nbrTicketOpenProject : 0 }</h3>
+                                                <p>tickets ouverts sur ce projet</p>
                                             </div>
                                         </div>
                                     </div>

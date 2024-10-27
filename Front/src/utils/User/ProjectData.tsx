@@ -10,6 +10,8 @@ import getCountAllTicketOneUser from "./getCountAllTicketOneUser";
 import { findNumberTicketByUserName, GenerateDataWeekTicket } from "@/app/helpers";
 import getProject from "./getProject";
 import getUserTeamProject from "./getUserTeamProject";
+import getCountAllTicketOneProject from "./getCountAllTicketOneProject";
+import getCountAllTicketByStatusOneProject from "./getCountAllTicketByStatusOneProject";
 
 //Create the type id in the decoded token so id is poperty is known
 interface JwtPayload {
@@ -44,7 +46,10 @@ export default async function ProjectData(id: string, userData: any) {
         stat: {
             nbrTicketByUser: [{ userName: "", nbr_ticket: 0 }],
             nbrTicket: 0,
-            nbrTicketPerWeek: { week: [""], nbr_ticket: [0] }
+            nbrTicketPerWeek: { week: [""], nbr_ticket: [0] },
+            nbrTicketByStatus: [{ status: "", nbr_ticket: 0 }],
+            nbrTicketOpenProject: 0,
+            nbrTicketProject: 0
         }
     }
     if (token) {
@@ -70,8 +75,11 @@ export default async function ProjectData(id: string, userData: any) {
         projectData.stat.nbrTicketPerWeek.week = dataWeek.week;
         projectData.stat.nbrTicketPerWeek.nbr_ticket = dataWeek.nbr_ticket;
 
+        projectData.stat.nbrTicketOpenProject = (await getCountAllTicketOneProject(user_id, token, id, false)).nbr_ticket;
+        projectData.stat.nbrTicketProject = (await getCountAllTicketOneProject(user_id, token, id, true)).nbr_ticket;
 
         projectData.stat.nbrTicketByUser = await getCountAllTicketByUserOneProject(user_id, token, id);
+        projectData.stat.nbrTicketByStatus = await getCountAllTicketByStatusOneProject(user_id, token, id);
         //Récuperer le nombre de ticket de l'utilisateur sur le projet
         //Une alternative plus sur serait de passer directement à travers une requete (pas de problème si 2 utilisateurs ont le même nom/prénom)
         const userName = userData.user.firstname + ' ' + userData.user.lastname;
