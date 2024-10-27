@@ -153,7 +153,13 @@ export default function DesktopNavigation({
 											'/dashboard/' + project.id
 										}
 									>
-										<button className='pName'>
+										<button
+											className = {
+												page == 'Dashboard' && project?.id == index
+													? 'pName selected'
+													: 'pName'
+											}
+										>
 											<img
 												src='/assets/icons/icon-cross.svg'
 												alt=''
