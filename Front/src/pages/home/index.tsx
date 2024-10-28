@@ -269,14 +269,23 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                         </CustomSwiper>
                     </div>
 
-                </> : <>
-                    <div className='no_project'>
-                        <h1>Bonjour {userData?.user ? <>{userData?.user.lastname} {userData?.user.firstname}</> : 'test'}</h1>
-                        <h2>Vous n&apos;avez pas encore de projets, ni d&apos;équipe, ni meme de planning, vous n&apos;êtes rien !</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio tortor, blandit a eleifend et, bibendum non justo. Donec commodo turpis augue, id ultrices libero consectetur quis. Duis varius elementum bibendum. Etiam ligula mi, sagittis ac est at, tristique volutpat neque. Ut non erat diam. Aenean ullamcorper pharetra quam eget ultrices. Maecenas blandit venenatis aliquam. Sed sit amet augue quis metus rhoncus cursus at et elit. Curabitur aliquet aliquam erat vel vehicula. In efficitur id sapien id efficitur. Quisque hendrerit, nisi a venenatis condimentum, leo ante convallis urna, vel venenatis lorem ipsum in enim. Praesent consectetur ultricies tristique. Nunc porttitor vulputate dui, sollicitudin eleifend sem pellentesque in. Fusce maximus malesuada dui a tincidunt. Donec sit amet nulla vitae metus elementum consequat.</p>
-                        <button className='create_project' onClick={() => router.push('/specification/create')}>Laissez vous guider</button>
+                </> : <div className='no_project'>
+                    <div className='main_modal'>
+                        <div className='main_modal_header'>
+                            <h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😊</h1>
+                            <p>Laissez-vous guider</p>
+                        </div>
+                        <div className='main_modal_form'>
+                            <div className='main_modal_form_idx'>
+                                <img src="/assets/nbr1off.png" alt="" />
+                                <img src="/assets/nbr2off.png" alt="" />
+                                <img src="/assets/nbr3off.png" alt="" />
+                                {/* to do : Géré le changement d'image selon le form surlequel je suis */}
+                            </div>
+                        </div>
                     </div>
-                </>}
+                </div>
+                }
             </div>
         </>
     );

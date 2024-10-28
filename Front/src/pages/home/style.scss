@@ -124,48 +124,6 @@
     }
 }
 
-.no_project {
-    width: 90%;
-    height: 75vh;
-    border-radius: 15px;
-    background-color: #0294fc77;
-    padding: 20px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10%;
-    color: white;
-    margin-top: -5%;
-
-    h2 {
-        text-align: center;
-        width: 33%;
-        letter-spacing: 4px;
-    }
-
-    p {
-        text-align: center;
-        letter-spacing: 4px;
-    }
-
-    .create_project {
-        border: none;
-        border-radius: 15px;
-        background-color: #0294fc;
-        color: white;
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 25px;
-        font-weight: bold;
-        letter-spacing: 4px;
-        transition: all 350ms ease-in-out;
-    }
-
-    .create_project:hover {
-        transform: translateY(-10px);
-    }
-
-}
 
 .stat {
     display: flex;
@@ -181,5 +139,60 @@
         justify-content: center;
         align-items: center;
         gap: 30%
+    }
+}
+
+.no_project {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 105%;
+    top: 0;
+    right: 0;
+    background-color: rgb(172, 172, 172, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .main_modal {
+        width: 40%;
+        background-color: white;
+        padding: 15px 15px;
+        border-radius: 15px;
+        box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+        display: flex;
+        gap: 30px;
+        flex-direction: column;
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .main_modal_form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .main_modal_form_idx {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 100%;
+
+                img {
+                    height: 30px;
+                    width: 30px;
+                }
+            }
+        }
     }
 }
