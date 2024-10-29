@@ -21,6 +21,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import GraphiquePie from '@/app/components/GraphiquePie';
 import GraphiqueLine from '@/app/components/GraphiqueLine';
+import FirstStep from '@/app/components/Form/firstStep';
+import SecondStep from '@/app/components/Form/secondStep';
+import ThirdStep from '@/app/components/Form/thirdStep';
 
 export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
     const [lastP, setLastP] = useState({
@@ -39,7 +42,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
             answer3: "",
         }
     });
-
+    const [userStep, setUserStep] = useState(0);
     const router = useRouter();
 
     useEffect(() => {
@@ -64,8 +67,14 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
             if (tmp_lastP.end_date < userData.project[i].end_date) tmp_lastP = userData.project[i];
         }
         setLastP(tmp_lastP);
+
+        if (userData.team.length == 0) {
+            setUserStep(1)
+        }
     }, [userData]);
-    console.log(userData)
+
+
+    console.log(userStep)
     return (
         <>
             <div className='right_container'>
@@ -277,10 +286,14 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                         </div>
                         <div className='main_modal_form'>
                             <div className='main_modal_form_idx'>
-                                <img src="/assets/nbr1off.png" alt="" />
-                                <img src="/assets/nbr2off.png" alt="" />
-                                <img src="/assets/nbr3off.png" alt="" />
-                                {/* to do : Géré le changement d'image selon le form surlequel je suis */}
+                                {userStep >= 1 ? <img className="fade-in-image firstStep" src="/assets/nbr1on.png" alt="" /> : <img src="/assets/nbr1off.png" alt="" />}
+                                <div className='dotted_line'></div>
+                                {userStep >= 2 ? <img className="fade-in-image" src="/assets/nbr2on.png" alt="" /> : <img src="/assets/nbr2off.png" alt="" />}
+                                <div className='dotted_line2'></div>
+                                {userStep >= 3 ? <img className="fade-in-image" src="/assets/nbr3on.png" alt="" /> : <img src="/assets/nbr3off.png" alt="" />}
+                            </div>
+                            <div className='main_modal_form_component'>
+                                {userStep == 1 ? <FirstStep /> : userStep == 2 ? <SecondStep /> : userStep == 3 ? <ThirdStep /> : null}
                             </div>
                         </div>
                     </div>

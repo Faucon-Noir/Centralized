@@ -180,19 +180,54 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            gap: 30px;
             width: 100%;
+            position: relative;
 
             .main_modal_form_idx {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 100%;
+                gap: 150%;
+                position: relative;
 
                 img {
                     height: 30px;
                     width: 30px;
+
+                }
+
+                .dotted_line {
+                    position: absolute;
+                    left: 69%;
+                    width: 145%;
+                    height: 1px;
+                    border-top: 4px dotted #0293FC;
+                }
+
+                .dotted_line2 {
+                    position: absolute;
+                    right: 69%;
+                    width: 145%;
+                    height: 1px;
+                    border-top: 4px dotted #0293FC;
+                }
+
+                .fade-in-image {
+                    animation: fadeIn 2s;
                 }
             }
         }
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
     }
 }
