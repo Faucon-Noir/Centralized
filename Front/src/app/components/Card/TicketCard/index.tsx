@@ -26,8 +26,8 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at 
             <div className='card' style={{ borderLeft: "7px solid " + urgenceColor[urgence] }}>
                 <h3>{title}</h3>
                 <div>
-                    <p>{start.substring(0, 10)} - {end.substring(0, 10)}</p>
-                    <p>Urgence : {urgenceValue[urgence]}</p>
+                    <p id="date">{start.substring(0, 10)} - {end.substring(0, 10)}</p>
+                    <p id="urgence">Urgence : {urgenceValue[urgence]}</p>
                 </div>
                 <p className='card_date'>Dernier maj : <strong>il y a {differenceInDays.toString().split(".")[0]} jours</strong></p>
             </div>

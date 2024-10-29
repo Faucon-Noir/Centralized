@@ -2,7 +2,7 @@ import Image from 'next/image';
 import './style.scss';
 import FolderIcon from '@mui/icons-material/Folder';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+import { numberToColor } from '../../../helpers';
 
 export default function ProjetCard({ name, totalTickets, id, projectId, updateUserData, userData }: { name: any, totalTickets: any, id: any, projectId: any, updateUserData: any, userData: any }) {
 	function addSelectedProject() {

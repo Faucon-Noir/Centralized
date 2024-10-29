@@ -3,7 +3,7 @@ import './style.css';
 import { RexCardProps } from './type';
 import { ButtonBase, Icon } from '@mui/material';
 import ArchiveIcon from '@mui/icons-material/Archive';
-import { numberToColor } from '@/app/helpers';
+import { numberToColor } from '../../../helpers';
 
 function RexCard({ name, answer1, answer2, answer3, color }: any) {
     return (
@@ -12,7 +12,7 @@ function RexCard({ name, answer1, answer2, answer3, color }: any) {
                 <div className="rexCard">
                     <div className='enteterexcard'>
                         <div className='titrerexcard'>
-                            <Icon sx={{ color: numberToColor(color), height: '35px', width: '35px' }}>
+                            <Icon id="icon" sx={{ color: numberToColor(color), height: '35px', width: '35px' }}>
                                 <ArchiveIcon fontSize='large' />
                             </Icon>
                             <h2>{name ? name : ""}</h2>
