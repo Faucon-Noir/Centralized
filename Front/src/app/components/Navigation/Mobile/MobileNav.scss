@@ -5,22 +5,23 @@
 	min-height: 95vh;
 	display: flex;
 	flex-direction: column;
-	padding-top: 40px;
-	// align-items: center;
-	padding-right: 30px;
-	padding-left: 30px;
-
-	a {
-		text-decoration: none;
-	}
+	padding: 0;
+	overflow-y: auto;
 
 	.centralized_logo {
 		width: 100%;
+		margin-top: 10%;
 		display: flex;
 		justify-content: center;
 
 		img {
-			width: 90%;
+			width: 50%;
+			padding: 0;
+			@media (max-width: 400px) {
+				margin-top: 10%;
+				width: 80%;
+				padding: 0;
+			}
 		}
 	}
 
@@ -60,7 +61,7 @@
 	}
 
 	.home_button {
-		margin-top: 80px;
+		margin-top: 32px;
 		display: flex;
 		margin-bottom: 20px;
 	}
@@ -200,11 +201,6 @@
 		}
 	}
 }
-// @media (max-width: 1279.9px) {
-// 	.navigation {
-// 		display: none !important;
-// 	}
-// }
 
 .mobileNav {
 	position: fixed;
@@ -213,21 +209,6 @@
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-}
-
-.fullscreen-popup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 9999; /* Assurez-vous que ce z-index est supérieur à celui des autres éléments */
-	background-color: rgba(
-		0,
-		0,
-		0,
-		0.8
-	); /* Optionnel : ajoutez un fond semi-transparent */
 	display: flex;
 	justify-content: center;
 	align-items: center;

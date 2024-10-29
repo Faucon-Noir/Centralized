@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import '../Navigation.scss';
+import './DesktopNav.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
