@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import '../Navigation.scss';
+import './MobileNav.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
@@ -13,10 +13,12 @@ export default function MobileNavigation({
 	page = '',
 	userData,
 	updateUserData,
+	setShowMobileNav,
 }: {
 	page: String;
 	userData: any;
 	updateUserData: any;
+	setShowMobileNav: (show: boolean) => void;
 }) {
 	const [selctedMap, setSelctedMap] = useState<{ [key: string]: any }>({});
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
@@ -227,6 +229,7 @@ export default function MobileNavigation({
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
 					</button>
 				</div>
+				<button onClick={() => setShowMobileNav(false)}>Close</button>
 			</div>
 		</>
 	);
