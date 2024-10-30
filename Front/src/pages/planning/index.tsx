@@ -2,11 +2,11 @@
 import './style.scss';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
-import format from 'date-fns/format';
-import parse from 'date-fns/parse';
-import startOfWeek from 'date-fns/startOfWeek';
-import getDay from 'date-fns/getDay';
-import fr from 'date-fns/locale/fr';
+import format from 'date-fns/format/index.js';
+import parse from 'date-fns/parse/index.js';
+import startOfWeek from 'date-fns/startOfWeek/index.js';
+import getDay from 'date-fns/getDay/index.js';
+import fr from 'date-fns/locale/fr/index.js';
 import 'swiper/css/pagination';
 import { useCallback, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
