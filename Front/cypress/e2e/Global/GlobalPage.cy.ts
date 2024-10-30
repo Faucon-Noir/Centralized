@@ -1,15 +1,4 @@
 import { ButtonNewTicketCy } from '../../../src/pages/planning/const'
-import {
-	AccountButtonCy,
-	HomeButtonCy,
-	LogoutButtonCy,
-	PlanningButtonCy,
-	ProjectNameCy,
-	RexButtonCy,
-	SpecificationButtonCy,
-	TeamButtonCy,
-	TicketButtonCy
-} from '../../../src/app/components/Dashboard/const'
 import { 
 	mockGetPlanningByUserIdHttpCall,
 	mockGetProjectByIdHttpCall, 
