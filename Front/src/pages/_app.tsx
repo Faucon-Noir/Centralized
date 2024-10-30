@@ -13,6 +13,7 @@ import Dashboard from '@/app/components/Dashboard/Dashboard';
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
+	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
 	const [userData, setUserData] = useState<any>({
 		project: [{
 			rex: [],
@@ -28,10 +29,17 @@ export default function App({ Component, pageProps }: AppProps) {
 		if (Component.name != "LoginPage") {
 			UserData().then(result => {
 				setUserData(result)
+			setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
 			})
+		} else {
+			setLoading(false);
 		}
 	}, [Component.name])
 
+
+	if (loading) {
+		return <div>En attente</div>;
+	}
 
 	return (
 		<>

@@ -56,6 +56,12 @@ declare global {
 			 * @example cy.logout()
 			 */
 			logout(): void
+
+			/**
+			 * Custom command to select a project
+			 * @example cy.selectProject(value)
+			 */
+			selectProject(value: string): void
 		}
 	}
 }

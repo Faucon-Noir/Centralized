@@ -83,3 +83,14 @@ Cypress.Commands.add('logout', (): void => {
 	cy.clearLocalStorage()
 	cy.visit('localhost:3000/login')
 })
+
+Cypress.Commands.add('selectProject', (id: string): void => {
+	cy.visit('localhost:3000/')
+	localStorage.removeItem('SelectedProject')
+	localStorage.setItem(
+		'SelectedProject',
+		id
+	)
+	cy.visit('localhost:3000/')
+	cy.viewport(1920, 1080)
+})

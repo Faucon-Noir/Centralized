@@ -1,18 +1,262 @@
 {
 	"user": {
+		"ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e": {
+			"id": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"lastname": "A 2603",
+			"firstname": "A DCJ",
+			"mail": "testcentry2024@gmail.com",
+			"bio": "Je suis un des testeurs",
+			"phone": "0628413146"
+		},
 		"cd345ea2-2a5f-42f2-a588-560ff4eaba8e": {
 			"id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
-			"lastname": "2048",
-			"firstname": "JDC",
+			"lastname": "M 2048",
+			"firstname": "B JDC",
 			"mail": "beuret_m@etna-alternance.net",
 			"bio": "Je suis un petit suisse",
 			"phone": "+33 7 01 21 94 14"
 		}
 	},
-	"ticket": {},
-	"project": {},
-	"planning": {},
-	"team": {},
-	"rex": {},
-	"specification": {}
+	"ticket": {
+		"1eb6f8df-a650-4da7-93c5-e88531706246": {
+			"id": "1eb6f8df-a650-4da7-93c5-e88531706246",
+			"title": "Create register page 2 days",
+			"description": "test 1",
+			"urgenceId": 2,
+			"status": "",
+			"start_date": "2024-07-13T12:00:00.000Z",
+			"end_date": "2024-06-28T12:00:00.000Z",
+			"updated_at": "2024-07-13T12:00:00.000Z",
+			"planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+			"userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+		},
+		"3fcdfaed-46f7-11ef-9af0-2800af05439c": {
+			"id": "3fcdfaed-46f7-11ef-9af0-2800af05439c",
+			"title": "Creation du formulaire",
+			"description": "",
+			"urgenceId": 0,
+			"status": "ouvert",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-08-02T12:00:00.000Z",
+			"updated_at": "2024-07-21T12:00:00.000Z",
+			"planningId": "d1bca2c9-46f6-11ef-9af0-2800af05439c",
+			"userId": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"projectId": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		},
+		"3fce0e08-46f7-11ef-9af0-2800af05439c": {
+			"id": "3fce0e08-46f7-11ef-9af0-2800af05439c",
+			"title": "Recuperation des données pour entrainer l'ia",
+			"description": "",
+			"urgenceId": 4,
+			"status": "ouvert",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-07-30T12:00:00.000Z",
+			"updated_at": "2024-07-30T12:00:00.000Z",
+			"planningId": "d1bca2c9-46f6-11ef-9af0-2800af05439c",
+			"userId": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"projectId": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		},
+		"13a59846-03ab-45da-8bbd-fffff09c5dd5": {
+			"id": "13a59846-03ab-45da-8bbd-fffff09c5dd5",
+			"title": "Create login page 1 day",
+			"description": "test 2",
+			"urgenceId": 1,
+			"status": "ouvert",
+			"start_date": "2024-07-11T12:00:00.000Z",
+			"end_date": "2024-08-11T12:00:00.000Z",
+			"updated_at": "2024-07-30T12:00:00.000Z",
+			"planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+			"userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+		},
+		"56ba1573-6724-4f1a-ba8a-b1e2913b6670": {
+			"id": "56ba1573-6724-4f1a-ba8a-b1e2913b6670",
+			"title": "Create home page 1 week",
+			"description": "test 3",
+			"urgenceId": 0,
+			"status": "ouvert",
+			"start_date": "2024-07-12T12:00:00.000Z",
+			"end_date": "2024-09-20T12:00:00.000Z",
+			"updated_at": "2024-07-30T12:00:00.000Z",
+			"planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+			"userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+		},
+		"89ce69ae-8195-4f9d-bd04-c76e169b168b": {
+			"id": "89ce69ae-8195-4f9d-bd04-c76e169b168b",
+			"title": "enregistrer les tickets 2 semaines",
+			"description": "",
+			"urgenceId": 0,
+			"status": "ouvert",
+			"start_date": "2024-04-08T22:00:00.000Z",
+			"end_date": "2024-04-22T22:00:00.000Z",
+			"updated_at": "2024-04-08T12:00:00.000Z",
+			"planningId": "8d854790-e0b5-47b7-a038-a58c8c834e4e",
+			"userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"projectId": "c896afae-0532-4ee5-8385-110ccecf72d0"
+		},
+		"5296bc37-46f7-11ef-9af0-2800af05439c": {
+			"id": "5296bc37-46f7-11ef-9af0-2800af05439c",
+			"title": "Entrainer l'ia",
+			"description": "",
+			"urgenceId": 1,
+			"status": "ouvert",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-08-21T12:00:00.000Z",
+			"updated_at": "2024-04-08T12:00:00.000Z",
+			"planningId": "d1bca2c9-46f6-11ef-9af0-2800af05439c",
+			"userId": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"projectId": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		},
+		"f2237b36-8f90-4515-ad93-3d089bbc9df0": {
+			"id": "f2237b36-8f90-4515-ad93-3d089bbc9df0",
+			"title": "Créer un formulaire de création de projet 3 jours",
+			"description": "",
+			"urgenceId": 0,
+			"status": "ouvert",
+			"start_date": "2024-04-08T12:00:00.000Z",
+			"end_date": "2024-04-11T12:00:00.000Z",
+			"updated_at": "2024-04-08T12:00:00.000Z",
+			"planningId": "8d854790-e0b5-47b7-a038-a58c8c834e4e",
+			"userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"projectId": "c896afae-0532-4ee5-8385-110ccecf72d0"
+		},
+		"ff7130ed-46f6-11ef-9af0-2800af05439c": {
+			"id": "ff7130ed-46f6-11ef-9af0-2800af05439c",
+			"title": "Creation du site",
+			"description": "Créer le début du site qui accueillera le formulaire",
+			"urgenceId": 3,
+			"status": "ouvert",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-07-24T12:00:00.000Z",
+			"updated_at": "2024-07-21T12:00:00.000Z",
+			"planningId": "d1bca2c9-46f6-11ef-9af0-2800af05439c",
+			"userId": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"projectId": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		}
+	},
+	"project": {
+		"24411468-8707-4773-9af0-0e483cbaa459": {
+			"name": "Taverne des citations",
+			"description": "Un site web pour deviner des citations connus d'univers différents",
+			"functionality": "Lister la totalité des citations, mini jeu en multijoueur pour deviner l'auteur, système de préférence",
+			"forecast": "Créer la page de liste: 2 semaines, Créer le mini-jeu: 3 semaines; Système de filtre et préférence: 13 jours; Hébergé le site: 3 jours; remplir la base de donnée: 60 jours",
+			"start_date": "2024-03-20T12:00:00.000Z",
+			"end_date": "2024-03-20T12:00:00.000Z",
+			"budget": "10000€",
+			"technology": "Symphony/Php pour l'intégralité du site",
+			"constraints": "Capacité de faire des rooms de jeux. Pouvoir gerer plus de 1000 citations",
+			"validation": "100 parties joués, 100 visiteurs, toutes les citations One Piece correctement répertorié",
+			"template": "",
+			"status": false,
+			"team_user": "Jérémy Da Cruz Lead-dev et Jacques Cubaud en administrateur systeme",
+			"color": 0,
+			"id": "24411468-8707-4773-9af0-0e483cbaa459"
+		},
+		"c896afae-0532-4ee5-8385-110ccecf72d0": {
+			"name": "GPE",
+			"description": "Un site utilisant de l'IA pour générer des cahiers des charges",
+			"functionality": "Créer un cahier des charges a partir d'un formulaire, enregistrer des tickets a partir du résultat",
+			"forecast": "Créer un formulaire de création de projet 3 jours; créer la liaison avec l\\'api 2 jours; enregistrer les tickets 2 semaines",
+			"start_date": "2024-04-07T22:00:00.000Z",
+			"end_date": "2024-04-07T22:00:00.000Z",
+			"budget": "3000",
+			"technology": "symfony, javascript",
+			"constraints": "aucune",
+			"validation": "réussir a créer 3 projets",
+			"template": "",
+			"status": true,
+			"team_user": "Jérémy s'occupe de la connexion avec l'api. Dorian s'occupe du formulaire. Il s'occupe aussi de l'enregistrement des tickets avec Paul",
+			"color": 1,
+			"id": "c896afae-0532-4ee5-8385-110ccecf72d0"
+		},
+		"f932f3fb-214e-4873-b416-b45ccbec7fc4": {
+			"name": "template generator",
+			"description": "template generator",
+			"functionality": "génération de template par ia",
+			"forecast": "Creation du site: 1 jour ;création du formulaire: ...",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-09-21T12:00:00.000Z",
+			"budget": "1 000 euros",
+			"technology": "Chat GPT, node js, vue js",
+			"constraints": "Doit pouvoir être flexible par rapport au demande",
+			"validation": "Générer 3 templates avec 3 sujets différents",
+			"template": "0",
+			"status": false,
+			"team_user": "Doit pouvoir être flexible par rapport au demande",
+			"color": 2,
+			"id": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		}
+	},
+	"planning": {
+		"8d854790-e0b5-47b7-a038-a58c8c834e4e": {
+			"id": "8d854790-e0b5-47b7-a038-a58c8c834e4e",
+			"start_date": "2024-04-08T12:00:00.000Z",
+			"end_date": "2024-04-08T12:00:00.000Z",
+			"projectId": "c896afae-0532-4ee5-8385-110ccecf72d0"
+		},
+		"381aebb9-bdd6-4951-b87b-0de5d3506dab": {
+			"id": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+			"start_date": "2024-03-21T12:00:00.000Z",
+			"end_date": "2024-03-21T12:00:00.000Z",
+			"projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+		},
+		"d1bca2c9-46f6-11ef-9af0-2800af05439c": {
+			"id": "d1bca2c9-46f6-11ef-9af0-2800af05439c",
+			"start_date": "2024-07-21T12:00:00.000Z",
+			"end_date": "2024-09-21T12:00:00.000Z",
+			"projectId": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+		}
+	},
+	"team": 
+	{
+		"72e46816-5ff4-42ef-a000-8c95e9c6c38b": {
+			"id": "72e46816-5ff4-42ef-a000-8c95e9c6c38b",
+			"name": "CentralizedDevTeam",
+			"created_at": "2024-03-22T12:00:00.000Z"
+		},
+		"6362dd37-46f3-11ef-9af0-2800af05439c": {
+			"id": "6362dd37-46f3-11ef-9af0-2800af05439c",
+			"name": "VoidTeam",
+			"created_at": "2024-07-21T12:00:00.000Z"
+		},
+		"8327bda4-6bc5-4f2c-9b61-c6cfcc5df290": {
+			"id": "8327bda4-6bc5-4f2c-9b61-c6cfcc5df290",
+			"name": "TemplateDevTeam",
+			"created_at": "2024-06-23T12:00:00.000Z"
+		}
+	},
+	"rex": {
+		"365a05b4-874b-4857-9742-ffb957ef1340": {
+			"id": "365a05b4-874b-4857-9742-ffb957ef1340",
+			"name": "GPE",
+			"answer1": "dshjdkflgm",
+			"answer2": "jkdjxckgv",
+			"answer3": "lvgkcfgly"
+		}
+	},
+	"specification": {
+		"59edc064-46f6-11ef-9af0-2800af05439c": {
+			"id": "59edc064-46f6-11ef-9af0-2800af05439c",
+			"project_id": "f932f3fb-214e-4873-b416-b45ccbec7fc4",
+			"user_id": "ae4bb54f-7e80-4c19-a6c8-8c7d3f8ba85e",
+			"team_id": "6362dd37-46f3-11ef-9af0-2800af05439c",
+			"cdc": "<h1>&nbsp;Cahier des charges: Template generator</h1>"
+		},
+		"623e3bbf-5650-45f2-b06c-f673d08e4c0a": {
+			"id": "623e3bbf-5650-45f2-b06c-f673d08e4c0a",
+			"project_id": "24411468-8707-4773-9af0-0e483cbaa459",
+			"user_id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"team_id": "72e46816-5ff4-42ef-a000-8c95e9c6c38b",
+			"cdc": "<h1>&nbsp;Cahier des charges: Taverne des citations</h1>"
+		},
+		"16005ed0-19bc-4969-a393-de7d09d21d4a": {
+			"id": "16005ed0-19bc-4969-a393-de7d09d21d4a",
+			"project_id": "c896afae-0532-4ee5-8385-110ccecf72d0",
+			"user_id": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+			"team_id": "72e46816-5ff4-42ef-a000-8c95e9c6c38b",
+			"cdc": "<h1>&nbsp;Cahier des charges: Générateur de Projets avec IA (GPE)</h1>"
+		}
+	}
 }
