@@ -10,6 +10,7 @@ import fr from "date-fns/locale/fr";
 import 'swiper/css/pagination';
 import { useCallback, useState, useEffect } from 'react';
 import { useRouter } from "next/router";
+import { ButtonNewTicketCy, CalendarCy } from './const';
 
 
 const messages = {
@@ -152,12 +153,12 @@ export default function Planning({ userData, updateUserData }: { userData: any, 
 					<hr style={{ marginLeft: 0 }} />
 
 					<div className="affichage_bouton">
-						<button className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
+						<button data-cy={ButtonNewTicketCy} className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
 							Nouveau Ticket
 						</button>
 					</div>
 				</div>
-				<div className='Calendar'>
+				<div data-cy={CalendarCy} className='Calendar'>
 					<Calendar
 						culture="fr"
 						messages={messages}
