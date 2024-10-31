@@ -82,72 +82,76 @@ export default function Tickets({
 					</ButtonBase>
 				</div>
 				<hr style={{ marginLeft: 0 }} />
-
 				<div className='ticket_container'>
-					<div className='todo_container'>
-						<h2>A faire</h2>
-						<div className='card_container'>
-							{projectTickets.todo.map((item: any) => (
-								<TicketCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									start={item.start_date}
-									end={item.end_date}
-									urgence={item.urgenceId}
-									updated_at={item.updated_at}
-								/>
-							))}
+					<div className='debut_container'>
+						<div className='todo_container'>
+							<h2>A faire</h2>
+							<div className='card_container'>
+								{projectTickets.todo.map((item: any) => (
+									<TicketCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										start={item.start_date}
+										end={item.end_date}
+										urgence={item.urgenceId}
+										updated_at={item.updated_at}
+									/>
+								))}
+							</div>
 						</div>
-					</div>
-					<div className='inprogress_container'>
-						<h2>En cours</h2>
+						
+						<div className='inprogress_container'>
+							<h2>En cours</h2>
 
-						<div className='card_container'>
-							{projectTickets.inprogress.map((item: any) => (
-								<TicketCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									start={item.start_date}
-									end={item.end_date}
-									urgence={item.urgenceId}
-									updated_at={item.updated_at}
-								/>
-							))}
+							<div className='card_container'>
+								{projectTickets.inprogress.map((item: any) => (
+									<TicketCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										start={item.start_date}
+										end={item.end_date}
+										urgence={item.urgenceId}
+										updated_at={item.updated_at}
+									/>
+								))}
+							</div>
 						</div>
 					</div>
-					<div className='late_container'>
-						<h2>En retard</h2>
-						<div className='card_container'>
-							{projectTickets.late.map((item: any) => (
-								<TicketCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									start={item.start_date}
-									end={item.end_date}
-									urgence={item.urgenceId}
-									updated_at={item.updated_at}
-								/>
-							))}
+					<div className='fin_container'>
+						<div className='late_container'>
+							<h2>En retard</h2>
+							<div className='card_container'>
+								{projectTickets.late.map((item: any) => (
+									<TicketCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										start={item.start_date}
+										end={item.end_date}
+										urgence={item.urgenceId}
+										updated_at={item.updated_at}
+									/>
+								))}
+							</div>
 						</div>
-					</div>
-					<div className='done_container'>
-						<h2>Terminé</h2>
+						<div className='done_container'>
+							<h2>Terminé</h2>
 
-						<div className='card_container'>
-							{projectTickets.done.map((item: any) => (
-								<TicketCard
-									key={item.id}
-									id={item.id}
-									title={item.title}
-									start={item.start_date}
-									end={item.end_date}
-									urgence={item.urgenceId}
-									updated_at={item.updated_at}
-								/>
-							))}
+							<div className='card_container'>
+								{projectTickets.done.map((item: any) => (
+									<TicketCard
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										start={item.start_date}
+										end={item.end_date}
+										urgence={item.urgenceId}
+										updated_at={item.updated_at}
+									/>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
