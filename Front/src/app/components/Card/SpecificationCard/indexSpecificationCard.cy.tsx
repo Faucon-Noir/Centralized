@@ -1,6 +1,6 @@
 import React from 'react'
 import SpecificationCard from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('SpecificationCard', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

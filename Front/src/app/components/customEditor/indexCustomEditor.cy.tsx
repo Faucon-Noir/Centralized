@@ -1,6 +1,6 @@
 import React from 'react'
 import CustomEditor from './index'
-
+/* eslint-disable react/no-children-prop */
 
 describe('<CustomEditor />', () => {
   it('renders', () => {

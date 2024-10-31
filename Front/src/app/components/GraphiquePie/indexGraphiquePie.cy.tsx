@@ -1,6 +1,6 @@
 import React from 'react'
 import GraphiquePie from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('<GraphiquePie />', () => {
   it('renders', () => {
     var nbrTicketByUser = [{ userName: "Patrick", nbr_ticket: 5 }, { userName: "Louis", nbr_ticket: 2 }]

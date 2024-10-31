@@ -5,7 +5,7 @@ import ProjetCard from '../../Card/ProjectCard'
 import './style.scss';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-
+/* eslint-disable react/no-children-prop */
 describe('CustomSwiper', () => {
   it('renders', () => {
     cy.viewport(1920, 1080);

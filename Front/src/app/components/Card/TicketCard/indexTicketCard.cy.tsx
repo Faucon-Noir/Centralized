@@ -2,7 +2,7 @@ import React from 'react'
 import TicketCard from './index'
 import { parse } from 'date-fns';
 import { fr } from 'date-fns/locale';
-
+/* eslint-disable react/no-children-prop */
 describe('<TicketCard />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

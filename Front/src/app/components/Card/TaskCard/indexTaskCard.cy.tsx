@@ -1,6 +1,6 @@
 import React from 'react'
 import TaskCard from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('TaskCard', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

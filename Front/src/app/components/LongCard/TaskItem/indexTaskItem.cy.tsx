@@ -2,7 +2,7 @@ import React from 'react'
 import TaskItem from './index'
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-
+/* eslint-disable react/no-children-prop */
 describe('<TaskItem />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

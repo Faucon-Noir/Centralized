@@ -1,6 +1,6 @@
 import React from 'react'
 import TeamItem from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('<TeamItem />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

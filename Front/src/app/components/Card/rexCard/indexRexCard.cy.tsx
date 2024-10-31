@@ -1,6 +1,6 @@
 import React from 'react'
 import RexCard from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('RexCard', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

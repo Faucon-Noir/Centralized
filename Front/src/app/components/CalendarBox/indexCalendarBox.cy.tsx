@@ -2,7 +2,7 @@ import React from 'react'
 import CalendarBox from './index'
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
-
+/* eslint-disable react/no-children-prop */
 dayjs.locale('fr');
 describe('CalendarBox', () => {
   let today = new Date();

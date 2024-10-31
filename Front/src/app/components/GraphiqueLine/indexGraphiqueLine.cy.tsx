@@ -3,7 +3,7 @@ import GraphiqueLine from './index'
 import addWeeks from 'date-fns/addWeeks/index.js';
 import format from 'date-fns/format/index.js';
 import startOfISOWeek from 'date-fns/startOfISOWeek/index.js';
-
+/* eslint-disable react/no-children-prop */
 const labels = Array.from({ length: 9 }, (_, i) =>
   format(startOfISOWeek(addWeeks(new Date(), i - 4)), 'dd/MM/yyyy')
 );

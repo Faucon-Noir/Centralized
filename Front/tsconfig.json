@@ -25,6 +25,6 @@
 		},
 		"strictNullChecks": true,
 	},
-	"include": ["next-env.d.ts", ".next/types/**/*.ts"],
+	"include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["cypress/", "node_modules", "**/*.cy.tsx", "**/*.cy.ts"],
 }

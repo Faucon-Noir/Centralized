@@ -1,6 +1,6 @@
 import React from 'react'
 import ProjetCard from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('ProjetCard', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

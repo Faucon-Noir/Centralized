@@ -1,6 +1,6 @@
 import React from 'react'
 import RexItem from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('<RexItem />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react

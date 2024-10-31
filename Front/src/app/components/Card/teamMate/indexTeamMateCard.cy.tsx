@@ -1,6 +1,6 @@
 import React from 'react'
 import TeamMateCard from './index'
-
+/* eslint-disable react/no-children-prop */
 describe('<TeamMateCard />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
