@@ -11,10 +11,22 @@ import './style.scss';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import { useEffect, useState } from 'react';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import Dashboard from "@/app/components/Dashboard/Dashboard";
-import { AvartarImageCy, BioFielCy, BioLabelCy, EmailFielCy, EmailLabelCy, FirstNameFielCy, FirstNameLabelCy, LastNameFielCy, LastNameLabelCy, PhoneFielCy, PhoneLabelCy, SaveButtonCy } from "@/app/const/account/const";
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import {
+	AvartarImageCy,
+	BioFielCy,
+	BioLabelCy,
+	EmailFielCy,
+	EmailLabelCy,
+	FirstNameFielCy,
+	FirstNameLabelCy,
+	LastNameFielCy,
+	LastNameLabelCy,
+	PhoneFielCy,
+	PhoneLabelCy,
+	SaveButtonCy,
+} from '@/app/const/account/const';
 
 export default function AccountPage({
 	userData,
@@ -119,9 +131,16 @@ export default function AccountPage({
 		<>
 			<div className='accent' />
 			<div style={{ display: 'block' }}>
-				<div data-cy={AvartarImageCy} className="profile-photo" style={{ position: 'relative' }}>
-					<Avatar src={`/media/${user.avatar}`} sx={{ height: '100%', width: '100%' }} />
-					<div id='inner' className="inner" onClick={handleClickOpen}>
+				<div
+					data-cy={AvartarImageCy}
+					className='profile-photo'
+					style={{ position: 'relative' }}
+				>
+					<Avatar
+						src={`/media/${user.avatar}`}
+						sx={{ height: '100%', width: '100%' }}
+					/>
+					<div id='inner' className='inner' onClick={handleClickOpen}>
 						<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
 					</div>
 					<Modal open={open}>
@@ -144,14 +163,20 @@ export default function AccountPage({
 			</div>
 
 			<form>
-				<Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+				<Box
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						flexGrow: 1,
+					}}
+				>
 					<label data-cy={FirstNameLabelCy} htmlFor='firstName'>
 						First Name
 					</label>
 					<TextField
-                		data-cy={FirstNameFielCy}
-						size="small"
-						className="textField"
+						data-cy={FirstNameFielCy}
+						size='small'
+						className='textField'
 						placeholder={'Votre prénom'}
 						value={user?.firstname ? user.firstname : ''}
 						onChange={(e) =>
@@ -162,9 +187,9 @@ export default function AccountPage({
 						Last Name
 					</label>
 					<TextField
-                		data-cy={LastNameFielCy}
-						size="small"
-						className="textField"
+						data-cy={LastNameFielCy}
+						size='small'
+						className='textField'
 						placeholder={'Votre nom'}
 						value={user?.lastname ? user.lastname : ''}
 						onChange={(e) =>
@@ -175,9 +200,9 @@ export default function AccountPage({
 						Email
 					</label>
 					<TextField
-              			data-cy={EmailFielCy}
-						size="small"
-						className="textField"
+						data-cy={EmailFielCy}
+						size='small'
+						className='textField'
 						placeholder={'Votre adresse mail'}
 						value={user?.mail ? user.mail : ''}
 						onChange={(e) =>
@@ -188,9 +213,9 @@ export default function AccountPage({
 						Phone
 					</label>
 					<TextField
-              			data-cy={PhoneFielCy}
-						size="small"
-						className="textField"
+						data-cy={PhoneFielCy}
+						size='small'
+						className='textField'
 						placeholder={'Votre numéro de téléphone'}
 						value={user?.phone ? user.phone : ''}
 						onChange={(e) =>
@@ -201,7 +226,7 @@ export default function AccountPage({
 						Bio
 					</label>
 					<TextField
-              			data-cy={BioFielCy}
+						data-cy={BioFielCy}
 						multiline
 						className='textField'
 						placeholder={'Une courte description de vous-même'}
@@ -212,7 +237,13 @@ export default function AccountPage({
 					/>
 				</Box>
 
-				<Button data-cy={SaveButtonCy} disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
+				<Button
+					data-cy={SaveButtonCy}
+					disabled={!user}
+					className='cta-primary'
+					type='submit'
+					onClick={(e) => handleUpdate(e)}
+				>
 					Sauvegarder
 				</Button>
 			</form>
