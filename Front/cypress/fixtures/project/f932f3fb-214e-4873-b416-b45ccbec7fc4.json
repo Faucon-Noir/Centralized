@@ -1,0 +1,17 @@
+{
+    "name": "template generator",
+    "description": "template generator",
+    "functionality": "génération de template par ia",
+    "forecast": "Creation du site: 1 jour ;création du formulaire: ...",
+    "start_date": "2024-07-21T12:00:00.000Z",
+    "end_date": "2024-09-21T12:00:00.000Z",
+    "budget": "1 000 euros",
+    "technology": "Chat GPT, node js, vue js",
+    "constraints": "Doit pouvoir être flexible par rapport au demande",
+    "validation": "Générer 3 templates avec 3 sujets différents",
+    "template": "0",
+    "status": false,
+    "team_user": "Doit pouvoir être flexible par rapport au demande",
+    "color": 2,
+    "id": "f932f3fb-214e-4873-b416-b45ccbec7fc4"
+}

@@ -7,6 +7,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
+import { AvartarImageCy, BioFielCy, BioLabelCy, EmailFielCy, EmailLabelCy, FirstNameFielCy, FirstNameLabelCy, LastNameFielCy, LastNameLabelCy, PhoneFielCy, PhoneLabelCy, SaveButtonCy } from "@/app/const/account/const";
 
 
 
@@ -104,7 +105,7 @@ export default function AccountPage({ userData, updateUserData }: { userData: an
 
 			<div className="accent" />
 			<div style={{ display: 'block' }}>
-				<div className="profile-photo" style={{ position: 'relative' }}>
+				<div data-cy={AvartarImageCy} className="profile-photo" style={{ position: 'relative' }}>
 					<Avatar src={`/media/${user.avatar}`} sx={{ height: '100%', width: '100%' }} />
 					<div id='inner' className="inner" onClick={handleClickOpen}>
 						<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
@@ -123,50 +124,55 @@ export default function AccountPage({ userData, updateUserData }: { userData: an
 
 			<form>
 				<Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-					<label htmlFor='firstName'>
+					<label data-cy={FirstNameLabelCy} htmlFor='firstName'>
 						First Name
 					</label>
 					<TextField
+                		data-cy={FirstNameFielCy}
 						size="small"
 						className="textField"
 						placeholder={'Votre prénom'}
 						value={user?.firstname ? user.firstname : ''}
 						onChange={(e) => setUser({ ...user, firstname: e.target.value })}
 					/>
-					<label htmlFor='lastName'>
+					<label data-cy={LastNameLabelCy} htmlFor='lastName'>
 						Last Name
 					</label>
 					<TextField
+                		data-cy={LastNameFielCy}
 						size="small"
 						className="textField"
 						placeholder={'Votre nom'}
 						value={user?.lastname ? user.lastname : ''}
 						onChange={(e) => setUser({ ...user, lastname: e.target.value })}
 					/>
-					<label htmlFor='email'>
+					<label data-cy={EmailLabelCy} htmlFor='email'>
 						Email
 					</label>
 					<TextField
+              			data-cy={EmailFielCy}
 						size="small"
 						className="textField"
 						placeholder={'Votre adresse mail'}
 						value={user?.mail ? user.mail : ''}
 						onChange={(e) => setUser({ ...user, mail: e.target.value })}
 					/>
-					<label htmlFor='phone'>
+					<label data-cy={PhoneLabelCy} htmlFor='phone'>
 						Phone
 					</label>
 					<TextField
+              			data-cy={PhoneFielCy}
 						size="small"
 						className="textField"
 						placeholder={'Votre numéro de téléphone'}
 						value={user?.phone ? user.phone : ''}
 						onChange={(e) => setUser({ ...user, phone: e.target.value })}
 					/>
-					<label htmlFor='bio'>
+					<label data-cy={BioLabelCy} htmlFor='bio'>
 						Bio
 					</label>
 					<TextField
+              			data-cy={BioFielCy}
 						multiline
 						className="textField"
 						placeholder={'Une courte description de vous-même'}
@@ -175,7 +181,7 @@ export default function AccountPage({ userData, updateUserData }: { userData: an
 					/>
 				</Box>
 
-				<Button disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
+				<Button data-cy={SaveButtonCy} disabled={!user} className='cta-primary' type='submit' onClick={(e) => handleUpdate(e)} >
 					Sauvegarder
 				</Button>
 			</form>

@@ -1,0 +1,17 @@
+{
+    "name": "Taverne des citations",
+    "description": "Un site web pour deviner des citations connus d'univers différents",
+    "functionality": "Lister la totalité des citations, mini jeu en multijoueur pour deviner l'auteur, système de préférence",
+    "forecast": "Créer la page de liste: 2 semaines, Créer le mini-jeu: 3 semaines; Système de filtre et préférence: 13 jours; Hébergé le site: 3 jours; remplir la base de donnée: 60 jours",
+    "start_date": "2024-03-20T12:00:00.000Z",
+    "end_date": "2024-03-20T12:00:00.000Z",
+    "budget": "10000€",
+    "technology": "Symphony/Php pour l'intégralité du site",
+    "constraints": "Capacité de faire des rooms de jeux. Pouvoir gerer plus de 1000 citations",
+    "validation": "100 parties joués, 100 visiteurs, toutes les citations One Piece correctement répertorié",
+    "template": "",
+    "status": false,
+    "team_user": "Jérémy Da Cruz Lead-dev et Jacques Cubaud en administrateur systeme",
+    "color": 0,
+    "id": "24411468-8707-4773-9af0-0e483cbaa459"
+}

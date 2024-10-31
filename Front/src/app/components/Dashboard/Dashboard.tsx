@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import './Dashboard.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+import { numberToColor } from '../../helpers';
 import Link from 'next/link'
 
 export default function Dashboard({ page = '', userData, updateUserData }: { page: String, userData: any, updateUserData: any }) {

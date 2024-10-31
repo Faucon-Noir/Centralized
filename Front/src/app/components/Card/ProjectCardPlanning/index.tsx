@@ -1,7 +1,7 @@
 import './style.scss';
 import { ProjetCardPlanningProps } from './type';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+import { numberToColor } from '../../../helpers';
 import FolderIcon from '@mui/icons-material/Folder';
 import { useRouter } from 'next/router';
 

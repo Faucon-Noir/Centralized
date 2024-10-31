@@ -84,6 +84,7 @@ import { numberToColor } from '@/app/helpers';
 import dynamic from 'next/dynamic';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from "axios";
+import { ButtonSubmitSpecificationCy, EditorCy, PopUpSpecificationCy, TitleSpecificationCy } from "@/app/const/specification/const";
 const CustomEditor = dynamic(() => import('@/app/components/customEditor'), { ssr: false });
 
 export default function SpecificationEdit({ userData, updateUserData }: { userData: any, updateUserData: any }) {
@@ -144,19 +145,19 @@ export default function SpecificationEdit({ userData, updateUserData }: { userDa
     <div className="spec_id">
       <div className="right_container">
         <div className="Presentation">
-          <div className='TitrePage' style={{ color: numberToColor(projectMap[projectPageID]?.color !== undefined ? projectMap[projectPageID]?.color : 0) }}> {projectMap[projectPageID] ? <h1>Mon cahier des charges</h1> : null}</div>
+          <div data-cy={TitleSpecificationCy} className='TitrePage' style={{ color: numberToColor(projectMap[projectPageID]?.color !== undefined ? projectMap[projectPageID]?.color : 0) }}> {projectMap[projectPageID] ? <h1>Mon cahier des charges</h1> : null}</div>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="box-specification">
-            <CustomEditor content={projectMap[projectPageID]?.cdc?.cdc} onChange={(value: string) => handleChangeContentText(value)} />
-            <button type="submit">
+            <CustomEditor data-cy={EditorCy} content={projectMap[projectPageID]?.cdc?.cdc} onChange={(value: string) => handleChangeContentText(value)} />
+            <button data-cy={ButtonSubmitSpecificationCy} type="submit">
               <CheckIcon />
             </button>
           </div>
         </form>
         {showPopPup ?
           <div className='reqLoad'>
-            <img src="/assets/icons/icon-cross.svg" alt="" className='cross' onClick={() => setShowPopPup(false)} />
+            <img data-cy={PopUpSpecificationCy} src="/assets/icons/icon-cross.svg" alt="" className='cross' onClick={() => setShowPopPup(false)} />
             <p >Modification</p>
             <p style={{ fontSize: "10px" }}>Votre cahier des charges à été modifié avec succes</p>
           </div>

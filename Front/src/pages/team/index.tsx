@@ -3,6 +3,7 @@ import './style.scss';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TeamCard from '@/app/components/Card/TeamCard';
+import { ButtonCreateTeamCy } from '@/app/const/team/teamConst';
 function Team({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 
 	console.log(userData)
@@ -10,7 +11,7 @@ function Team({ userData, updateUserData }: { userData: any, updateUserData: any
 		<div className='teamPage'>
 			<div className='header'>
 				<h1>Mes équipes</h1>
-				<ButtonBase >
+				<ButtonBase data-cy={ButtonCreateTeamCy}>
 					<AddIcon
 						fontSize='medium'
 						sx={{ color: '#000000' }}

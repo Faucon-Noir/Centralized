@@ -1,0 +1,44 @@
+{
+    "ticket": [
+        {
+            "id": "1eb6f8df-a650-4da7-93c5-e88531706246",
+            "title": "Create register page 2 days",
+            "description": "test 1",
+            "urgenceId": 2,
+            "status": "résolu",
+            "start_date": "2024-07-13T12:00:00.000Z",
+            "end_date": "2024-06-28T12:00:00.000Z",
+            "updated_at": "2024-07-13T12:00:00.000Z",
+            "planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+            "userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+            "projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+        },
+        {
+            "id": "13a59846-03ab-45da-8bbd-fffff09c5dd5",
+            "title": "Create login page 1 day",
+            "description": "test 2",
+            "urgenceId": 1,
+            "status": "ouvert",
+            "start_date": "2024-07-11T12:00:00.000Z",
+            "end_date": "2024-08-11T12:00:00.000Z",
+            "updated_at": "2024-07-30T12:00:00.000Z",
+            "planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+            "userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+            "projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+        },
+        {
+            "id": "56ba1573-6724-4f1a-ba8a-b1e2913b6670",
+            "title": "Create home page 1 week",
+            "description": "test 3",
+            "urgenceId": 0,
+            "status": "ouvert",
+            "start_date": "2024-07-12T12:00:00.000Z",
+            "end_date": "2024-09-20T12:00:00.000Z",
+            "updated_at": "2024-07-30T12:00:00.000Z",
+            "planningId": "381aebb9-bdd6-4951-b87b-0de5d3506dab",
+            "userId": "cd345ea2-2a5f-42f2-a588-560ff4eaba8e",
+            "projectId": "24411468-8707-4773-9af0-0e483cbaa459"
+        }
+    ],
+    "count": 3
+}

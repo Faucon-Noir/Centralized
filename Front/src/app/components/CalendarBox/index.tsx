@@ -6,7 +6,7 @@ import './style.scss';
 import { CalendarBoxProps } from './type';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import { numberToColor, urgenceIdToString } from "@/app/helpers";
+import { numberToColor, urgenceIdToString } from "../../helpers";
 import Link from 'next/link'
 
 type ValuePiece = Date | null;

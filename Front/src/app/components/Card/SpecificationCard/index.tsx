@@ -3,7 +3,7 @@ import "./style.scss"
 import { SpecificationCardProps } from "./type";
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { Icon } from "@mui/material";
-import { numberToColor } from "@/app/helpers";
+import { numberToColor } from "../../../helpers";
 import Link from 'next/link'
 
 export default function SpecificationCard({ title, id, color }: any) {
