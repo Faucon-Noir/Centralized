@@ -9,7 +9,7 @@ import {
 import {
 	ButtonNewTicketCy,
 	CalendarCy,
-} from '../../../src/pages/planning/const'
+} from '../../../src/app/const/planning/const'
 
 // Collection de tests
 describe('PlanningPage', () => {

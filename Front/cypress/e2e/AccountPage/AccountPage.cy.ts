@@ -12,7 +12,7 @@ import {
 	PhoneFielCy,
 	PhoneLabelCy,
 	SaveButtonCy,
-} from '../../../src/pages/account/const'
+} from '../../../src/app/const/account/const'
 
 // Collection de tests
 describe('AccountPage', () => {

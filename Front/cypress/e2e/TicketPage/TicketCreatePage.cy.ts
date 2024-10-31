@@ -17,7 +17,7 @@ import {
 	StartTitcketLabelCy,
 	UrgenceErrorCy,
 	UrgenceFieldCy,
-	UrgenceLabelCy } from '../../../src/pages/ticket/const'
+	UrgenceLabelCy } from '../../../src/app/const/ticket/ticketConst'
 import {
 	mockGetPlanningByUserIdHttpCall,
 	mockPostCreateTicketHttpCall } from '../../support/helper'

@@ -1,4 +1,4 @@
-import { ButtonNewTicketCy } from '../../../src/pages/planning/const'
+import { ButtonNewTicketCy } from '../../../src/app/const/planning/const'
 import { 
 	mockGetPlanningByUserIdHttpCall,
 	mockGetProjectByIdHttpCall, 

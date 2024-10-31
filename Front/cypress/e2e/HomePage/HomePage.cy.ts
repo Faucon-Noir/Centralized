@@ -17,7 +17,7 @@ import {
 // import { HomeSpecificationCardCy, HomeSpecificationCardTitleCy } from '../../../src/app/components/SpecificationCard/const'
 // import { HomeRexCardCy, RexCardAnswer1Cy, RexCardAnswer2Cy, RexCardAnswer3Cy } from '../../../src/app/components/rexCard/const'
 // import { HomeTeamCardCy, HomeTeamCardNameCy } from '../../../src/app/components/TeamCard/const'
-import { HomeHelloCy } from '../../../src/pages/home/const'
+import { HomeHelloCy } from '../../../src/app/const/home/const'
 
 //TODO refaire les tests
 // Collection de tests

@@ -28,7 +28,7 @@ import {
 	WhiteGridCy,
 	WhiteLogoImgCy,
 	WhiteLogoLabelCy,
-} from '../../../src/pages/login/const'
+} from '../../../src/app/const/login/const'
 
 // Ici on test la page de login en tant qu'utilisateur
 // On ne regarde pas le style seulement le contenu et le comportement

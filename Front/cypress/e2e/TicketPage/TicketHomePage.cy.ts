@@ -1,4 +1,4 @@
-import { ButtonCreateTicketCy } from '../../../src/pages/ticket/[projectId]/const'
+import { ButtonCreateTicketCy } from '../../../src/app/const/ticket/ticketIdConst'
 import { BoxTicketCardCy, MajTicketCardCy, NameTicketCardCy, PeriodTicketCardCy, UrgenceTicketCardCy } from '../../../src/app/components/Card/TicketCard/const'
 import { mockGetProjectByIdHttpCall, mockGetProjectByUserIdHttpCall, mockGetRexByProjectIdHttpCall, mockGetSpecificationByUserHttpCall, mockGetTeamUserByUserIdHttpCall, mockGetTicketByProjectIdHttpCall, mockGetUserByIdHttpCall, mockPatchUpdateTicketHttpCall } from '../../support/helper'
 
