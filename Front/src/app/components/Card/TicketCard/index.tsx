@@ -1,6 +1,5 @@
 import { BoxTicketCardCy, MajTicketCardCy, NameTicketCardCy, PeriodTicketCardCy, UrgenceTicketCardCy } from './const';
 import './style.scss';
-import { numberToColor } from '@/app/helpers';
 
 export default function TicketCard({ id, title, start, end, urgence, updated_at }: { id: any, title: any, start: any, end: any, urgence: 0 | 1 | 2 | 3 | 4, updated_at: Date }) {
     let urgenceValue = {

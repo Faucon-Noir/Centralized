@@ -1,35 +1,23 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
 	ButtonGroupStyle,
-	FormBoxStyle,
-	LoginButtonStyle,
-	MailFieldStyle,
 	MainBoxStyle,
-	PwdFieldStyle,
-	TextFieldStyle,
-	TitleStyle,
-	TypoStyle,
-} from "./style";
+} from './style';
 import {
 	Box,
-	Button,
 	ButtonGroup,
 	Checkbox,
 	Container,
 	FormControlLabel,
 	Link,
-	TextField,
-	Typography,
 } from "@mui/material";
 import axios from "axios";
-import { redirect } from 'next/navigation'
 import { useRouter } from "next/router";
 import { Poppins } from 'next/font/google'
 import confetti from "canvas-confetti";
-import { Mosaic } from "react-loading-indicators";
 import { CGUButtonCy, ForgotPasswordLinkCy, SwitchLoginButtonCy, MailFieldCy, NameFieldCy, PasswordFieldCy, PhoneFieldCy, SwitchRegisterButtonCy, SurnameFieldCy, SubmitButtonCy, RegistrationFormCy } from "./const";
 
-const poppins = Poppins({ subsets: ['latin'], weight: "600" })
+const poppins = Poppins({ subsets: ['latin'], weight: '600' });
 
 function RegistrationForm() {
 	const router = useRouter();
@@ -37,27 +25,28 @@ function RegistrationForm() {
 	const [isErrorLogin, setIsErrorLogin] = useState<number>(0);
 	const [isErrorRegister, setIsErrorRegister] = useState<number>(0);
 	const [user, setUser] = useState({
-		lastname: "",
-		firstname: "",
-		mail: "",
-		phone: "",
-		password: ""
-	})
+		lastname: '',
+		firstname: '',
+		mail: '',
+		phone: '',
+		password: '',
+	});
 	function handleRedirect(e: any) {
 		e.preventDefault();
 
 		if (isRegister == false) {
 			setIsErrorLogin(0);
-			axios.post(`http://localhost:8000/api/login`, {
-				mail: user.mail.trim(),
-				password: user.password.trim()
-			})
+			axios
+				.post(`http://localhost:8000/api/login`, {
+					mail: user.mail.trim(),
+					password: user.password.trim(),
+				})
 				.then(function (response) {
 					console.log(response);
 					if (response.status === 200 && response.data.success) {
-						localStorage.setItem("token", response.data.token);
-						console.log('logged in')
-						router.push('/home')
+						localStorage.setItem('token', response.data.token);
+						console.log('logged in');
+						router.push('/home');
 					} else {
 						setIsErrorLogin(1);
 					}
@@ -69,13 +58,14 @@ function RegistrationForm() {
 		} else {
 			setIsErrorRegister(0);
 
-			axios.post(`http://localhost:8000/api/register`, {
-				lastname: user.lastname.trim(),
-				firstname: user.firstname.trim(),
-				mail: user.mail.trim(),
-				phone: user.phone.trim(),
-				password: user.password.trim()
-			})
+			axios
+				.post(`http://localhost:8000/api/register`, {
+					lastname: user.lastname.trim(),
+					firstname: user.firstname.trim(),
+					mail: user.mail.trim(),
+					phone: user.phone.trim(),
+					password: user.password.trim(),
+				})
 				.then(function (response) {
 					if (response.status === 200 && response.data.success) {
 						for (let index = 0; index < 20; index++) {
@@ -83,19 +73,20 @@ function RegistrationForm() {
 								origin: {
 									x: Math.random() - 0.1,
 									y: Math.random() - 0.1,
-								}
+								},
 							});
 						}
 
 						setTimeout(() => {
 							setIsErrorLogin(0);
 							setIsErrorRegister(0);
-							localStorage.setItem("token", response.data.token);
-							router.push('/home')
+							localStorage.setItem('token', response.data.token);
+							router.push('/home');
 						}, 1000);
-
-
-					} else if (response.data.error && response.data.error == "Account existing. Please Login") {
+					} else if (
+						response.data.error &&
+						response.data.error == 'Account existing. Please Login'
+					) {
 						setIsErrorRegister(1);
 					} else {
 						setIsErrorRegister(2);
@@ -104,7 +95,7 @@ function RegistrationForm() {
 				.catch(function (error) {
 					console.log(error);
 					setIsErrorRegister(1);
-				})
+				});
 		}
 	}
 
@@ -114,9 +105,9 @@ function RegistrationForm() {
 			<Box sx={MainBoxStyle}>
 				<Box
 					sx={{
-						backgroundColor: "#0293FC",
-						padding: "4px",
-						borderRadius: "16px",
+						backgroundColor: '#0293FC',
+						padding: '4px',
+						borderRadius: '16px',
 					}}
 				>
 					<ButtonGroup variant="contained" sx={ButtonGroupStyle}>
@@ -153,7 +144,7 @@ function RegistrationForm() {
 							<input type="password" placeholder="**********" onChange={e => setUser({ ...user, password: e.target.value })} />
 						</div>
 					</div>
-					{isRegister
+					{isRegister 
 						// TODO: ajouter le lien aux CGU
 						? <FormControlLabel data-cy={CGUButtonCy} required control={<Checkbox />} label="J'accepte les conditions d'utilisation" />
 						: <Link data-cy={ForgotPasswordLinkCy} href="/forgotPassword" underline="hover" style={{ color: '#0293FC', fontSize: '12px' }}>Mot de passe oublié ?</Link>

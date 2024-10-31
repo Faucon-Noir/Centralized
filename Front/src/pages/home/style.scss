@@ -1,146 +1,252 @@
 .ProjetCards {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
 }
 
 .projetcard {
-    cursor: pointer;
+	cursor: pointer;
 }
 
-
 .TitleProjetCards {
-    display: flex;
-    gap: 10px;
+	display: flex;
+	gap: 10px;
 }
 
 .Entete {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
-
 .DernierTicket {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	min-width: 300px;
+	h2 {
+		margin-top: 16px !important;
+	}
 }
 
 .entetedernierticket {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 22px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
 
-    h2 {
-        margin: 0;
-    }
+	h2 {
+		margin: 0;
+	}
 }
 
 .fleches {
-    margin-top: auto;
-    margin-bottom: 10px;
+	margin-top: auto;
+	margin-bottom: 10px;
 }
 
 .swiper-button-prev-1:hover,
 .swiper-button-next-1:hover,
 .swiper-button-prev-2:hover,
 .swiper-button-next-2:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .swiper-button-disabled {
-    color: rgb(128, 128, 128);
-    cursor: auto !important;
+	color: rgb(128, 128, 128);
+	cursor: auto !important;
 }
 
 .right_container {
-    margin-top: 12%;
-    margin-left: 100px;
+	margin-top: 12%;
+	margin-left: 100px;
+	width: 100% !important;
 
-    .Presentation {
-        margin-bottom: 20px;
-    }
+	@media (max-width: 1024px) {
+		margin: 10% 25px;
+	}
+	@media (max-width: 660px) {
+		margin: 0px 50px;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+	}
+	@media (max-width: 550px) {
+		margin: 0;
+		padding-top: 32px;
+	}
 
-    .Entete {
-        display: flex;
-        justify-content: space-between;
-        padding-right: 30px;
-    }
+	.Presentation {
+		margin-bottom: 20px;
+		h1 {
+			@media (max-width: 550px) {
+				margin-left: 16px;
+			}
+		}
+	}
 
-    .swiper-horizontal {
-        padding-left: 20px;
-        margin-left: -20px;
-        padding-right: 30px;
-    }
+	.Entete {
+		display: flex;
+		justify-content: space-between;
+		padding-right: 30px;
+		@media (max-width: 550px) {
+			margin-left: 16px;
+		}
+	}
 
-    .swiper-wrapper {
-        margin-top: 32px;
-        margin-bottom: 50px;
-        overflow: visible !important;
-    }
+	.swiper-horizontal {
+		// padding-left: 20px;
+		// margin-left: -20px;
+		padding-right: 30px;
+		padding-left: 16px;
 
-    h1 {
-        font-size: 36px;
-        margin: 0;
-    }
+		@media (min-width: 550px) {
+			margin-left: -16px;
+		}
+	}
 
-    h2 {
-        font-size: 24px;
-        margin: 0;
-    }
+	.swiper-wrapper {
+		margin-top: 32px;
+		margin-bottom: 50px;
+		overflow: visible !important;
+	}
 
-    /* TODO: Trouver un nom plus explicite */
-    .DeuxEtapes {
-        display: flex;
-        flex-direction: row;
-        gap: 10%;
-        width: 100%;
+	h1 {
+		font-size: 36px;
+		margin: 0;
+	}
 
-        .calendar_container {
-            width: 35%;
-        }
+	h2 {
+		font-size: 24px;
+		margin: 0;
+	}
 
-        .DernierTicket {
-            width: 40%;
-            padding-right: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+	/* TODO: Trouver un nom plus explicite */
+	.BlocDouble {
+		display: flex;
+		flex-direction: row;
+		gap: 10%;
+		// align-items: center;
 
-    }
+		// @media (max-width: 1280px) {
+		// 	gap: 1%;
+		// }
+		@media (max-width: 1080px) {
+			gap: 10%;
+		}
+		@media (max-width: 920px) {
+			gap: 20%;
+		}
+		@media (max-width: 860px) {
+			gap: 25%;
+		}
+		@media (max-width: 720px) {
+			gap: 30%;
+		}
+		@media (max-width: 660px) {
+			// gap: 40%;
+			flex-direction: column;
+		}
 
-    .second_line {
-        gap: 12% !important;
+		width: 100%;
 
-        .DernierTicket {
-            width: 30% !important;
-        }
-    }
+		.calendar_container {
+			width: 35%;
 
-    .MyTeam {
-        margin-top: 50px;
-    }
+			@media (max-width: 660px) {
+				width: 70%;
+				margin-bottom: 24px;
+			}
+			@media (max-width: 550px) {
+				width: 90%;
+			}
+		}
+
+		.DernierTicket {
+			// width: 100% !important;
+			// padding: 0 25px;
+			display: flex;
+			flex-direction: column;
+			gap: 25px;
+			@media (max-width: 660px) {
+				margin-bottom: 24px;
+			}
+		}
+	}
+
+	.MyTeam {
+		margin-top: 50px;
+	}
 }
 
+.no_project {
+	width: 90%;
+	height: 75vh;
+	border-radius: 15px;
+	background-color: #0294fc77;
+	padding: 20px 30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10%;
+	color: white;
+	margin-top: -5%;
+
+	h2 {
+		text-align: center;
+		width: 33%;
+		letter-spacing: 4px;
+	}
+
+	p {
+		text-align: center;
+		letter-spacing: 4px;
+	}
+
+	.create_project {
+		border: none;
+		border-radius: 15px;
+		background-color: #0294fc;
+		color: white;
+		padding: 10px 15px;
+		cursor: pointer;
+		font-size: 25px;
+		font-weight: bold;
+		letter-spacing: 4px;
+		transition: all 350ms ease-in-out;
+	}
+
+	.create_project:hover {
+		transform: translateY(-10px);
+	}
+}
 
 .stat {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    canvas {
-        height: 300px !important;
-        width: 300px !important;
-    }
+	canvas {
+		height: 300px !important;
+		max-width: 600px !important;
+		@media (max-width: 660px) {
+			max-width: 600px !important;
+			max-height: 200px !important;
+		}
+	}
 
-    .graph_div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30%
-    }
+	.graph_div {
+		display: flex;
+		align-items: center;
+		gap: 50px;
+		@media (min-width: 1680px) {
+			gap: 250px;
+		}
+		@media (max-width: 768px) {
+			flex-direction: column;
+			margin-bottom: 24px;
+		}
+	}
 }
+
 
 .no_project {
     overflow: hidden;
@@ -230,4 +336,7 @@
     100% {
         opacity: 1;
     }
+}
+.mobile {
+	margin: 0 16px;
 }

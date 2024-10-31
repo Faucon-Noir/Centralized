@@ -1,119 +1,123 @@
 .Presentation {
-    margin-top: 50px;
-}
-
-.Calendar {
-    padding-top: 20px;
+	margin-top: 50px;
 }
 
 .rbc-toolbar-label,
 .rbc-continues-prior,
 .rbc-header {
-    text-transform: capitalize;
+	text-transform: capitalize;
 }
-
+.rbc-month-view {
+	border-radius: 15px;
+}
 .rbc-month-row * {
-    border-radius: 15px;
+	border-radius: 15px;
 }
 
 .fleches {
-    text-align-last: right;
+	text-align-last: right;
 }
 
 .Projet {
-    margin: 20px;
+	margin: 20px;
 }
 
 button.rbc-button-link.rbc-show-more {
-    color: black
+	color: black;
 }
 
 .TitrePage {
-    font-size: 4em;
-    margin-bottom: 0px;
+	font-size: 4em;
+	margin-bottom: 0px;
 }
 
 .swiper-button-prev-1:hover,
 .swiper-button-next-1:hover,
 .swiper-button-prev-2:hover,
 .swiper-button-next-2:hover {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .swiper-button-disabled {
-    color: rgb(128, 128, 128);
-    cursor: auto !important;
+	color: rgb(128, 128, 128);
+	cursor: auto !important;
 }
 
 .cree_ticket_bouton {
-    font-size: 16px;
-    color: white;
-    padding: 12px 24px;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 10px;
-    border-radius: 12px;
-    background: #0293FC;
-    border: none;
-    align-self: center;
-    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-    cursor: pointer;
+	font-size: 16px;
+	color: white;
+	padding: 12px 24px;
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	gap: 10px;
+	border-radius: 12px;
+	background: #0293fc;
+	border: none;
+	align-self: center;
+	font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+	cursor: pointer;
 }
 
 .affichage_bouton {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-right: 20px;
+	display: flex;
+	flex-direction: row;
+	margin-right: 20px;
 }
 
 .rbc-btn-group-button {
-    margin: 0px 5px;
-    border-radius: 10%;
+	margin: 0px 5px;
+	border-radius: 10%;
 }
 
 .ProjetCards {
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
+	display: flex;
+	flex-direction: row;
+	margin: 20px;
 }
 
 .swiper-horizontal {
-    padding-left: 20px !important;
-    margin-left: -20px !important;
-    padding-right: 20px !important;
-    margin-right: -20px !important;
+	padding-left: 20px !important;
+	margin-left: -20px !important;
+	padding-right: 20px !important;
+	margin-right: -20px !important;
 }
 
 .swiper-wrapper {
-    margin-top: 32px;
-    margin-bottom: 50px;
-    overflow: visible !important;
+	margin-top: 32px;
+	margin-bottom: 50px;
+	overflow: visible !important;
 }
 
 .right_container {
-    margin-top: 5%;
-    margin-left: 50px;
-    margin-bottom: 20px;
-    margin-right: 100px;
+	margin-top: 5%;
+	margin-bottom: 20px;
+	margin-left: 50px;
+	// margin-right: 100px;
+	width: 90%;
 
+	@media (max-width: 660px) {
+		margin-left: 20px !important;
+	}
 
-    .Presentation {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        flex-direction: column;
+	.Presentation {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 10px;
+		flex-direction: column;
 
-        h1 {
-            font-size: 2em;
-            margin: 0;
-        }
+		h1 {
+			font-size: 2em;
+			margin: 0;
+		}
 
-        hr {
-            width: 25%;
-            border-bottom: 1px solid #0293FC;
-        }
-
-    }
-
+		hr {
+			width: 25%;
+			border-bottom: 1px solid #0293fc;
+		}
+	}
+	
+	.Calendar {
+		padding-top: 20px;
+	}
 }

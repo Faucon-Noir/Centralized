@@ -1,14 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import './style.scss';
-import { creationTicket } from '@/app/constant';
-import { Grid, Typography } from '@mui/material';
-import { urgenceIdToString } from '@/app/helpers';
-import Dashboard from '@/app/components/Dashboard/Dashboard';
-import { useDispatch } from 'react-redux';
-import { Project } from '@/app/models/project';
-import { CreateTicket } from '@/app/models/ticket';
 
 export default function CreateTicketPage() {
 	// // NEW
