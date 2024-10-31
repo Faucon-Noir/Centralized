@@ -6,8 +6,12 @@ name: Centralized Front CI
 on:
     push:
         branches: ["*"]
+        paths-ignore:
+            - '**/*.cy.*'
     pull_request:
         branches: ["*"]
+        paths-ignore:
+            - '**/*.cy.*'
 
 jobs:
     build:
@@ -28,8 +32,8 @@ jobs:
               run: cd Front && npm ci
             - name: Build
               run: cd Front && npm run build
-            # - name: Test
-            #   run: cd Front && npm run cy:all
+            - name: Test
+              run: cd Front && npm run cy:all
 
     # cypress-run:
     #     runs-on:
