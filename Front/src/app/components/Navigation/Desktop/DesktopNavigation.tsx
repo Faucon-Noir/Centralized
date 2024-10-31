@@ -82,152 +82,143 @@ export default function DesktopNavigation({
 	}
 
 	return (
-		<>
-			<div className='navigation'>
-				<div className='centralized_logo'>
-					<img
-						src='/assets/logo/WhiteLogoLeft.png'
-						alt='Logo'
-						className='logo'
-					/>
-				</div>
-				<div className='home_button'>
-					<Link href='/home'>
-						<button
-							className={
-								page == 'HomePage'
-									? 'navigation_button active'
-									: 'navigation_button'
-							}
-						>
-							<img src='/assets/icons/home_icon.svg' alt='' />{' '}
-							Tableau de bord
-						</button>
-					</Link>
-				</div>
-				<div className='navigation_nav'>
-					<Link href='/planning'>
-						<button
-							className={
-								page == 'Planning'
-									? 'navigation_button active'
-									: 'navigation_button'
-							}
-						>
-							<img src='/assets/icons/planning.svg' alt='' />
-							Mon Planning
-						</button>
-					</Link>
-					<Link href='/specification'>
-						<button
-							className={
-								page == 'Specification'
-									? 'navigation_button active'
-									: 'navigation_button'
-							}
-						>
-							<img src='/assets/icons/specification.svg' alt='' />
-							Mes projets
-						</button>
-					</Link>
-					<Link href='/team'>
-						<button
-							className={
-								page == 'Team'
-									? 'navigation_button active'
-									: 'navigation_button'
-							}
-						>
-							<img src='/assets/icons/teams.svg' alt='' />
-							Mes équipes
-						</button>
-					</Link>
-
-					{Object.keys(selctedMap).length > 0 ? (
-						<div className='selectedContainer'>
-							{Object.values(selctedMap).map((project, index) => (
-								<div className='projectOpen' key={index}>
-									<button className='pName'>
-										<img
-											src='/assets/icons/icon-cross.svg'
-											alt=''
-											className='cross'
-											onClick={() =>
-												deleteSelected(project.id)
-											}
-										/>
-										<Icon
-											sx={{
-												color: numberToColor(
-													project.color
-												),
-												height: '35px',
-												width: '35px',
-											}}
-										>
-											<FolderCopyIcon fontSize='large' />
-										</Icon>
-										<p>{project.name}</p>
-									</button>
-									<div className='submenu'>
-										<Link
-											href={
-												'/specification/' + project.id
-											}
-										>
-											<button className='submenu_btn'>
-												<img
-													src='/assets/icons/project.svg'
-													alt=''
-												/>
-												<p>Cahier des charges</p>
-											</button>
-										</Link>
-										<Link href={'/ticket/' + project.id}>
-											<button className='submenu_btn'>
-												<img
-													src='/assets/icons/tickets.svg'
-													alt=''
-												/>
-												<p>Tickets</p>
-											</button>
-										</Link>
-										<Link href={'/rex/' + project.id}>
-											<button className='submenu_btn'>
-												<img
-													src='/assets/icons/rex.svg'
-													alt=''
-												/>
-												<p>Rex</p>
-											</button>
-										</Link>
-									</div>
-								</div>
-							))}
-						</div>
-					) : null}
-				</div>
-				<div className='navigation_profile'>
-					<Link href='/account'>
-						<button
-							className={
-								page == 'account'
-									? 'navigation_button active'
-									: 'navigation_button'
-							}
-						>
-							<img src='/assets/icons/user.svg' alt='' /> Mon
-							compte
-						</button>
-					</Link>
-					<button
-						className='navigation_button red'
-						onClick={() => logout()}
-					>
-						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
-					</button>
-				</div>
+		<div className='navigation'>
+			<div className='centralized_logo'>
+				<img
+					src='/assets/logo/WhiteLogoLeft.png'
+					alt='Logo'
+					className='logo'
+				/>
 			</div>
-		</>
+			<div className='home_button'>
+				<Link href='/home'>
+					<button
+						className={
+							page == 'HomePage'
+								? 'navigation_button active'
+								: 'navigation_button'
+						}
+					>
+						<img src='/assets/icons/home_icon.svg' alt='' /> Tableau
+						de bord
+					</button>
+				</Link>
+			</div>
+			<div className='navigation_nav'>
+				<Link href='/planning'>
+					<button
+						className={
+							page == 'Planning'
+								? 'navigation_button active'
+								: 'navigation_button'
+						}
+					>
+						<img src='/assets/icons/planning.svg' alt='' />
+						Mon Planning
+					</button>
+				</Link>
+				<Link href='/specification'>
+					<button
+						className={
+							page == 'Specification'
+								? 'navigation_button active'
+								: 'navigation_button'
+						}
+					>
+						<img src='/assets/icons/specification.svg' alt='' />
+						Mes projets
+					</button>
+				</Link>
+				<Link href='/team'>
+					<button
+						className={
+							page == 'Team'
+								? 'navigation_button active'
+								: 'navigation_button'
+						}
+					>
+						<img src='/assets/icons/teams.svg' alt='' />
+						Mes équipes
+					</button>
+				</Link>
+
+				{Object.keys(selctedMap).length > 0 ? (
+					<div className='selectedContainer'>
+						{Object.values(selctedMap).map((project, index) => (
+							<div className='projectOpen' key={index}>
+								<button className='pName'>
+									<img
+										src='/assets/icons/icon-cross.svg'
+										alt=''
+										className='cross'
+										onClick={() =>
+											deleteSelected(project.id)
+										}
+									/>
+									<Icon
+										sx={{
+											color: numberToColor(project.color),
+											height: '35px',
+											width: '35px',
+										}}
+									>
+										<FolderCopyIcon fontSize='large' />
+									</Icon>
+									<p>{project.name}</p>
+								</button>
+								<div className='submenu'>
+									<Link href={'/specification/' + project.id}>
+										<button className='submenu_btn'>
+											<img
+												src='/assets/icons/project.svg'
+												alt=''
+											/>
+											<p>Cahier des charges</p>
+										</button>
+									</Link>
+									<Link href={'/ticket/' + project.id}>
+										<button className='submenu_btn'>
+											<img
+												src='/assets/icons/tickets.svg'
+												alt=''
+											/>
+											<p>Tickets</p>
+										</button>
+									</Link>
+									<Link href={'/rex/' + project.id}>
+										<button className='submenu_btn'>
+											<img
+												src='/assets/icons/rex.svg'
+												alt=''
+											/>
+											<p>Rex</p>
+										</button>
+									</Link>
+								</div>
+							</div>
+						))}
+					</div>
+				) : null}
+			</div>
+			<div className='navigation_profile'>
+				<Link href='/account'>
+					<button
+						className={
+							page == 'account'
+								? 'navigation_button active'
+								: 'navigation_button'
+						}
+					>
+						<img src='/assets/icons/user.svg' alt='' /> Mon compte
+					</button>
+				</Link>
+				<button
+					className='navigation_button red'
+					onClick={() => logout()}
+				>
+					<img src='/assets/icons/x.svg' alt='' /> Déconnexion
+				</button>
+			</div>
+		</div>
 	);
 }

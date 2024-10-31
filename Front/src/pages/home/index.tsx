@@ -25,385 +25,242 @@ import React from 'react';
 import FirstStep from '@/app/components/Form/firstStep';
 import SecondStep from '@/app/components/Form/secondStep';
 import ThirdStep from '@/app/components/Form/thirdStep';
+import HomeData from '@/app/components/HomeData';
 
-export default function HomePage({ userData, updateUserData }: { userData: any, updateUserData: any }) {
-    const [lastP, setLastP] = useState({
-        name: "",
-        start_date: "",
-        end_date: "",
-        description: "",
-        color: 0,
-        ticket: {
-            count: 0,
-            ticket: [{}]
-        },
-        rex: {
-            answer1: "",
-            answer2: "",
-            answer3: "",
-        }
-    });
-    const [userStep, setUserStep] = useState(0);
-    const router = useRouter();
-    const [windowWidth, setWindowWidth] = useState<number>(1440);
+export default function HomePage({
+	userData,
+	updateUserData,
+}: {
+	userData: any;
+	updateUserData: any;
+}) {
+	const [lastP, setLastP] = useState({
+		name: '',
+		start_date: '',
+		end_date: '',
+		description: '',
+		color: 0,
+		ticket: {
+			count: 0,
+			ticket: [{}],
+		},
+		rex: {
+			answer1: '',
+			answer2: '',
+			answer3: '',
+		},
+	});
+	const [userStep, setUserStep] = useState(0);
+	const router = useRouter();
+	const [windowWidth, setWindowWidth] = useState<number>(1440);
 
-    useEffect(() => {
-        let tmp_lastP = {
-            name: "",
-            start_date: "",
-            end_date: "",
-            description: "",
-            color: 0,
-            ticket: {
-                count: 0,
-                ticket: [{}]
-            },
-            rex: {
-                answer1: "",
-                answer2: "",
-                answer3: "",
-            }
-        }
-        for (let i = 0; i < userData?.project?.length; i++) {
-            if (i == 0) tmp_lastP = userData.project[i]
-            if (tmp_lastP.end_date < userData.project[i].end_date) tmp_lastP = userData.project[i];
-        }
-        setLastP(tmp_lastP);
+	useEffect(() => {
+		let tmp_lastP = {
+			name: '',
+			start_date: '',
+			end_date: '',
+			description: '',
+			color: 0,
+			ticket: {
+				count: 0,
+				ticket: [{}],
+			},
+			rex: {
+				answer1: '',
+				answer2: '',
+				answer3: '',
+			},
+		};
+		for (let i = 0; i < userData?.project?.length; i++) {
+			if (i == 0) tmp_lastP = userData.project[i];
+			if (tmp_lastP.end_date < userData.project[i].end_date)
+				tmp_lastP = userData.project[i];
+		}
+		setLastP(tmp_lastP);
 
-        if (userData.team.length == 0) {
-            setUserStep(1)
-        }
-    }, [userData]);
+		if (userData.team.length == 0) {
+			setUserStep(1);
+		}
+	}, [userData]);
 
-
-    console.log(userStep)
-    return (
-        <>
-            <div className='right_container'>
-                {userData?.project?.length > 0 ? <>
-                    <div className='Presentation'>
-                        <h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😎</h1>
-                    </div>
-                    <div className='MonProjet'>
-                        <div className='Entete'>
-                            <div className='TitleProjetCards'>
-                                <h2>Mes projets</h2>
-                                <ButtonBase href='/specification/create'>
-                                    <AddIcon
-                                        fontSize='medium'
-                                        sx={{ color: '#000000' }}
-                                    />
-                                </ButtonBase>
-                            </div>
-                            <div className='fleches'>
-                                <ChevronLeftIcon className='swiper-button-prev swiper-button-prev-1 fleche' />
-                                <ChevronRightIcon className='swiper-button-next swiper-button-next-1 fleche' />
-                            </div>
-                        </div>
-                        <CustomSwiper swiperId={1}>
-                            <div className='ProjetCards'>
-                                {userData?.project && Array.isArray(userData?.project) &&
-                                    userData?.project.length > 0
-                                    ? userData?.project.map((item: any) => (
-                                        <SwiperSlide key={item.id}>
-                                            <ProjetCard
-                                                name={item.name}
-                                                totalTickets={item.ticket?.count}
-                                                key={item.id}
-                                                id={item.color}
-                                                projectId={item.id}
-                                                updateUserData={updateUserData}
-                                                userData={userData}
-                                            />
-                                        </SwiperSlide>
-                                    ))
-                                    : null}
-                            </div>
-                        </CustomSwiper>
-                    </div>
-                    <Grid container sx={{ display: 'flex', flexDirection: 'column', gap: '50px' }}>
-                        {userData?.stat?.error ? <></> : <div className='stat'>
-                            <h2>Statistique du dernier projet</h2>
-                            <div className='graph_div'>
-                                {userData?.stat?.nbrTicketByUser ?
-                                    <GraphiquePie
-                                        labels={userData.stat.nbrTicketByUser.map((x: { userName: any; }) => x.userName)}
-                                        data={userData.stat.nbrTicketByUser.map((row: { nbr_ticket: any; }) => (row.nbr_ticket))}
-                                        title='Nombre de ticket non fini par utilisateur'
-                                        hover='Nombre de ticket'
-                                    /> : null}
-                                {userData?.stat?.nbrTicketByUser ?
-                                    <GraphiqueLine
-                                        labels={userData.stat.nbrTicketPerWeek.week}
-                                        data={userData.stat.nbrTicketPerWeek.nbr_ticket}
-                                        title="Nombre de tickets ouverts par semaine"
-                                        hover="Nombre de tickets"
-                                    /> : null
-                                }
-                            </div>
-                        </div>}
-
-							<div className='BlocDouble'>
-								<div className='calendar_container'>
-									<CalendarBox
-										name={lastP ? lastP.name : ''}
-										start_date={
-											lastP
-												? new Date(lastP.start_date)
-												: new Date()
-										}
-										end_date={
-											lastP
-												? new Date(lastP.end_date)
-												: new Date()
-										}
-										description={
-											lastP ? lastP.description : ''
-										}
-										color={lastP.color}
-									/>
-								</div>
-								<div className='BlocDouble second_line'>
-									<div className='DernierTicket'>
-										<h2>
-											Mes derniers cahiers des charges
-										</h2>
-										{userData?.project
-											.filter(
-												(value: any, idx: number) =>
-													idx < 3
-											)
-											.map((value: any) => (
-												<SpecificationCard
-													id={value.id}
-													title={value.name}
-													color={value.color}
-													key={value.id}
-												/>
-											))}
-									</div>
-									<div className='DernierTicket'>
-										<h2>
-											Derniers retours d&apos;expériences
-										</h2>
-										<RexCard
-											answer1={
-												lastP.rex.answer1 != undefined
-													? lastP.rex.answer1
-													: "Votre dernier projet n'a pas de rex"
-											}
-											answer2={
-												lastP.rex.answer2 != undefined
-													? lastP.rex.answer2
-													: 'Continuer et vous y arriverez'
-											}
-											answer3={
-												lastP.rex.answer3 != undefined
-													? lastP.rex.answer3
-													: 'Croyez en vous'
-											}
-											color={lastP.color}
-											name='REX'
+	console.log(userStep);
+	return (
+		<>
+			<div className='right_container'>
+				{userData?.project?.length > 0 ? (
+					<>
+						<div className='Presentation'>
+							<h1>
+								Hello{' '}
+								{userData?.user
+									? userData?.user.firstname
+									: 'test'}{' '}
+								😎
+							</h1>
+						</div>
+						<div className='MonProjet'>
+							<div className='Entete'>
+								<div className='TitleProjetCards'>
+									<h2>Mes projets</h2>
+									<ButtonBase href='/specification/create'>
+										<AddIcon
+											fontSize='medium'
+											sx={{ color: '#000000' }}
 										/>
-									</div>
+									</ButtonBase>
 								</div>
+								<div className='fleches'>
+									<ChevronLeftIcon className='swiper-button-prev swiper-button-prev-1 fleche' />
+									<ChevronRightIcon className='swiper-button-next swiper-button-next-1 fleche' />
+								</div>
+							</div>
+							<CustomSwiper swiperId={1}>
+								<div className='ProjetCards'>
+									{userData?.project &&
+									Array.isArray(userData?.project) &&
+									userData?.project.length > 0
+										? userData?.project.map((item: any) => (
+												<SwiperSlide key={item.id}>
+													<ProjetCard
+														name={item.name}
+														totalTickets={
+															item.ticket?.count
+														}
+														key={item.id}
+														id={item.color}
+														projectId={item.id}
+														updateUserData={
+															updateUserData
+														}
+														userData={userData}
+													/>
+												</SwiperSlide>
+											))
+										: null}
+								</div>
+							</CustomSwiper>
+						</div>
+						{windowWidth > 660 ? (
+							<Grid
+								container
+								sx={{
+									display: 'flex',
+									flexDirection: 'column',
+									gap: '50px',
+								}}
+							>
+								<HomeData userData={userData} lastP={lastP} />
 							</Grid>
 						) : (
 							<div className='mobile'>
-								{userData?.stat?.error ? (
-									<></>
-								) : (
-									<div className='stat'>
-										<h2>Statistique du dernier projet</h2>
-										<div className='graph_div'>
-											{userData?.stat?.nbrTicketByUser ? (
-												<GraphiquePie
-													labels={userData.stat.nbrTicketByUser.map(
-														(x: {
-															userName: any;
-														}) => x.userName
-													)}
-													data={userData.stat.nbrTicketByUser.map(
-														(row: {
-															nbr_ticket: any;
-														}) => row.nbr_ticket
-													)}
-													title='Nombre de ticket non fini par utilisateur'
-													hover='Nombre de ticket'
-												/>
-											) : null}
-											{userData?.stat?.nbrTicketByUser ? (
-												<GraphiqueLine
-													labels={
-														userData.stat
-															.nbrTicketPerWeek
-															.week
-													}
-													data={
-														userData.stat
-															.nbrTicketPerWeek
-															.nbr_ticket
-													}
-													title='Nombre de tickets ouverts par semaine'
-													hover='Nombre de tickets'
-												/>
-											) : null}
-										</div>
-									</div>
-								)}
-								<div className='BlocDouble'>
-									<div className='calendar_container'>
-										<CalendarBox
-											name={lastP ? lastP.name : ''}
-											start_date={
-												lastP
-													? new Date(lastP.start_date)
-													: new Date()
-											}
-											end_date={
-												lastP
-													? new Date(lastP.end_date)
-													: new Date()
-											}
-											description={
-												lastP ? lastP.description : ''
-											}
-											color={lastP.color}
+								<HomeData userData={userData} lastP={lastP} />
+							</div>
+						)}
+						<div className='MyTeam'>
+							<div className='Entete'>
+								<div className='TitleProjetCards'>
+									<h2>Mes équipes</h2>
+									<ButtonBase>
+										<AddIcon
+											fontSize='medium'
+											sx={{ color: '#000000' }}
 										/>
-									</div>
-
-                            <div className='DernierTicket'>
-                                <div className='entetedernierticket'>
-                                    <h2>Derniers tickets</h2>
-                                    <ButtonBase>
-                                        <Image
-                                            height={20}
-                                            width={20}
-                                            alt=''
-                                            src='/assets/arrow-narrow-right.svg'
-                                        />
-                                    </ButtonBase>
-                                </div>
-                                {lastP.ticket.count > 0 ? lastP.ticket.ticket
-                                    .filter(
-                                        (task: any, idx: number) =>
-                                            idx < 3
-                                    )
-                                    .map((task: any) => (
-                                        <TaskCard
-                                            id={task.id}
-                                            title={
-                                                task.title
-                                            }
-                                            urgenceId={
-                                                task.urgence
-                                            }
-                                            date={
-                                                task.start_date
-                                            }
-                                            color={lastP.color}
-                                            key={task.id}
-                                        />
-                                    ))
-                                    : null}
-                            </div>
-                        </div>
-                        <div className='BlocDouble second_line'>
-                            <div className='DernierTicket'>
-                                <h2>Mes derniers cahiers des charges</h2>
-                                {userData?.project
-                                    .filter(
-                                        (value: any, idx: number) => idx < 3
-                                    )
-                                    .map((value: any) => (
-                                        <SpecificationCard
-                                            id={value.id}
-                                            title={value.name}
-                                            color={value.color}
-                                            key={value.id}
-                                        />
-                                    ))}
-                            </div>
-                            <div className='DernierTicket'>
-                                <h2>Derniers retours d&apos;expériences</h2>
-                                <RexCard
-                                    answer1={lastP.rex.answer1 != undefined ? lastP.rex.answer1 : "Votre dernier projet n'a pas de rex"}
-                                    answer2={lastP.rex.answer2 != undefined ? lastP.rex.answer2 : 'Continuer et vous y arriverez'}
-                                    answer3={lastP.rex.answer3 != undefined ? lastP.rex.answer3 : 'Croyez en vous'}
-                                    color={lastP.color}
-                                    name="REX"
-                                />
-                            </div>
-                        </div>
-                    </Grid>
-                    <div className='MyTeam'>
-                        <div className='Entete'>
-                            <div className='TitleProjetCards'>
-                                <h2>Mes équipes</h2>
-                                <ButtonBase>
-                                    <AddIcon
-                                        fontSize='medium'
-                                        sx={{ color: '#000000' }}
-                                    />
-                                </ButtonBase>
-                            </div>
-                            <div className='fleches'>
-                                <Image
-                                    src='/assets/chevron-left.svg'
-                                    alt=''
-                                    width={20}
-                                    height={20}
-                                    className='swiper-button-prev swiper-button-prev-2 fleche'
-                                ></Image>
-                                <Image
-                                    src='/assets/chevron-right.svg'
-                                    alt=''
-                                    width={20}
-                                    height={20}
-                                    className='swiper-button-next swiper-button-next-2 fleche'
-                                ></Image>
-                            </div>
-                        </div>
-                        <CustomSwiper swiperId={2}>
-                            <div className='ProjetCards'>
-                                {/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
-                                {userData?.team
-                                    ? userData?.team.map((item: any) => (
-                                        <SwiperSlide key={item.id}>
-                                            <TeamCard
-                                                key={item.id}
-                                                id={item.team.id}
-                                                prenom={item.team.name}
-                                            />
-                                        </SwiperSlide>
-                                    ))
-                                    : null}
-                            </div>
-                        </CustomSwiper>
-                    </div>
-
-                </> : <div className='no_project'>
-                    <div className='main_modal'>
-                        <div className='main_modal_header'>
-                            <h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😊</h1>
-                            <p>Laissez-vous guider</p>
-                        </div>
-                        <div className='main_modal_form'>
-                            <div className='main_modal_form_idx'>
-                                {userStep >= 1 ? <img className="fade-in-image firstStep" src="/assets/nbr1on.png" alt="" /> : <img src="/assets/nbr1off.png" alt="" />}
-                                <div className='dotted_line'></div>
-                                {userStep >= 2 ? <img className="fade-in-image" src="/assets/nbr2on.png" alt="" /> : <img src="/assets/nbr2off.png" alt="" />}
-                                <div className='dotted_line2'></div>
-                                {userStep >= 3 ? <img className="fade-in-image" src="/assets/nbr3on.png" alt="" /> : <img src="/assets/nbr3off.png" alt="" />}
-                            </div>
-                            <div className='main_modal_form_component'>
-                                {userStep == 1 ? <FirstStep /> : userStep == 2 ? <SecondStep /> : userStep == 3 ? <ThirdStep /> : null}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                }
-            </div>
-        </>
-    );
+									</ButtonBase>
+								</div>
+								<div className='fleches'>
+									<Image
+										src='/assets/chevron-left.svg'
+										alt=''
+										width={20}
+										height={20}
+										className='swiper-button-prev swiper-button-prev-2 fleche'
+									></Image>
+									<Image
+										src='/assets/chevron-right.svg'
+										alt=''
+										width={20}
+										height={20}
+										className='swiper-button-next swiper-button-next-2 fleche'
+									></Image>
+								</div>
+							</div>
+							<CustomSwiper swiperId={2}>
+								<div className='ProjetCards'>
+									{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
+									{userData?.team
+										? userData?.team.map((item: any) => (
+												<SwiperSlide key={item.id}>
+													<TeamCard
+														key={item.id}
+														id={item.team.id}
+														prenom={item.team.name}
+													/>
+												</SwiperSlide>
+											))
+										: null}
+								</div>
+							</CustomSwiper>
+						</div>
+					</>
+				) : (
+					<div className='no_project'>
+						<div className='main_modal'>
+							<div className='main_modal_header'>
+								<h1>
+									Hello{' '}
+									{userData?.user
+										? userData?.user.firstname
+										: 'test'}{' '}
+									😊
+								</h1>
+								<p>Laissez-vous guider</p>
+							</div>
+							<div className='main_modal_form'>
+								<div className='main_modal_form_idx'>
+									{userStep >= 1 ? (
+										<img
+											className='fade-in-image firstStep'
+											src='/assets/nbr1on.png'
+											alt=''
+										/>
+									) : (
+										<img src='/assets/nbr1off.png' alt='' />
+									)}
+									<div className='dotted_line'></div>
+									{userStep >= 2 ? (
+										<img
+											className='fade-in-image'
+											src='/assets/nbr2on.png'
+											alt=''
+										/>
+									) : (
+										<img src='/assets/nbr2off.png' alt='' />
+									)}
+									<div className='dotted_line2'></div>
+									{userStep >= 3 ? (
+										<img
+											className='fade-in-image'
+											src='/assets/nbr3on.png'
+											alt=''
+										/>
+									) : (
+										<img src='/assets/nbr3off.png' alt='' />
+									)}
+								</div>
+								<div className='main_modal_form_component'>
+									{userStep == 1 ? (
+										<FirstStep />
+									) : userStep == 2 ? (
+										<SecondStep />
+									) : userStep == 3 ? (
+										<ThirdStep />
+									) : null}
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
+			</div>
+		</>
+	);
 }

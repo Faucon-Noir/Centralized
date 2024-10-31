@@ -1,32 +1,20 @@
 import React, { useState } from 'react';
 import {
 	ButtonGroupStyle,
-	FormBoxStyle,
-	LoginButtonStyle,
-	MailFieldStyle,
 	MainBoxStyle,
-	PwdFieldStyle,
-	TextFieldStyle,
-	TitleStyle,
-	TypoStyle,
 } from './style';
 import {
 	Box,
-	Button,
 	ButtonGroup,
 	Checkbox,
 	Container,
 	FormControlLabel,
 	Link,
-	TextField,
-	Typography,
 } from "@mui/material";
 import axios from "axios";
-import { redirect } from 'next/navigation'
 import { useRouter } from "next/router";
 import { Poppins } from 'next/font/google'
 import confetti from "canvas-confetti";
-import { Mosaic } from "react-loading-indicators";
 import { CGUButtonCy, ForgotPasswordLinkCy, SwitchLoginButtonCy, MailFieldCy, NameFieldCy, PasswordFieldCy, PhoneFieldCy, SwitchRegisterButtonCy, SurnameFieldCy, SubmitButtonCy, RegistrationFormCy } from "./const";
 
 const poppins = Poppins({ subsets: ['latin'], weight: '600' });
@@ -156,7 +144,7 @@ function RegistrationForm() {
 							<input type="password" placeholder="**********" onChange={e => setUser({ ...user, password: e.target.value })} />
 						</div>
 					</div>
-					{isRegister ? (
+					{isRegister 
 						// TODO: ajouter le lien aux CGU
 						? <FormControlLabel data-cy={CGUButtonCy} required control={<Checkbox />} label="J'accepte les conditions d'utilisation" />
 						: <Link data-cy={ForgotPasswordLinkCy} href="/forgotPassword" underline="hover" style={{ color: '#0293FC', fontSize: '12px' }}>Mot de passe oublié ?</Link>

@@ -97,7 +97,9 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 1' ? 'selected-box' : 'unselected-box'
+								selectedText === 'Text 1'
+									? 'selected-box'
+									: 'unselected-box'
 							}
 						>
 							<div className='box'>
@@ -117,7 +119,9 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 2' ? 'selected-box' : 'unselected-box'
+								selectedText === 'Text 2'
+									? 'selected-box'
+									: 'unselected-box'
 							}
 						>
 							<div className='box'>
@@ -125,7 +129,7 @@ export default function WelcomePage() {
 								<p className='description'>
 									Générez automatiquement vos tickets pour
 									gagner du temps, et gagner du temps sur
-									l'organisation.
+									l&apos;organisation.
 								</p>
 							</div>
 						</div>
@@ -137,7 +141,9 @@ export default function WelcomePage() {
 								)
 							}
 							className={
-								selectedText === 'Text 3' ? 'selected-box' : 'unselected-box'
+								selectedText === 'Text 3'
+									? 'selected-box'
+									: 'unselected-box'
 							}
 						>
 							<div className='box'>
@@ -218,65 +224,62 @@ export default function WelcomePage() {
 				{/* <button className='offer'>Comparaison</button> */}
 				<div className='grid-price'>
 					<article className='box'>
-						<div className="edition">
+						<div className='edition'>
 							Standard
-							<div className="price">
-								6<span className="currency">€</span>
+							<div className='price'>
+								6<span className='currency'>€</span>
 							</div>
-							<p className="info">Par utilisateur et par mois</p>
+							<p className='info'>Par utilisateur et par mois</p>
 						</div>
-						<div className="description">
-							<p className="user">
-								Pour les petites équipes qui ont peu de projet à la
-								fois.
+						<div className='description'>
+							<p className='user'>
+								Pour les petites équipes qui ont peu de projet à
+								la fois.
 							</p>
-							<p className="limit">
+							<p className='limit'>
 								Les utilisateur sont limités à la création de 5
 								projets par mois.
 							</p>
 						</div>
-						<a href="#">
-							S'inscrire
-						</a>
+						<a href='#'>S&apos;inscrire</a>
 					</article>
-					<article className="box premium">
-						<div className="edition">
+					<article className='box premium'>
+						<div className='edition'>
 							Premium
-							<div className="price">
-								12<span className="currency">€</span>
+							<div className='price'>
+								12<span className='currency'>€</span>
 							</div>
-							<p className="info">Par utilisateur et par mois</p>
+							<p className='info'>Par utilisateur et par mois</p>
 						</div>
-						<div className="description">
-							<p className="user">
-								Pour les équipes qui ont besoins de gérer plusieurs
-								projet à la fois.
+						<div className='description'>
+							<p className='user'>
+								Pour les équipes qui ont besoins de gérer
+								plusieurs projet à la fois.
 							</p>
-							<p className="limit">
+							<p className='limit'>
 								Les utilisateur sont limités à la création de 20
 								projets par mois.
 							</p>
 						</div>
-						<a href="#">
-							S'inscrire
-						</a>
+						<a href='#'>S&apos;inscrire</a>
 					</article>
-					<article className="box">
-						<div className="edition">
+					<article className='box'>
+						<div className='edition'>
 							Entreprise
-							<div className="price">
-								15<span className="currency">€</span>
+							<div className='price'>
+								15<span className='currency'>€</span>
 							</div>
-							<p className="info">
-								Par utilisateur et par mois, facturation annuelle
+							<p className='info'>
+								Par utilisateur et par mois, facturation
+								annuelle
 							</p>
 						</div>
-						<div className="description">
-							<p className="user">
+						<div className='description'>
+							<p className='user'>
 								Pour les entreprises qui produisent plusieurs
 								projets à la fois.
 							</p>
-							<p className="limit">
+							<p className='limit'>
 								Les utilisateur sont limités à la création de 50
 								projets par mois.
 							</p>
@@ -297,9 +300,9 @@ export default function WelcomePage() {
 							<div className='description'>Description 3</div>
 						</div>
 						{/* Add more blocks as needed */}
-					</div>
+					</article>
 				</div>
-			</div>
+			</section>
 			<div className='price'>
 				<h1>Des prix adaptés à vos besoins</h1>
 				<h3></h3>
@@ -307,19 +310,41 @@ export default function WelcomePage() {
 				<div className='gridprice'>
 					<div className='box'>
 						<h3>STANDARD</h3>
-						<h1>6<span className="currency">€</span></h1>
-						<p className='info'>par utilisateur et par mois</p><br></br>
-						<p className='user'>Pour les petites équipes qui ont peu de projet à la fois.</p>
-						<p className='limite'>Les utilisateur sont limités à la création de 5 projets par mois.</p>
-						<a href='#'><button>S&apos;inscrire</button></a>
+						<h1>
+							6<span className='currency'>€</span>
+						</h1>
+						<p className='info'>par utilisateur et par mois</p>
+						<br></br>
+						<p className='user'>
+							Pour les petites équipes qui ont peu de projet à la
+							fois.
+						</p>
+						<p className='limite'>
+							Les utilisateur sont limités à la création de 5
+							projets par mois.
+						</p>
+						<a href='#'>
+							<button>S&apos;inscrire</button>
+						</a>
 					</div>
 					<div className='box premium'>
 						<h3>PREMIUM</h3>
-						<h1>12<span className="currency">€</span></h1>
-						<p className='info'>par utilisateur et par mois</p><br></br>
-						<p className='user'>Pour les équipes qui ont besoins de gérer plusieurs projet à la fois.</p>
-						<p className='limite'>Les utilisateur sont limités à la création de 20 projets par mois.</p>
-						<a href='#'><button>S&apos;inscrire</button></a>
+						<h1>
+							12<span className='currency'>€</span>
+						</h1>
+						<p className='info'>par utilisateur et par mois</p>
+						<br></br>
+						<p className='user'>
+							Pour les équipes qui ont besoins de gérer plusieurs
+							projet à la fois.
+						</p>
+						<p className='limite'>
+							Les utilisateur sont limités à la création de 20
+							projets par mois.
+						</p>
+						<a href='#'>
+							<button>S&apos;inscrire</button>
+						</a>
 					</div>
 					<div className='box right'>
 						<h3>ENTERPRISE</h3>
@@ -343,7 +368,7 @@ export default function WelcomePage() {
 						</a>
 					</div>
 				</div>
-			</section>
+			</div>
 			<section className='pre-footer'>
 				<div className='text'>
 					<h2>Simplifier, Centraliser, Ameliorer</h2>
@@ -356,7 +381,9 @@ export default function WelcomePage() {
 						name='E-mail'
 						placeholder='E-mail'
 					></input>
-					<button id='submit' type="submit">Inscrivez-vous !</button>
+					<button id='submit' type='submit'>
+						Inscrivez-vous !
+					</button>
 				</form>
 			</section>
 			{/*<footer className='footer'>*/}
