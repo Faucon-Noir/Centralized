@@ -3,7 +3,7 @@ import './style.scss';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TeamCard from '@/app/components/Card/TeamCard';
-import { ButtonCreateTeamCy } from './const';
+import { ButtonCreateTeamCy } from '@/app/const/team/teamConst';
 function Team({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 
 	console.log(userData)

@@ -7,7 +7,7 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import Dashboard from "@/app/components/Dashboard/Dashboard";
-import { AvartarImageCy, BioFielCy, BioLabelCy, EmailFielCy, EmailLabelCy, FirstNameFielCy, FirstNameLabelCy, LastNameFielCy, LastNameLabelCy, PhoneFielCy, PhoneLabelCy, SaveButtonCy } from "./const";
+import { AvartarImageCy, BioFielCy, BioLabelCy, EmailFielCy, EmailLabelCy, FirstNameFielCy, FirstNameLabelCy, LastNameFielCy, LastNameLabelCy, PhoneFielCy, PhoneLabelCy, SaveButtonCy } from "@/app/const/account/const";
 
 
 

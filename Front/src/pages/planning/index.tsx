@@ -10,7 +10,7 @@ import fr from "date-fns/locale/fr";
 import 'swiper/css/pagination';
 import { useCallback, useState, useEffect } from 'react';
 import { useRouter } from "next/router";
-import { ButtonNewTicketCy, CalendarCy } from './const';
+import { ButtonNewTicketCy, CalendarCy } from '@/app/const/planning/const';
 
 
 const messages = {

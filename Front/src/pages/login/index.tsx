@@ -2,7 +2,7 @@ import RegistrationForm from "@/app/components/Form/registrationForm";
 import Grid from "@mui/material/Unstable_Grid2";
 import React from "react";
 import './style.scss'
-import { BlueGridCy, PlanningImgCy, PlanningsLabelCy, ProjectImgCy, ProjectsLabelCy, RegistrationFormCy, RexImgCy, RexLabelCy, SpecificationImgCy, SpecificationLabelCy, TeamsImgCy, TeamsLabelCy, TicketImgCy, TicketsLabelCy, WhiteGridCy, WhiteLogoImgCy, WhiteLogoLabelCy } from "./const";
+import { BlueGridCy, PlanningImgCy, PlanningsLabelCy, ProjectImgCy, ProjectsLabelCy, RegistrationFormCy, RexImgCy, RexLabelCy, SpecificationImgCy, SpecificationLabelCy, TeamsImgCy, TeamsLabelCy, TicketImgCy, TicketsLabelCy, WhiteGridCy, WhiteLogoImgCy, WhiteLogoLabelCy } from "@/app/const/login/const";
 
 function LoginPage() {
     return (

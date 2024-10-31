@@ -84,7 +84,7 @@ import { numberToColor } from '@/app/helpers';
 import dynamic from 'next/dynamic';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from "axios";
-import { ButtonSubmitSpecificationCy, EditorCy, PopUpSpecificationCy, TitleSpecificationCy } from "../const";
+import { ButtonSubmitSpecificationCy, EditorCy, PopUpSpecificationCy, TitleSpecificationCy } from "@/app/const/specification/const";
 const CustomEditor = dynamic(() => import('@/app/components/customEditor'), { ssr: false });
 
 export default function SpecificationEdit({ userData, updateUserData }: { userData: any, updateUserData: any }) {
