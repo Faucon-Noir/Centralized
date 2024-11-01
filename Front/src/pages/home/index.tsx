@@ -281,8 +281,8 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                 </> : <div className='no_project'>
                     <div className='main_modal'>
                         <div className='main_modal_header'>
-                            <h1>Hello {userData?.user ? userData?.user.firstname : 'test'} 😊</h1>
-                            <p>Laissez-vous guider</p>
+                            <h1>Hello {userData?.user ? userData?.user.firstname : 'test'}</h1>
+                            <p>Laissez-nous vous guider</p>
                         </div>
                         <div className='main_modal_form'>
                             <div className='main_modal_form_idx'>
@@ -293,7 +293,7 @@ export default function HomePage({ userData, updateUserData }: { userData: any, 
                                 {userStep >= 3 ? <img className="fade-in-image" src="/assets/nbr3on.png" alt="" /> : <img src="/assets/nbr3off.png" alt="" />}
                             </div>
                             <div className='main_modal_form_component'>
-                                {userStep == 1 ? <FirstStep /> : userStep == 2 ? <SecondStep /> : userStep == 3 ? <ThirdStep /> : null}
+                                {userStep == 1 ? <FirstStep setUserStep={setUserStep} /> : userStep == 2 ? <SecondStep userData={userData} setUserStep={setUserStep} /> : userStep == 3 ? <ThirdStep /> : null}
                             </div>
                         </div>
                     </div>

@@ -155,14 +155,17 @@
     align-items: center;
 
     .main_modal {
-        width: 40%;
+        min-width: 40%;
         background-color: white;
-        padding: 15px 15px;
+        padding: 30px 15px;
         border-radius: 15px;
         box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
         display: flex;
         gap: 30px;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
 
         h1,
         h2,

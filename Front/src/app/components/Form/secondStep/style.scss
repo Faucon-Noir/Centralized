@@ -1,0 +1,86 @@
+.step2form {
+    width: 100%;
+
+    .wrapperform {
+        border-radius: 15px;
+        padding: 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 30px;
+
+        h1,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1:hover {
+            transition: all 350ms ease-in-out;
+            color: #0293FC;
+        }
+
+        .line {
+            display: flex;
+            gap: 50px;
+
+            input,
+            textarea,
+            select {
+                border: none;
+                border-radius: 5px;
+                background-color: #eceeee;
+                color: #887575;
+                padding: 10px;
+                transition: all 350ms ease-in-out;
+                outline: none;
+                box-shadow: 0px 2px 8px 0px #0000001A;
+            }
+
+            input,
+            textarea::placeholder {
+                font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+            }
+
+            input:focus,
+            textarea:focus,
+            select:focus {
+                color: #0293FC !important;
+                outline: none !important;
+                border-radius: 5px;
+            }
+        }
+
+        select {
+
+            font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+        }
+
+        button {
+            width: 20%;
+            cursor: pointer;
+            padding: 15px 10px;
+            border-radius: 15px;
+            font-size: 16px;
+            border: none;
+            font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+            background-color: #0293FC;
+            color: white;
+            transition: all 350ms ease-in-out;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        button:hover:enabled {
+            transform: translateY(-10px);
+            background-color: white;
+            color: #0293FC;
+            box-shadow: 0px 2px 8px 0px #0000001A;
+        }
+    }
+}
