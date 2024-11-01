@@ -26,19 +26,19 @@ function SecondStep({ userData, setUserStep }: { userData: any, setUserStep: any
         template: 0,
         status: false,
     });
-
+    console.log(userData);
     async function handleSubmit() {
         setUserStep(3)
-        // // add user to project
-        // setProject({ ...project, user: userData.user.id })
-        // if (await checkFilledForm(project)) {
-        //     //start the request create specification
-        //     await axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project,
-        //         { headers: { Authorization: `Bearer ${userData.user.token}` } })
+        // add user to project
+        setProject({ ...project, user: userData.user.id })
+        if (await checkFilledForm(project)) {
+            //start the request create specification
+            await axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project,
+                { headers: { Authorization: `Bearer ${userData.user.token}` } })
 
-        //     startTask(); // Met à jour l'état global que la tâche a démarré
-        //     router.push('/home');
-        // }
+            startTask(); // Met à jour l'état global que la tâche a démarré
+            router.push('/home');
+        }
     }
     return (
         <div className="step2form">

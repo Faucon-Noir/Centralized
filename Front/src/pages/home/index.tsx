@@ -44,7 +44,7 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 			answer3: '',
 		},
 	});
-	const [userStep, setUserStep] = useState(0);
+	const [userStep, setUserStep] = useState(1);
 
 	useEffect(() => {
 		let tmp_lastP = {
@@ -71,6 +71,12 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 		setLastP(tmp_lastP);
 
 		if (userData.team.length == 0) {
+			setUserStep(1);
+		}
+
+		if (userData.team.length > 0) {
+			setUserStep(2)
+		} else {
 			setUserStep(1);
 		}
 	}, [userData]);
