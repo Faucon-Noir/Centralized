@@ -10,6 +10,7 @@ import UserData from '@/utils/User/UserData';
 import { useEffect, useState } from 'react';
 import { Grid } from '@mui/material';
 import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNavigation';
+import React from 'react';
 import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/router';
@@ -20,6 +21,7 @@ const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 export default function App({ Component, pageProps }: AppProps) {
 	const [showMobileNav, setShowMobileNav] = useState(false);
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
+	console.log('mobilenav', showMobileNav);
 	const [userData, setUserData] = useState<any>({
 		project: [
 			{
@@ -54,16 +56,9 @@ export default function App({ Component, pageProps }: AppProps) {
 		if (Component.name != 'LoginPage') {
 			UserData().then((result) => {
 				setUserData(result);
-				setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
 			});
-		} else {
-			setLoading(false);
 		}
 	}, [Component.name]);
-
-	if (loading) {
-		return <div>En attente</div>;
-	}
 
 	return (
 		<main className={myFont.className} style={{ height: '100%' }}>
@@ -85,8 +80,62 @@ export default function App({ Component, pageProps }: AppProps) {
 										}
 										updateUserData={setUserData}
 									/>
+								</>
+							) : windowWidth >= 1280 ? (
+								<Grid container>
+									<Grid xs={2} item={true}>
+										<DesktopNavigation
+											page={Component.name}
+											userData={
+												userData?.user ? userData : {}
+											}
+											updateUserData={setUserData}
+										/>
+									</Grid>
+									<Grid xs={10} item={true}>
+										<Component
+											{...pageProps}
+											userData={
+												userData?.user ? userData : {}
+											}
+											updateUserData={setUserData}
+										/>
+										<GlobalPollingComponent />
+									</Grid>
 								</Grid>
-								<Grid xs={10} item={true}>
+							) : (
+								<>
+									<button
+										className='burgerMenu'
+										onClick={() => setShowMobileNav(true)}
+									>
+										<MenuIcon />
+									</button>
+									{showMobileNav ? (
+										<>
+											<MobileNavigation
+												page={Component.name}
+												userData={
+													userData?.user
+														? userData
+														: {}
+												}
+												updateUserData={setUserData}
+												setShowMobileNav={
+													setShowMobileNav
+												}
+											/>
+											<button
+												onClick={() =>
+													setShowMobileNav(false)
+												}
+											>
+												Close
+											</button>
+										</>
+									) : (
+										<></>
+									)}
 									<Component
 										{...pageProps}
 										userData={

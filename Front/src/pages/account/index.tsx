@@ -13,20 +13,6 @@ import { useEffect, useState } from 'react';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import {
-	AvartarImageCy,
-	BioFielCy,
-	BioLabelCy,
-	EmailFielCy,
-	EmailLabelCy,
-	FirstNameFielCy,
-	FirstNameLabelCy,
-	LastNameFielCy,
-	LastNameLabelCy,
-	PhoneFielCy,
-	PhoneLabelCy,
-	SaveButtonCy,
-} from '@/app/const/account/const';
 
 export default function AccountPage({
 	userData,
@@ -135,11 +121,7 @@ export default function AccountPage({
 		<>
 			<div className='accent' />
 			<div style={{ display: 'block' }}>
-				<div
-					data-cy={AvartarImageCy}
-					className='profile-photo'
-					style={{ position: 'relative' }}
-				>
+				<div className='profile-photo' style={{ position: 'relative' }}>
 					<Avatar
 						src={avatarPreview || `/media/${user.avatar}`}
 						sx={{ height: '100%', width: '100%' }}
@@ -236,7 +218,6 @@ export default function AccountPage({
 				</Box>
 
 				<Button
-					data-cy={SaveButtonCy}
 					disabled={!user}
 					className='cta-primary'
 					type='submit'

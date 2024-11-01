@@ -76,6 +76,9 @@ export default async function UserData() {
 		let selectedP = localStorage.getItem('selectedP');
 		let tempSelectedMap: { [key: string]: any } = []; // Crée un objet temporaire pour stocker les projets
 
+        //userData.stat.nbrAllTicket = (await getCountAllTicketOneUser(user_id, token)). nbr_ticket;
+        let selectedP = localStorage.getItem("selectedP");
+        let tempSelectedMap: { [key: string]: any } = []; // Crée un objet temporaire pour stocker les projets
 		//get rexs of projects
 		for (let projectData of userData.project) {
 			projectData.rex = await getProjectRex(projectData.id, token);
