@@ -1,5 +1,5 @@
+import { BoxTicketCardCy, MajTicketCardCy, NameTicketCardCy, PeriodTicketCardCy, UrgenceTicketCardCy } from './const';
 import './style.scss';
-import { numberToColor } from '@/app/helpers';
 
 export default function TicketCard({ id, title, start, end, urgence, updated_at }: { id: any, title: any, start: any, end: any, urgence: 0 | 1 | 2 | 3 | 4, updated_at: Date }) {
     let urgenceValue = {
@@ -23,13 +23,13 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at 
     const differenceInDays = lastUpdate / millisecondsInOneDay;
     return (
         <>
-            <div className='card' style={{ borderLeft: "7px solid " + urgenceColor[urgence] }}>
-                <h3>{title}</h3>
+            <div data-cy={BoxTicketCardCy} className='card' style={{ borderLeft: "7px solid " + urgenceColor[urgence] }}>
+                <h3 data-cy={NameTicketCardCy}>{title}</h3>
                 <div>
-                    <p>{start.substring(0, 10)} - {end.substring(0, 10)}</p>
-                    <p>Urgence : {urgenceValue[urgence]}</p>
+                    <p data-cy={PeriodTicketCardCy}>{start.substring(0, 10)} - {end.substring(0, 10)}</p>
+                    <p data-cy={UrgenceTicketCardCy}>Urgence : {urgenceValue[urgence]}</p>
                 </div>
-                <p className='card_date'>Dernier maj : <strong>il y a {differenceInDays.toString().split(".")[0]} jours</strong></p>
+                <p data-cy={MajTicketCardCy} className='card_date'>Dernier maj : <strong>il y a {differenceInDays.toString().split(".")[0]} jours</strong></p>
             </div>
         </>
     )

@@ -1,7 +1,8 @@
+import { numberToColor } from '../../../helpers';
 import './style.scss';
 import FolderIcon from '@mui/icons-material/Folder';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+// import { numberToColor } from '@/app/helpers';
 import Link from 'next/link'
 
 export default function MyProjectCard({ project, userData, updateUserData }: { project: any, userData: any, updateUserData: any }) {
@@ -35,7 +36,7 @@ export default function MyProjectCard({ project, userData, updateUserData }: { p
                         <img src="/assets/icons/tickets.svg" alt="" />
                     </div>
                 </div>
-                <p>Fin du projet le : <strong>{project?.end_date?.substring(0, 10)}</strong></p>
+                <p>Fin du projet le : <strong id='end_date'>{project?.end_date?.substring(0, 10)}</strong></p>
                 <Link href={"/specification/" + project?.id} style={{ backgroundColor: numberToColor(project?.color) }}>Voir les cachier des charges</Link>
             </div>
         </>

@@ -6,8 +6,12 @@ name: Centralized Front CI
 on:
     push:
         branches: ["*"]
+        paths-ignore:
+            - '**/*.cy.*'
     pull_request:
         branches: ["*"]
+        paths-ignore:
+            - '**/*.cy.*'
 
 jobs:
     build:
