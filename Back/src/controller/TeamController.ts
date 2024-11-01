@@ -101,7 +101,6 @@ export class TeamController {
 			if (storedFiles) {
 				const files = storedFiles.map((file) => {
 					data.setAvatar(file.filename);
-					this.teamRepository.save({ team });
 				});
 			}
 
@@ -174,7 +173,7 @@ export class TeamController {
 	): Promise<TeamUser | ErrorDto> {
 		try {
 			const user: User = await this.userRepository.findOne({
-				where: { mail: data.mail },
+				where: { mail: data.user },
 			});
 			if (!user) throw new Error("Account not found");
 			const team: Team = await this.teamRepository.findOne({

@@ -27,13 +27,7 @@ import SecondStep from '@/app/components/Form/secondStep';
 import ThirdStep from '@/app/components/Form/thirdStep';
 import HomeData from '@/app/components/HomeData';
 
-export default function HomePage({
-	userData,
-	updateUserData,
-}: {
-	userData: any;
-	updateUserData: any;
-}) {
+export default function HomePage({ userData, updateUserData, }: { userData: any; updateUserData: any; }) {
 	const [lastP, setLastP] = useState({
 		name: '',
 		start_date: '',
@@ -51,8 +45,6 @@ export default function HomePage({
 		},
 	});
 	const [userStep, setUserStep] = useState(0);
-	const router = useRouter();
-	const [windowWidth, setWindowWidth] = useState<number>(1440);
 
 	useEffect(() => {
 		let tmp_lastP = {
@@ -83,8 +75,6 @@ export default function HomePage({
 		}
 	}, [userData]);
 
-
-	console.log(userStep)
 	return (
 		<>
 			<div className='right_container'>
@@ -296,14 +286,14 @@ export default function HomePage({
 						</div>
 						<div className='main_modal_form'>
 							<div className='main_modal_form_idx'>
-								{userStep >= 1 ? <img className="fade-in-image firstStep" src="/assets/nbr1on.png" alt="" /> : <img src="/assets/nbr1off.png" alt="" />}
+								{userStep >= 1 ? <img className="fade-in-image firstStep" src="/assets/nbr1on.png" alt="" onClick={() => setUserStep(1)} style={{ cursor: "pointer" }} /> : <img src="/assets/nbr1off.png" alt="" onClick={() => setUserStep(1)} />}
 								<div className='dotted_line'></div>
-								{userStep >= 2 ? <img className="fade-in-image" src="/assets/nbr2on.png" alt="" /> : <img src="/assets/nbr2off.png" alt="" />}
+								{userStep >= 2 ? <img className="fade-in-image" src="/assets/nbr2on.png" alt="" onClick={() => setUserStep(2)} style={{ cursor: "pointer" }} /> : <img src="/assets/nbr2off.png" alt="" />}
 								<div className='dotted_line2'></div>
-								{userStep >= 3 ? <img className="fade-in-image" src="/assets/nbr3on.png" alt="" /> : <img src="/assets/nbr3off.png" alt="" />}
+								{userStep >= 3 ? <img className="fade-in-image" src="/assets/nbr3on.png" alt="" onClick={() => setUserStep(3)} style={{ cursor: "pointer" }} /> : <img src="/assets/nbr3off.png" alt="" />}
 							</div>
 							<div className='main_modal_form_component'>
-								{userStep == 1 ? <FirstStep setUserStep={setUserStep} /> : userStep == 2 ? <SecondStep userData={userData} setUserStep={setUserStep} /> : userStep == 3 ? <ThirdStep /> : null}
+								{userStep == 1 ? <FirstStep userData={userData} setUserStep={setUserStep} /> : userStep == 2 ? <SecondStep userData={userData} setUserStep={setUserStep} /> : userStep == 3 ? <ThirdStep /> : null}
 							</div>
 						</div>
 					</div>

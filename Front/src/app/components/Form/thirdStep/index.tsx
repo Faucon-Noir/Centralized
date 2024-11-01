@@ -5,7 +5,12 @@ import "./style.scss"
 function ThirdStep() {
 
     return (
-        <div></div>
+        <div className="third_step_form">
+            <h1>Vous êtes prêt !</h1>
+            <p>Vous venez de crée votre équipe, ainsi que votre premier projet.</p>
+            <p>Il ne vous reste plus qu&apos;a crée vos ticket et profiter de votre plateforme.</p>
+            <button onClick={() => window.location.reload()}>Terminer</button>
+        </div>
     );
 }
 

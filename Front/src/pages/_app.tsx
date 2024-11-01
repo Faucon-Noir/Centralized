@@ -1,6 +1,8 @@
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import './main_style.scss';
+import "./global.scss"
+
 import AuthWrapper from '@/app/components/Middleware/AuthWrapper';
 import { TaskProvider } from '../app/contexts/isReq'; // Importation du contexte
 import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingComponent';
@@ -56,9 +58,9 @@ export default function App({ Component, pageProps }: AppProps) {
 	}
 
 	return (
-		<main className={myFont.className}>
+		<main className={myFont.className} style={{ height: "100%" }}>
 			{Component.name == 'LoginPage' ||
-			Component.name == 'WelcomePage' ? (
+				Component.name == 'WelcomePage' ? (
 				<Component {...pageProps} userData={userData} />
 			) : (
 				<AuthWrapper>
@@ -66,7 +68,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						{Component.name === 'LoginPage' ? (
 							<Component {...pageProps} userData={userData} />
 						) : windowWidth >= 1280 ? (
-							<Grid container>
+							<Grid container style={{ height: "100%" }}>
 								<Grid xs={2} item={true}>
 									<DesktopNavigation
 										page={Component.name}

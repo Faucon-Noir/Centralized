@@ -29,16 +29,16 @@ function SecondStep({ userData, setUserStep }: { userData: any, setUserStep: any
 
     async function handleSubmit() {
         setUserStep(3)
-        // add user to project
-        setProject({ ...project, user: userData.user.id })
-        if (await checkFilledForm(project)) {
-            //start the request create specification
-            await axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project,
-                { headers: { Authorization: `Bearer ${userData.user.token}` } })
+        // // add user to project
+        // setProject({ ...project, user: userData.user.id })
+        // if (await checkFilledForm(project)) {
+        //     //start the request create specification
+        //     await axios.post(`http://localhost:8000/api/project/${project.team}/${project.user}`, project,
+        //         { headers: { Authorization: `Bearer ${userData.user.token}` } })
 
-            startTask(); // Met à jour l'état global que la tâche a démarré
-            router.push('/home');
-        }
+        //     startTask(); // Met à jour l'état global que la tâche a démarré
+        //     router.push('/home');
+        // }
     }
     return (
         <div className="step2form">
@@ -71,7 +71,7 @@ function SecondStep({ userData, setUserStep }: { userData: any, setUserStep: any
                 <div className='line'>
                     <textarea placeholder='Répartition de l&apos;équipe' rows={5} cols={100} onChange={(e) => setProject({ ...project, teamUser: e.target.value.trim() })} />
                 </div>
-                <button onClick={handleSubmit} disabled={!project.name || !project.description || !project.functionality || !project.forecast || !project.start_date || !project.end_date || !project.budget || !project.team || !project.technology || !project.constraints || !project.validation || !project.teamUser}>Générer</button>
+                <button onClick={handleSubmit} disabled={!project.name || !project.description || !project.functionality || !project.forecast || !project.start_date || !project.end_date || !project.budget || !project.technology || !project.constraints || !project.validation}>Générer</button>
             </div>
         </div >
     );

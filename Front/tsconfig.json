@@ -2,9 +2,10 @@
 	"compilerOptions": {
 		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
-		"types": ["node", "cypress"],
+		"types": ["node"],
 		"allowJs": true,
 		"skipLibCheck": true,
+		"typeRoots": ["./src/global.d.ts", "./node_modules/@types"],
 		"strict": true,
 		"noEmit": true,
 		"esModuleInterop": true,
@@ -26,5 +27,5 @@
 		"strictNullChecks": true,
 	},
 	"include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.tsx"],
-	"exclude": ["cypress/", "node_modules", "**/*.cy.tsx", "**/*.cy.ts", "**/const.ts"],
+	"exclude": ["node_modules", "**/*.cy.tsx", "**/*.cy.ts", "**/const.ts"],
 }

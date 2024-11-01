@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import './DesktopNav.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
@@ -29,6 +28,7 @@ export default function DesktopNavigation({
 	}
 
 	useEffect(() => {
+		import('./DesktopNav.scss'); // Charge uniquement quand MobileNavigation est monté
 		if (userData?.project?.length > 0) {
 			let selectedP = localStorage.getItem('selectedP');
 			let tempSelectedMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
