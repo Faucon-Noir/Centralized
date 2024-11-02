@@ -70,14 +70,10 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 		}
 		setLastP(tmp_lastP);
 
-		if (userData.team.length == 0) {
+		if (userData?.team?.length == 0) {
 			setUserStep(1);
-		}
-
-		if (userData.team.length > 0) {
-			setUserStep(2)
 		} else {
-			setUserStep(1);
+			setUserStep(2)
 		}
 	}, [userData]);
 

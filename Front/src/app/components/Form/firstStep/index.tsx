@@ -87,7 +87,8 @@ function FirstStep({ userData, setUserStep }: { userData: any, setUserStep: any 
                 }
             }
         }
-        setUserStep(2)
+        window.location.reload()
+        // setUserStep(2)
     }
     return (
         <div className="team_form">

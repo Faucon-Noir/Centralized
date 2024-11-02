@@ -19,7 +19,6 @@ const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 export default function App({ Component, pageProps }: AppProps) {
 	const [showMobileNav, setShowMobileNav] = useState(false);
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
-	console.log('mobilenav', showMobileNav);
 	const [userData, setUserData] = useState<any>({
 		project: [
 			{
@@ -59,11 +58,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<main className={myFont.className} style={{ height: "100%" }}>
-			{Component.name == 'LoginPage' ||
-				Component.name == 'WelcomePage' ? (
-				<Component {...pageProps} userData={userData} />
-			) : (
-				<AuthWrapper>
+			{Component.name == 'LoginPage' || Component.name == 'WelcomePage' ? (<Component {...pageProps} userData={userData} />) :
+				(<AuthWrapper>
 					<TaskProvider>
 						{Component.name === 'LoginPage' ? (
 							<Component {...pageProps} userData={userData} />
@@ -128,7 +124,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						)}
 					</TaskProvider>
 				</AuthWrapper>
-			)}
+				)}
 		</main>
 	);
 }

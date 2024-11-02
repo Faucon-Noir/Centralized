@@ -2,7 +2,7 @@ import './style.scss';
 import { useEffect, useState } from 'react';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import MyProjectCard from '@/app/components/Card/MyProjectCard';
+import MyProjectCard from '@/app/components/Card/ProjectCardSpecification';
 
 function Specification({ userData, updateUserData }: { userData: any, updateUserData: any }) {
 	const [openedP, setOpenedP] = useState<any[]>([]);
