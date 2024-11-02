@@ -159,7 +159,6 @@ export default function AccountPage({
 							>
 								<CloseOutlinedIcon />
 							</IconButton>
-							{/* TODO: Faire une update de l'api pour prendre en charge le blob de l'image */}
 							<Input type='file' onChange={handleFileChange} />
 						</Box>
 					</Modal>
