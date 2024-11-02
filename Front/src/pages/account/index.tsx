@@ -74,7 +74,8 @@ export default function AccountPage({
 			const maxSize: number = 2 * 1024 * 1024; // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
 				setUser({...user, avatar: file});
-				setAvatarPreview(URL.createObjectURL(file))
+				setAvatarPreview(URL.createObjectURL(file));
+				setOpen(false);
 			} else {
 				alert(
 					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
