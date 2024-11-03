@@ -70,7 +70,7 @@ export default function GlobalPollingComponent() {
 				<div className='reqLoad'>
 					<p>Création de votre cahier des charges...</p>
 					<p style={{ fontSize: '10px' }}>
-						La page cahier des charges est temporairement désactivée
+						Génération de votre cahier des charges par IA.
 					</p>
 					<BarLoader
 						color='white'

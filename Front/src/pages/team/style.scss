@@ -26,4 +26,51 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
+
+    .team_modal{
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgb(172, 172, 172, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .team_main_modal {
+            min-width: 40%;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+            display: flex;
+            gap: 30px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-height: 80%;
+            overflow: scroll;
+            padding: 50px;
+            position: relative;
+            h1,
+            h2,
+            h3,
+            p {
+                margin: 0;
+                padding: 0;
+            }
+    
+            h1 {
+                font-size: 28px;
+            }
+            img{
+                cursor: pointer;
+                filter: invert(1);
+                position: absolute;
+                right: 2%;
+                top: 5%;
+            }
+        }
+    }
 }

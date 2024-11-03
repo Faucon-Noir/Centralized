@@ -28,6 +28,8 @@ import ThirdStep from '@/app/components/Form/thirdStep';
 import HomeData from '@/app/components/HomeData';
 
 export default function HomePage({ userData, updateUserData, }: { userData: any; updateUserData: any; }) {
+	const router = useRouter();
+
 	const [lastP, setLastP] = useState({
 		name: '',
 		start_date: '',
@@ -77,7 +79,9 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 		}
 	}, [userData]);
 
-	return (
+	const handleClickCreateTeam = () => {
+		router.push('/team?create=true');
+	}; return (
 		<>
 			<div className='right_container'>
 				{userData?.project?.length > 0 ? <>
@@ -238,7 +242,7 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 						<div className='Entete'>
 							<div className='TitleProjetCards'>
 								<h2>Mes équipes</h2>
-								<ButtonBase>
+								<ButtonBase onClick={() => handleClickCreateTeam()}>
 									<AddIcon
 										fontSize='medium'
 										sx={{ color: '#000000' }}
@@ -269,9 +273,7 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 									? userData?.team.map((item: any) => (
 										<SwiperSlide key={item.id}>
 											<TeamCard
-												key={item.id}
-												id={item.team.id}
-												prenom={item.team.name}
+												team={item?.team} userData={userData} key={item?.team?.id}
 											/>
 										</SwiperSlide>
 									))
@@ -279,7 +281,6 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 							</div>
 						</CustomSwiper>
 					</div>
-
 				</> : <div className='no_project'>
 					<div className='main_modal'>
 						<div className='main_modal_header'>
@@ -301,7 +302,7 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 					</div>
 				</div>
 				}
-			</div>
+			</div >
 		</>
 	);
 }
