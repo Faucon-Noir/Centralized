@@ -10,12 +10,14 @@ import { Grid } from '@mui/material';
 import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNavigation';
 import React from 'react';
 import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
+import MenuIcon from '@mui/icons-material/Menu';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [showMobileNav, setShowMobileNav] = useState(false);
+	console.log('mobilenav', showMobileNav);
 	const [userData, setUserData] = useState<any>({
 		project: [
 			{
@@ -64,31 +66,15 @@ export default function App({ Component, pageProps }: AppProps) {
 								</>
 							) : windowWidth >= 1280 ? (
 								<Grid container>
-									{windowWidth >= 1280 ? (
-										<Grid xs={2} item={true}>
-											<DesktopNavigation
-												page={Component.name}
-												userData={
-													userData?.user
-														? userData
-														: {}
-												}
-												updateUserData={setUserData}
-											/>
-										</Grid>
-									) : (
-										showMobileNav && (
-											<MobileNavigation
-												page={Component.name}
-												userData={
-													userData?.user
-														? userData
-														: {}
-												}
-												updateUserData={setUserData}
-											/>
-										)
-									)}
+									<Grid xs={2} item={true}>
+										<DesktopNavigation
+											page={Component.name}
+											userData={
+												userData?.user ? userData : {}
+											}
+											updateUserData={setUserData}
+										/>
+									</Grid>
 									<Grid xs={10} item={true}>
 										<Component
 											{...pageProps}
@@ -102,6 +88,37 @@ export default function App({ Component, pageProps }: AppProps) {
 								</Grid>
 							) : (
 								<>
+									<button
+										className='burgerMenu'
+										onClick={() => setShowMobileNav(true)}
+									>
+										<MenuIcon />
+									</button>
+									{showMobileNav ? (
+										<>
+											<MobileNavigation
+												page={Component.name}
+												userData={
+													userData?.user
+														? userData
+														: {}
+												}
+												updateUserData={setUserData}
+												setShowMobileNav={
+													setShowMobileNav
+												}
+											/>
+											<button
+												onClick={() =>
+													setShowMobileNav(false)
+												}
+											>
+												Close
+											</button>
+										</>
+									) : (
+										<></>
+									)}
 									<Component
 										{...pageProps}
 										userData={
