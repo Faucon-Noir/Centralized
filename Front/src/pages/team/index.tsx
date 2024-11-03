@@ -21,7 +21,6 @@ function Team({ userData, updateUserData }: { userData: any, updateUserData: any
 		setShowModal(false);
 		router.push('/team');
 	}
-	console.log(showModal)
 	return (
 		<div className='teamPage'>
 			<div className='header'>

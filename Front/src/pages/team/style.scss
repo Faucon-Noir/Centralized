@@ -22,8 +22,9 @@
     }
 
     .teams_container {
+        margin-top: 3%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 20px;
     }
 
@@ -69,7 +70,7 @@
                 filter: invert(1);
                 position: absolute;
                 right: 2%;
-                top: 5%;
+                top: 2%;
             }
         }
     }
