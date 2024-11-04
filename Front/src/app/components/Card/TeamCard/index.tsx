@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 
-export default function TeamCard({ team, userData }: { team: any, userData: any }) {
+export default function TeamCard({ team, userData, clickable }: { team: any, userData: any, clickable: any }) {
 	const [teamData, setTeamData] = useState([{
 		id: 0
 	}]);
@@ -81,7 +81,7 @@ export default function TeamCard({ team, userData }: { team: any, userData: any 
 
 	return (
 		<>
-			<div className='card_team' onClick={() => setShowModal(true)}>
+			<div className='card_team' onClick={() => clickable ? setShowModal(true) : null}>
 				<div className='card-header yellow'>
 					<img src={"/media/" + team.avatar} alt='avatar' className='avatar' onError={(e) => { e.currentTarget.src = '/assets/avatar_team.png' }}></img>
 				</div>
@@ -115,9 +115,7 @@ export default function TeamCard({ team, userData }: { team: any, userData: any 
 									</div>
 								)) : null}
 							</div>
-							{/* to do ajouter un membre a une team */}
 							<input type="text" placeholder='Ajouter des membres (email)' onChange={e => setMailToAdd(e.target.value)} />
-							{/* to do ajouter un membre a une team */}
 							<button onClick={() => handleFinish()}>Terminé</button>
 						</div>
 					</div>

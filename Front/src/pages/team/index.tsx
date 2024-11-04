@@ -36,7 +36,7 @@ function Team({ userData, updateUserData }: { userData: any, updateUserData: any
 			<div className='teams_container'>
 				{userData.team.length > 0 ?
 					userData.team.map((item: any) => (
-						<TeamCard team={item?.team} userData={userData} key={item?.team?.id} />
+						<TeamCard team={item?.team} userData={userData} key={item?.team?.id} clickable={true} />
 					))
 					: null}
 			</div>

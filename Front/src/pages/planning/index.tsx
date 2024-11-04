@@ -12,6 +12,7 @@ import { useCallback, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ButtonNewTicketCy, CalendarCy } from '@/app/const/planning/const';
+import { numberToColor } from '@/app/helpers';
 
 const messages = {
 	allDay: 'Tous les jours',
@@ -91,13 +92,7 @@ const CustomToolbar = ({
 	);
 };
 
-export default function Planning({
-	userData,
-	updateUserData,
-}: {
-	userData: any;
-	updateUserData: any;
-}) {
+export default function Planning({ userData, updateUserData }: { userData: any; updateUserData: any }) {
 	const router = useRouter();
 
 	const [myList, setMyList] = useState([
@@ -106,78 +101,35 @@ export default function Planning({
 			start: new Date(),
 			end: new Date(),
 			title: '',
+			color: 'black'
 		},
 	]);
 
 	useEffect(() => {
 		let displayTicket: any = [];
 		let idx = 0;
-
 		for (let project of userData.project) {
-			if (
-				project.ticket != undefined &&
-				project.ticket.ticket != undefined &&
-				project.ticket.error == undefined
-			) {
-				for (let line of project.ticket.ticket) {
-					let shouldAddTicket = true; // On part du principe qu'on va ajouter le ticket
-					let newStart = new Date(line.start_date);
-					let newEnd = new Date(line.end_date);
-
-					// On vérifie le ticket par rapport à tous les tickets déjà ajoutés dans displayTicket
-					for (let existingTicket of displayTicket) {
-						const existingStart = existingTicket.start;
-						const existingEnd = existingTicket.end;
-
-						// Cas 1 : Si le ticket actuel est totalement contenu dans un autre ticket, on le saute
-						if (
-							newStart >= existingStart &&
-							newEnd <= existingEnd
-						) {
-							shouldAddTicket = false;
-							break; // On sort de la boucle car ce ticket ne doit pas être ajouté
-						}
-
-						// Cas 2 : Si le ticket chevauche le début d'un autre, on ajuste la date de début
-						if (newStart <= existingEnd && newEnd > existingEnd) {
-							newStart = new Date(existingEnd); // Ajuster le début
-						}
-
-						// Cas 3 : Si le ticket chevauche la fin d'un autre, on ajuste la date de fin
-						if (
-							newEnd >= existingStart &&
-							newStart < existingStart
-						) {
-							newEnd = existingStart;
-						}
-					}
-
-					// Ajouter le ticket si shouldAddTicket est toujours vrai
-					if (shouldAddTicket) {
-						displayTicket.push({
-							id: idx,
-							start: newStart,
-							end: newEnd,
-							title: project.name,
-						});
-						idx++;
-					}
-				}
-			}
+			displayTicket.push({
+				id: idx,
+				start: new Date(project.start_date),
+				end: new Date(project.end_date),
+				title: project.name,
+				color: project.color
+			})
+			idx++;
 		}
-
-		console.log(displayTicket);
 		setMyList(displayTicket);
 	}, [userData]);
+
 
 	function handleRedirect(e: any) {
 		e.preventDefault();
 		router.push('/ticket/create');
 	}
 
-	const eventStyleGetter = () => {
+	const eventStyleGetter = (event: any) => {
 		var style = {
-			backgroundColor: 'black',
+			backgroundColor: numberToColor(event.color) || 'black',
 		};
 		return {
 			style: style,

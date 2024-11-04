@@ -272,7 +272,7 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 									? userData?.team.map((item: any) => (
 										<SwiperSlide key={item.id}>
 											<TeamCard
-												team={item?.team} userData={userData} key={item?.team?.id}
+												team={item?.team} userData={userData} key={item?.team?.id} clickable={false}
 											/>
 										</SwiperSlide>
 									))
