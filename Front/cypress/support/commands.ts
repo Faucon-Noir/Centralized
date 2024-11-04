@@ -36,61 +36,58 @@
 //   }
 // }
 
-Cypress.Commands.add(
-	'cleanType',
-	(
-		inputName: string,
-		value: string,
-		selector = 'name'
-	): Cypress.Chainable<JQuery<HTMLElement>> => {
-		// Avoids a bug with quick inputs, from https://github.com/cypress-io/cypress/issues/5480#issuecomment-633660321
-		return cy
-			.get(`input[${selector}="${inputName}"]`)
-			.clear()
-			.type(value)
-			.should('have.value', value)
-	}
-)
+// Cypress.Commands.add(
+// 	'cleanType',
+// 	(
+// 		inputName: string,
+// 		value: string,
+// 		selector = 'name'
+// 	): Cypress.Chainable<JQuery<HTMLElement>> => {
+// 		// Avoids a bug with quick inputs, from https://github.com/cypress-io/cypress/issues/5480#issuecomment-633660321
+// 		return cy
+// 			.get(`input[${selector}="${inputName}"]`)
+// 			.clear()
+// 			.type(value)
+// 			.should('have.value', value)
+// 	}
+// )
 
 Cypress.Commands.add(
 	'centralizedGet',
 	(name: string): Cypress.Chainable<JQuery<HTMLElement>> => {
-		return cy.get(`[data-cy="${name}"]`)
+		return cy.get(`[data-cy="${name}"]`);
 	}
-)
+);
 
 Cypress.Commands.add(
 	'centralizedGetValue',
 	(name: string, value: string): Cypress.Chainable<JQuery<HTMLElement>> => {
-		return cy.get(`[data-cy="${name}"][data-cy-value="${value}"]`)
+		return cy.get(`[data-cy="${name}"][data-cy-value="${value}"]`);
 	}
-)
+);
 
 Cypress.Commands.add('login', (): void => {
-	cy.visit('localhost:3000/login')
+	cy.visit('localhost:3000/login');
 	// Token valide 10 ans
-	localStorage.clear()
+	localStorage.clear();
 	localStorage.setItem(
 		'token',
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkMzQ1ZWEyLTJhNWYtNDJmMi1hNTg4LTU2MGZmNGVhYmE4ZSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzE3NTk3MDkyLCJleHAiOjI0NzQ5Nzk0OTJ9.So-Ldq8l1g_hSG6Nz7SdoAhbvdM4WNCkqHGy-wl3IjY"
-	)
-	cy.visit('localhost:3000/')
-	cy.viewport(1920, 1080)
-})
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkMzQ1ZWEyLTJhNWYtNDJmMi1hNTg4LTU2MGZmNGVhYmE4ZSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzE3NTk3MDkyLCJleHAiOjI0NzQ5Nzk0OTJ9.So-Ldq8l1g_hSG6Nz7SdoAhbvdM4WNCkqHGy-wl3IjY'
+	);
+	cy.visit('localhost:3000/');
+	cy.viewport(1920, 1080);
+});
 
 Cypress.Commands.add('logout', (): void => {
-	localStorage.removeItem('token')
-	cy.clearLocalStorage()
-	cy.visit('localhost:3000/login')
-})
+	localStorage.removeItem('token');
+	cy.clearLocalStorage();
+	cy.visit('localhost:3000/login');
+});
 
 Cypress.Commands.add('selectProject', (id: string): void => {
-	cy.visit('localhost:3000/')
-	localStorage.removeItem('SelectedProject')
-	localStorage.setItem(
-		'SelectedProject',
-		id
-	)
-	cy.visit('localhost:3000/')
-	cy.viewport(1920, 1080)
-})
+	cy.visit('localhost:3000/');
+	localStorage.removeItem('SelectedProject');
+	localStorage.setItem('SelectedProject', id);
+	cy.visit('localhost:3000/');
+	cy.viewport(1920, 1080);
+});

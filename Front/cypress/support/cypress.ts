@@ -1,18 +1,18 @@
-import { mount, MountOptions, MountReturn } from 'cypress/react18'
-import { MemoryRouterProps } from 'react-router-dom'
+import { mount, MountOptions, MountReturn } from 'cypress/react18';
+import { MemoryRouterProps } from 'react-router-dom';
 
-export type UserType = 'unknown' | 'user'
+export type UserType = 'unknown' | 'user';
 
 export type UserConfigType = {
-	email: string
-	password: string
-	expireAt: number
-}
+	email: string;
+	password: string;
+	expireAt: number;
+};
 
 declare global {
 	namespace Cypress {
 		interface Chainable {
-			mount: typeof mount
+			mount: typeof mount;
 			/**
 			 * Mounts a React node
 			 * @param component React Node to mount
@@ -21,20 +21,20 @@ declare global {
 			mountWithRouter(
 				component: React.ReactNode,
 				options?: MountOptions & { routerProps?: MemoryRouterProps }
-			): Cypress.Chainable<MountReturn>
+			): Cypress.Chainable<MountReturn>;
 		}
 		interface Chainable {
-			cleanType(
-				inputName: string,
-				value: string,
-				selector?: 'name' | 'id'
-			): Chainable<JQuery<HTMLElement>>
+			// cleanType(
+			// 	inputName: string,
+			// 	value: string,
+			// 	selector?: 'name' | 'id'
+			// ): Chainable<JQuery<HTMLElement>>
 
 			/**
 			 * Custom command to select DOM element by data-cy attribute.
 			 * @example cy.centralizedGet('greeting')
 			 */
-			centralizedGet(value: string): Chainable<JQuery<HTMLElement>>
+			centralizedGet(value: string): Chainable<JQuery<HTMLElement>>;
 
 			/**
 			 * Custom command to select DOM element by data-cy attribute and data-cy-value attribute
@@ -43,25 +43,25 @@ declare global {
 			centralizedGetValue(
 				dataCy: string,
 				dataCyValue: string
-			): Chainable<JQuery<HTMLElement>>
+			): Chainable<JQuery<HTMLElement>>;
 
 			/**
 			 * Custom command to login
 			 * @example cy.login()
 			 */
-			login(): void
+			login(): void;
 
 			/**
 			 * Custom command to logout
 			 * @example cy.logout()
 			 */
-			logout(): void
+			logout(): void;
 
 			/**
 			 * Custom command to select a project
 			 * @example cy.selectProject(value)
 			 */
-			selectProject(value: string): void
+			selectProject(value: string): void;
 		}
 	}
 }

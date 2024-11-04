@@ -5,14 +5,17 @@ declare namespace Cypress {
 		 * Custom command to select DOM element by data-cy attribute.
 		 * @example cy.centralizedGet('greeting')
 		 */
-		centralizedGet(value: string): Chainable<any>
+		centralizedGet(value: string): Chainable<any>;
 
 		/**
 		 * Custom command to select DOM element by data-cy attribute and data-cy-value attribute
 		 * @example cy.centralizedGetValue('greeting', 'abc')
 		 */
-		centralizedGetValue(dataCy: string, dataCyValue: string): Chainable<any>
+		centralizedGetValue(
+			dataCy: string,
+			dataCyValue: string
+		): Chainable<any>;
 
-		cleanType(inputName: string, value: string): Chainable<any>
+		// cleanType(inputName: string, value: string): Chainable<any>
 	}
 }
