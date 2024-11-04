@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import './main_style.scss';
-import "./global.scss"
+import './global.scss';
 
 import AuthWrapper from '@/app/components/Middleware/AuthWrapper';
 import { TaskProvider } from '../app/contexts/isReq'; // Importation du contexte
@@ -12,6 +12,7 @@ import { Grid } from '@mui/material';
 import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNavigation';
 import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useRouter } from 'next/router';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
@@ -31,15 +32,23 @@ export default function App({ Component, pageProps }: AppProps) {
 		specification: [],
 		selectedProjects: [],
 	});
-	const [windowWidth, setWindowWidth] = useState<number>(1440);
+	const [windowWidth, setWindowWidth] = useState<number>(0);
+	const router = useRouter();
 
 	useEffect(() => {
+		setWindowWidth(window.innerWidth);
+
 		const handleResize = () => setWindowWidth(window.innerWidth);
+		const handleRouteChange = () => setWindowWidth(window.innerWidth);
+
 		window.addEventListener('resize', handleResize);
+		router.events.on('routeChangeComplete', handleRouteChange);
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
+			router.events.off('routeChangeComplete', handleRouteChange);
 		};
-	}, []);
+	}, [router.events]);
 
 	useEffect(() => {
 		if (Component.name != 'LoginPage') {
@@ -57,14 +66,17 @@ export default function App({ Component, pageProps }: AppProps) {
 	}
 
 	return (
-		<main className={myFont.className} style={{ height: "100%" }}>
-			{Component.name == 'LoginPage' || Component.name == 'WelcomePage' ? (<Component {...pageProps} userData={userData} />) :
-				(<AuthWrapper>
+		<main className={myFont.className} style={{ height: '100%' }}>
+			{Component.name == 'LoginPage' ||
+			Component.name == 'WelcomePage' ? (
+				<Component {...pageProps} userData={userData} />
+			) : (
+				<AuthWrapper>
 					<TaskProvider>
 						{Component.name === 'LoginPage' ? (
 							<Component {...pageProps} userData={userData} />
 						) : windowWidth >= 1280 ? (
-							<Grid container style={{ height: "100%" }}>
+							<Grid container style={{ height: '100%' }}>
 								<Grid xs={2} item={true}>
 									<DesktopNavigation
 										page={Component.name}
@@ -124,7 +136,7 @@ export default function App({ Component, pageProps }: AppProps) {
 						)}
 					</TaskProvider>
 				</AuthWrapper>
-				)}
+			)}
 		</main>
 	);
 }
