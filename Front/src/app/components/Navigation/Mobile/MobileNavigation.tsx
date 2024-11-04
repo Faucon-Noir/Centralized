@@ -7,7 +7,7 @@ import { Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
 import Link from 'next/link';
 import React from 'react';
-
+import './MobileNav.scss';
 export default function MobileNavigation({
 	page = '',
 	userData,
@@ -30,7 +30,7 @@ export default function MobileNavigation({
 	}
 
 	useEffect(() => {
-		import('./MobileNav.scss'); // Charge uniquement quand MobileNavigation est monté
+		// Charge uniquement quand MobileNavigation est monté
 
 		if (userData?.project?.length > 0) {
 			let selectedP = localStorage.getItem('selectedP');
@@ -150,28 +150,40 @@ export default function MobileNavigation({
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
 								<div className='projectOpen' key={index}>
-									<button className='pName'>
-										<img
-											src='/assets/icons/icon-cross.svg'
-											alt=''
-											className='cross'
-											onClick={() =>
-												deleteSelected(project.id)
+									<Link
+										className='ProjectBlocName'
+										href={'/dashboard/' + project.id}
+									>
+										<button
+											className={
+												page == 'Dashboard' &&
+												project?.id == index
+													? 'pName selected'
+													: 'pName'
 											}
-										/>
-										<Icon
-											sx={{
-												color: numberToColor(
-													project.color
-												),
-												height: '35px',
-												width: '35px',
-											}}
 										>
-											<FolderCopyIcon fontSize='large' />
-										</Icon>
-										<p>{project.name}</p>
-									</button>
+											<img
+												src='/assets/icons/icon-cross.svg'
+												alt=''
+												className='cross'
+												onClick={() =>
+													deleteSelected(project.id)
+												}
+											/>
+											<Icon
+												sx={{
+													color: numberToColor(
+														project.color
+													),
+													height: '35px',
+													width: '35px',
+												}}
+											>
+												<FolderCopyIcon fontSize='large' />
+											</Icon>
+											<p>{project.name}</p>
+										</button>
+									</Link>
 									<div className='submenu'>
 										<Link
 											href={

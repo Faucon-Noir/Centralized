@@ -177,7 +177,57 @@
 			}
 		}
 	}
+	.BlocDouble {
+		display: flex;
+		flex-direction: row;
+		gap: 10%;
+		// align-items: center;
 
+		// @media (max-width: 1280px) {
+		// 	gap: 1%;
+		// }
+		@media (max-width: 1080px) {
+			gap: 10%;
+		}
+		@media (max-width: 920px) {
+			gap: 20%;
+		}
+		@media (max-width: 860px) {
+			gap: 25%;
+		}
+		@media (max-width: 720px) {
+			gap: 30%;
+		}
+		@media (max-width: 660px) {
+			// gap: 40%;
+			flex-direction: column;
+		}
+
+		width: 100%;
+
+		.calendar_container {
+			width: 35%;
+
+			@media (max-width: 660px) {
+				width: 70%;
+				margin-bottom: 24px;
+			}
+			@media (max-width: 550px) {
+				width: 90%;
+			}
+		}
+
+		.DernierTicket {
+			// width: 100% !important;
+			// padding: 0 25px;
+			display: flex;
+			flex-direction: column;
+			gap: 25px;
+			@media (max-width: 660px) {
+				margin-bottom: 24px;
+			}
+		}
+	}
 	.MyTeam {
 		margin-top: 50px;
 	}
@@ -209,6 +259,42 @@
 		@media (max-width: 768px) {
 			flex-direction: column;
 			margin-bottom: 24px;
+		}
+	}
+	.text_stat {
+		display: flex;
+		justify-content: space-evenly;
+		gap: 50px;
+		text-align: center;
+		@media (min-width: 1680px) {
+			flex-direction: column;
+		}
+		@media (max-width: 660px) {
+			flex-direction: column;
+			margin-bottom: 30px;
+		}
+		@media (max-width: 1680px) and (min-width: 660px) {
+			width: 100%;
+		}
+		.stat_container {
+			background-color: white;
+			border-radius: 20px;
+			box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			padding: 16px;
+			justify-content: center;
+			transition: all 350ms ease-in-out;
+			min-width: 275px;
+			max-width: 500px;
+			text-align: center;
+			p {
+				margin: 0;
+			}
+			h3 {
+				margin: 0;
+			}
 		}
 	}
 }
