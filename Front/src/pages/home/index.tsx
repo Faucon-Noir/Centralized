@@ -268,7 +268,6 @@ export default function HomePage({ userData, updateUserData, }: { userData: any;
 						</div>
 						<CustomSwiper swiperId={2}>
 							<div className='ProjetCards'>
-								{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
 								{userData?.team
 									? userData?.team.map((item: any) => (
 										<SwiperSlide key={item.id}>

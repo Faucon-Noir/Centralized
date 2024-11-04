@@ -23,10 +23,6 @@
 	flex-direction: column;
 	gap: 10px;
 	min-width: 300px;
-
-	h2 {
-		margin-top: 16px !important;
-	}
 }
 
 .entetedernierticket {
@@ -217,7 +213,6 @@
 	}
 }
 
-
 .no_project {
 	overflow: hidden;
 	position: absolute;
@@ -244,7 +239,7 @@
 		max-height: 80%;
 		overflow: scroll;
 		padding: 50px;
-		
+
 		h1,
 		h2,
 		h3,
@@ -275,7 +270,6 @@
 				img {
 					height: 30px;
 					width: 30px;
-
 				}
 
 				.dotted_line {
@@ -283,7 +277,7 @@
 					left: 69%;
 					width: 145%;
 					height: 1px;
-					border-top: 4px dotted #0293FC;
+					border-top: 4px dotted #0293fc;
 				}
 
 				.dotted_line2 {
@@ -291,7 +285,7 @@
 					right: 69%;
 					width: 145%;
 					height: 1px;
-					border-top: 4px dotted #0293FC;
+					border-top: 4px dotted #0293fc;
 				}
 
 				.fade-in-image {

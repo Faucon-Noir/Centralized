@@ -83,7 +83,7 @@ export default function TeamCard({ team, userData }: { team: any, userData: any 
 		<>
 			<div className='card_team' onClick={() => setShowModal(true)}>
 				<div className='card-header yellow'>
-					<img src={"/media/" + team.avatar} alt='avatar' className='avatar'></img>
+					<img src={"/media/" + team.avatar} alt='avatar' className='avatar' onError={(e) => { e.currentTarget.src = '/assets/avatar_team.png' }}></img>
 				</div>
 				<div className='card-body'>
 					<h2 className='team-name'>{team.name}</h2>
@@ -101,7 +101,7 @@ export default function TeamCard({ team, userData }: { team: any, userData: any 
 
 					<div className='team_main_modal_content'>
 						<div className='image_container'>
-							<img src={"/media/" + team.avatar} alt='avatar' className='avatar'></img>
+							<img src={"/media/" + team.avatar} alt='avatar' className='avatar' onError={(e) => { e.currentTarget.src = '/assets/avatar_team.png' }}></img>
 
 						</div>
 						<div className='right_modal_container'>
