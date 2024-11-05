@@ -1,12 +1,18 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-img-element */
 'use client';
-import 'swiper/css';
+// import 'swiper/css';
 import './style.scss';
-import 'swiper/css/pagination';
+// import 'swiper/css/pagination';
 
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import React from 'react';
+
+// Icons
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import XIcon from '@mui/icons-material/X';
 
 export default function WelcomePage() {
 	const [currentImage, setCurrentImage] = useState(
@@ -50,6 +56,7 @@ export default function WelcomePage() {
 				/>
 				<Link href='/login'>Connexion</Link>
 			</header>
+
 			<section className='first'>
 				<div className='text'>
 					<h1>Travailler ensemble plus facilement</h1>
@@ -79,6 +86,7 @@ export default function WelcomePage() {
 					/>
 				</div>
 			</section>
+
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
@@ -160,65 +168,68 @@ export default function WelcomePage() {
 					</div>
 				</div>
 			</section>
-			{/*<section className='third'>*/}
-			{/*	<h1>Améliorer votre manière de travailler</h1>*/}
-			{/*	<button onClick={handleNextClick} className='arrow'>*/}
-			{/*		<div className='round'>*/}
-			{/*			<p>&gt;</p>*/}
-			{/*		</div>*/}
-			{/*	</button>*/}
-			{/*	<br></br>*/}
-			{/*	<div className='container'>*/}
-			{/*		<div className='listContainer' ref={listContainerRef}>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>📦</div>*/}
-			{/*				<div className='title'>Title 1</div>*/}
-			{/*				<div className='description'>Description 1</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🛠</div>*/}
-			{/*				<div className='title'>Title 2</div>*/}
-			{/*				<div className='description'>Description 2</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🚀</div>*/}
-			{/*				<div className='title'>Title 3</div>*/}
-			{/*				<div className='description'>Description 3</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>📦</div>*/}
-			{/*				<div className='title'>Title 1</div>*/}
-			{/*				<div className='description'>Description 1</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🛠</div>*/}
-			{/*				<div className='title'>Title 2</div>*/}
-			{/*				<div className='description'>Description 2</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🚀</div>*/}
-			{/*				<div className='title'>Title 3</div>*/}
-			{/*				<div className='description'>Description 3</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>📦</div>*/}
-			{/*				<div className='title'>Title 1</div>*/}
-			{/*				<div className='description'>Description 1</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🛠</div>*/}
-			{/*				<div className='title'>Title 2</div>*/}
-			{/*				<div className='description'>Description 2</div>*/}
-			{/*			</div>*/}
-			{/*			<div className='block'>*/}
-			{/*				<div className='icon'>🚀</div>*/}
-			{/*				<div className='title'>Title 3</div>*/}
-			{/*				<div className='description'>Description 3</div>*/}
-			{/*			</div>*/}
-			{/*			/!* Add more blocks as needed *!/*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</section>*/}
+
+			<section className='third'>
+				<h1>Améliorer votre manière de travailler</h1>
+				<button onClick={handleNextClick} className='arrow'>
+					<div className='round'>
+						{/* <p>&gt;</p> */}
+						<ChevronRightIcon sx={{ height: 32, width: 32 }} />
+					</div>
+				</button>
+				<br />
+				<div className='container'>
+					<div className='listContainer' ref={listContainerRef}>
+						<div className='block'>
+							<div className='icon'>📦</div>
+							<div className='title'>Title 1</div>
+							<div className='description'>Description 1</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🛠</div>
+							<div className='title'>Title 2</div>
+							<div className='description'>Description 2</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🚀</div>
+							<div className='title'>Title 3</div>
+							<div className='description'>Description 3</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>📦</div>
+							<div className='title'>Title 1</div>
+							<div className='description'>Description 1</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🛠</div>
+							<div className='title'>Title 2</div>
+							<div className='description'>Description 2</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🚀</div>
+							<div className='title'>Title 3</div>
+							<div className='description'>Description 3</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>📦</div>
+							<div className='title'>Title 1</div>
+							<div className='description'>Description 1</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🛠</div>
+							<div className='title'>Title 2</div>
+							<div className='description'>Description 2</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>🚀</div>
+							<div className='title'>Title 3</div>
+							<div className='description'>Description 3</div>
+						</div>
+						{/* /!* Add more blocks as needed *!/ */}
+					</div>
+				</div>
+			</section>
+
 			<section className='price'>
 				<h2>Des prix adaptés à vos besoins</h2>
 				{/* <button className='offer'>Comparaison</button> */}
@@ -284,91 +295,11 @@ export default function WelcomePage() {
 								projets par mois.
 							</p>
 						</div>
-						<div className='block'>
-							<div className='icon'>📦</div>
-							<div className='title'>Title 1</div>
-							<div className='description'>Description 1</div>
-						</div>
-						<div className='block'>
-							<div className='icon'>🛠</div>
-							<div className='title'>Title 2</div>
-							<div className='description'>Description 2</div>
-						</div>
-						<div className='block'>
-							<div className='icon'>🚀</div>
-							<div className='title'>Title 3</div>
-							<div className='description'>Description 3</div>
-						</div>
-						{/* Add more blocks as needed */}
+						<a href='#'>Contacter notre équipe</a>
 					</article>
 				</div>
 			</section>
-			<div className='price'>
-				<h1>Des prix adaptés à vos besoins</h1>
-				<h3></h3>
-				{/* <button className='offer'>Comparaison</button> */}
-				<div className='gridprice'>
-					<div className='box'>
-						<h3>STANDARD</h3>
-						<h1>
-							6<span className='currency'>€</span>
-						</h1>
-						<p className='info'>par utilisateur et par mois</p>
-						<br></br>
-						<p className='user'>
-							Pour les petites équipes qui ont peu de projet à la
-							fois.
-						</p>
-						<p className='limite'>
-							Les utilisateur sont limités à la création de 5
-							projets par mois.
-						</p>
-						<a href='#'>
-							<button>S&apos;inscrire</button>
-						</a>
-					</div>
-					<div className='box premium'>
-						<h3>PREMIUM</h3>
-						<h1>
-							12<span className='currency'>€</span>
-						</h1>
-						<p className='info'>par utilisateur et par mois</p>
-						<br></br>
-						<p className='user'>
-							Pour les équipes qui ont besoins de gérer plusieurs
-							projet à la fois.
-						</p>
-						<p className='limite'>
-							Les utilisateur sont limités à la création de 20
-							projets par mois.
-						</p>
-						<a href='#'>
-							<button>S&apos;inscrire</button>
-						</a>
-					</div>
-					<div className='box right'>
-						<h3>ENTERPRISE</h3>
-						<h1>
-							15<span className='currency'>€</span>
-						</h1>
-						<p className='info'>
-							par utilisateur et par mois, facturation annuelle
-						</p>
-						<br></br>
-						<p className='user'>
-							Pour les entreprises qui produisent plusieurs
-							projets à la fois.
-						</p>
-						<p className='limite'>
-							Les utilisateur sont limités à la création de 50
-							projets par mois.
-						</p>
-						<a href='#'>
-							<button>Contacter notre équipe</button>
-						</a>
-					</div>
-				</div>
-			</div>
+
 			<section className='pre-footer'>
 				<div className='text'>
 					<h2>Simplifier, Centraliser, Ameliorer</h2>
@@ -386,107 +317,108 @@ export default function WelcomePage() {
 					</button>
 				</form>
 			</section>
-			{/*<footer className='footer'>*/}
-			{/*	<div className='container debut'>*/}
-			{/*		<div className='box'>*/}
-			{/*			<img*/}
-			{/*				src='/assets/logo/WhiteLogoLeft.png'*/}
-			{/*				alt='Logo'*/}
-			{/*				className='logo'*/}
-			{/*			/>*/}
-			{/*			<br></br>*/}
-			{/*		</div>*/}
-			{/*		<div className='box'>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<Link href='/login'>Connexion</Link>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*		<div className='box'>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<a href='#'>*/}
-			{/*					A propos de Centralized*/}
-			{/*					<h6>*/}
-			{/*						Qui sommes nous? Découvrez tout ce qu&pos;il*/}
-			{/*						y a à savoir sur nous*/}
-			{/*					</h6>*/}
-			{/*				</a>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*		<div className='box'>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<a href='#'>*/}
-			{/*					Nous contacter*/}
-			{/*					<h6>Besoin d&pos;aide? Contactez-nous!</h6>*/}
-			{/*				</a>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*	<div className='container bottom'>*/}
-			{/*		<div className='box bottom line'>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<a href='#'>*/}
-			{/*					<h6>Conditions</h6>*/}
-			{/*				</a>*/}
-			{/*			</div>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<a href='#'>*/}
-			{/*					<h6>Politique de confidentialité</h6>*/}
-			{/*				</a>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*		<div className='box bottom'>*/}
-			{/*			<div className='inbox'>*/}
-			{/*				<h6>Copyright © 2024 Centralized</h6>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*		<div className='box bottom media'>*/}
-			{/*			<div className='social'>*/}
-			{/*				<div className='container'>*/}
-			{/*					<div className='effect thurio'>*/}
-			{/*						<div className='buttons'>*/}
-			{/*							<a*/}
-			{/*								href='https://x.com/Centralized_app'*/}
-			{/*								target='_blank'*/}
-			{/*								className='tw'*/}
-			{/*								title='Join us on Twitter'*/}
-			{/*							>*/}
-			{/*								<img*/}
-			{/*									src='/assets/vitrine/twitter.png'*/}
-			{/*									className='fa fa-twitter'*/}
-			{/*									aria-hidden='true'*/}
-			{/*								/>*/}
-			{/*							</a>*/}
-			{/*							<a*/}
-			{/*								href='#'*/}
-			{/*								target='_blank'*/}
-			{/*								className='insta'*/}
-			{/*								title='Join us on Instagram'*/}
-			{/*							>*/}
-			{/*								<img*/}
-			{/*									src='/assets/vitrine/instagram.png'*/}
-			{/*									className='fa fa-instagram'*/}
-			{/*									aria-hidden='true'*/}
-			{/*								/>*/}
-			{/*							</a>*/}
-			{/*							<a*/}
-			{/*								href='https://www.linkedin.com/in/Centralized/'*/}
-			{/*								target='_blank'*/}
-			{/*								className='in'*/}
-			{/*								title='Join us on Linked In'*/}
-			{/*							>*/}
-			{/*								<img*/}
-			{/*									src='/assets/vitrine/linkedin.png'*/}
-			{/*									className='fa fa-linkedin'*/}
-			{/*									aria-hidden='true'*/}
-			{/*								/>*/}
-			{/*							</a>*/}
-			{/*						</div>*/}
-			{/*					</div>*/}
-			{/*				</div>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</footer>*/}
+
+			<footer className='footer'>
+				<div className='container debut'>
+					<div className='box'>
+						<img
+							src='/assets/logo/WhiteLogoLeft.png'
+							alt='Logo'
+							className='logo'
+						/>
+						<br />
+					</div>
+					<div className='box'>
+						<div className='inbox'>
+							<Link href='/login'>Connexion</Link>
+						</div>
+					</div>
+					<div className='box'>
+						<div className='inbox'>
+							<a href='#'>
+								A propos de Centralized
+								<h6>
+									Qui sommes nous? Découvrez tout ce
+									qu&apos;il y a à savoir sur nous
+								</h6>
+							</a>
+						</div>
+					</div>
+					<div className='box'>
+						<div className='inbox'>
+							<a href='#'>
+								Nous contacter
+								<h6>Besoin d&apos;aide? Contactez-nous!</h6>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div className='container bottom'>
+					<div className='box bottom line'>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Conditions</h6>
+							</a>
+						</div>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Politique de confidentialité</h6>
+							</a>
+						</div>
+					</div>
+					<div className='box bottom'>
+						<div className='inbox'>
+							<h6>Copyright © 2024 Centralized</h6>
+						</div>
+					</div>
+					<div className='box bottom media'>
+						<div className='social'>
+							<div className='container'>
+								<div className='effect thurio'>
+									<div className='buttons'>
+										<a
+											href='https://x.com/Centralized_app'
+											target='_blank'
+											className='tw'
+											title='Join us on Twitter'
+										>
+											<XIcon
+												sx={{
+													transform: 'rotate(-45deg)',
+												}}
+											/>
+										</a>
+										<a
+											href='#'
+											target='_blank'
+											className='insta'
+											title='Join us on Instagram'
+										>
+											<InstagramIcon
+												sx={{
+													transform: 'rotate(-45deg)',
+												}}
+											/>
+										</a>
+										<a
+											href='https://www.linkedin.com/in/Centralized/'
+											target='_blank'
+											// className='in'
+											title='Join us on LinkedIn'
+										>
+											<LinkedInIcon
+												sx={{
+													transform: 'rotate(-45deg)',
+												}}
+											/>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
 		</>
 	);
 }

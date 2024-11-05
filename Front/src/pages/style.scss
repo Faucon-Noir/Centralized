@@ -72,12 +72,15 @@ section.first {
 	@media screen and (min-width: 1024px) {
 		padding: 2rem 10%;
 	}
+	@media screen and (max-width: 1023px) {
+		background-size: cover;
+	}
 
 	@media screen and (min-width: 1440px) {
 		padding: 2rem 20%;
 	}
 
-	&>div {
+	& > div {
 		@media screen and (min-width: 768px) {
 			width: 50%;
 		}
@@ -208,7 +211,7 @@ section.second {
 	background: linear-gradient(white, #d8ebff);
 
 	h1 {
-		margin-left: 216px;
+		margin-left: 10%;
 	}
 
 	// styles/Home.module.scss
@@ -224,8 +227,8 @@ section.second {
 		display: flex;
 		overflow: hidden; // Hide overflow
 		width: 100%; // Adjust width as needed
-		padding: 20px 216px 30px 216px;
-		// padding-right: 216px;
+		padding: 20px 10% 30px 10%;
+		// padding-right: 10%;
 	}
 
 	.block {
@@ -262,7 +265,7 @@ section.second {
 		border: none;
 		font-size: 2rem;
 		cursor: pointer;
-		width: calc(100% - 216px);
+		width: 90%;
 		text-align: right;
 		padding-right: 100px;
 
@@ -292,8 +295,8 @@ section.second {
 }
 
 section.price {
-	h2 { 
-		text-align: center
+	h2 {
+		text-align: center;
 	}
 
 	.grid-price {
@@ -337,7 +340,7 @@ section.price {
 
 			.description {
 				margin-top: 1rem;
-				
+
 				.limit {
 					color: gray;
 				}
@@ -436,6 +439,12 @@ section.pre-footer {
 	.bottom {
 		grid-template-columns: 33% 34% 33%;
 
+		// @media screen and (max-width: 1024px) {
+		// 	grid-row: none;
+		// 	grid-template-columns: none;
+		// }
+		// grid-row: none;
+
 		.line {
 			padding-left: 100px;
 		}
@@ -493,7 +502,7 @@ section.pre-footer {
 
 				img {
 					width: 15px;
-					transform: rotate(-45deg);
+					// transform: rotate(-45deg);
 				}
 
 				/* common styles !!! YOU DON'T NEED THEM */
