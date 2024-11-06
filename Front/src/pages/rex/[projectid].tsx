@@ -7,7 +7,13 @@ import axios, { AxiosResponse } from 'axios';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RexCard from '@/app/components/Card/rexCard/index';
-export default function Page({ userData, updateUserData }: { userData: any, updateUserData: any }) {
+export default function Page({
+	userData,
+	updateUserData,
+}: {
+	userData: any;
+	updateUserData: any;
+}) {
 	const router = useRouter();
 	const [IsForm, setIsForm] = useState(false);
 	const [myRex, setMyRex] = useState({
@@ -44,13 +50,16 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 
 	useEffect(() => {
 		for (let project of userData.project) {
-			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
-				if (Object.keys(project?.rex).length < 1) setIsForm(true)
+			if (
+				project.id ==
+				new URL(window.location.href).pathname.split('/')[2]
+			) {
+				if (Object.keys(project?.rex).length < 1) setIsForm(true);
 				setProject(project);
 				setRex(project.rex);
 			}
 		}
-	}, [userData])
+	}, [userData]);
 	function verificationRex() {
 		if (myRex.rexReussite.trim() == '') return 1;
 		else if (myRex.rexProbleme.trim() == '') return 2;
@@ -72,7 +81,11 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 						answer2: myRex.rexProbleme.trim(),
 						answer3: myRex.rexAmelioration.trim(),
 					},
-					{ headers: { Authorization: `Bearer ${userData.user.token}` } }
+					{
+						headers: {
+							Authorization: `Bearer ${userData.user.token}`,
+						},
+					}
 				)
 				.then(function (response: AxiosResponse<any, any>) {
 					if (response.status === 200 && response.data.success) {
@@ -93,9 +106,7 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 			{IsForm ? (
 				<form onSubmit={(e) => handleSubmit(e)}>
 					<div className='box'>
-						<h1 className='title'>
-							Retour d&apos;Expérience
-						</h1>
+						<h1 className='title'>Retour d&apos;Expérience</h1>
 
 						<div className='input_form'>
 							<label htmlFor='rexReussite'>
@@ -114,8 +125,7 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 							/>
 							{isError == 1 ? (
 								<p className='error_message'>
-									Veuillez écrire les points positifs
-									trouvés{' '}
+									Veuillez écrire les points positifs trouvés{' '}
 								</p>
 							) : (
 								''
@@ -139,8 +149,7 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 							/>
 							{isError == 2 ? (
 								<p className='error_message'>
-									Veuillez écrire les points bloquants
-									trouvés{' '}
+									Veuillez écrire les points bloquants trouvés{' '}
 								</p>
 							) : (
 								''
@@ -164,8 +173,8 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 							/>
 							{isError == 3 ? (
 								<p className='error_message'>
-									Veuillez écrire les points pouvant
-									être améliorés{' '}
+									Veuillez écrire les points pouvant être
+									améliorés{' '}
 								</p>
 							) : (
 								''
@@ -178,16 +187,14 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 						) : (
 							''
 						)}
-						<button type='submit'>
-							Cloturer le projet
-						</button>
+						<button type='submit'>Cloturer le projet</button>
 					</div>
 				</form>
 			) : (
 				<div className='noRex'>
 					<div className='header'>
 						<h1>Retour d&apos;experience</h1>
-						<ButtonBase onClick={() => (setIsForm(true))}>
+						<ButtonBase onClick={() => setIsForm(true)}>
 							<AddIcon
 								fontSize='medium'
 								sx={{ color: '#000000' }}
@@ -211,6 +218,6 @@ export default function Page({ userData, updateUserData }: { userData: any, upda
 					</div>
 				</div>
 			)}
-		</div >
+		</div>
 	);
 }

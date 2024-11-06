@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react';
 
 export type CustomSwiperProps = {
-    children: ReactNode;
-    swiperId: number;
-}
+	children: ReactNode;
+	swiperId: number;
+};

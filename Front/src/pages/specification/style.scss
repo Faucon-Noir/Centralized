@@ -1,44 +1,44 @@
 .specification_wrapper {
-  margin-top: 5%;
-  margin-left: 50px;
-  margin-bottom: 2px;
+	margin-top: 5%;
+	margin-left: 50px;
+	margin-bottom: 2px;
 }
 
 .specification_title {
-  .specification_title_cross {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
+	.specification_title_cross {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+	}
 
-  h1 {
-    font-size: 2em;
-    margin: 0;
-  }
+	h1 {
+		font-size: 2em;
+		margin: 0;
+	}
 
-  hr {
-    width: 20%;
-    border: 1px solid #0293FC;
-}
+	hr {
+		width: 20%;
+		border: 1px solid #0293fc;
+	}
 }
 
 .opened_container,
 .closed_container {
-  h2 {
-    display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    font-weight: bold;
-    unicode-bidi: isolate;
-  }
+	h2 {
+		display: block;
+		font-size: 1.5em;
+		margin-block-start: 0.83em;
+		margin-block-end: 0.83em;
+		margin-inline-start: 0px;
+		margin-inline-end: 0px;
+		font-weight: bold;
+		unicode-bidi: isolate;
+	}
 }
 
 .card_container {
-  display: flex;
-  width: 100%;
-  flex-wrap: wrap;
-  gap: 16px;
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	gap: 16px;
 }

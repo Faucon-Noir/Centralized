@@ -1,6 +1,6 @@
 export type PermanentDrawerLeftProps = {
-	page: string
-}
+	page: string;
+};
 export type useDataProps = {
-    logout: () => void,
-}
+	logout: () => void;
+};

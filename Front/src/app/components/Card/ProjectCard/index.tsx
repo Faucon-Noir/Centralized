@@ -4,21 +4,37 @@ import FolderIcon from '@mui/icons-material/Folder';
 import { Icon } from '@mui/material';
 import { numberToColor } from '../../../helpers';
 
-export default function ProjetCard({ name, totalTickets, id, projectId, updateUserData, userData }: { name: any, totalTickets: any, id: any, projectId: any, updateUserData: any, userData: any }) {
+export default function ProjetCard({
+	name,
+	totalTickets,
+	id,
+	projectId,
+	updateUserData,
+	userData,
+}: {
+	name: any;
+	totalTickets: any;
+	id: any;
+	projectId: any;
+	updateUserData: any;
+	userData: any;
+}) {
 	function addSelectedProject() {
-		let selectedP = localStorage.getItem("selectedP");
+		let selectedP = localStorage.getItem('selectedP');
 		if (selectedP != null) {
-			let selectedPArr = selectedP.split(",");
+			let selectedPArr = selectedP.split(',');
 			for (let line of selectedPArr) {
 				if (line == projectId) {
-					return
+					return;
 				}
 			}
-			localStorage.setItem("selectedP", selectedP + "," + projectId);
-		}
-		else localStorage.setItem("selectedP", projectId);
+			localStorage.setItem('selectedP', selectedP + ',' + projectId);
+		} else localStorage.setItem('selectedP', projectId);
 
-		updateUserData({ ...userData, selectedProjects: [...userData.selectedProjects, projectId] })
+		updateUserData({
+			...userData,
+			selectedProjects: [...userData.selectedProjects, projectId],
+		});
 	}
 	return (
 		<div className='projetcard' onClick={() => addSelectedProject()}>

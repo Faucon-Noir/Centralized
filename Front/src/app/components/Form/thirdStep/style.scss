@@ -1,32 +1,32 @@
-.third_step_form{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    button {
-        width: 20%;
-        cursor: pointer;
-        padding: 15px 10px;
-        border-radius: 15px;
-        font-size: 16px;
-        border: none;
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-        background-color: #0293FC;
-        color: white;
-        transition: all 350ms ease-in-out;
-    }
-    
-    button:disabled {
-        background-color: #ccc;
-        color: #666;
-        cursor: not-allowed;
-    }
-    
-    button:hover:enabled {
-        transform: translateY(-10px);
-        background-color: white;
-        color: #0293FC;
-        box-shadow: 0px 2px 8px 0px #0000001A;
-    }
+.third_step_form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	justify-content: center;
+	align-items: center;
+	button {
+		width: 20%;
+		cursor: pointer;
+		padding: 15px 10px;
+		border-radius: 15px;
+		font-size: 16px;
+		border: none;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		background-color: #0293fc;
+		color: white;
+		transition: all 350ms ease-in-out;
+	}
+
+	button:disabled {
+		background-color: #ccc;
+		color: #666;
+		cursor: not-allowed;
+	}
+
+	button:hover:enabled {
+		transform: translateY(-10px);
+		background-color: white;
+		color: #0293fc;
+		box-shadow: 0px 2px 8px 0px #0000001a;
+	}
 }

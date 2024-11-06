@@ -92,7 +92,13 @@ const CustomToolbar = ({
 	);
 };
 
-export default function Planning({ userData, updateUserData }: { userData: any; updateUserData: any }) {
+export default function Planning({
+	userData,
+	updateUserData,
+}: {
+	userData: any;
+	updateUserData: any;
+}) {
 	const router = useRouter();
 
 	const [myList, setMyList] = useState([
@@ -101,7 +107,7 @@ export default function Planning({ userData, updateUserData }: { userData: any; 
 			start: new Date(),
 			end: new Date(),
 			title: '',
-			color: 'black'
+			color: 'black',
 		},
 	]);
 
@@ -114,13 +120,12 @@ export default function Planning({ userData, updateUserData }: { userData: any; 
 				start: new Date(project.start_date),
 				end: new Date(project.end_date),
 				title: project.name,
-				color: project.color
-			})
+				color: project.color,
+			});
 			idx++;
 		}
 		setMyList(displayTicket);
 	}, [userData]);
-
 
 	function handleRedirect(e: any) {
 		e.preventDefault();
@@ -142,8 +147,12 @@ export default function Planning({ userData, updateUserData }: { userData: any; 
 					<h1 className='TitrePage'>Mon Planning</h1>
 					<hr style={{ marginLeft: 0 }} />
 
-					<div className="affichage_bouton">
-						<button data-cy={ButtonNewTicketCy} className="cree_ticket_bouton" onClick={(e) => handleRedirect(e)}>
+					<div className='affichage_bouton'>
+						<button
+							data-cy={ButtonNewTicketCy}
+							className='cree_ticket_bouton'
+							onClick={(e) => handleRedirect(e)}
+						>
 							Nouveau Ticket
 						</button>
 					</div>

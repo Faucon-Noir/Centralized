@@ -1,13 +1,18 @@
-import axios from "axios";
+import axios from 'axios';
 
-export default async function getCountAllTicketOneUser(id: string, token: string) {
-    try {
-        let response = await axios.get("http://localhost:8000/api/ticket/user/" + id + "/count/", {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        return response.data;
-    } catch (e) {
-        console.log(e)
-    }
-
+export default async function getCountAllTicketOneUser(
+	id: string,
+	token: string
+) {
+	try {
+		let response = await axios.get(
+			'http://localhost:8000/api/ticket/user/' + id + '/count/',
+			{
+				headers: { Authorization: `Bearer ${token}` },
+			}
+		);
+		return response.data;
+	} catch (e) {
+		console.log(e);
+	}
 }

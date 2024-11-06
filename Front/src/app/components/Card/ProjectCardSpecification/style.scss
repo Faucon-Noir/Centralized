@@ -1,75 +1,73 @@
 .project_card {
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
-    gap: 16px;
-    border-radius: 20px;
-    background: #FFF;
-    box-shadow: 0px 4px 24px 5px rgba(0, 0, 0, 0.15);
-    width: 20%;
-    min-height: 180px;
-    transition: all 350ms ease-in-out;
-    cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	gap: 16px;
+	border-radius: 20px;
+	background: #fff;
+	box-shadow: 0px 4px 24px 5px rgba(0, 0, 0, 0.15);
+	width: 20%;
+	min-height: 180px;
+	transition: all 350ms ease-in-out;
+	cursor: pointer;
 
-    p {
-        margin: 0;
-        padding: 0;
-    }
+	p {
+		margin: 0;
+		padding: 0;
+	}
 
-    .title_card {
-        display: flex;
-        font-size: 20px;
-        color: #0293FC;
-        font-weight: 600;
-        gap: 16px;
-        align-items: center;
-    }
+	.title_card {
+		display: flex;
+		font-size: 20px;
+		color: #0293fc;
+		font-weight: 600;
+		gap: 16px;
+		align-items: center;
+	}
 
-    .ticket_card {
-        display: flex;
-        flex-direction: column;
+	.ticket_card {
+		display: flex;
+		flex-direction: column;
 
-        p {
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-        }
+		p {
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+		}
 
-        .ticket_nbr_container {
-            display: flex;
-            align-items: center;
-            gap: 4px;
+		.ticket_nbr_container {
+			display: flex;
+			align-items: center;
+			gap: 4px;
 
-            .ticket_nbr {
-                font-size: 16px;
-            }
+			.ticket_nbr {
+				font-size: 16px;
+			}
 
-            img {
-                width: 14px;
-                height: 14px;
-                filter: invert(1);
-            }
-        }
+			img {
+				width: 14px;
+				height: 14px;
+				filter: invert(1);
+			}
+		}
+	}
 
-    }
+	a {
+		font-size: 12px;
+		font-weight: 600;
+		padding: 5px;
+		width: fit-content;
+		border-radius: 10px;
+		text-decoration: none;
+		color: white;
+		transition: all 350ms ease-in-out;
+	}
 
-    a {
-        font-size: 12px;
-        font-weight: 600;
-        padding: 5px;
-        width: fit-content;
-        border-radius: 10px;
-        text-decoration: none;
-        color: white;
-        transition: all 350ms ease-in-out;
-
-    }
-
-    a:hover {
-        transform: translateY(-10px);
-    }
+	a:hover {
+		transform: translateY(-10px);
+	}
 }
 
 .project_card:hover {
-    transform: translateY(-10px);
+	transform: translateY(-10px);
 }

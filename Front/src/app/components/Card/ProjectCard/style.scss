@@ -1,32 +1,32 @@
 .projetcard {
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    padding: 20px;
-    background-color: #FFFFFF;
-    height: 130px;
-    transition: all 350ms ease-in-out;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #ffffff;
+	height: 130px;
+	transition: all 350ms ease-in-out;
 
-    h2 {
-        font-size: 20px;
-    }
+	h2 {
+		font-size: 20px;
+	}
 
-    p {
-        font-size: 16px;
-    }
+	p {
+		font-size: 16px;
+	}
 }
 
 .projetcard-left {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 h2,
 p {
-    margin: 0;
+	margin: 0;
 }
 
 .projetcard:hover {
-    transform: translateY(-10px);
+	transform: translateY(-10px);
 }

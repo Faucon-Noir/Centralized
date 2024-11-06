@@ -1,150 +1,149 @@
 .box {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  gap: 24px;
-  overflow: hidden;
-  margin-top: 12%;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 20%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	gap: 24px;
+	overflow: hidden;
+	margin-top: 12%;
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-bottom: 20%;
 
-  .input_form,
-  .input_date {
-    display: flex;
-    gap: 4px;
-    flex-direction: column;
-  }
+	.input_form,
+	.input_date {
+		display: flex;
+		gap: 4px;
+		flex-direction: column;
+	}
 
-  .box_date {
-    display: flex;
-    width: 40%;
-  }
+	.box_date {
+		display: flex;
+		width: 40%;
+	}
 
-  .input_date {
-    margin: auto;
-    width: 30%;
-  }
+	.input_date {
+		margin: auto;
+		width: 30%;
+	}
 
-  textarea,
-  input {
-    border: none;
-    border-radius: 5px;
-    background-color: #eceeee;
-    color: #435254;
-    padding: 10px;
-  }
+	textarea,
+	input {
+		border: none;
+		border-radius: 5px;
+		background-color: #eceeee;
+		color: #435254;
+		padding: 10px;
+	}
 
-  button {}
+	button {
+	}
 
-  button:hover {
-    cursor: pointer;
-  }
+	button:hover {
+		cursor: pointer;
+	}
 
-  button:disabled {
-    background-color: #ccc;
-    color: #666;
-    cursor: not-allowed;
-  }
+	button:disabled {
+		background-color: #ccc;
+		color: #666;
+		cursor: not-allowed;
+	}
 }
 
 .form_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10%;
-  row-gap: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10%;
+	row-gap: 30px;
 
-  .input_form {
-    width: 40% !important;
-  }
+	.input_form {
+		width: 40% !important;
+	}
 
-  input,
-  textarea {
-    background-color: transparent;
-    border-bottom: 1px solid black;
-    border-radius: 0;
-    color: #0293FC !important;
-    outline: none;
-  }
+	input,
+	textarea {
+		background-color: transparent;
+		border-bottom: 1px solid black;
+		border-radius: 0;
+		color: #0293fc !important;
+		outline: none;
+	}
 
-  input::placeholder {
-    color: white;
-  }
+	input::placeholder {
+		color: white;
+	}
 
-  input,
-  textarea::placeholder {
-    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-    color: white;
-  }
+	input,
+	textarea::placeholder {
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		color: white;
+	}
 
-  input,
-  textarea:focus {
-    color: #0293FC !important;
-  }
+	input,
+	textarea:focus {
+		color: #0293fc !important;
+	}
 
-  textarea {
-    overflow: hidden;
-    resize: none;
-    outline: none;
-  }
+	textarea {
+		overflow: hidden;
+		resize: none;
+		outline: none;
+	}
 
-  select {
-    background-color: white;
-    color: #0293FC;
-    padding: 15px 0px;
-    border-radius: 15px;
-    border: none;
-    font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-    box-shadow: 0px 2px 8px 0px #0000001A;
-    text-align: center;
-    outline: none;
-  }
+	select {
+		background-color: white;
+		color: #0293fc;
+		padding: 15px 0px;
+		border-radius: 15px;
+		border: none;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		box-shadow: 0px 2px 8px 0px #0000001a;
+		text-align: center;
+		outline: none;
+	}
 
-  .btn_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40%;
+	.btn_container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40%;
 
-    button {
-      width: 50%;
-      padding: 10px 5px;
-      border-radius: 15px;
-      font-size: 16px;
-      border: none;
-      font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-      background-color: #0293FC;
-      color: white;
-      transition: all 350ms ease-in-out;
-    }
+		button {
+			width: 50%;
+			padding: 10px 5px;
+			border-radius: 15px;
+			font-size: 16px;
+			border: none;
+			font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+			background-color: #0293fc;
+			color: white;
+			transition: all 350ms ease-in-out;
+		}
 
-    button:hover {
-      transform: translateY(-10px);
-      background-color: white;
-      color: #0293FC;
-      box-shadow: 0px 2px 8px 0px #0000001A;
-    }
-  }
-
+		button:hover {
+			transform: translateY(-10px);
+			background-color: white;
+			color: #0293fc;
+			box-shadow: 0px 2px 8px 0px #0000001a;
+		}
+	}
 }
 
-
 .ticket_container {
-  margin-top: 12%;
-  margin-left: 100px;
+	margin-top: 12%;
+	margin-left: 100px;
 
-  .header {
-    display: flex;
-  }
+	.header {
+		display: flex;
+	}
 
-  .card_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 50px;
-    .card{
-      width: 20%;
-    }
-  }
+	.card_container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 50px;
+		.card {
+			width: 20%;
+		}
+	}
 }

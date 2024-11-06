@@ -28,12 +28,13 @@
 		width: 100%;
 		gap: 32px;
 
-		.debut_container, .fin_container{
+		.debut_container,
+		.fin_container {
 			display: flex;
 			flex-direction: row;
 			gap: 32px;
 
-			@media (max-width:870px){
+			@media (max-width: 870px) {
 				display: flex;
 				flex-direction: column !important;
 			}
@@ -83,18 +84,17 @@
 			// @media (max-width: 1679px) {
 			// 	padding: 16px;
 			// }
-			@media (max-width:870px){
+			@media (max-width: 870px) {
 				margin: 0 1% !important;
-				width: Inherit !important;
+				width: inherit !important;
 				min-width: 150px;
 			}
 		}
 
-		
 		// @media (max-width: 1679px) {
 		// 	gap: 16px;
 		// }
-		@media (max-width:1440px){
+		@media (max-width: 1440px) {
 			display: flex;
 			flex-direction: column !important;
 		}

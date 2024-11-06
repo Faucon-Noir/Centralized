@@ -4,7 +4,13 @@ import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import MyProjectCard from '@/app/components/Card/ProjectCardSpecification';
 
-function Specification({ userData, updateUserData }: { userData: any, updateUserData: any }) {
+function Specification({
+	userData,
+	updateUserData,
+}: {
+	userData: any;
+	updateUserData: any;
+}) {
 	const [openedP, setOpenedP] = useState<any[]>([]);
 	const [closedP, setClosedP] = useState<any[]>([]);
 
@@ -15,12 +21,12 @@ function Specification({ userData, updateUserData }: { userData: any, updateUser
 			if (new Date().toISOString() > line.end_date) {
 				closed_tmp.push(line);
 			} else {
-				opened_tmp.push(line)
+				opened_tmp.push(line);
 			}
 		}
 		setOpenedP(opened_tmp);
 		setClosedP(closed_tmp);
-	}, [userData.project])
+	}, [userData.project]);
 
 	return (
 		<>
@@ -41,20 +47,30 @@ function Specification({ userData, updateUserData }: { userData: any, updateUser
 					<div className='opened_container'>
 						<h2>Projets en cours</h2>
 						<div className='card_container'>
-							{openedP.length > 0 ?
-								openedP.map((item: any) => (
-									<MyProjectCard key={item.key} project={item} updateUserData={updateUserData} userData={userData} />
-								))
+							{openedP.length > 0
+								? openedP.map((item: any) => (
+										<MyProjectCard
+											key={item.key}
+											project={item}
+											updateUserData={updateUserData}
+											userData={userData}
+										/>
+									))
 								: null}
 						</div>
 					</div>
 					<div className='closed_container'>
 						<h2>Projets terminés</h2>
 						<div className='card_container'>
-							{closedP.length > 0 ?
-								closedP.map((item: any) => (
-									<MyProjectCard key={item.key} project={item} updateUserData={updateUserData} userData={userData} />
-								))
+							{closedP.length > 0
+								? closedP.map((item: any) => (
+										<MyProjectCard
+											key={item.key}
+											project={item}
+											updateUserData={updateUserData}
+											userData={userData}
+										/>
+									))
 								: null}
 						</div>
 					</div>

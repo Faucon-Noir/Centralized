@@ -1,76 +1,76 @@
 .team_form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    gap: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	gap: 15px;
 
-    .next_btn {
-        margin-top: 25px;
-        border: none;
-        background-color: #0293FC;
-        padding: 15px;
-        width: 30%;
-        border-radius: 15px;
-        color: white;
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-        transition: all 350ms ease-in-out;
+	.next_btn {
+		margin-top: 25px;
+		border: none;
+		background-color: #0293fc;
+		padding: 15px;
+		width: 30%;
+		border-radius: 15px;
+		color: white;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		transition: all 350ms ease-in-out;
 
-        cursor: pointer;
-    }
+		cursor: pointer;
+	}
 
-    .next_btn:hover {
-        transform: translateY(-10px);
-        background-color: white;
-        color: #0293FC;
-        box-shadow: 0px 2px 8px 0px #0000001A;
-    }
+	.next_btn:hover {
+		transform: translateY(-10px);
+		background-color: white;
+		color: #0293fc;
+		box-shadow: 0px 2px 8px 0px #0000001a;
+	}
 
-    input {
-        border-radius: 5px;
-        border: none;
-        background-color: #E5E7EB !important;
-        padding: 10px;
-        border-radius: 5px !important;
-    }
+	input {
+		border-radius: 5px;
+		border: none;
+		background-color: #e5e7eb !important;
+		padding: 10px;
+		border-radius: 5px !important;
+	}
 
-    input,
-    textarea {
-        background-color: transparent;
-        color: #0293FC !important;
-        outline: none;
-    }
+	input,
+	textarea {
+		background-color: transparent;
+		color: #0293fc !important;
+		outline: none;
+	}
 
-    input::placeholder {
-        color: #0293FC;
-    }
+	input::placeholder {
+		color: #0293fc;
+	}
 
-    input,
-    textarea::placeholder {
-        font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
-        color: white;
-    }
+	input,
+	textarea::placeholder {
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		color: white;
+	}
 
-    input,
-    textarea:focus {
-        color: #0293FC !important;
-    }
+	input,
+	textarea:focus {
+		color: #0293fc !important;
+	}
 
-    .same_line {
-        display: flex;
-        gap: 30px;
+	.same_line {
+		display: flex;
+		gap: 30px;
 
-        .avatar_input {
-            background-color: white !important;
-        }
-    }
+		.avatar_input {
+			background-color: white !important;
+		}
+	}
 
-    .second_line {
-        width: 100%;
+	.second_line {
+		width: 100%;
 
-        input {
-            width: 100%;
-        }
-    }
+		input {
+			width: 100%;
+		}
+	}
 }

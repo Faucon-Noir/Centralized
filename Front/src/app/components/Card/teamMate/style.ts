@@ -10,4 +10,4 @@ export const BoxTeamMate = {
 	borderRadius: '20px',
 	background: '#FFF',
 	boxShadow: '0px 4px 24px 5px rgba(0, 0, 0, 0.15)',
-}
+};

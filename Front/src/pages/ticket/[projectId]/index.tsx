@@ -3,7 +3,7 @@ import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import './style.scss';
 import TicketCard from '@/app/components/Card/TicketCard';
-import { ButtonCreateTicketCy  } from '@/app/const/ticket/ticketIdConst';
+import { ButtonCreateTicketCy } from '@/app/const/ticket/ticketIdConst';
 import React from 'react';
 
 // Définir un type pour vos tickets
@@ -100,7 +100,7 @@ export default function Tickets({
 								))}
 							</div>
 						</div>
-						
+
 						<div className='inprogress_container'>
 							<h2>En cours</h2>
 

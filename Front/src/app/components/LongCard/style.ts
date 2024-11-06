@@ -7,4 +7,4 @@ export const ItemDivStyle = {
 	padding: '24px',
 	margin: '16px',
 	gap: '25px',
-}
+};

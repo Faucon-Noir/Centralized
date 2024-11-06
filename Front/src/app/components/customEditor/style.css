@@ -1,15 +1,15 @@
 .rdw-storybook-editor {
-    background-color: white;
-    padding-left: 5px;
-    padding-right: 5px;
-    max-width: 100%;
-    min-height: 250px;
-    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
+	background-color: white;
+	padding-left: 5px;
+	padding-right: 5px;
+	max-width: 100%;
+	min-height: 250px;
+	box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.15);
+	border-radius: 8px;
 }
 
 .rdw-storybook-toolbar {
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 20px;
+	border-radius: 8px;
+	border: none;
+	margin-bottom: 20px;
 }

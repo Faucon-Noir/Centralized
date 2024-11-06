@@ -1,5 +1,5 @@
 {
-	"name": "broc-en-ligne_api",
+	"name": "centralized_back",
 	"version": "1.0.0",
 	"description": "",
 	"main": "./src/index.ts",

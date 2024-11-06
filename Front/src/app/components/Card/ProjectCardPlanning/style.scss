@@ -1,33 +1,33 @@
 .ProjetCardPlanning {
-    display: flex;
-    justify-content: flex-start;
-    box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
-    padding: 20px;
-    background-color: #FFFFFF;
-    height: 130px;
-    flex-direction: column;
-    cursor: pointer;
+	display: flex;
+	justify-content: flex-start;
+	box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #ffffff;
+	height: 130px;
+	flex-direction: column;
+	cursor: pointer;
 
-    h2 {
-        font-size: 20px;
-    }
+	h2 {
+		font-size: 20px;
+	}
 
-    p {
-        font-size: 16px;
-    }
+	p {
+		font-size: 16px;
+	}
 }
 
 .projetcard-left {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 h2,
 p {
-    margin: 0;
+	margin: 0;
 }
 
 .rbc-event {
-    background-color: purple;
+	background-color: purple;
 }

@@ -8,7 +8,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true); // Ajout d'un état de chargement
 
 	const checkToken = () => {
-		const token = localStorage.getItem("token");
+		const token = localStorage.getItem('token');
 
 		if (router.pathname !== '/login') {
 			if (token) {
@@ -16,7 +16,9 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 					const decodedToken: any = jwtDecode(token);
 
 					if (decodedToken.exp) {
-						const expirationDate = new Date(decodedToken.exp * 1000);
+						const expirationDate = new Date(
+							decodedToken.exp * 1000
+						);
 						const currentDate = new Date();
 
 						if (expirationDate < currentDate) {
