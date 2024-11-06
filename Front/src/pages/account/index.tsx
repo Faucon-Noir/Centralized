@@ -13,6 +13,18 @@ import { useEffect, useState } from 'react';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import {
+	BioFielCy,
+	BioLabelCy,
+	EmailFielCy,
+	EmailLabelCy,
+	FirstNameFielCy,
+	FirstNameLabelCy,
+	LastNameFielCy,
+	LastNameLabelCy,
+	PhoneFielCy,
+	PhoneLabelCy,
+} from '../../app/const/account/const';
 
 export default function AccountPage({
 	userData,
@@ -210,7 +222,7 @@ export default function AccountPage({
 						data-cy={BioFielCy}
 						className='textField'
 						placeholder={'Une courte description de vous-même'}
-						value={user?.bio && user.bio !== "null" ? user.bio : ''}
+						value={user?.bio && user.bio !== 'null' ? user.bio : ''}
 						onChange={(e) =>
 							setUser({ ...user, bio: e.target.value })
 						}
