@@ -1,17 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+// MUI
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+
+// Next
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+// React
 import React from 'react';
+import { useEffect, useState } from 'react';
+
+// Utils
+import './MobileNav.scss';
+import { numberToColor } from '@/app/helpers';
 
 export default function MobileNavigation({
 	page = '',
 	userData,
-	updateUserData,
 	setShowMobileNav,
 }: {
 	page: String;
@@ -30,8 +37,6 @@ export default function MobileNavigation({
 	}
 
 	useEffect(() => {
-		import('./MobileNav.scss'); // Charge uniquement quand MobileNavigation est monté
-
 		if (userData?.project?.length > 0) {
 			let selectedP = localStorage.getItem('selectedP');
 			let tempSelectedMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
@@ -86,7 +91,7 @@ export default function MobileNavigation({
 
 	return (
 		<>
-			<div className='navigation mobileNav'>
+			<div className='navigation-mobile mobileNav'>
 				<div className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'

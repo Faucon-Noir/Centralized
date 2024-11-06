@@ -1,17 +1,24 @@
 'use client';
-
+// Next
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import FolderCopyIcon from '@mui/icons-material/FolderCopy';
-import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
 import Link from 'next/link';
+
+// MaterialUi
+import { Icon } from '@mui/material';
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
+
+// React
+
+import { useEffect, useState } from 'react';
 import React from 'react';
+
+// Utils
+import './DesktopNav.scss';
+import { numberToColor } from '@/app/helpers';
 
 export default function DesktopNavigation({
 	page = '',
 	userData,
-	updateUserData,
 }: {
 	page: String;
 	userData: any;
@@ -28,7 +35,6 @@ export default function DesktopNavigation({
 	}
 
 	useEffect(() => {
-		import('./DesktopNav.scss'); // Charge uniquement quand MobileNavigation est monté
 		if (userData?.project?.length > 0) {
 			let selectedP = localStorage.getItem('selectedP');
 			let tempSelectedMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
@@ -82,7 +88,7 @@ export default function DesktopNavigation({
 	}
 
 	return (
-		<div className='navigation'>
+		<div className='navigation-desktop'>
 			<div className='centralized_logo'>
 				<img
 					src='/assets/logo/WhiteLogoLeft.png'

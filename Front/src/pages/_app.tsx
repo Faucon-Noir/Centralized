@@ -1,18 +1,26 @@
-import type { AppProps } from 'next/app';
-import localFont from 'next/font/local';
-import './main_style.scss';
-import './global.scss';
-
+// Comrponents
 import AuthWrapper from '@/app/components/Middleware/AuthWrapper';
 import { TaskProvider } from '../app/contexts/isReq'; // Importation du contexte
-import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingComponent';
-import UserData from '@/utils/User/UserData';
-import { useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
 import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNavigation';
 import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
+
+// Material	UI
+import { Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+
+// Next
+import type { AppProps } from 'next/app';
+import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
+
+// React
+import { useEffect, useState } from 'react';
+
+// Utils
+import './main_style.scss';
+import './global.scss';
+import UserData from '@/utils/User/UserData';
+import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingComponent';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
@@ -33,6 +41,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		selectedProjects: [],
 	});
 	const [windowWidth, setWindowWidth] = useState<number>(0);
+	const [previousRoute, setPreviousRoute] = useState<string | null>(null);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -60,6 +69,26 @@ export default function App({ Component, pageProps }: AppProps) {
 			setLoading(false);
 		}
 	}, [Component.name]);
+
+	useEffect(() => {
+		const handleRouteChangeStart = (url: string) => {
+			setPreviousRoute(router.pathname);
+		};
+
+		const handleRouteChangeComplete = (url: string) => {
+			if (previousRoute === '/login' && url === '/') {
+				window.location.reload();
+			}
+		};
+
+		router.events.on('routeChangeStart', handleRouteChangeStart);
+		router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+		return () => {
+			router.events.off('routeChangeStart', handleRouteChangeStart);
+			router.events.off('routeChangeComplete', handleRouteChangeComplete);
+		};
+	}, [router, previousRoute]);
 
 	if (loading) {
 		return <div>En attente</div>;
@@ -99,12 +128,15 @@ export default function App({ Component, pageProps }: AppProps) {
 							</Grid>
 						) : (
 							<>
-								<button
+								{/* <button
 									className='burgerMenu'
 									onClick={() => setShowMobileNav(true)}
-								>
-									<MenuIcon />
-								</button>
+								> */}
+								<MenuIcon
+									className='burgerMenu'
+									onClick={() => setShowMobileNav(true)}
+								/>
+								{/* </button> */}
 								{showMobileNav ? (
 									<>
 										<MobileNavigation
