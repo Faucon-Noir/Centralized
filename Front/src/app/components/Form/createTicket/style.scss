@@ -40,12 +40,8 @@
 	textarea,
 	select {
 		background-color: transparent;
-		color: #0293fc !important;
+		color: black !important;
 		outline: none;
-	}
-
-	input::placeholder {
-		color: #0293fc;
 	}
 
 	input,
@@ -56,8 +52,9 @@
 	}
 
 	input,
+	select,
 	textarea:focus {
-		color: #0293fc !important;
+		color: black !important;
 	}
 
 	.same_line {

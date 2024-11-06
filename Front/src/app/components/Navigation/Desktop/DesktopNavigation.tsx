@@ -185,15 +185,6 @@ export default function DesktopNavigation({
 											<p>Tickets</p>
 										</button>
 									</a>
-									<a href={'http://localhost:3000/rex/' + project.id} >
-										<button className='submenu_btn'>
-											<img
-												src='/assets/icons/rex.svg'
-												alt=''
-											/>
-											<p>Rex</p>
-										</button>
-									</a>
 								</div>
 							</div>
 						))}

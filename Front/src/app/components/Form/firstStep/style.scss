@@ -38,12 +38,12 @@
 	input,
 	textarea {
 		background-color: transparent;
-		color: #0293fc !important;
+		color: black !important;
 		outline: none;
 	}
 
 	input::placeholder {
-		color: #0293fc;
+		color: black;
 	}
 
 	input,
@@ -54,7 +54,7 @@
 
 	input,
 	textarea:focus {
-		color: #0293fc !important;
+		color: black !important;
 	}
 
 	.same_line {
