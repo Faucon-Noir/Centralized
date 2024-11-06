@@ -13,7 +13,7 @@ export default function DesktopNavigation({
 	userData,
 	updateUserData,
 }: {
-	page: String;
+	page: string;
 	userData: any;
 	updateUserData: any;
 }) {
@@ -147,17 +147,18 @@ export default function DesktopNavigation({
 						{Object.values(selctedMap).map((project, index) => (
 							<div className='projectOpen' key={index}>
 								<Link
-									className='ProjectBlocName'
+									className={
+										page == 'DashboardPage' &&
+										project?.id ==
+											window.location.pathname.split(
+												'/'
+											)[2]
+											? 'ProjectBlocName selected'
+											: 'ProjectBlocName'
+									}
 									href={'/dashboard/' + project.id}
 								>
-									<button
-										className={
-											page == 'Dashboard' &&
-											project?.id == index
-												? 'pName selected'
-												: 'pName'
-										}
-									>
+									<button className='pName'>
 										<img
 											src='/assets/icons/icon-cross.svg'
 											alt=''
