@@ -22,7 +22,7 @@ export default function TaskCard({ id, urgenceId, title, date, color }: any) {
 					<h2 className='task-title'>{title}</h2>
 				</div>
 				<div className='container_infos'>
-					<p id='urgence'>Urgence: {urgenceIdToString(urgenceId)} </p>
+					<p id='urgence'>Status: {urgenceId} </p>
 					<p id='date'>posté le {dateFormat}</p>
 				</div>
 			</div>

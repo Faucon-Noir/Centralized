@@ -68,7 +68,7 @@ export class TicketController {
 	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const planning = await this.planningRepository.findOne({
-				where: { id: data.getPlanning() },
+				where: { id: data.planningId },
 			});
 			if (!planning) {
 				throw new Error("Planning not found");
@@ -299,7 +299,7 @@ export class TicketController {
 			for (let l in ticket) {
 				count++
 			}
-			return { ticket: ticket, count: count };
+			return { ticket: ticket, count: count, planning: planning };
 		} catch (err) {
 			return { error: err.message };
 		}

@@ -130,10 +130,10 @@ function SpecificationForm({ userData }: any) {
 					<option value=''>Veuillez choisir une équipe</option>
 					{userData?.team
 						? userData?.team.map((item: any) => (
-								<option key={item.team.id} value={item.team.id}>
-									{item.team.name}
-								</option>
-							))
+							<option key={item.team.id} value={item.team.id}>
+								{item.team.name}
+							</option>
+						))
 						: null}
 				</select>
 			</div>

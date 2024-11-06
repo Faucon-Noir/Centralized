@@ -20,3 +20,29 @@
 		font-size: 14px;
 	}
 }
+
+.buttn_container {
+	display: flex;
+	width: 100%;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
+	.delete_btn {
+		border: none;
+		background-color: #f73c3c;
+		padding: 15px;
+		width: 30%;
+		border-radius: 15px;
+		color: white;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		transition: all 350ms ease-in-out;
+
+		cursor: pointer;
+	}
+	.delete_btn:hover {
+		transform: translateY(-10px);
+		background-color: white;
+		color: #f73c3c;
+		box-shadow: 0px 2px 8px 0px #0000001a;
+	}
+}

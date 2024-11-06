@@ -1,0 +1,96 @@
+.ticket_form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	gap: 15px;
+
+	.next_btn {
+		border: none;
+		background-color: #0293fc;
+		padding: 15px;
+		width: 30%;
+		border-radius: 15px;
+		color: white;
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		transition: all 350ms ease-in-out;
+
+		cursor: pointer;
+	}
+
+	.next_btn:hover {
+		transform: translateY(-10px);
+		background-color: white;
+		color: #0293fc;
+		box-shadow: 0px 2px 8px 0px #0000001a;
+	}
+
+	input,
+	select,
+	textarea {
+		border-radius: 5px;
+		border: none;
+		background-color: #e5e7eb !important;
+		padding: 10px;
+		border-radius: 5px !important;
+	}
+
+	input,
+	textarea,
+	select {
+		background-color: transparent;
+		color: #0293fc !important;
+		outline: none;
+	}
+
+	input::placeholder {
+		color: #0293fc;
+	}
+
+	input,
+	select,
+	textarea::placeholder {
+		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		color: white;
+	}
+
+	input,
+	textarea:focus {
+		color: #0293fc !important;
+	}
+
+	.same_line {
+		display: flex;
+		gap: 30px;
+
+		.avatar_input {
+			background-color: white !important;
+		}
+	}
+
+	.second_line {
+		width: 100%;
+		display: flex;
+		gap: 30px;
+
+		select {
+			width: 100%;
+		}
+		.input_grp {
+			width: 100%;
+		}
+	}
+	.third_line {
+		width: 100%;
+		display: flex;
+		gap: 30px;
+
+		textarea {
+			width: 95%;
+		}
+		.input_grp {
+			width: 100%;
+		}
+	}
+}

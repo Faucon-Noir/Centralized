@@ -232,7 +232,7 @@ export default function HomePage({
 													idx < 3
 											)
 											.map((task: any) => (
-												<TaskCard id={task.id} title={task.title} urgenceId={task.urgence} date={task.start_date} color={lastP.color} key={task.id} />
+												<TaskCard id={task.id} title={task.title} urgenceId={task.status} date={task.start_date} color={lastP.color} key={task.id} />
 											))
 										: null}
 								</div>

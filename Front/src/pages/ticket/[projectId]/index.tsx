@@ -5,6 +5,8 @@ import './style.scss';
 import TicketCard from '@/app/components/Card/TicketCard';
 import { ButtonCreateTicketCy } from '@/app/const/ticket/ticketIdConst';
 import React from 'react';
+import CreateTicketForm from '@/app/components/Form/createTicket';
+import { useRouter } from 'next/router';
 
 // Définir un type pour vos tickets
 type Ticket = {
@@ -17,13 +19,9 @@ type Ticket = {
 	urgenceId: string;
 	updated_at: Date;
 };
-export default function Tickets({
-	userData,
-	updateUserData,
-}: {
-	userData: any;
-	updateUserData: any;
-}) {
+export default function Tickets({ userData, updateUserData, }: { userData: any, updateUserData: any }) {
+	const [showCreateModal, setShowCreateModal] = useState(false);
+	const [selectedProject, setSelectedProject] = useState({});
 	const [projectTickets, setProjectTickets] = useState<{
 		todo: Ticket[];
 		inprogress: Ticket[];
@@ -44,26 +42,16 @@ export default function Tickets({
 			done: [] as Ticket[],
 		};
 		for (let project of userData.project) {
-			if (
-				project.id ==
-				new URL(window.location.href).pathname.split('/')[2]
-			) {
+			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
+				setSelectedProject(project);
 				for (let ticket of project.ticket.ticket) {
-					if (ticket.start_date > new Date().toISOString()) {
+					if (ticket.urgenceId === 0) {
 						updatedTickets.todo.push(ticket);
-					} else if (
-						ticket.start_date < new Date().toISOString() &&
-						ticket.end_date < new Date().toISOString() &&
-						ticket.status === 'fermé'
-					) {
+					} else if (ticket.urgenceId === 3) {
 						updatedTickets.done.push(ticket);
-					} else if (
-						ticket.start_date < new Date().toISOString() &&
-						ticket.end_date < new Date().toISOString() &&
-						ticket.status === 'ouvert'
-					) {
+					} else if (ticket.urgenceId === 2) {
 						updatedTickets.late.push(ticket);
-					} else {
+					} else if (ticket.urgenceId === 1) {
 						updatedTickets.inprogress.push(ticket);
 					}
 				}
@@ -71,13 +59,18 @@ export default function Tickets({
 		}
 		setProjectTickets(updatedTickets);
 	}, [userData]);
+
+	function handleCloseModal() {
+		setShowCreateModal(false);
+	}
+
 	console.log(projectTickets);
 	return (
 		<>
 			<div className='ticketPage'>
 				<div className='header'>
 					<h1>Gestion des tickets</h1>
-					<ButtonBase href='/specification/create'>
+					<ButtonBase onClick={() => setShowCreateModal(true)}>
 						<AddIcon fontSize='medium' sx={{ color: '#000000' }} />
 					</ButtonBase>
 				</div>
@@ -95,7 +88,11 @@ export default function Tickets({
 										start={item.start_date}
 										end={item.end_date}
 										urgence={item.urgenceId}
+										status={item.status}
+										planningId={item.planningId}
 										updated_at={item.updated_at}
+										userData={userData}
+										description={item.description}
 									/>
 								))}
 							</div>
@@ -113,7 +110,11 @@ export default function Tickets({
 										start={item.start_date}
 										end={item.end_date}
 										urgence={item.urgenceId}
+										status={item.status}
+										planningId={item.planningId}
 										updated_at={item.updated_at}
+										userData={userData}
+										description={item.description}
 									/>
 								))}
 							</div>
@@ -131,7 +132,11 @@ export default function Tickets({
 										start={item.start_date}
 										end={item.end_date}
 										urgence={item.urgenceId}
+										status={item.status}
+										planningId={item.planningId}
 										updated_at={item.updated_at}
+										userData={userData}
+										description={item.description}
 									/>
 								))}
 							</div>
@@ -148,13 +153,30 @@ export default function Tickets({
 										start={item.start_date}
 										end={item.end_date}
 										urgence={item.urgenceId}
+										status={item.status}
+										planningId={item.planningId}
 										updated_at={item.updated_at}
+										userData={userData}
+										description={item.description}
 									/>
 								))}
 							</div>
 						</div>
 					</div>
 				</div>
+				{showCreateModal ? (
+					<div className='ticket_modal'>
+						<div className='ticket_main_modal'>
+							<img
+								src='/assets/icons/icon-cross.svg'
+								alt=''
+								className='cross'
+								onClick={() => handleCloseModal()}
+							/>
+							<CreateTicketForm userData={userData} selectedProject={selectedProject} />
+						</div>
+					</div>
+				) : null}
 			</div>
 		</>
 	);

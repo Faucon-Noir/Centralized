@@ -167,7 +167,7 @@ export default function DesktopNavigation({
 									<p>{project.name}</p>
 								</button>
 								<div className='submenu'>
-									<Link href={'/specification/' + project.id}>
+									<a href={'http://localhost:3000/specification/' + project.id}>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/project.svg'
@@ -175,8 +175,8 @@ export default function DesktopNavigation({
 											/>
 											<p>Cahier des charges</p>
 										</button>
-									</Link>
-									<Link href={'/ticket/' + project.id}>
+									</a>
+									<a href={'http://localhost:3000/ticket/' + project.id}>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/tickets.svg'
@@ -184,8 +184,8 @@ export default function DesktopNavigation({
 											/>
 											<p>Tickets</p>
 										</button>
-									</Link>
-									<Link href={'/rex/' + project.id}>
+									</a>
+									<a href={'http://localhost:3000/rex/' + project.id} >
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/rex.svg'
@@ -193,7 +193,7 @@ export default function DesktopNavigation({
 											/>
 											<p>Rex</p>
 										</button>
-									</Link>
+									</a>
 								</div>
 							</div>
 						))}
