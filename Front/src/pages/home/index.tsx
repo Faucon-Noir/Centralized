@@ -1,8 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-import SpecificationCard from '@/app/components/Card/SpecificationCard';
-import TaskCard from '@/app/components/Card/TaskCard';
-import CalendarBox from '@/app/components/CalendarBox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import 'swiper/css';
@@ -15,12 +12,9 @@ import ProjetCard from '@/app/components/Card/ProjectCard';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import TeamCard from '@/app/components/Card/TeamCard';
-import RexCard from '@/app/components/Card/rexCard';
 import CustomSwiper from '@/app/components/Swiper/customSwiper';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import GraphiquePie from '@/app/components/GraphiquePie';
-import GraphiqueLine from '@/app/components/GraphiqueLine';
 import React from 'react';
 import FirstStep from '@/app/components/Form/firstStep';
 import SecondStep from '@/app/components/Form/secondStep';

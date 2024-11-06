@@ -236,12 +236,10 @@
 	.graph_div {
 		display: flex;
 		flex-flow: wrap;
-		justify-content: space-between;
-
+		// justify-content: space-evenly;
+		align-items: center;
 		gap: 50px;
-		@media (min-width: 1680px) {
-			gap: 50px;
-		}
+
 		@media (max-width: 660px) {
 			flex-direction: column;
 			margin-bottom: 24px;
@@ -252,18 +250,19 @@
 		justify-content: space-evenly;
 		gap: 50px;
 		text-align: center;
-		@media (min-width: 2537px) {
-			flex-direction: column;
-		}
-		@media (min-width: 1680px) and (max-width: 1773px) {
-			flex-direction: column;
-		}
-		@media (min-width: 1356px) and (max-width: 1680px) {
-			flex-direction: column;
-		}
-		@media (max-width: 660px) {
-			flex-direction: column;
-		}
+		flex-direction: row;
+		// @media (min-width: 2537px) {
+		// 	flex-direction: column;
+		// }
+		// @media (min-width: 1680px) and (max-width: 1773px) {
+		// 	flex-direction: column;
+		// }
+		// @media (min-width: 1356px) and (max-width: 1680px) {
+		// 	flex-direction: column;
+		// }
+		// @media (max-width: 660px) {
+		// 	flex-direction: column;
+		// }
 		.stat_container {
 			background-color: white;
 			border-radius: 20px;
