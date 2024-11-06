@@ -49,7 +49,7 @@ export default function AccountPage({
 	};
 	const [user, setUser] = useState({
 		id: '',
-		avatar: '',
+		avatar: {},
 		lastname: '',
 		firstname: '',
 		mail: '',
@@ -58,6 +58,7 @@ export default function AccountPage({
 		password: '',
 	});
 	const [open, setOpen] = useState<boolean>(false);
+	const [avatarPreview, setAvatarPreview] = useState<string>('');
 	let user_id: string = '';
 
 	const handleClickOpen = () => {
@@ -72,6 +73,9 @@ export default function AccountPage({
 			const allowedTypes: string[] = ['image/png', 'image/jpeg'];
 			const maxSize: number = 2 * 1024 * 1024; // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
+				setUser({...user, avatar: file});
+				setAvatarPreview(URL.createObjectURL(file));
+				setOpen(false);
 			} else {
 				alert(
 					'Le fichier doit être une image de type png ou jpeg et ne doit pas dépasser 2Mo'
@@ -137,7 +141,7 @@ export default function AccountPage({
 					style={{ position: 'relative' }}
 				>
 					<Avatar
-						src={`/media/${user.avatar}`}
+						src={avatarPreview || `/media/${user.avatar}`}
 						sx={{ height: '100%', width: '100%' }}
 					/>
 					<div id='inner' className='inner' onClick={handleClickOpen}>
@@ -155,7 +159,6 @@ export default function AccountPage({
 							>
 								<CloseOutlinedIcon />
 							</IconButton>
-							{/* TODO: Faire une update de l'api pour prendre en charge le blob de l'image */}
 							<Input type='file' onChange={handleFileChange} />
 						</Box>
 					</Modal>
