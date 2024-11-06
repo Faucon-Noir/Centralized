@@ -46,13 +46,6 @@ form {
 	padding: 0 52px 32px;
 }
 
-label,
-input,
-textarea {
-	width: 100%;
-	display: block;
-}
-
 label {
 	font-size: 25px;
 	margin-top: 24px;
@@ -60,11 +53,13 @@ label {
 
 input,
 textarea {
-	border: none;
-	border-radius: 5px;
-	background-color: #eceeee;
-	color: #435254;
-	padding: 10px;
+	border-radius: 5px !important;
+	border: none !important;
+	background-color: #e5e7eb !important;
+	padding: 15px;
+	background-color: transparent;
+	color: black !important;
+	outline: none;
 }
 
 textarea {

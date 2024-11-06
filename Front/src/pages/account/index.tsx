@@ -73,7 +73,7 @@ export default function AccountPage({
 			const allowedTypes: string[] = ['image/png', 'image/jpeg'];
 			const maxSize: number = 2 * 1024 * 1024; // 2Mo
 			if (allowedTypes.includes(file.type) && file.size <= maxSize) {
-				setUser({...user, avatar: file});
+				setUser({ ...user, avatar: file });
 				setAvatarPreview(URL.createObjectURL(file));
 				setOpen(false);
 			} else {
@@ -176,9 +176,8 @@ export default function AccountPage({
 					<label data-cy={FirstNameLabelCy} htmlFor='firstName'>
 						First Name
 					</label>
-					<TextField
+					<input
 						data-cy={FirstNameFielCy}
-						size='small'
 						className='textField'
 						placeholder={'Votre prénom'}
 						value={user?.firstname ? user.firstname : ''}
@@ -189,9 +188,8 @@ export default function AccountPage({
 					<label data-cy={LastNameLabelCy} htmlFor='lastName'>
 						Last Name
 					</label>
-					<TextField
+					<input
 						data-cy={LastNameFielCy}
-						size='small'
 						className='textField'
 						placeholder={'Votre nom'}
 						value={user?.lastname ? user.lastname : ''}
@@ -202,9 +200,8 @@ export default function AccountPage({
 					<label data-cy={EmailLabelCy} htmlFor='email'>
 						Email
 					</label>
-					<TextField
+					<input
 						data-cy={EmailFielCy}
-						size='small'
 						className='textField'
 						placeholder={'Votre adresse mail'}
 						value={user?.mail ? user.mail : ''}
@@ -215,9 +212,8 @@ export default function AccountPage({
 					<label data-cy={PhoneLabelCy} htmlFor='phone'>
 						Phone
 					</label>
-					<TextField
+					<input
 						data-cy={PhoneFielCy}
-						size='small'
 						className='textField'
 						placeholder={'Votre numéro de téléphone'}
 						value={user?.phone ? user.phone : ''}
@@ -228,12 +224,11 @@ export default function AccountPage({
 					<label data-cy={BioLabelCy} htmlFor='bio'>
 						Bio
 					</label>
-					<TextField
+					<input
 						data-cy={BioFielCy}
-						multiline
 						className='textField'
 						placeholder={'Une courte description de vous-même'}
-						value={user?.bio ? user.bio : ''}
+						value={user?.bio && user.bio !== "null" ? user.bio : ''}
 						onChange={(e) =>
 							setUser({ ...user, bio: e.target.value })
 						}

@@ -87,7 +87,7 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at,
 								</div>
 							</div>
 							<div className='buttn_container'>
-								<button className="next_btn" onClick={handleSubmit}>Terminer</button>
+								<button className="next_btn" onClick={handleSubmit}>Valider</button>
 								<button className="delete_btn" onClick={handleDelete}>Supprimer</button>
 							</div>
 

@@ -66,7 +66,7 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
                 </div>
             </div>
             <button className='next_btn' onClick={() => handleSubmit()}>
-                Terminer
+                Valider
             </button>
         </div>
     );
