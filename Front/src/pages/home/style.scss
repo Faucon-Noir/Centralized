@@ -181,6 +181,7 @@
 		display: flex;
 		flex-direction: row;
 		gap: 10%;
+		margin-top: 30px;
 		// align-items: center;
 
 		// @media (max-width: 1280px) {
@@ -249,10 +250,16 @@
 
 	.graph_div {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		gap: 50px;
 		flex-wrap: wrap;
-
+		.first_line {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			gap: 20%;
+		}
 		// @media (min-width: 1680px) {
 		// 	gap: 250px;
 		// }
@@ -264,12 +271,10 @@
 	}
 	.text_stat {
 		display: flex;
-		justify-content: space-evenly;
-		gap: 50px;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 50%;
 		text-align: center;
-		@media (min-width: 1680px) {
-			flex-direction: column;
-		}
 		@media (max-width: 660px) {
 			flex-direction: column;
 			margin-bottom: 30px;

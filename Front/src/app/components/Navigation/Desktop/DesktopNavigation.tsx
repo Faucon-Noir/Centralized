@@ -151,10 +151,10 @@ export default function DesktopNavigation({
 					<div className='selectedContainer'>
 						{Object.values(selctedMap).map((project, index) => (
 							<div className='projectOpen' key={index}>
-								<Link
+								<a
 									className={
 										page == 'DashboardPage' &&
-										project?.id ==
+											project?.id ==
 											window.location.pathname.split(
 												'/'
 											)[2]
@@ -185,7 +185,7 @@ export default function DesktopNavigation({
 										</Icon>
 										<p>{project.name}</p>
 									</button>
-								</Link>
+								</a>
 								<div className='submenu'>
 									<a href={'http://localhost:3000/specification/' + project.id}>
 										<button className='submenu_btn'>

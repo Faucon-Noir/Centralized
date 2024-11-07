@@ -6,6 +6,7 @@ import TaskCard from '../Card/TaskCard';
 import GraphiqueLine from '../GraphiqueLine';
 import GraphiquePie from '../GraphiquePie';
 import Image from 'next/image';
+import { numberToColor } from '../../helpers';
 
 export default function HomeData({
 	userData,
@@ -14,15 +15,7 @@ export default function HomeData({
 	userData: any;
 	lastP: any;
 }) {
-	// const [lastP, setLastP] = useState({
-	// 	name: '',
-	// 	start_date: '',
-	// 	end_date: '',
-	// 	description: '',
-	// 	color: 0,
-	// 	ticket: { count: 0, ticket: [] },
-	// 	rex: { answer1: '', answer2: '', answer3: '' },
-	// });
+	console.log(lastP)
 	return (
 		<>
 			{userData?.stat?.error ? (
@@ -31,26 +24,29 @@ export default function HomeData({
 				<div className='stat'>
 					<h2>Statistique du dernier projet</h2>
 					<div className='graph_div'>
-						{userData?.stat?.nbrTicketByUser ? (
-							<GraphiquePie
-								labels={userData.stat.nbrTicketByUser.map(
-									(x: { userName: any }) => x.userName
-								)}
-								data={userData.stat.nbrTicketByUser.map(
-									(row: { nbr_ticket: any }) => row.nbr_ticket
-								)}
-								title='Nombre de ticket non fini par utilisateur'
-								hover='Nombre de ticket'
-							/>
-						) : null}
-						{userData?.stat?.nbrTicketByUser ? (
-							<GraphiqueLine
-								labels={userData.stat.nbrTicketPerWeek.week}
-								data={userData.stat.nbrTicketPerWeek.nbr_ticket}
-								title='Nombre de tickets ouverts par semaine'
-								hover='Nombre de tickets'
-							/>
-						) : null}
+						<div className='first_line'>
+							{userData?.stat?.nbrTicketByUser ? (
+								<GraphiquePie
+									labels={userData.stat.nbrTicketByUser.map(
+										(x: { userName: any }) => x.userName
+									)}
+									data={userData.stat.nbrTicketByUser.map(
+										(row: { nbr_ticket: any }) => row.nbr_ticket
+									)}
+									title='Nombre de ticket non fini par utilisateur'
+									hover='Nombre de ticket'
+								/>
+							) : null}
+							{userData?.stat?.nbrTicketByUser ? (
+								<GraphiqueLine
+									labels={userData.stat.nbrTicketPerWeek.week}
+									data={userData.stat.nbrTicketPerWeek.nbr_ticket}
+									title='Nombre de tickets ouverts par semaine'
+									hover='Nombre de tickets'
+								/>
+							) : null}
+						</div>
+
 						<div className='text_stat'>
 							<div className='stat_container'>
 								<p>Vous avez</p>
@@ -84,7 +80,7 @@ export default function HomeData({
 						}
 						end_date={lastP ? new Date(lastP.end_date) : new Date()}
 						description={lastP ? lastP.description : ''}
-						color={lastP.color}
+						color={numberToColor(lastP.color)}
 					/>
 				</div>
 
@@ -102,17 +98,17 @@ export default function HomeData({
 					</div>
 					{lastP.ticket.count > 0
 						? lastP.ticket.ticket
-								.filter((task: any, idx: number) => idx < 3)
-								.map((task: any) => (
-									<TaskCard
-										id={task.id}
-										title={task.title}
-										urgenceId={task.urgence}
-										date={task.start_date}
-										color={lastP.color}
-										key={task.id}
-									/>
-								))
+							.filter((task: any, idx: number) => idx < 3)
+							.map((task: any) => (
+								<TaskCard
+									id={task.id}
+									title={task.title}
+									urgenceId={task.status}
+									date={task.start_date}
+									color={lastP.color}
+									key={task.id}
+								/>
+							))
 						: null}
 				</div>
 			</div>

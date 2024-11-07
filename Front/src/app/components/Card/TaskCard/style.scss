@@ -5,11 +5,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-	padding: 32px;
+	padding: 12px;
 	justify-content: center;
 	transition: all 350ms ease-in-out;
-	min-width: 275px;
-	max-width: 500px;
+	min-width: 500px;
 }
 
 .container:hover {
@@ -20,7 +19,6 @@
 	display: flex;
 	align-items: center;
 	gap: 15px;
-
 	.css-10y1ysj-MuiIcon-root {
 		width: 35px;
 		height: 35px;
@@ -40,5 +38,4 @@
 	padding-left: 7%;
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
 }

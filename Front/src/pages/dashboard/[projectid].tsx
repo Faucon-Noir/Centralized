@@ -110,20 +110,20 @@ export default function DashboardPage({
 												order={1}
 											/>
 										) : null}
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiqueLine
-												labels={
-													project.stat
-														.nbrTicketPerWeek.week
-												}
-												data={
-													project.stat
-														.nbrTicketPerWeek
-														.nbr_ticket
-												}
-												title='Nombre de tickets ouverts par semaine'
-												hover='Nombre de tickets'
-												order={1}
+										{project?.stat?.nbrTicketByStatus ? (
+											<GraphiquePie
+												labels={project.stat.nbrTicketByStatus.map(
+													(x: { status: any }) =>
+														x.status
+												)}
+												data={project.stat.nbrTicketByStatus.map(
+													(row: {
+														nbr_ticket: any;
+													}) => row.nbr_ticket
+												)}
+												title='Nombre de ticket par état'
+												hover='Nombre de ticket'
+												order={2}
 											/>
 										) : null}
 										<div className='text_stat stat_container_1'>
@@ -133,7 +133,7 @@ export default function DashboardPage({
 													{userData?.stat
 														?.nbrAllTicket
 														? userData.stat
-																.nbrAllTicket
+															.nbrAllTicket
 														: 0}
 												</h3>
 												<p>
@@ -154,20 +154,21 @@ export default function DashboardPage({
 												</p>
 											</div>
 										</div>
-										{project?.stat?.nbrTicketByStatus ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByStatus.map(
-													(x: { status: any }) =>
-														x.status
-												)}
-												data={project.stat.nbrTicketByStatus.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket par état'
-												hover='Nombre de ticket'
-												order={2}
+
+										{project?.stat?.nbrTicketByUser ? (
+											<GraphiqueLine
+												labels={
+													project.stat
+														.nbrTicketPerWeek.week
+												}
+												data={
+													project.stat
+														.nbrTicketPerWeek
+														.nbr_ticket
+												}
+												title='Nombre de tickets ouverts par semaine'
+												hover='Nombre de tickets'
+												order={1}
 											/>
 										) : null}
 										<div className='text_stat stat_container_2'>
@@ -177,7 +178,7 @@ export default function DashboardPage({
 													{project?.stat
 														?.nbrTicketProject
 														? project.stat
-																.nbrTicketProject
+															.nbrTicketProject
 														: 0}
 												</h3>
 												<p>
@@ -191,7 +192,7 @@ export default function DashboardPage({
 													{project?.stat
 														?.nbrTicketOpenProject
 														? project.stat
-																.nbrTicketOpenProject
+															.nbrTicketOpenProject
 														: 0}
 												</h3>
 												<p>
@@ -215,15 +216,15 @@ export default function DashboardPage({
 										start_date={
 											project
 												? new Date(
-														project.project.start_date
-													)
+													project.project.start_date
+												)
 												: new Date()
 										}
 										end_date={
 											project
 												? new Date(
-														project.project.end_date
-													)
+													project.project.end_date
+												)
 												: new Date()
 										}
 										description={
@@ -305,21 +306,23 @@ export default function DashboardPage({
 												hover='Nombre de ticket'
 											/>
 										) : null}
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiqueLine
-												labels={
-													project.stat
-														.nbrTicketPerWeek.week
-												}
-												data={
-													project.stat
-														.nbrTicketPerWeek
-														.nbr_ticket
-												}
-												title='Nombre de tickets ouverts par semaine'
-												hover='Nombre de tickets'
+										{project?.stat?.nbrTicketByStatus ? (
+											<GraphiquePie
+												labels={project.stat.nbrTicketByStatus.map(
+													(x: { status: any }) =>
+														x.status
+												)}
+												data={project.stat.nbrTicketByStatus.map(
+													(row: {
+														nbr_ticket: any;
+													}) => row.nbr_ticket
+												)}
+												title='Nombre de ticket par état'
+												hover='Nombre de ticket'
+												order={2}
 											/>
 										) : null}
+
 										<div className='text_stat stat_container_1'>
 											<div className='stat_container'>
 												<p>Vous avez</p>
@@ -327,7 +330,7 @@ export default function DashboardPage({
 													{userData?.stat
 														?.nbrAllTicket
 														? userData.stat
-																.nbrAllTicket
+															.nbrAllTicket
 														: 0}
 												</h3>
 												<p>
@@ -348,20 +351,19 @@ export default function DashboardPage({
 												</p>
 											</div>
 										</div>
-										{project?.stat?.nbrTicketByStatus ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByStatus.map(
-													(x: { status: any }) =>
-														x.status
-												)}
-												data={project.stat.nbrTicketByStatus.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket par état'
-												hover='Nombre de ticket'
-												order={2}
+										{project?.stat?.nbrTicketByUser ? (
+											<GraphiqueLine
+												labels={
+													project.stat
+														.nbrTicketPerWeek.week
+												}
+												data={
+													project.stat
+														.nbrTicketPerWeek
+														.nbr_ticket
+												}
+												title='Nombre de tickets ouverts par semaine'
+												hover='Nombre de tickets'
 											/>
 										) : null}
 										<div className='text_stat stat_container_2'>
@@ -371,7 +373,7 @@ export default function DashboardPage({
 													{project?.stat
 														?.nbrTicketProject
 														? project.stat
-																.nbrTicketProject
+															.nbrTicketProject
 														: 0}
 												</h3>
 												<p>
@@ -385,7 +387,7 @@ export default function DashboardPage({
 													{project?.stat
 														?.nbrTicketOpenProject
 														? project.stat
-																.nbrTicketOpenProject
+															.nbrTicketOpenProject
 														: 0}
 												</h3>
 												<p>
@@ -408,15 +410,15 @@ export default function DashboardPage({
 										start_date={
 											project.project
 												? new Date(
-														project.project.start_date
-													)
+													project.project.start_date
+												)
 												: new Date()
 										}
 										end_date={
 											project.project
 												? new Date(
-														project.project.end_date
-													)
+													project.project.end_date
+												)
 												: new Date()
 										}
 										description={
@@ -450,11 +452,9 @@ export default function DashboardPage({
 												<TaskCard
 													id={task.id}
 													title={task.title}
-													urgenceId={task.urgence}
+													urgenceId={task.status}
 													date={task.start_date}
-													color={
-														project.project.color
-													}
+													color={task.color}
 													key={task.id}
 												/>
 											))
@@ -510,20 +510,20 @@ export default function DashboardPage({
 								{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
 								{project?.userTeam
 									? project?.userTeam.map((item: any) => (
-											<SwiperSlide key={item.id}>
-												<TeamMateCard
-													avatar={item.avatar}
-													firstName={
-														item.user_firstname
-													}
-													lastName={
-														item.user_lastname
-													}
-													bio={item.user_bio}
-													grade={0}
-												/>
-											</SwiperSlide>
-										))
+										<SwiperSlide key={item.id}>
+											<TeamMateCard
+												avatar={item.avatar}
+												firstName={
+													item.user_firstname
+												}
+												lastName={
+													item.user_lastname
+												}
+												bio={item.user_bio}
+												grade={0}
+											/>
+										</SwiperSlide>
+									))
 									: null}
 							</div>
 						</CustomSwiper>
