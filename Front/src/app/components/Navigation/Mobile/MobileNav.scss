@@ -1,4 +1,4 @@
-.navigation {
+.navigation-mobile {
 	background-color: #0293fc;
 	max-width: 100%;
 	height: 100%;
@@ -7,6 +7,11 @@
 	flex-direction: column;
 	padding: 0;
 	overflow-y: auto;
+	animation: fade-inout 1s;
+
+	a {
+		text-decoration: none;
+	}
 
 	.centralized_logo {
 		width: 100%;
@@ -202,6 +207,13 @@
 		.red {
 			color: #fb2c39;
 		}
+	}
+
+	.cross {
+		cursor: pointer;
+		position: absolute;
+		right: 5%;
+		top: 5%;
 	}
 }
 

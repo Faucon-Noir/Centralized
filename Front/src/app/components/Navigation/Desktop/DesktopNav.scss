@@ -1,4 +1,4 @@
-.navigation {
+.navigation-desktop {
 	background-color: #0293fc;
 	max-width: 100%;
 	height: 100%;
@@ -84,7 +84,7 @@
 
 				a {
 					height: fit-content;
-					width: fit-content;
+					width: auto;
 					padding: 0;
 					margin: 0;
 					height: 90%;
@@ -152,16 +152,17 @@
 					display: flex;
 					gap: 10px;
 					background-color: white;
-					width: 80%;
+					width: 100%;
 					border-radius: 5px;
 					box-shadow: 20px 4px 25px 0px rgba(0, 0, 0, 0.25);
 
 					.cross {
+						color: red;
 						z-index: 10;
 						width: 15px;
 						position: absolute;
 						top: -5%;
-						right: 18%;
+						right: -2%;
 						cursor: pointer;
 						display: none;
 						animation: fade-inout 1s;
@@ -187,6 +188,7 @@
 			.pName:hover {
 				.cross {
 					display: inline;
+					// filter: invert(1);
 				}
 			}
 		}
@@ -202,27 +204,6 @@
 		}
 	}
 }
-
-/* // @media (max-width: 1279.9px) {
-// 	.navigation {
-// 		display: none !important;
-// 	}
-// } */
-
-// .fullscreen-popup {
-// 	position: fixed;
-// 	top: 0;
-// 	left: 0;
-// 	width: 100%;
-// 	height: 100%;
-// 	z-index: 9999;
-// 	/* Assurez-vous que ce z-index est supérieur à celui des autres éléments */
-// 	background-color: rgba(0, 0, 0, 0.8);
-// 	/* Optionnel : ajoutez un fond semi-transparent */
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// }
 
 @keyframes fade-inout {
 	0% {

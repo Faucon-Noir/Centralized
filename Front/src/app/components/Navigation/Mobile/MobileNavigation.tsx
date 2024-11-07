@@ -1,22 +1,28 @@
 'use client';
 
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+// MUI
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
-import { numberToColor } from '@/app/helpers';
+
+// Next
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+// React
 import React from 'react';
+import { useEffect, useState } from 'react';
+
+// Utils
 import './MobileNav.scss';
+import { numberToColor } from '@/app/helpers';
+
 export default function MobileNavigation({
 	page = '',
 	userData,
-	updateUserData,
 	setShowMobileNav,
 }: {
 	page: String;
 	userData: any;
-	updateUserData: any;
 	setShowMobileNav: (show: boolean) => void;
 }) {
 	const [selctedMap, setSelctedMap] = useState<{ [key: string]: any }>({});
@@ -30,8 +36,6 @@ export default function MobileNavigation({
 	}
 
 	useEffect(() => {
-		// Charge uniquement quand MobileNavigation est monté
-
 		if (userData?.project?.length > 0) {
 			let selectedP = localStorage.getItem('selectedP');
 			let tempSelectedMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
@@ -80,13 +84,26 @@ export default function MobileNavigation({
 		}
 	}
 
+	const handleCloseNav = () => {
+		setShowMobileNav(false);
+		setTimeout(() => {
+			setShowMobileNav(false);
+		}, 1000);
+	};
+
 	if (loading) {
 		return <div>Chargement des projets...</div>;
 	}
 
 	return (
 		<>
-			<div className='navigation mobileNav'>
+			<div className='navigation-mobile mobileNav'>
+				<img
+					src='/assets/icons/icon-cross.svg'
+					alt=''
+					className='cross'
+					onClick={() => setShowMobileNav(false)}
+				/>
 				<div className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'
@@ -243,7 +260,6 @@ export default function MobileNavigation({
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
 					</button>
 				</div>
-				<button onClick={() => setShowMobileNav(false)}>Close</button>
 			</div>
 		</>
 	);

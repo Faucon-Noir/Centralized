@@ -655,3 +655,4 @@ FodyWeavers.xsd
 yarn.lock
 *env
 */cypress/downloads/*
+.idea
