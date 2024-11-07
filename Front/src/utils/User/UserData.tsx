@@ -19,7 +19,9 @@ interface JwtPayload {
 
 export default async function UserData() {
 	const token = localStorage.getItem('token');
-	if (token == null) return null;
+	if (token == null) {
+		return null
+	};
 	var user_id = '';
 	var userData = {
 		user: {

@@ -10,7 +10,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 	const checkToken = () => {
 		const token = localStorage.getItem('token');
 
-		if (router.pathname !== '/login') {
+		if (router.pathname !== '/login' && router.pathname !== '/') {
 			if (token) {
 				try {
 					const decodedToken: any = jwtDecode(token);

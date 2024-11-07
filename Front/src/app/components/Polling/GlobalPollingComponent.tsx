@@ -6,7 +6,10 @@ import { BarLoader } from 'react-spinners';
 import UserData from '@/utils/User/UserData';
 import './GlobalPoll.scss';
 import React from 'react';
+import { useRouter } from 'next/router';
 export default function GlobalPollingComponent() {
+	const router = useRouter();
+
 	const { isTaskStarted, isTaskComplete, completeTask } = useTask();
 	const [showPopup, setShowPopup] = useState(false);
 
@@ -25,43 +28,45 @@ export default function GlobalPollingComponent() {
 	useEffect(() => {
 		UserData().then((result) => {
 			setUserData(result);
+			console.log(result)
 		});
 	}, []);
 
 	// Polling pour vérifier l'état de la tâche
 	useEffect(() => {
-		let intervalId: any;
+		if (userData !== null) {
+			let intervalId: any;
 
-		if (isTaskStarted && !isTaskComplete) {
-			setShowPopup(true); // Affiche la popup quand le polling commence
+			if (isTaskStarted && !isTaskComplete) {
+				setShowPopup(true); // Affiche la popup quand le polling commence
 
-			const checkTaskStatus = () => {
-				intervalId = setInterval(async () => {
-					try {
-						let responseStatus = await axios.get(
-							`http://localhost:8000/api/specification/check-status`,
-							{
-								headers: {
-									Authorization: `Bearer ${userData.user.token}`,
-								},
+				const checkTaskStatus = () => {
+					intervalId = setInterval(async () => {
+						try {
+							let responseStatus = await axios.get(
+								`http://localhost:8000/api/specification/check-status`,
+								{
+									headers: {
+										Authorization: `Bearer ${userData.user.token}`,
+									},
+								}
+							);
+							if (responseStatus.data.status === true) {
+								completeTask(); // Marquer la tâche comme terminée
+								setShowPopup(false); // Fermer la popup
+								clearInterval(intervalId); // Arrêter le polling
 							}
-						);
-						if (responseStatus.data.status === true) {
-							completeTask(); // Marquer la tâche comme terminée
-							setShowPopup(false); // Fermer la popup
-							clearInterval(intervalId); // Arrêter le polling
+						} catch (error) {
+							console.error('Erreur lors du polling', error);
+							clearInterval(intervalId);
 						}
-					} catch (error) {
-						console.error('Erreur lors du polling', error);
-						clearInterval(intervalId);
-					}
-				}, 10000); // Polling toutes les 10 secondes
-			};
+					}, 10000); // Polling toutes les 10 secondes
+				};
 
-			checkTaskStatus();
+				checkTaskStatus();
+			}
+			return () => clearInterval(intervalId); // Cleanup l'interval si le composant se démonte
 		}
-
-		return () => clearInterval(intervalId); // Cleanup l'interval si le composant se démonte
 	}, [isTaskStarted, isTaskComplete, completeTask, userData.user.token]);
 
 	return (
