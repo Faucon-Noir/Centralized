@@ -45,6 +45,9 @@ function parseDurations(input: string, startDateString: string): Date[] {
 
 	// Define mappings for different units
 	const unitMappings: { [key: string]: string } = {
+		month: "month",
+        mois: "month",
+        m: "month",
 		semaine: "week",
 		semaines: "weeks",
 		week: "week",
@@ -75,6 +78,11 @@ function parseDurations(input: string, startDateString: string): Date[] {
 			let newDate: Date;
 
 			switch (unit) {
+				case "month":
+                    newDate = new Date(
+                        startDate.getTime() + value * 31 * 24 * 60 * 60 * 1000
+                    );
+                    break;
 				case "week":
 				case "weeks":
 					newDate = new Date(
@@ -138,7 +146,7 @@ async function createTicket(
 	if (resultArray.length > 0) {
 		resultArray.forEach(async (date, index) => {
 			const ticket: Ticket = new Ticket(
-				forecastarray[index], // title
+				forecastarray[index].split(":")[0].trim(), // title
 				"", // description
 				0, // urgenceId
 				StatusEnum.Open, // status
