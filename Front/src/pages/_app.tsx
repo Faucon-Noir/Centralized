@@ -41,7 +41,6 @@ export default function App({ Component, pageProps }: AppProps) {
 		selectedProjects: [],
 	});
 	const [windowWidth, setWindowWidth] = useState<number>(0);
-	const [previousRoute, setPreviousRoute] = useState<string | null>(null);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -71,24 +70,18 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [Component.name]);
 
 	useEffect(() => {
-		const handleRouteChangeStart = (url: string) => {
-			setPreviousRoute(router.pathname);
-		};
-
 		const handleRouteChangeComplete = (url: string) => {
-			if (previousRoute === '/login' && url === '/') {
+			if (url === '/home') {
 				window.location.reload();
 			}
 		};
 
-		router.events.on('routeChangeStart', handleRouteChangeStart);
 		router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
 		return () => {
-			router.events.off('routeChangeStart', handleRouteChangeStart);
 			router.events.off('routeChangeComplete', handleRouteChangeComplete);
 		};
-	}, [router, previousRoute]);
+	}, [router]);
 
 	if (loading) {
 		return <div>En attente</div>;
