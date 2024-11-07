@@ -49,11 +49,12 @@ export default function DashboardPage({
 		userTeam: [{}],
 		stat: {
 			nbrTicketByUser: [{ userName: '', nbr_ticket: 0 }],
-			nbrTicket: 0,
 			nbrTicketPerWeek: { week: [''], nbr_ticket: [0] },
 			nbrTicketByStatus: [{ status: '', nbr_ticket: 0 }],
 			nbrTicketOpenProject: 0,
 			nbrTicketProject: 0,
+            nbrMyTicketOpenProject: 0,
+            nbrMyTicketProject: 0
 		},
 	});
 
@@ -123,10 +124,10 @@ export default function DashboardPage({
 										<div className='stat_container'>
 											<p>Vous avez</p>
 											<h3>
-												{userData?.stat
-													?.nbrAllTicket
-													? userData.stat
-														.nbrAllTicket
+												{project?.stat
+													?.nbrMyTicketProject
+													? project.stat
+														.nbrMyTicketProject
 													: 0}
 											</h3>
 											<p>
@@ -137,8 +138,8 @@ export default function DashboardPage({
 										<div className='stat_container'>
 											<p>Vous avez</p>
 											<h3>
-												{project?.stat?.nbrTicket
-													? project.stat.nbrTicket
+												{project?.stat?.nbrMyTicketOpenProject
+													? project.stat.nbrMyTicketOpenProject
 													: 0}
 											</h3>
 											<p>

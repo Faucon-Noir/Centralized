@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export default async function getCountAllTicketOneProject(id: string, token: string, id_project: string) {
-    let $url = "http://localhost:8000/api/ticket/user/"+ id + "/project/" + id_project + "/count";
+export default async function getCountAllTicketOneProjectOneUserByStatus(id: string, token: string, id_project: string) {
+    let $url = "http://localhost:8000/api/ticket/user/"+ id + "/project/" + id_project + "/status/me";
     try {
         let response = await axios.get($url, {
             headers: { Authorization: `Bearer ${token}` },
