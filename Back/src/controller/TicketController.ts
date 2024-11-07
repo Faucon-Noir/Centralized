@@ -240,7 +240,7 @@ export class TicketController {
 			if (!ticket) throw new Error("Ticket not found");
 			let count = 0;
 			for (let l in ticket) {
-				count++
+				count++;
 			}
 			return { ticket: ticket, count: count };
 		} catch (err) {
@@ -292,12 +292,12 @@ export class TicketController {
 
 			const ticket: Ticket = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
-				order: { start_date: "ASC" }
+				order: { start_date: "ASC" },
 			});
 			if (!ticket) throw new Error("Ticket not found");
 			let count = 0;
 			for (let l in ticket) {
-				count++
+				count++;
 			}
 			return { ticket: ticket, count: count, planning: planning };
 		} catch (err) {
@@ -340,9 +340,7 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getAllTicketByUser(
-		@Param("userid") userid: string
-	) {
+	public async getAllTicketByUser(@Param("userid") userid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
@@ -355,10 +353,8 @@ export class TicketController {
 				.select(["ticket", "planning.project"])
 				.getRawMany();
 
-
 			if (!tickets) throw new Error("Ticket not found");
 			return { ticket: tickets, count: tickets.length };
-
 		} catch (err) {
 			return { error: err.message };
 		}
@@ -424,7 +420,7 @@ export class TicketController {
 
 	/**
 	 * @swagger
-	 * /ticket/user/:userid/count:
+	 * /ticket/user/{userid}/count:
 	 *   get:
 	 *     tags:
 	 *       - Ticket
@@ -457,9 +453,7 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getCountAllTicketByUser(
-		@Param("userid") userid: string
-	) {
+	public async getCountAllTicketByUser(@Param("userid") userid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
@@ -473,43 +467,41 @@ export class TicketController {
 				.select(["COUNT(ticket.id) as nbr_ticket"])
 				.getRawOne();
 
-
 			if (!tickets) throw new Error("Ticket not found");
 			return tickets;
-
 		} catch (err) {
 			return { error: err.message };
 		}
 	}
 
 	/**
- * @swagger
- * /ticket/user/{userid}/project/{projectid}:
- *   get:
- *     tags:
- *       - Ticket
- *     summary: Récupère le nombre de ticket par parsonne pour un  d'un utilisateur spécifique
- *     parameters:
- *       - in: path
- *         name: userid
- *         required: true
- *         schema:
- *           type: string
- *         description: L'ID de l'utilisateur
- *     responses:
- *       200:
- *         description: Les tickets ont été récupérés avec succès
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Ticket'
- *       404:
- *         description: Les tickets n'ont pas été trouvés
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Error'
- */
+	 * @swagger
+	 * /ticket/user/{userid}/project/{projectid}:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le nombre de ticket par parsonne pour un  d'un utilisateur spécifique
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Les tickets ont été récupérés avec succès
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
 	@Get("/ticket/user/:userid/project/:projectid")
 	@UseBefore(CheckAuth)
 	/**
@@ -529,10 +521,7 @@ export class TicketController {
 					"planning",
 					"ticket.status != 'résolu'"
 				)
-				.innerJoin(
-					"ticket.user",
-					"user"
-				)
+				.innerJoin("ticket.user", "user")
 				.innerJoin(
 					"planning.project",
 					"project",
@@ -540,30 +529,238 @@ export class TicketController {
 					{ projectid: projectid }
 				)
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
-				.innerJoin(
-					"project.team",
-					"team"
-				)
-				.innerJoin(
-					"team.teamUser",
-					"teamUser",
-				)
+				.innerJoin("project.team", "team")
+				.innerJoin("team.teamUser", "teamUser")
 				.innerJoin(
 					"teamUser.user",
 					"TeamLimit",
 					"teamUser.user = :userid",
 					{ userid: userid }
 				)
-				.select(["concat(user.firstname,' ', user.lastname) as userName", "COUNT(ticket.id) as nbr_ticket"])
+				.select([
+					"concat(user.firstname,' ', user.lastname) as userName",
+					"COUNT(distinct ticket.id) as nbr_ticket",
+				])
 				.groupBy("user.id")
 				.getRawMany();
 
 			if (!tickets) throw new Error("Ticket not found");
 			return tickets;
-
 		} catch (err) {
 			return { error: err.message };
 		}
 	}
 
+	/**
+	 * @swagger
+	 * /ticket/user/{userid}/project/{projectid}/status:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le nombre de ticket par état pour un projet
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Les tickets ont été récupérés avec succès
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/user/:userid/project/:projectid/status")
+	@UseBefore(CheckAuth)
+	/**
+	 * Retrieves the number of tickets per status of a specific user's project .
+	 * @param userid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getCountAllTicketByStatusOneProject(
+		@Param("userid") userid: string,
+		@Param("projectid") projectid: string
+	) {
+		try {
+			const tickets = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin("ticket.planning", "planning")
+				.innerJoin("ticket.user", "user")
+				.innerJoin(
+					"planning.project",
+					"project",
+					"planning.project = :projectid",
+					{ projectid: projectid }
+				)
+				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
+				.innerJoin("project.team", "team")
+				.innerJoin("team.teamUser", "teamUser")
+				.innerJoin(
+					"teamUser.user",
+					"TeamLimit",
+					"teamUser.user = :userid",
+					{ userid: userid }
+				)
+				.select([
+					"ticket.status as status",
+					"COUNT(distinct ticket.id) as nbr_ticket",
+				])
+				.groupBy("ticket.status")
+				.getRawMany();
+			if (!tickets) throw new Error("Ticket not found");
+			return tickets;
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
+
+	/**
+	 * @swagger
+	 * /ticket/user/{userid}/project/{projectid}/count:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le nombre de ticket non cloturé d'un projet
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Le nombre de ticket du projet
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/user/:userid/project/:projectid/count")
+	@UseBefore(CheckAuth)
+	/**
+	 * Retrieves the number of tickets not close of a specific user's project.
+	 * @param userid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getCountAllTicketNotCloseOneProject(
+		@Param("userid") userid: string,
+		@Param("projectid") projectid: string
+	) {
+		try {
+			const tickets = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin(
+					"ticket.planning",
+					"planning",
+					"ticket.status != 'résolu'"
+				)
+				.innerJoin("ticket.user", "user")
+				.innerJoin(
+					"planning.project",
+					"project",
+					"planning.project = :projectid",
+					{ projectid: projectid }
+				)
+				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
+				.innerJoin("project.team", "team")
+				.innerJoin("team.teamUser", "teamUser")
+				.innerJoin(
+					"teamUser.user",
+					"TeamLimit",
+					"teamUser.user = :userid",
+					{ userid: userid }
+				)
+				.select(["COUNT(distinct ticket.id) as nbr_ticket"])
+				.getRawOne();
+
+			if (!tickets) throw new Error("Ticket not found");
+			return tickets;
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
+
+	/**
+	 * @swagger
+	 * /ticket/user/{userid}/project/{projectid}/count/all:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le nombre de ticket total d'un projet
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Le nombre de ticket du projet
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/user/:userid/project/:projectid/count/all")
+	@UseBefore(CheckAuth)
+	/**
+	 * Retrieves the number of tickets of a specific user's project .
+	 * @param userid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getCountAllTicketOneProject(
+		@Param("userid") userid: string,
+		@Param("projectid") projectid: string
+	) {
+		try {
+			const tickets = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin("ticket.planning", "planning")
+				.innerJoin("ticket.user", "user")
+				.innerJoin(
+					"planning.project",
+					"project",
+					"planning.project = :projectid",
+					{ projectid: projectid }
+				)
+				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
+				.innerJoin("project.team", "team")
+				.innerJoin("team.teamUser", "teamUser")
+				.innerJoin(
+					"teamUser.user",
+					"TeamLimit",
+					"teamUser.user = :userid",
+					{ userid: userid }
+				)
+				.select(["COUNT(ticket.id) as nbr_ticket"])
+				.getRawOne();
+			if (!tickets) throw new Error("Ticket not found");
+			return tickets;
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
 }

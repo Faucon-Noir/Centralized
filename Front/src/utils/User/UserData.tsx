@@ -75,6 +75,8 @@ export default async function UserData() {
 
 		let selectedP = userData.project[userData.project.length - 1];
 
+		//userData.stat.nbrAllTicket = (await getCountAllTicketOneUser(user_id, token)). nbr_ticket;
+
 		//get rexs of projects
 		for (let projectData of userData.project) {
 			projectData.rex = await getProjectRex(projectData.id, token);

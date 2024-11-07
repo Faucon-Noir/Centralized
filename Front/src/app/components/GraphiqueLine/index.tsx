@@ -8,9 +8,16 @@ interface GraphiqueLineProps {
 	data: Array<number>;
 	title: string;
 	hover: string;
+	order?: Number;
 }
 
-function GraphiqueLine({ labels, data, title, hover }: GraphiqueLineProps) {
+function GraphiqueLine({
+	labels,
+	data,
+	title,
+	hover,
+	order = 0,
+}: GraphiqueLineProps) {
 	// Utilisation des types ChartData et ChartOptions pour corriger le typage
 	const [datagraphique, setDataGraphique] = useState<ChartData<'line'>>({
 		labels: [],
@@ -78,14 +85,18 @@ function GraphiqueLine({ labels, data, title, hover }: GraphiqueLineProps) {
 		setDataGraphique(data1);
 		setOptionsGraphique(options);
 		setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
-	}, [labels, data, hover, title]); // Ajout des dépendances pour éviter les avertissements de React
+	}, [labels, data, hover, title, order]); // Ajout des dépendances pour éviter les avertissements de React
 
 	if (loading) {
 		return <div>Chargement des données...</div>;
 	}
 
 	return (
-		<div className='graph_line'>
+		<div
+			className={
+				order != 0 ? 'graph_line graph_line_' + order : 'graph_line'
+			}
+		>
 			<Line data={datagraphique} options={optionsgraphique} />
 		</div>
 	);

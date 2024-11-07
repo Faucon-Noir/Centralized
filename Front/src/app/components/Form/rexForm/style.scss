@@ -1,0 +1,60 @@
+.rexCard {
+	border-radius: 20px;
+	background: #fff;
+	box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	background-color: #ffffff;
+	max-width: 550px;
+}
+
+.enteterexcard,
+.titrerexcard {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 10px 20px 0px 10px;
+}
+
+.enteterexcard {
+	justify-content: space-between;
+}
+
+.titrerexcard {
+	gap: 10px;
+}
+
+.listerexcard {
+	margin-right: 20px;
+}
+
+.textarea {
+	max-width: 90%;
+}
+
+.input_form {
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+}
+.showRex {
+	margin: 10px;
+}
+
+.FormRex {
+	margin: 10px;
+}
+
+.DivButtonRex {
+	text-align: center;
+}
+
+.ButtonRex {
+	width: 40%;
+	padding: 15px 10px;
+	border-radius: 15px;
+	font-size: 16px;
+	border: none;
+	background-color: #0293fc;
+	color: white;
+}
