@@ -1,29 +1,19 @@
-'use client';
-
-// MUI
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import './Dashboard.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Icon } from '@mui/material';
-
-// Next
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-// React
-import React from 'react';
-import { useEffect, useState } from 'react';
-
-// Utils
-import './MobileNav.scss';
 import { numberToColor } from '@/app/helpers';
+import Link from 'next/link';
 
-export default function MobileNavigation({
+export default function Dashboard({
 	page = '',
 	userData,
-	setShowMobileNav,
+	updateUserData,
 }: {
 	page: String;
 	userData: any;
-	setShowMobileNav: (show: boolean) => void;
+	updateUserData: any;
 }) {
 	const [selctedMap, setSelctedMap] = useState<{ [key: string]: any }>({});
 	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
@@ -84,26 +74,13 @@ export default function MobileNavigation({
 		}
 	}
 
-	const handleCloseNav = () => {
-		setShowMobileNav(false);
-		setTimeout(() => {
-			setShowMobileNav(false);
-		}, 1000);
-	};
-
 	if (loading) {
 		return <div>Chargement des projets...</div>;
 	}
 
 	return (
 		<>
-			<div className='navigation-mobile mobileNav'>
-				<img
-					src='/assets/icons/icon-cross.svg'
-					alt=''
-					className='cross'
-					onClick={() => setShowMobileNav(false)}
-				/>
+			<div className='dashboard'>
 				<div className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'
@@ -116,8 +93,8 @@ export default function MobileNavigation({
 						<button
 							className={
 								page == 'HomePage'
-									? 'navigation_button active'
-									: 'navigation_button'
+									? 'dashboard_button active'
+									: 'dashboard_button'
 							}
 						>
 							<img src='/assets/icons/home_icon.svg' alt='' />{' '}
@@ -125,13 +102,13 @@ export default function MobileNavigation({
 						</button>
 					</Link>
 				</div>
-				<div className='navigation_nav'>
+				<div className='dashboard_nav'>
 					<Link href='/planning'>
 						<button
 							className={
 								page == 'Planning'
-									? 'navigation_button active'
-									: 'navigation_button'
+									? 'dashboard_button active'
+									: 'dashboard_button'
 							}
 						>
 							<img src='/assets/icons/planning.svg' alt='' />
@@ -142,8 +119,8 @@ export default function MobileNavigation({
 						<button
 							className={
 								page == 'Specification'
-									? 'navigation_button active'
-									: 'navigation_button'
+									? 'dashboard_button active'
+									: 'dashboard_button'
 							}
 						>
 							<img src='/assets/icons/specification.svg' alt='' />
@@ -154,8 +131,8 @@ export default function MobileNavigation({
 						<button
 							className={
 								page == 'Team'
-									? 'navigation_button active'
-									: 'navigation_button'
+									? 'dashboard_button active'
+									: 'dashboard_button'
 							}
 						>
 							<img src='/assets/icons/teams.svg' alt='' />
@@ -167,42 +144,38 @@ export default function MobileNavigation({
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
 								<div className='projectOpen' key={index}>
-									<Link
-										className={
-											page == 'DashboardPage' &&
-											project?.id ==
-												window.location.pathname.split(
-													'/'
-												)[2]
-												? 'ProjectBlocName selected'
-												: 'ProjectBlocName'
-										}
-										href={'/dashboard/' + project.id}
-									>
-										<button className='pName'>
-											<img
-												src='/assets/icons/icon-cross.svg'
-												alt=''
-												className='cross'
-												onClick={() =>
-													deleteSelected(project.id)
-												}
-											/>
-											<Icon
-												sx={{
-													color: numberToColor(
-														project.color
-													),
-													height: '35px',
-													width: '35px',
-												}}
-											>
-												<FolderCopyIcon fontSize='large' />
-											</Icon>
-											<p>{project.name}</p>
-										</button>
-									</Link>
+									<button className='pName'>
+										<img
+											src='/assets/icons/icon-cross.svg'
+											alt=''
+											className='cross'
+											onClick={() =>
+												deleteSelected(project.id)
+											}
+										/>
+										<Icon
+											sx={{
+												color: numberToColor(
+													project.color
+												),
+												height: '35px',
+												width: '35px',
+											}}
+										>
+											<FolderCopyIcon fontSize='large' />
+										</Icon>
+										<p>{project.name}</p>
+									</button>
 									<div className='submenu'>
+										<Link href={'/dashboard/' + project.id}>
+											<button className='submenu_btn'>
+												<img
+													src='/assets/icons/home_icon.svg'
+													alt=''
+												/>
+												<p>Dashboard</p>
+											</button>
+										</Link>
 										<Link
 											href={
 												'/specification/' + project.id
@@ -240,13 +213,13 @@ export default function MobileNavigation({
 						</div>
 					) : null}
 				</div>
-				<div className='navigation_profile'>
+				<div className='dashboard_profile'>
 					<Link href='/account'>
 						<button
 							className={
 								page == 'account'
-									? 'navigation_button active'
-									: 'navigation_button'
+									? 'dashboard_button active'
+									: 'dashboard_button'
 							}
 						>
 							<img src='/assets/icons/user.svg' alt='' /> Mon
@@ -254,7 +227,7 @@ export default function MobileNavigation({
 						</button>
 					</Link>
 					<button
-						className='navigation_button red'
+						className='dashboard_button red'
 						onClick={() => logout()}
 					>
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion

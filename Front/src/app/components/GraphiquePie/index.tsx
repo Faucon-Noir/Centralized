@@ -9,9 +9,16 @@ interface GraphiquePieProps {
 	data: Array<number>;
 	title: string;
 	hover: string;
+	order?: number;
 }
 
-function GraphiquePie({ labels, data, title, hover }: GraphiquePieProps) {
+function GraphiquePie({
+	labels,
+	data,
+	title,
+	hover,
+	order = 0,
+}: GraphiquePieProps) {
 	// Utilisation des types ChartData et ChartOptions pour corriger le typage
 	const [datagraphique, setDataGraphique] = useState<ChartData<'pie'>>({
 		labels: [],
@@ -56,7 +63,11 @@ function GraphiquePie({ labels, data, title, hover }: GraphiquePieProps) {
 	}
 
 	return (
-		<div className='graph_pie'>
+		<div
+			className={
+				order != 0 ? 'graph_pie graph_pie_' + order : 'graph_pie'
+			}
+		>
 			<Pie data={datagraphique} options={optionsgraphique} />
 		</div>
 	);
