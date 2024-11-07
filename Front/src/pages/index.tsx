@@ -90,7 +90,7 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-				Alliance de simplicité et d'efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
+				Alliance de simplicité et d&aposefficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -195,7 +195,7 @@ export default function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>📅</div>
 							<div className='title'>Calendrier intégré</div>
-							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d'œil</div>
+							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d&aposœil</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🎟️</div>
@@ -205,17 +205,17 @@ export default function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>🚀</div>
 							<div className='title'>Cahiers des charges</div>
-							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l’IA</div>
+							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l&aposIA</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>✨</div>
-							<div className='title'>Retour d'expérience</div>
+							<div className='title'>Retour d&aposexpérience</div>
 							<div className='description'>Analysez les résultats et optimisez vos processus pour les futurs projets</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📈</div>
 							<div className='title'>Performance</div>
-							<div className='description'>Évaluez l'avancement et la performance en temps réel</div>
+							<div className='description'>Évaluez l&aposavancement et la performance en temps réel</div>
 						</div>
 						{/* /!* Add more blocks as needed *!/ */}
 					</div>
