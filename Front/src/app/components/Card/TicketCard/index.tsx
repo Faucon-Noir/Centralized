@@ -54,11 +54,11 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at,
 								</div>
 								<div className="input_grp">
 									<p>Date de début</p>
-									<input type="date" placeholder="Date de début" value={ticket.start_date} onChange={(e) => setTicket({ ...ticket, start_date: e.target.value.trim() })} />
+									<input type="date" placeholder="Date de début" value={ticket.start_date.substring(0, 10)} onChange={(e) => setTicket({ ...ticket, start_date: e.target.value.trim() })} />
 								</div>
 								<div className="input_grp">
 									<p>Date de fin</p>
-									<input type="date" placeholder="Date de fin" value={ticket.end_date} onChange={(e) => setTicket({ ...ticket, end_date: e.target.value.trim() })} />
+									<input type="date" placeholder="Date de fin" value={ticket.end_date.substring(0, 10)} onChange={(e) => setTicket({ ...ticket, end_date: e.target.value.trim() })} />
 								</div>
 							</div>
 							<div className="second_line">
