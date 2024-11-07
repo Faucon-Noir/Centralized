@@ -1,13 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Post,
-	Delete,
-	UseBefore,
-	Patch,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Delete, UseBefore, Patch } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Ticket } from "../entity/Ticket";
 import { Planning } from "../entity/Planning";
@@ -23,13 +14,7 @@ dotenv.config();
 
 @JsonController()
 export class TicketController {
-	private clientUrl = "http://localhost:8000";
-
-	constructor(
-		private ticketRepository,
-		private planningRepository,
-		private userRepository
-	) {
+	constructor(private ticketRepository, private planningRepository, private userRepository) {
 		this.ticketRepository = AppDataSource.getRepository(Ticket);
 		this.planningRepository = AppDataSource.getRepository(Planning);
 		this.userRepository = AppDataSource.getRepository(User);
@@ -63,9 +48,7 @@ export class TicketController {
 	 * @param data - The ticket data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async createTicket(
-		@Body() data: Ticket
-	): Promise<SuccessDto | ErrorDto> {
+	public async createTicket(@Body() data: Ticket): Promise<SuccessDto | ErrorDto> {
 		try {
 			const planning = await this.planningRepository.findOne({
 				where: { id: data.planningId },
@@ -129,10 +112,7 @@ export class TicketController {
 	 * @param data - The updated ticket data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(
-		@Param("id") id: string,
-		@Body() data: TicketDto
-	): Promise<SuccessDto | ErrorDto> {
+	public async update(@Param("id") id: string, @Body() data: TicketDto): Promise<SuccessDto | ErrorDto> {
 		try {
 			const ticket: Ticket = await this.ticketRepository.findOne({
 				where: { id },
@@ -181,9 +161,7 @@ export class TicketController {
 	 * @param id - The ID of the ticket to retrieve.
 	 * @returns The ticket object if found, otherwise an error object.
 	 */
-	public async getOne(
-		@Param("id") id: string
-	): Promise<TicketDto | ErrorDto> {
+	public async getOne(@Param("id") id: string): Promise<TicketDto | ErrorDto> {
 		try {
 			const ticket: TicketDto = await this.ticketRepository.findOne({
 				where: { id },
@@ -230,9 +208,7 @@ export class TicketController {
 	 * @param planningid - The ID of the planning.
 	 * @returns A Promise that resolves to the ticket associated with the planning, or an error object if not found.
 	 */
-	public async getAllTicketByPlanning(
-		@Param("planningid") planningid: string
-	) {
+	public async getAllTicketByPlanning(@Param("planningid") planningid: string) {
 		try {
 			const ticket: TicketDto = await this.ticketRepository.find({
 				where: { planning: { id: planningid } },
@@ -344,12 +320,7 @@ export class TicketController {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin(
-					"ticket.planning",
-					"planning",
-					"ticket.user = :userid",
-					{ userid: userid }
-				)
+				.innerJoin("ticket.planning", "planning", "ticket.user = :userid", { userid: userid })
 				.select(["ticket", "planning.project"])
 				.getRawMany();
 
@@ -403,9 +374,7 @@ export class TicketController {
 	 * @param id - The ID of the ticket to be removed.
 	 * @returns A promise that resolves to an object with a success property if the ticket is deleted successfully, or an error property if an error occurs.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const ticket: TicketDto = await this.ticketRepository.findOne({
 				where: { id },
@@ -457,12 +426,7 @@ export class TicketController {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin(
-					"ticket.planning",
-					"planning",
-					"ticket.user = :userid",
-					{ userid: userid }
-				)
+				.innerJoin("ticket.planning", "planning", "ticket.user = :userid", { userid: userid })
 				.where("ticket.status != :status", { status: "résolu" })
 				.select(["COUNT(ticket.id) as nbr_ticket"])
 				.getRawOne();
@@ -509,38 +473,18 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getCountAllTicketByUserOneProject(
-		@Param("userid") userid: string,
-		@Param("projectid") projectid: string
-	) {
+	public async getCountAllTicketByUserOneProject(@Param("userid") userid: string, @Param("projectid") projectid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin(
-					"ticket.planning",
-					"planning",
-					"ticket.status != 'résolu'"
-				)
+				.innerJoin("ticket.planning", "planning", "ticket.status != 'résolu'")
 				.innerJoin("ticket.user", "user")
-				.innerJoin(
-					"planning.project",
-					"project",
-					"planning.project = :projectid",
-					{ projectid: projectid }
-				)
+				.innerJoin("planning.project", "project", "planning.project = :projectid", { projectid: projectid })
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 				.innerJoin("project.team", "team")
 				.innerJoin("team.teamUser", "teamUser")
-				.innerJoin(
-					"teamUser.user",
-					"TeamLimit",
-					"teamUser.user = :userid",
-					{ userid: userid }
-				)
-				.select([
-					"concat(user.firstname,' ', user.lastname) as userName",
-					"COUNT(distinct ticket.id) as nbr_ticket",
-				])
+				.innerJoin("teamUser.user", "TeamLimit", "teamUser.user = :userid", { userid: userid })
+				.select(["concat(user.firstname,' ', user.lastname) as userName", "COUNT(distinct ticket.id) as nbr_ticket"])
 				.groupBy("user.id")
 				.getRawMany();
 
@@ -586,34 +530,18 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getCountAllTicketByStatusOneProject(
-		@Param("userid") userid: string,
-		@Param("projectid") projectid: string
-	) {
+	public async getCountAllTicketByStatusOneProject(@Param("userid") userid: string, @Param("projectid") projectid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
 				.innerJoin("ticket.planning", "planning")
 				.innerJoin("ticket.user", "user")
-				.innerJoin(
-					"planning.project",
-					"project",
-					"planning.project = :projectid",
-					{ projectid: projectid }
-				)
+				.innerJoin("planning.project", "project", "planning.project = :projectid", { projectid: projectid })
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 				.innerJoin("project.team", "team")
 				.innerJoin("team.teamUser", "teamUser")
-				.innerJoin(
-					"teamUser.user",
-					"TeamLimit",
-					"teamUser.user = :userid",
-					{ userid: userid }
-				)
-				.select([
-					"ticket.status as status",
-					"COUNT(distinct ticket.id) as nbr_ticket",
-				])
+				.innerJoin("teamUser.user", "TeamLimit", "teamUser.user = :userid", { userid: userid })
+				.select(["ticket.status as status", "COUNT(distinct ticket.id) as nbr_ticket"])
 				.groupBy("ticket.status")
 				.getRawMany();
 			if (!tickets) throw new Error("Ticket not found");
@@ -658,34 +586,17 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getCountAllTicketNotCloseOneProject(
-		@Param("userid") userid: string,
-		@Param("projectid") projectid: string
-	) {
+	public async getCountAllTicketNotCloseOneProject(@Param("userid") userid: string, @Param("projectid") projectid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin(
-					"ticket.planning",
-					"planning",
-					"ticket.status != 'résolu'"
-				)
+				.innerJoin("ticket.planning", "planning", "ticket.status != 'résolu'")
 				.innerJoin("ticket.user", "user")
-				.innerJoin(
-					"planning.project",
-					"project",
-					"planning.project = :projectid",
-					{ projectid: projectid }
-				)
+				.innerJoin("planning.project", "project", "planning.project = :projectid", { projectid: projectid })
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 				.innerJoin("project.team", "team")
 				.innerJoin("team.teamUser", "teamUser")
-				.innerJoin(
-					"teamUser.user",
-					"TeamLimit",
-					"teamUser.user = :userid",
-					{ userid: userid }
-				)
+				.innerJoin("teamUser.user", "TeamLimit", "teamUser.user = :userid", { userid: userid })
 				.select(["COUNT(distinct ticket.id) as nbr_ticket"])
 				.getRawOne();
 
@@ -731,30 +642,17 @@ export class TicketController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
-	public async getCountAllTicketOneProject(
-		@Param("userid") userid: string,
-		@Param("projectid") projectid: string
-	) {
+	public async getCountAllTicketOneProject(@Param("userid") userid: string, @Param("projectid") projectid: string) {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
 				.innerJoin("ticket.planning", "planning")
 				.innerJoin("ticket.user", "user")
-				.innerJoin(
-					"planning.project",
-					"project",
-					"planning.project = :projectid",
-					{ projectid: projectid }
-				)
+				.innerJoin("planning.project", "project", "planning.project = :projectid", { projectid: projectid })
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 				.innerJoin("project.team", "team")
 				.innerJoin("team.teamUser", "teamUser")
-				.innerJoin(
-					"teamUser.user",
-					"TeamLimit",
-					"teamUser.user = :userid",
-					{ userid: userid }
-				)
+				.innerJoin("teamUser.user", "TeamLimit", "teamUser.user = :userid", { userid: userid })
 				.select(["COUNT(ticket.id) as nbr_ticket"])
 				.getRawOne();
 			if (!tickets) throw new Error("Ticket not found");

@@ -1,12 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Delete,
-	UseBefore,
-	Patch,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Delete, UseBefore, Patch } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Project } from "../entity/Project";
 import { Cdc } from "../entity/Specification";
@@ -22,13 +14,7 @@ dotenv.config();
 
 @JsonController()
 export class ProjectController {
-	private clientUrl = "http://localhost:8000";
-
-	constructor(
-		private projectRepository,
-		private cdcRepository,
-		private teamRepository
-	) {
+	constructor(private projectRepository, private cdcRepository, private teamRepository) {
 		this.projectRepository = AppDataSource.getRepository(Project);
 		this.cdcRepository = AppDataSource.getRepository(Cdc);
 		this.teamRepository = AppDataSource.getRepository(Team);
@@ -72,9 +58,7 @@ export class ProjectController {
 	 * @param id - The ID of the project to retrieve.
 	 * @returns The project object if found, otherwise an error object.
 	 */
-	public async getOne(
-		@Param("id") id: string
-	) {
+	public async getOne(@Param("id") id: string) {
 		try {
 			const project: ProjectDto = await this.projectRepository.findOne({
 				where: { id },
@@ -128,9 +112,7 @@ export class ProjectController {
 	 * @returns A Promise that resolves to the project associated with the user.
 	 * @throws An error if the project is not found.
 	 */
-	public async getAllPojectByUser(
-		@Param("userid") userid: string
-	) {
+	public async getAllPojectByUser(@Param("userid") userid: string) {
 		try {
 			const project = await this.projectRepository.find({
 				where: { user: { id: userid } },
@@ -190,9 +172,7 @@ export class ProjectController {
 	 * @param id - The ID of the project to be removed.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const project: ProjectDto = await this.projectRepository.findOne({
 				where: { id },
@@ -253,10 +233,7 @@ export class ProjectController {
 	 * @param data - The updated project data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(
-		@Param("id") id: string,
-		@Body() data: ProjectDto
-	): Promise<SuccessDto | ErrorDto> {
+	public async update(@Param("id") id: string, @Body() data: ProjectDto): Promise<SuccessDto | ErrorDto> {
 		try {
 			const project: Project = await this.projectRepository.findOne({
 				where: { id },

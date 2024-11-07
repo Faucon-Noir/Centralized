@@ -1,13 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Post,
-	Delete,
-	UseBefore,
-	Patch,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Delete, UseBefore, Patch } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Planning } from "../entity/Planning";
 import { Project } from "../entity/Project";
@@ -21,8 +12,6 @@ dotenv.config();
 
 @JsonController()
 export class PlanningController {
-	private clientUrl = "http://localhost:8000";
-
 	constructor(private planningRepository, private projectRepository) {
 		this.planningRepository = AppDataSource.getRepository(Planning);
 		this.projectRepository = AppDataSource.getRepository(Project);
@@ -68,9 +57,7 @@ export class PlanningController {
 	 * @param data The planning data.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async createPlanning(
-		@Body() data: Planning
-	): Promise<SuccessDto | ErrorDto> /*: Promise<PlanningDto | ErrorDto>*/ {
+	public async createPlanning(@Body() data: Planning): Promise<SuccessDto | ErrorDto> /*: Promise<PlanningDto | ErrorDto>*/ {
 		try {
 			const project = await this.projectRepository.findOne({
 				where: { id: data.getProject() },
@@ -177,9 +164,7 @@ export class PlanningController {
 	 * @param projectid - The ID of the project.
 	 * @returns A Promise that resolves to the planning items for the project, or an error object if not found.
 	 */
-	public async getAllPlanningByProject(
-		@Param("projectid") projectid: string
-	): Promise<Planning | ErrorDto> {
+	public async getAllPlanningByProject(@Param("projectid") projectid: string): Promise<Planning | ErrorDto> {
 		try {
 			const planning: Planning = await this.planningRepository.find({
 				where: { project: { id: projectid } },
@@ -230,18 +215,11 @@ export class PlanningController {
 	 * @returns A Promise that resolves to the project associated with the user.
 	 * @throws An error if the project is not found.
 	 */
-	public async getAllPlanningByUser(
-		@Param("userid") userid: string
-	): Promise<PlanningDto[] | ErrorDto> {
+	public async getAllPlanningByUser(@Param("userid") userid: string): Promise<PlanningDto[] | ErrorDto> {
 		try {
 			const plannings = await this.planningRepository
 				.createQueryBuilder("planning")
-				.innerJoin(
-					"planning.project",
-					"project",
-					"project.user = :userid",
-					{ userid: userid }
-				)
+				.innerJoin("planning.project", "project", "project.user = :userid", { userid: userid })
 				.select(["planning.id", "project.name"])
 				.getRawMany();
 
@@ -293,9 +271,7 @@ export class PlanningController {
 	 * @param id - The ID of the planning to be removed.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const planning: Planning = await this.planningRepository.findOne({
 				where: { id },
@@ -316,10 +292,7 @@ export class PlanningController {
 	 * @param data - The updated data for the planning record.
 	 * @returns An object indicating the success or error message of the update operation.
 	 */
-	public async update(
-		@Param("id") id: string,
-		@Body() data: Planning
-	): Promise<SuccessDto | ErrorDto> /*: Promise<PlanningDto | ErrorDto>*/ {
+	public async update(@Param("id") id: string, @Body() data: Planning): Promise<SuccessDto | ErrorDto> /*: Promise<PlanningDto | ErrorDto>*/ {
 		try {
 			const planning: Planning = await this.planningRepository.findOne({
 				where: { id },

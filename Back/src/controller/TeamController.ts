@@ -1,14 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Post,
-	Delete,
-	UseBefore,
-	Patch,
-	UploadedFiles,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Delete, UseBefore, Patch, UploadedFiles } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Team } from "../entity/Team";
 import { TeamUser } from "../entity/TeamUser";
@@ -28,13 +18,7 @@ dotenv.config();
 // TODO: revoir les urls, plusieurs ne sont pas logiques
 @JsonController()
 export class TeamController {
-	private clientUrl = "http://localhost:8000";
-
-	constructor(
-		private teamRepository,
-		private teamuserRepository,
-		private userRepository
-	) {
+	constructor(private teamRepository, private teamuserRepository, private userRepository) {
 		this.teamRepository = AppDataSource.getRepository(Team);
 		this.teamuserRepository = AppDataSource.getRepository(TeamUser);
 		this.userRepository = AppDataSource.getRepository(User);
@@ -185,8 +169,7 @@ export class TeamController {
 				.andWhere("teamId = :teamId", { teamId: team.getId() })
 				.execute();
 
-			if (team_of_user.length > 0)
-				throw new Error(user.getMail() + " already in the team");
+			if (team_of_user.length > 0) throw new Error(user.getMail() + " already in the team");
 
 			const teamuser: TeamUser = new TeamUser();
 			teamuser.setUser(user);
@@ -244,9 +227,7 @@ export class TeamController {
 	 * @returns A promise that resolves to an array of teams.
 	 * @throws An error if the user is not found.
 	 */
-	public async getAllTeamFromUser(
-		@Param("id") id: string
-	): Promise<TeamUserDto[] | ErrorDto> {
+	public async getAllTeamFromUser(@Param("id") id: string): Promise<TeamUserDto[] | ErrorDto> {
 		try {
 			const team_of_user = await this.teamuserRepository
 				.createQueryBuilder("team_user")
@@ -304,26 +285,14 @@ export class TeamController {
 	 * @returns A Promise that resolves to an array of users in the project.
 	 * @throws If the team is not found, an error is thrown.
 	 */
-	public async getAllUserFromProject(
-		@Param("id") id: string
-	): Promise<UserDto[] | ErrorDto> {
+	public async getAllUserFromProject(@Param("id") id: string): Promise<UserDto[] | ErrorDto> {
 		try {
 			const users_in_project = await this.teamuserRepository
 				.createQueryBuilder("team_user")
 				.innerJoin("team_user.user", "user")
 				.innerJoin("team_user.team", "team")
-				.innerJoin(
-					"team.project",
-					"project",
-					"project.id = :projectId",
-					{ projectId: id }
-				)
-				.select([
-					"user.firstname",
-					"user.lastname",
-					"user.bio",
-					"user.avatar as avatar",
-				])
+				.innerJoin("team.project", "project", "project.id = :projectId", { projectId: id })
+				.select(["user.firstname", "user.lastname", "user.bio", "user.avatar as avatar"])
 				.getRawMany();
 			if (!users_in_project) throw new Error("Project not found");
 			return users_in_project;
@@ -380,9 +349,7 @@ export class TeamController {
 	 * @returns A Promise that resolves to an array of users in the team.
 	 * @throws If the team is not found, an error is thrown.
 	 */
-	public async getAllUserFromTeam(
-		@Param("id") id: string
-	): Promise<UserDto[] | ErrorDto> {
+	public async getAllUserFromTeam(@Param("id") id: string): Promise<UserDto[] | ErrorDto> {
 		try {
 			const users_in_team = await this.teamuserRepository
 				.createQueryBuilder("team_user")
@@ -492,9 +459,7 @@ export class TeamController {
 	 * @param id - The ID of the team to remove.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const team: TeamDto = await this.teamRepository.findOne({
 				where: { id },
@@ -551,15 +516,11 @@ export class TeamController {
 	 * @param id - The ID of the user to be removed from the team.
 	 * @returns A success message if the user is successfully removed from the team, or an error message if an error occurs.
 	 */
-	public async removeUserTeam(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async removeUserTeam(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
-			const teamuser: TeamUserDto = await this.teamuserRepository.findOne(
-				{
-					where: { id },
-				}
-			);
+			const teamuser: TeamUserDto = await this.teamuserRepository.findOne({
+				where: { id },
+			});
 			if (!teamuser) throw new Error("User cannot be deleted from Team");
 			await this.teamuserRepository.remove(teamuser);
 			return { success: "User deleted from Team" };

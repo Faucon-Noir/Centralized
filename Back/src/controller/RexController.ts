@@ -1,16 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Post,
-	Put,
-	Delete,
-	Req,
-	UseBefore,
-	Patch,
-	Controller,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Put, Delete, Req, UseBefore, Patch, Controller } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Rex } from "../entity/Rex";
 import { Project } from "../entity/Project";
@@ -25,8 +13,6 @@ dotenv.config();
 
 @Controller()
 export class RexController {
-	private clientUrl = "http://localhost:8000";
-
 	constructor(private rexRepository, private projectRepository) {
 		this.rexRepository = AppDataSource.getRepository(Rex);
 		this.projectRepository = AppDataSource.getRepository(Project);
@@ -188,9 +174,7 @@ export class RexController {
 	 * @returns A Promise that resolves to an array of Rex objects.
 	 * @throws If the Rex objects are not found, an error is thrown.
 	 */
-	public async getAllRexByProject(
-		@Param("projectid") projectid: string
-	): Promise<RexDto | ErrorDto> {
+	public async getAllRexByProject(@Param("projectid") projectid: string): Promise<RexDto | ErrorDto> {
 		try {
 			const rex: RexDto = await this.rexRepository.findOne({
 				where: { project: { id: projectid } },
@@ -252,10 +236,7 @@ export class RexController {
 	 * @param data - The updated data for the Rex entity.
 	 * @returns An object indicating the success or error message of the update operation.
 	 */
-	public async update(
-		@Param("id") id: string,
-		@Body() data: RexDto
-	): Promise<SuccessDto | ErrorDto> {
+	public async update(@Param("id") id: string, @Body() data: RexDto): Promise<SuccessDto | ErrorDto> {
 		try {
 			const rex: Rex = await this.rexRepository.findOne({
 				where: { id },
@@ -312,9 +293,7 @@ export class RexController {
 	 * @param id - The ID of the Rex entity to be removed.
 	 * @returns A promise that resolves to an object indicating the success or error message.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const rex: RexDto = await this.rexRepository.findOne({
 				where: { id },
