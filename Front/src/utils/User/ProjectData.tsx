@@ -22,7 +22,7 @@ export default async function ProjectData(id: string, userData: any) {
             name: "",
             start_date: "",
             end_date: "",
-            color: "",
+            color: 0,
             description: "",
             id: ""
         },

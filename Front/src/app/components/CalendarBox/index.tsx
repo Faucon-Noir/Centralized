@@ -33,6 +33,7 @@ function CalendarBox({ name, start_date, end_date, description, color }: any) {
 
 		startDateString = start_date?.toISOString().slice(0, 10);
 		endDateString = end_date?.toISOString().slice(0, 10);
+        let codeColor = ' color_' + color.substring(1);
 
 		// Vérifier si la date fait partie de la plage de dates
 		if (
@@ -46,13 +47,13 @@ function CalendarBox({ name, start_date, end_date, description, color }: any) {
 				(date.getDay() === 1 && dateString === endDateString) ||
 				(dateString === startDateString && dateString === endDateString)
 			) {
-				return 'highlight-start highlight-end';
+				return 'highlight-start highlight-end' + codeColor;
 			} else if (date.getDay() === 1 || dateString === startDateString) {
-				return 'highlight-start';
+				return 'highlight-start' + codeColor;
 			} else if (date.getDay() === 0 || dateString === endDateString) {
-				return 'highlight-end';
+				return 'highlight-end' + codeColor;
 			} else {
-				return 'highlight';
+				return 'highlight' + codeColor;
 			}
 		}
 	};
@@ -75,7 +76,7 @@ function CalendarBox({ name, start_date, end_date, description, color }: any) {
 							<div
 								className='circlemini'
 								style={{
-									backgroundColor: numberToColor(color),
+									backgroundColor: color,
 								}}
 							></div>
 						</div>

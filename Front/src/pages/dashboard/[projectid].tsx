@@ -17,6 +17,7 @@ import GraphiqueLine from '@/app/components/GraphiqueLine';
 import ProjectData from '@/utils/User/ProjectData';
 import TeamMateCard from '@/app/components/Card/teamMate';
 import RexForm from '@/app/components/Form/rexForm';
+import { numberToColor } from '@/app/helpers';
 
 export default function DashboardPage({
 	userData,
@@ -31,7 +32,7 @@ export default function DashboardPage({
 			name: '',
 			start_date: '',
 			end_date: '',
-			color: '',
+			color: 0,
 			description: '',
 			id: '',
 		},
@@ -223,7 +224,7 @@ export default function DashboardPage({
 											? project.project.description
 											: ''
 									}
-									color={project.project.color}
+									color={numberToColor(project.project.color)}
 								/>
 							</div>
 
