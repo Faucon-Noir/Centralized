@@ -444,7 +444,7 @@ export class TicketController {
 	 *   get:
 	 *     tags:
 	 *       - Ticket
-	 *     summary: Récupère le nombre de ticket par parsonne pour un  d'un utilisateur spécifique
+	 *     summary: Récupère le nombre de ticket par parsonne pour un projet
 	 *     parameters:
 	 *       - in: path
 	 *         name: userid
@@ -469,7 +469,7 @@ export class TicketController {
 	@Get("/ticket/user/:userid/project/:projectid")
 	@UseBefore(CheckAuth)
 	/**
-	 * Retrieves the number of tickets per user of a specific user's groups for .
+	 * Retrieves the number of tickets per user of a specific user's groups for a project .
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
@@ -609,11 +609,11 @@ export class TicketController {
 
 	/**
 	 * @swagger
-	 * /ticket/user/{userid}/project/{projectid}/count/all:
+	 * /ticket/user/{userid}/project/{projectid}/status/me:
 	 *   get:
 	 *     tags:
 	 *       - Ticket
-	 *     summary: Récupère le nombre de ticket total d'un projet
+	 *     summary: Récupère le nombre de ticket total d'un projet par status pour une personne
 	 *     parameters:
 	 *       - in: path
 	 *         name: userid
@@ -635,10 +635,10 @@ export class TicketController {
 	 *             schema:
 	 *               $ref: '#/components/schemas/Error'
 	 */
-	@Get("/ticket/user/:userid/project/:projectid/count/all")
+	@Get("/ticket/user/:userid/project/:projectid/status/me")
 	@UseBefore(CheckAuth)
 	/**
-	 * Retrieves the number of tickets of a specific user's project .
+	 * Retrieves the number of tickets of a specific user's project for a user.
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
@@ -646,15 +646,35 @@ export class TicketController {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin("ticket.planning", "planning")
-				.innerJoin("ticket.user", "user")
-				.innerJoin("planning.project", "project", "planning.project = :projectid", { projectid: projectid })
+				.innerJoin("ticket.planning","planning")
+				.innerJoin(
+					"ticket.user",
+					"user",
+					"ticket.user = :userid",
+					{ userid: userid }
+
+				)
+				.innerJoin(
+					"planning.project",
+					"project",
+					"planning.project = :projectid",
+					{ projectid: projectid }
+				)
 				// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 				.innerJoin("project.team", "team")
 				.innerJoin("team.teamUser", "teamUser")
-				.innerJoin("teamUser.user", "TeamLimit", "teamUser.user = :userid", { userid: userid })
-				.select(["COUNT(ticket.id) as nbr_ticket"])
-				.getRawOne();
+				.innerJoin(
+					"teamUser.user",
+					"TeamLimit",
+					"teamUser.user = :userid",
+					{ userid: userid }
+				)
+				.select([
+					"ticket.status as status",
+					"COUNT(ticket.id) as nbr_ticket"
+				])
+				.groupBy("ticket.status")
+				.getRawMany();
 			if (!tickets) throw new Error("Ticket not found");
 			return tickets;
 		} catch (err) {
