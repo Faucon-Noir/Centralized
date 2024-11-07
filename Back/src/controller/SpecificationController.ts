@@ -149,7 +149,7 @@ async function createTicket(
 				forecastarray[index].split(":")[0].trim(), // title
 				"", // description
 				0, // urgenceId
-				StatusEnum.Open, // status
+				StatusEnum.Todo, // status
 				planning.getId(), // planningId
 				project_input.getStartDate(), // start_date
 				date, // end_date
