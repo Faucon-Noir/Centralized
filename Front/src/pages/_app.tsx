@@ -128,33 +128,19 @@ export default function App({ Component, pageProps }: AppProps) {
 							</Grid>
 						) : (
 							<>
-								{/* <button
-									className='burgerMenu'
-									onClick={() => setShowMobileNav(true)}
-								> */}
 								<MenuIcon
 									className='burgerMenu'
 									onClick={() => setShowMobileNav(true)}
 								/>
 								{/* </button> */}
 								{showMobileNav ? (
-									<>
-										<MobileNavigation
-											page={Component.name}
-											userData={
-												userData?.user ? userData : {}
-											}
-											updateUserData={setUserData}
-											setShowMobileNav={setShowMobileNav}
-										/>
-										<button
-											onClick={() =>
-												setShowMobileNav(false)
-											}
-										>
-											Close
-										</button>
-									</>
+									<MobileNavigation
+										page={Component.name}
+										userData={
+											userData?.user ? userData : {}
+										}
+										setShowMobileNav={setShowMobileNav}
+									/>
 								) : (
 									<></>
 								)}

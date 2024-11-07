@@ -7,6 +7,7 @@
 	flex-direction: column;
 	padding: 0;
 	overflow-y: auto;
+	animation: fade-inout 1s;
 
 	a {
 		text-decoration: none;
@@ -203,6 +204,13 @@
 		.red {
 			color: #fb2c39;
 		}
+	}
+
+	.cross {
+		cursor: pointer;
+		position: absolute;
+		right: 5%;
+		top: 5%;
 	}
 }
 

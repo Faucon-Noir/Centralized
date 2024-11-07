@@ -23,7 +23,6 @@ export default function MobileNavigation({
 }: {
 	page: String;
 	userData: any;
-	updateUserData: any;
 	setShowMobileNav: (show: boolean) => void;
 }) {
 	const [selctedMap, setSelctedMap] = useState<{ [key: string]: any }>({});
@@ -85,6 +84,13 @@ export default function MobileNavigation({
 		}
 	}
 
+	const handleCloseNav = () => {
+		setShowMobileNav(false);
+		setTimeout(() => {
+			setShowMobileNav(false);
+		}, 1000);
+	};
+
 	if (loading) {
 		return <div>Chargement des projets...</div>;
 	}
@@ -92,6 +98,12 @@ export default function MobileNavigation({
 	return (
 		<>
 			<div className='navigation-mobile mobileNav'>
+				<img
+					src='/assets/icons/icon-cross.svg'
+					alt=''
+					className='cross'
+					onClick={() => setShowMobileNav(false)}
+				/>
 				<div className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'
@@ -235,7 +247,6 @@ export default function MobileNavigation({
 						<img src='/assets/icons/x.svg' alt='' /> Déconnexion
 					</button>
 				</div>
-				<button onClick={() => setShowMobileNav(false)}>Close</button>
 			</div>
 		</>
 	);
