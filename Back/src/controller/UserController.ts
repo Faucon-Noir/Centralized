@@ -1,15 +1,4 @@
-import {
-	JsonController,
-	Param,
-	Body,
-	Get,
-	Post,
-	Delete,
-	Req,
-	UseBefore,
-	Patch,
-	UploadedFiles,
-} from "routing-controllers";
+import { JsonController, Param, Body, Get, Post, Delete, Req, UseBefore, Patch, UploadedFiles } from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { User } from "../entity/User";
 import { CheckAuth } from "../middleware/Auth";
@@ -22,17 +11,12 @@ import { multerConfig } from "../config/multer";
 
 import * as dotenv from "dotenv";
 import { UserDto } from "../dto/UserDto";
-import {
-	ErrorDto,
-	ErrorAuthDto,
-	SuccessDto,
-	SuccessAuthDto,
-} from "../dto/ResultDto";
+import { ErrorDto, SuccessDto, SuccessAuthDto } from "../dto/ResultDto";
 dotenv.config();
 
 @JsonController()
 export class UserController {
-	private clientUrl = "http://localhost:8000";
+	private clientUrl = process.env.CLIENT_URL;
 	private mailer = new NodeMailerSendEmail();
 
 	constructor(private userRepository) {
@@ -82,19 +66,14 @@ export class UserController {
 	public async register(@Body() data: User): Promise<SuccessAuthDto | ErrorDto> {
 		try {
 			// verif object existing in data source
-			const hasAccountWithEmail: User = await this.userRepository.findOne(
-				{
-					where: { mail: data.getMail() },
-				}
-			);
-			if (hasAccountWithEmail)
-				throw new Error("Account existing. Please Login");
+			const hasAccountWithEmail: User = await this.userRepository.findOne({
+				where: { mail: data.getMail() },
+			});
+			if (hasAccountWithEmail) throw new Error("Account existing. Please Login");
 
-			if (data.getPassword() == "" || !data.getPassword())
-				throw new Error("No password provide");
+			if (data.getPassword() == "" || !data.getPassword()) throw new Error("No password provide");
 
-			if (data.getPassword().includes(" "))
-				throw new Error("Space cannot be in a password");
+			if (data.getPassword().includes(" ")) throw new Error("Space cannot be in a password");
 			// hash password
 			const hash = await bcrypt.hash(data.getPassword(), 10);
 
@@ -181,10 +160,7 @@ export class UserController {
 			if (!user) throw new Error("Account not found");
 
 			// check if password conform
-			const isValid = await bcrypt.compare(
-				data.getPassword(),
-				user.getPassword()
-			);
+			const isValid = await bcrypt.compare(data.getPassword(), user.getPassword());
 			if (!isValid) throw new Error("Identifiant/password incorrect");
 
 			const token = jwt.sign(
@@ -199,11 +175,7 @@ export class UserController {
 			);
 			if (!token) throw new Error("Error authentication");
 
-			await this.mailer.sendMailTicket(
-				user.getMail(),
-				"Centralized : votre ticket à été avec succès !",
-				user.getLastname()
-			);
+			await this.mailer.sendMailTicket(user.getMail(), "Centralized : votre ticket à été avec succès !", user.getLastname());
 
 			return { success: "Account login", token: token };
 		} catch (error) {
@@ -303,9 +275,7 @@ export class UserController {
 	 * @param id - The ID of the user to retrieve.
 	 * @returns The user object if found, otherwise an error object.
 	 */
-	public async getOneByMail(
-		@Param("mail") mail: string
-	): Promise<UserDto | ErrorDto> {
+	public async getOneByMail(@Param("mail") mail: string): Promise<UserDto | ErrorDto> {
 		try {
 			const user: UserDto = await this.userRepository.findOne({
 				where: { mail },
@@ -447,9 +417,7 @@ export class UserController {
 	 * @param id - The ID of the user account to be removed.
 	 * @returns A promise that resolves to an object with a success property if the account is deleted, or an error property if an error occurs.
 	 */
-	public async remove(
-		@Param("id") id: string
-	): Promise<SuccessDto | ErrorDto> {
+	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
 		try {
 			const user: UserDto = await this.userRepository.findOne({
 				where: { id },
@@ -503,10 +471,7 @@ export class UserController {
 	 * @param req - The request object.
 	 * @returns The password reset link or an error object.
 	 */
-	public async requestResetPassword(
-		@Body() data: User,
-		@Req() req: any
-	): Promise<string | ErrorDto> {
+	public async requestResetPassword(@Body() data: User, @Req() req: any): Promise<string | ErrorDto> {
 		try {
 			const user: User = await this.userRepository.findOne({
 				where: { mail: data.getMail() },
@@ -519,8 +484,7 @@ export class UserController {
 			req.session.token = hash;
 
 			// url page reset password
-			const link = `${this.clientUrl
-				}/passwordReset?token=${resetToken}&id=${user.getId()}`;
+			const link = `${this.clientUrl}/passwordReset?token=${resetToken}&id=${user.getId()}`;
 			return link;
 		} catch (error) {
 			return { error: error.message };
@@ -575,21 +539,13 @@ export class UserController {
 	 * @param req - The request object.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async resetPassword(
-		@Body() data: any,
-		@Req() req: any
-	): Promise<SuccessDto | ErrorDto> {
+	public async resetPassword(@Body() data: any, @Req() req: any): Promise<SuccessDto | ErrorDto> {
 		try {
 			let passwordResetToken = await req.session.token;
-			if (!passwordResetToken)
-				throw new Error("Invalid or expired password reset token");
+			if (!passwordResetToken) throw new Error("Invalid or expired password reset token");
 
-			const isValid = await bcrypt.compare(
-				data.token,
-				passwordResetToken
-			);
-			if (!isValid)
-				throw new Error("Invalid or expired password reset token");
+			const isValid = await bcrypt.compare(data.token, passwordResetToken);
+			if (!isValid) throw new Error("Invalid or expired password reset token");
 
 			const hash = await bcrypt.hash(data.password, 10);
 

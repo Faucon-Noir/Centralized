@@ -47,7 +47,7 @@ const options = {
 		},
 		servers: [
 			{
-				url: "http://localhost:8000/api/",
+				url: `${process.env.CLIENT_URL}/api`,
 				description: "Local server",
 			},
 		],
@@ -225,10 +225,7 @@ const specs = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 let server = app.listen(PORT, () => {
-	return (
-		console.log(`Express is listening at http://localhost:${PORT}`),
-		console.log(`Swagger is listening at http://localhost:${PORT}/api-docs`)
-	);
+	return console.log(`Express is listening at ${process.env.CLIENT_URL}`), console.log(`Swagger is listening at ${process.env.CLIENT_URL}/api-docs`);
 });
 
 export { app };

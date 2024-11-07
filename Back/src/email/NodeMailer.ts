@@ -6,21 +6,17 @@ export class NodeMailerSendEmail {
 	public mailApp: string = process.env.MAIL_APP;
 
 	public transport = nodemailer.createTransport({
-		host: "sandbox.smtp.mailtrap.io",
-		port: 2525,
+		host: process.env.MAIL_HOST,
+		port: process.env.MAIL_PORT,
 		auth: {
-			user: "fb8ee8bdfc1f45",
-			pass: "dbfe3978d7f7d1"
+			user: process.env.MAIL_USER,
+			pass: process.env.MAIL_PASS,
 		},
 		tls: {
 			rejectUnauthorized: false, // ne pas vérifier le certificat du serveur SMTP
 		},
 	});
-	public async sendMailTicket(
-		email: string,
-		subject: string,
-		username: string
-	) {
+	public async sendMailTicket(email: string, subject: string, username: string) {
 		const mailOptions = {
 			from: this.mailApp,
 			to: email,
