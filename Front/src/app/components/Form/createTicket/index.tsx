@@ -50,7 +50,7 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
                     </select>
                 </div>
                 <div className='input_grp'>
-                    <p>Etat</p>
+                    <p>Urgence</p>
                     <select onChange={(e) => setTicket({ ...ticket, urgenceId: parseInt(e.target.value) })} required>
                         <option value={0}>À faire</option>
                         <option value={1}>En cours</option>
