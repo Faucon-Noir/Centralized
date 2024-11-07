@@ -60,3 +60,14 @@
 	background-color: #0293fc;
 	color: white;
 }
+
+input,
+textarea {
+	border-radius: 5px !important;
+	border: none !important;
+	background-color: #e5e7eb !important;
+	padding: 15px;
+	background-color: transparent;
+	color: black !important;
+	outline: none;
+}
