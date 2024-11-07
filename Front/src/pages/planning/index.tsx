@@ -127,11 +127,6 @@ export default function Planning({
 		setMyList(displayTicket);
 	}, [userData]);
 
-	function handleRedirect(e: any) {
-		e.preventDefault();
-		router.push('/ticket/create');
-	}
-
 	const eventStyleGetter = (event: any) => {
 		var style = {
 			backgroundColor: numberToColor(event.color) || 'black',
@@ -146,16 +141,6 @@ export default function Planning({
 				<div className='Presentation'>
 					<h1 className='TitrePage'>Mon Planning</h1>
 					<hr style={{ marginLeft: 0 }} />
-
-					<div className='affichage_bouton'>
-						<button
-							data-cy={ButtonNewTicketCy}
-							className='cree_ticket_bouton'
-							onClick={(e) => handleRedirect(e)}
-						>
-							Nouveau Ticket
-						</button>
-					</div>
 				</div>
 				<div data-cy={CalendarCy} className='Calendar'>
 					<Calendar

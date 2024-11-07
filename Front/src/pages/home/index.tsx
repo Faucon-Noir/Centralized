@@ -71,11 +71,7 @@ export default function HomePage({
 				answer3: '',
 			},
 		};
-		for (let i = 0; i < userData?.project?.length; i++) {
-			if (i == 0) tmp_lastP = userData.project[i];
-			if (tmp_lastP.end_date < userData.project[i].end_date)
-				tmp_lastP = userData.project[i];
-		}
+		tmp_lastP = userData.project[userData.project.length - 1]
 		setLastP(tmp_lastP);
 
 		if (userData?.team?.length == 0) {
@@ -88,6 +84,8 @@ export default function HomePage({
 	const handleClickCreateTeam = () => {
 		router.push('/team?create=true');
 	};
+
+	console.log(lastP)
 	return (
 		<>
 			<div className='right_container'>
