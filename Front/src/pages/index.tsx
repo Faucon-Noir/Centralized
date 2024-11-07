@@ -90,10 +90,7 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-					ullamco laboris nisi ut aliquip ex ea commodo consequat.
+				Alliance de simplicité et d'efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -181,49 +178,44 @@ export default function WelcomePage() {
 				<div className='container'>
 					<div className='listContainer' ref={listContainerRef}>
 						<div className='block'>
-							<div className='icon'>📦</div>
-							<div className='title'>Title 1</div>
-							<div className='description'>Description 1</div>
+							<div className='icon'>💡</div>
+							<div className='title'>Gestion de projet</div>
+							<div className='description'>Planifiez et suivez vos projets de bout en bout</div>
 						</div>
 						<div className='block'>
-							<div className='icon'>🛠</div>
-							<div className='title'>Title 2</div>
-							<div className='description'>Description 2</div>
-						</div>
-						<div className='block'>
-							<div className='icon'>🚀</div>
-							<div className='title'>Title 3</div>
-							<div className='description'>Description 3</div>
-						</div>
-						<div className='block'>
-							<div className='icon'>📦</div>
-							<div className='title'>Title 1</div>
-							<div className='description'>Description 1</div>
-						</div>
-						<div className='block'>
-							<div className='icon'>🛠</div>
-							<div className='title'>Title 2</div>
-							<div className='description'>Description 2</div>
+							<div className='icon'>📊</div>
+							<div className='title'>Gestion des tâches</div>
+							<div className='description'>Organisez et priorisez chaque tâche avec une vision claire</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🚀</div>
-							<div className='title'>Title 3</div>
-							<div className='description'>Description 3</div>
+							<div className='title'>Suivi des équipes</div>
+							<div className='description'>Gérez vos équipes efficacement et suivez les contribution</div>
 						</div>
 						<div className='block'>
-							<div className='icon'>📦</div>
-							<div className='title'>Title 1</div>
-							<div className='description'>Description 1</div>
+							<div className='icon'>📅</div>
+							<div className='title'>Calendrier intégré</div>
+							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d'œil</div>
 						</div>
 						<div className='block'>
-							<div className='icon'>🛠</div>
-							<div className='title'>Title 2</div>
-							<div className='description'>Description 2</div>
+							<div className='icon'>🎟️</div>
+							<div className='title'>Gestion des tickets</div>
+							<div className='description'>Suivez les demandes et résolvez les incidents via un kanban intuitif</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🚀</div>
-							<div className='title'>Title 3</div>
-							<div className='description'>Description 3</div>
+							<div className='title'>Cahiers des charges</div>
+							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l’IA</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>✨</div>
+							<div className='title'>Retour d'expérience</div>
+							<div className='description'>Analysez les résultats et optimisez vos processus pour les futurs projets</div>
+						</div>
+						<div className='block'>
+							<div className='icon'>📈</div>
+							<div className='title'>Performance</div>
+							<div className='description'>Évaluez l'avancement et la performance en temps réel</div>
 						</div>
 						{/* /!* Add more blocks as needed *!/ */}
 					</div>
