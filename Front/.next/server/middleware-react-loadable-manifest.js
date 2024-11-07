@@ -1,0 +1,1 @@
+self.__REACT_LOADABLE_MANIFEST='{"specification\\\\[id]\\\\index.tsx -> @/app/components/customEditor":{"id":21849,"files":["static/chunks/2c386607.ba0ca008584f8e8e.js","static/chunks/3b9d1622.d9d1ea082863fa99.js","static/css/8a44a19489568baa.css","static/chunks/849.1b1213c3312430b9.js"]}}';
