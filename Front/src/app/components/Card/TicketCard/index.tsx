@@ -3,13 +3,14 @@ import { BoxTicketCardCy, MajTicketCardCy, NameTicketCardCy, PeriodTicketCardCy,
 import './style.scss';
 import axios from 'axios';
 
-type Status = 'ouvert' | 'résolu' | 'fermer'; // Définir les statuts possibles
+type Status = 'a faire' | 'en cours' | 'en retard' | 'résolu'; // Définir les statuts possibles
+type Urgence = 0 | 1 | 2 | 3; // Définir les urgences possibles
 
-export default function TicketCard({ id, title, start, end, urgence, updated_at, status, planningId, userData, description }: { description: any; userData: any; id: any; title: any; start: any; end: any; urgence: any; updated_at: Date; status: Status; planningId: any; }) {
+export default function TicketCard({ id, title, start, end, urgence, updated_at, status, planningId, userData, description }: { description: any; userData: any; id: any; title: any; start: any; end: any; urgence: Urgence; updated_at: Date; status: Status; planningId: any; }) {
 	const [ticket, setTicket] = useState({ start_date: start, end_date: end, planningId: planningId, userId: userData.user.id, title: title, urgenceId: urgence, description: description, status: status });
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-	const urgenceColor: { [key in Status]: string } = { ouvert: '#8BC729', résolu: '#0083E1', fermer: 'orange' };
+	const urgenceColor = { 0: '#8BC729', 1: '#0083E1', 2: '#ffa60063', 3: '#ff000038'};
 
 	const date1 = new Date();
 	const date2 = new Date(updated_at);
@@ -32,7 +33,7 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at,
 	}
 	return (
 		<>
-			<div data-cy={BoxTicketCardCy} className="card" style={{ borderLeft: '7px solid ' + urgenceColor[ticket.status], cursor: 'pointer' }} onClick={() => setShowUpdateModal(true)}>
+			<div data-cy={BoxTicketCardCy} className="card" style={{ borderLeft: '7px solid ' + urgenceColor[ticket.urgenceId], cursor: 'pointer' }} onClick={() => setShowUpdateModal(true)}>
 				<h3 data-cy={NameTicketCardCy}>{title}</h3>
 				<div>
 					<p data-cy={PeriodTicketCardCy}>{start.substring(0, 10)} - {end.substring(0, 10)}</p>
@@ -65,18 +66,19 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at,
 								<div className="input_grp">
 									<p>Status</p>
 									<select onChange={(e) => { const newStatus = e.target.value.trim() as Status; setTicket({ ...ticket, status: newStatus }); }} required>
-										<option value="ouvert" selected={ticket.status === 'ouvert'}>Ouvert</option>
-										<option value="fermer" selected={ticket.status === 'fermer'}>Fermé</option>
-										<option value="résolu" selected={ticket.status === 'résolu'}>Résolu</option>
+										<option value='a faire' selected={ticket.status === 'a faire'}>À faire</option>
+										<option value='en cours' selected={ticket.status === 'en cours'}>En cours</option>
+										<option value='en retard' selected={ticket.status === 'en retard'}>En retard</option>
+										<option value='résolu' selected={ticket.status === 'résolu'}>Résolu</option>
 									</select>
 								</div>
 								<div className="input_grp">
 									<p>Urgence</p>
-									<select onChange={(e) => setTicket({ ...ticket, urgenceId: parseInt(e.target.value) })} required>
-										<option value={0} selected={ticket.urgenceId === 0}>À faire</option>
-										<option value={1} selected={ticket.urgenceId === 1}>En cours</option>
-										<option value={2} selected={ticket.urgenceId === 2}>En retard</option>
-										<option value={3} selected={ticket.urgenceId === 3}>Terminé</option>
+									<select onChange={(e) => { const newStatus = parseInt(e.target.value) as Urgence; setTicket({ ...ticket, urgenceId: newStatus }); }}  required>
+										<option value={0} selected={ticket.urgenceId === 0}>Mineur</option>
+										<option value={1} selected={ticket.urgenceId === 1}>Moyen</option>
+										<option value={2} selected={ticket.urgenceId === 2}>Majeur</option>
+										<option value={3} selected={ticket.urgenceId === 3}>Urgent</option>
 									</select>
 								</div>
 							</div>

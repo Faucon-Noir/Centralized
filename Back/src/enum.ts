@@ -1,5 +1,6 @@
 export enum StatusEnum {
-  Open = "ouvert",
-  Canceled = "annulé",
-  Resolve = "résolu",
+  Todo = "a faire",
+  InProgress = 'en cours',
+  Late = "en retard",
+  Resolve = "résolu"
 }
