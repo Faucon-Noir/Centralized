@@ -1,7 +1,7 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import { TeamMateCardProps } from './type';
 import { gradeToString } from '@/app/helpers';
-import { BoxTeamMate } from './style';
+import './style.scss';
 
 export default function TeamMateCard({
 	avatar,
@@ -11,10 +11,10 @@ export default function TeamMateCard({
 	bio,
 }: TeamMateCardProps) {
 	return (
-		<Box sx={BoxTeamMate}>
+		<div className='memberTeamCard'>
 			<Avatar
 				id='avatar'
-				src={avatar}
+				src={'/media/'+avatar}
 				sx={{ height: '100px', width: '100px' }}
 			/>
 			<Typography
@@ -23,10 +23,6 @@ export default function TeamMateCard({
 			>
 				{`${firstName} ${lastName}`}
 			</Typography>
-			{/* <Typography style={{ fontSize: '14px', fontWeight: '600', marginTop: -20 }}>
-                {gradeToString(grade)}
-            </Typography> */}
-			<Typography id='bio'>{bio}</Typography>
-		</Box>
+		</div>
 	);
 }

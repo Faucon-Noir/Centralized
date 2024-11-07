@@ -167,7 +167,7 @@ export default function MobileNavigation({
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
 								<div className='projectOpen' key={index}>
-									<Link
+									<a
 										className={
 											page == 'DashboardPage' &&
 											project?.id ==
@@ -201,9 +201,9 @@ export default function MobileNavigation({
 											</Icon>
 											<p>{project.name}</p>
 										</button>
-									</Link>
+									</a>
 									<div className='submenu'>
-										<Link
+										<a
 											href={
 												'/specification/' + project.id
 											}
@@ -215,8 +215,8 @@ export default function MobileNavigation({
 												/>
 												<p>Cahier des charges</p>
 											</button>
-										</Link>
-										<Link href={'/ticket/' + project.id}>
+										</a>
+										<a href={'/ticket/' + project.id}>
 											<button className='submenu_btn'>
 												<img
 													src='/assets/icons/tickets.svg'
@@ -224,16 +224,7 @@ export default function MobileNavigation({
 												/>
 												<p>Tickets</p>
 											</button>
-										</Link>
-										<Link href={'/rex/' + project.id}>
-											<button className='submenu_btn'>
-												<img
-													src='/assets/icons/rex.svg'
-													alt=''
-												/>
-												<p>Rex</p>
-											</button>
-										</Link>
+										</a>
 									</div>
 								</div>
 							))}

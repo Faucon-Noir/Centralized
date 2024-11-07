@@ -87,14 +87,6 @@ export default function HomeData({
 				<div className='DernierTicket'>
 					<div className='entetedernierticket'>
 						<h2>Derniers tickets</h2>
-						<ButtonBase>
-							<Image
-								height={20}
-								width={20}
-								alt=''
-								src='/assets/arrow-narrow-right.svg'
-							/>
-						</ButtonBase>
 					</div>
 					{lastP.ticket.count > 0
 						? lastP.ticket.ticket

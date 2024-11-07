@@ -1,0 +1,22 @@
+.memberTeamCard {
+	display: flex;
+	justify-content: space-evenly;
+	box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
+	border-radius: 20px;
+	padding: 20px;
+	background-color: #ffffff;
+	height: 130px;
+	transition: all 350ms ease-in-out;
+	// width: 250px;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	height: 200px;
+	h2 {
+		font-size: 20px;
+	}
+
+	p {
+		font-size: 16px;
+	}
+}

@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [router.events]);
 
 	useEffect(() => {
-		if (Component.name != 'LoginPage') {
+		if (Component.name != 'LoginPage' && Component.name != 'WelcomePage') {
 			UserData().then((result) => {
 				setUserData(result);
 				setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement

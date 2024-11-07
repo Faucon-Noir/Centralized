@@ -17,6 +17,7 @@ import GraphiqueLine from '@/app/components/GraphiqueLine';
 import ProjectData from '@/utils/User/ProjectData';
 import TeamMateCard from '@/app/components/Card/teamMate';
 import RexForm from '@/app/components/Form/rexForm';
+import { numberToColor } from '@/app/helpers';
 
 export default function DashboardPage({
 	userData,
@@ -31,7 +32,7 @@ export default function DashboardPage({
 			name: '',
 			start_date: '',
 			end_date: '',
-			color: '',
+			color: 0,
 			description: '',
 			id: '',
 		},
@@ -49,11 +50,12 @@ export default function DashboardPage({
 		userTeam: [{}],
 		stat: {
 			nbrTicketByUser: [{ userName: '', nbr_ticket: 0 }],
-			nbrTicket: 0,
 			nbrTicketPerWeek: { week: [''], nbr_ticket: [0] },
 			nbrTicketByStatus: [{ status: '', nbr_ticket: 0 }],
 			nbrTicketOpenProject: 0,
 			nbrTicketProject: 0,
+            nbrMyTicketOpenProject: 0,
+            nbrMyTicketProject: 0
 		},
 	});
 
@@ -79,403 +81,190 @@ export default function DashboardPage({
 					<div className='Presentation'>
 						<h1>{project?.project ? project.project.name : ''}</h1>
 					</div>
-					{windowWidth >= 660 ? (
-						<Grid
-							container
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								gap: '50px',
-							}}
-						>
-							{!project?.stat ? (
-								<></>
-							) : (
-								<div className='stat'>
-									<h2>Statistique du dernier projet</h2>
-									<div className='graph_div'>
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByUser.map(
-													(x: { userName: any }) =>
-														x.userName
-												)}
-												data={project.stat.nbrTicketByUser.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket non fini par utilisateur'
-												hover='Nombre de ticket'
-												order={1}
-											/>
-										) : null}
-										{project?.stat?.nbrTicketByStatus ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByStatus.map(
-													(x: { status: any }) =>
-														x.status
-												)}
-												data={project.stat.nbrTicketByStatus.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket par état'
-												hover='Nombre de ticket'
-												order={2}
-											/>
-										) : null}
-										<div className='text_stat stat_container_1'>
-											<div className='stat_container'>
-												<p>Vous avez</p>
-												<h3>
-													{userData?.stat
-														?.nbrAllTicket
-														? userData.stat
-															.nbrAllTicket
-														: 0}
-												</h3>
-												<p>
-													tickets en tout sur ce
-													projet
-												</p>
-											</div>
-											<div className='stat_container'>
-												<p>Vous avez</p>
-												<h3>
-													{project?.stat?.nbrTicket
-														? project.stat.nbrTicket
-														: 0}
-												</h3>
-												<p>
-													tickets ouverts sur ce
-													projet
-												</p>
-											</div>
+					<div className='mobile'>
+						{!project?.stat ? (
+							<></>
+						) : (
+							<div className='stat'>
+								<h2>Statistique du dernier projet</h2>
+								<div className='graph_div'>
+									<div className='text_stat'>
+									{project?.stat?.nbrTicketByUser ? (
+										<GraphiquePie
+											labels={project.stat.nbrTicketByUser.map(
+												(x: { userName: any }) =>
+													x.userName
+											)}
+											data={project.stat.nbrTicketByUser.map(
+												(row: {
+													nbr_ticket: any;
+												}) => row.nbr_ticket
+											)}
+											title='Nombre de ticket non fini par utilisateur'
+											hover='Nombre de ticket'
+										/>
+									) : null}
+									{project?.stat?.nbrTicketByStatus ? (
+										<GraphiquePie
+											labels={project.stat.nbrTicketByStatus.map(
+												(x: { status: any }) =>
+													x.status
+											)}
+											data={project.stat.nbrTicketByStatus.map(
+												(row: {
+													nbr_ticket: any;
+												}) => row.nbr_ticket
+											)}
+											title='Nombre de ticket par état'
+											hover='Nombre de ticket'
+											order={2}
+										/>
+									) : null}
+								</div>
+									<div className='text_stat stat_container_1'>
+										<div className='stat_container'>
+											<p>Vous avez</p>
+											<h3>
+												{project?.stat
+													?.nbrMyTicketProject
+													? project.stat
+														.nbrMyTicketProject
+													: 0}
+											</h3>
+											<p>
+												tickets en tout sur ce
+												projet
+											</p>
 										</div>
-
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiqueLine
-												labels={
-													project.stat
-														.nbrTicketPerWeek.week
-												}
-												data={
-													project.stat
-														.nbrTicketPerWeek
-														.nbr_ticket
-												}
-												title='Nombre de tickets ouverts par semaine'
-												hover='Nombre de tickets'
-												order={1}
-											/>
-										) : null}
-										<div className='text_stat stat_container_2'>
-											<div className='stat_container'>
-												<p>Il y a</p>
-												<h3>
-													{project?.stat
-														?.nbrTicketProject
-														? project.stat
-															.nbrTicketProject
-														: 0}
-												</h3>
-												<p>
-													tickets en tout sur ce
-													projet
-												</p>
-											</div>
-											<div className='stat_container'>
-												<p>Il y a</p>
-												<h3>
-													{project?.stat
-														?.nbrTicketOpenProject
-														? project.stat
-															.nbrTicketOpenProject
-														: 0}
-												</h3>
-												<p>
-													tickets ouverts sur ce
-													projet
-												</p>
-											</div>
+										<div className='stat_container'>
+											<p>Vous avez</p>
+											<h3>
+												{project?.stat?.nbrMyTicketOpenProject
+													? project.stat.nbrMyTicketOpenProject
+													: 0}
+											</h3>
+											<p>
+												tickets ouverts sur ce
+												projet
+											</p>
+										</div>
+									</div>
+									{project?.stat?.nbrTicketByUser ? (
+										<GraphiqueLine
+											labels={
+												project.stat
+													.nbrTicketPerWeek.week
+											}
+											data={
+												project.stat
+													.nbrTicketPerWeek
+													.nbr_ticket
+											}
+											title='Nombre de tickets ouverts par semaine'
+											hover='Nombre de tickets'
+										/>
+									) : null}
+									<div className='text_stat stat_container_2'>
+										<div className='stat_container'>
+											<p>Il y a</p>
+											<h3>
+												{project?.stat
+													?.nbrTicketProject
+													? project.stat
+														.nbrTicketProject
+													: 0}
+											</h3>
+											<p>
+												tickets en tout sur ce
+												projet
+											</p>
+										</div>
+										<div className='stat_container'>
+											<p>Il y a</p>
+											<h3>
+												{project?.stat
+													?.nbrTicketOpenProject
+													? project.stat
+														.nbrTicketOpenProject
+													: 0}
+											</h3>
+											<p>
+												tickets ouverts sur ce
+												projet
+											</p>
 										</div>
 									</div>
 								</div>
-							)}
-
-							<div className='BlocDouble'>
-								<div className='calendar_container'>
-									<CalendarBox
-										name={
-											project.project
-												? project.project.name
-												: ''
-										}
-										start_date={
-											project
-												? new Date(
-													project.project.start_date
-												)
-												: new Date()
-										}
-										end_date={
-											project
-												? new Date(
-													project.project.end_date
-												)
-												: new Date()
-										}
-										description={
-											project
-												? project.project.description
-												: ''
-										}
-										color={project.project.color}
-									/>
-								</div>
-
-								<div className='DernierTicket'>
-									<div className='entetedernierticket'>
-										<h2>Derniers tickets</h2>
-										<ButtonBase>
-											<Image
-												height={20}
-												width={20}
-												alt=''
-												src='/assets/arrow-narrow-right.svg'
-											/>
-										</ButtonBase>
-									</div>
-									{project.ticket.count > 0 ? (
-										project.ticket.ticket
-											.filter(
-												(task: any, idx: number) =>
-													idx < 3
+							</div>
+						)}
+						<div className='BlocDouble'>
+							<div className='calendar_container'>
+								<CalendarBox
+									name={
+										project.project
+											? project.project.name
+											: ''
+									}
+									start_date={
+										project.project
+											? new Date(
+												project.project.start_date
 											)
-											.map((task: any) => (
-												<TaskCard
-													id={task.id}
-													title={task.title}
-													urgenceId={task.urgence}
-													date={task.start_date}
-													color={
-														project.project.color
-													}
-													key={task.id}
-												/>
-											))
-									) : (
-										<> Aucun ticket n&apos;est ouvert</>
-									)}
-								</div>
-							</div>
-							<div className='BlocDouble second_line'>
-								<div className='DernierTicket'>
-									<h2>Derniers retours d&apos;expériences</h2>
-									<RexForm
-										userData={userData}
-										RexData={project.rex}
-										idProject={project.project.id}
-										color={project.project.color}
-									/>
-								</div>
-							</div>
-						</Grid>
-					) : (
-						<div className='mobile'>
-							{!project?.stat ? (
-								<></>
-							) : (
-								<div className='stat'>
-									<h2>Statistique du dernier projet</h2>
-									<div className='graph_div'>
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByUser.map(
-													(x: { userName: any }) =>
-														x.userName
-												)}
-												data={project.stat.nbrTicketByUser.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket non fini par utilisateur'
-												hover='Nombre de ticket'
-											/>
-										) : null}
-										{project?.stat?.nbrTicketByStatus ? (
-											<GraphiquePie
-												labels={project.stat.nbrTicketByStatus.map(
-													(x: { status: any }) =>
-														x.status
-												)}
-												data={project.stat.nbrTicketByStatus.map(
-													(row: {
-														nbr_ticket: any;
-													}) => row.nbr_ticket
-												)}
-												title='Nombre de ticket par état'
-												hover='Nombre de ticket'
-												order={2}
-											/>
-										) : null}
-
-										<div className='text_stat stat_container_1'>
-											<div className='stat_container'>
-												<p>Vous avez</p>
-												<h3>
-													{userData?.stat
-														?.nbrAllTicket
-														? userData.stat
-															.nbrAllTicket
-														: 0}
-												</h3>
-												<p>
-													tickets en tout sur ce
-													projet
-												</p>
-											</div>
-											<div className='stat_container'>
-												<p>Vous avez</p>
-												<h3>
-													{project?.stat?.nbrTicket
-														? project.stat.nbrTicket
-														: 0}
-												</h3>
-												<p>
-													tickets ouverts sur ce
-													projet
-												</p>
-											</div>
-										</div>
-										{project?.stat?.nbrTicketByUser ? (
-											<GraphiqueLine
-												labels={
-													project.stat
-														.nbrTicketPerWeek.week
-												}
-												data={
-													project.stat
-														.nbrTicketPerWeek
-														.nbr_ticket
-												}
-												title='Nombre de tickets ouverts par semaine'
-												hover='Nombre de tickets'
-											/>
-										) : null}
-										<div className='text_stat stat_container_2'>
-											<div className='stat_container'>
-												<p>Il y a</p>
-												<h3>
-													{project?.stat
-														?.nbrTicketProject
-														? project.stat
-															.nbrTicketProject
-														: 0}
-												</h3>
-												<p>
-													tickets en tout sur ce
-													projet
-												</p>
-											</div>
-											<div className='stat_container'>
-												<p>Il y a</p>
-												<h3>
-													{project?.stat
-														?.nbrTicketOpenProject
-														? project.stat
-															.nbrTicketOpenProject
-														: 0}
-												</h3>
-												<p>
-													tickets ouverts sur ce
-													projet
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							)}
-							<div className='BlocDouble'>
-								<div className='calendar_container'>
-									<CalendarBox
-										name={
-											project.project
-												? project.project.name
-												: ''
-										}
-										start_date={
-											project.project
-												? new Date(
-													project.project.start_date
-												)
-												: new Date()
-										}
-										end_date={
-											project.project
-												? new Date(
-													project.project.end_date
-												)
-												: new Date()
-										}
-										description={
-											project.project
-												? project.project.description
-												: ''
-										}
-										color={project.project.color}
-									/>
-								</div>
-
-								<div className='DernierTicket'>
-									<div className='entetedernierticket'>
-										<h2>Derniers tickets</h2>
-										<ButtonBase>
-											<Image
-												height={20}
-												width={20}
-												alt=''
-												src='/assets/arrow-narrow-right.svg'
-											/>
-										</ButtonBase>
-									</div>
-									{project.ticket.count > 0 ? (
-										project.ticket.ticket
-											.filter(
-												(task: any, idx: number) =>
-													idx < 3
+											: new Date()
+									}
+									end_date={
+										project.project
+											? new Date(
+												project.project.end_date
 											)
-											.map((task: any) => (
-												<TaskCard
-													id={task.id}
-													title={task.title}
-													urgenceId={task.status}
-													date={task.start_date}
-													color={task.color}
-													key={task.id}
-												/>
-											))
-									) : (
-										<> Aucun ticket n&apos;est ouvert</>
-									)}
-								</div>
+											: new Date()
+									}
+									description={
+										project.project
+											? project.project.description
+											: ''
+									}
+									color={numberToColor(project.project.color)}
+								/>
 							</div>
-							<div className='BlocDouble second_line'>
-								<div className='DernierTicket'>
-									<h2>Derniers retours d&apos;expériences</h2>
-									<RexForm
-										userData={userData}
-										RexData={project.rex}
-										idProject={project.project.id}
-										color={project.project.color}
-									/>
+
+							<div className='DernierTicket'>
+								<div className='entetedernierticket'>
+									<h2>Derniers tickets</h2>
 								</div>
+								{project.ticket.count > 0 ? (
+									project.ticket.ticket
+										.filter(
+											(task: any, idx: number) =>
+												idx < 3
+										)
+										.map((task: any) => (
+											<TaskCard
+												id={task.id}
+												title={task.title}
+												urgenceId={task.status}
+												date={task.start_date}
+												color={task.color}
+												key={task.id}
+											/>
+										))
+								) : (
+									<> Aucun ticket n&apos;est ouvert</>
+								)}
 							</div>
 						</div>
-					)}
+						<div className='BlocDouble second_line'>
+							<div className='DernierTicket'>
+								<h2>Derniers retours d&apos;expériences</h2>
+								<RexForm
+									userData={userData}
+									RexData={project.rex}
+									idProject={project.project.id}
+									color={project.project.color}
+								/>
+							</div>
+						</div>
+					</div>
 
 					<div className='MyTeam'>
 						<div className='Entete'>
@@ -507,7 +296,6 @@ export default function DashboardPage({
 						</div>
 						<CustomSwiper swiperId={2}>
 							<div className='ProjetCards'>
-								{/* equipe => a récupérer depuis l'api => liste d'équipe ou détail de l'équipe ?*/}
 								{project?.userTeam
 									? project?.userTeam.map((item: any) => (
 										<SwiperSlide key={item.id}>

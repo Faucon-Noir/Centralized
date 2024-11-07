@@ -15,7 +15,7 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
         title: '',
         urgenceId: 0,
         description: '',
-        status: 'ouvert',
+        status: 'a faire',
     });
 
     async function handleSubmit() {
@@ -43,19 +43,19 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
                 <div className='input_grp'>
                     <p>Status</p>
                     <select onChange={(e) => setTicket({ ...ticket, status: e.target.value.trim() })} required>
-                        <option value="ouvert">Ouvert</option>
-                        <option value="fermer">Fermé</option>
-                        <option value="résolu">Résolu</option>
-
+                        <option value='a faire'>À faire</option>
+                        <option value='en cours'>En cours</option>
+                        <option value='en retard'>En retard</option>
+                        <option value='résolu'>Résolu</option>
                     </select>
                 </div>
                 <div className='input_grp'>
-                    <p>Etat</p>
+                    <p>Urgence</p>
                     <select onChange={(e) => setTicket({ ...ticket, urgenceId: parseInt(e.target.value) })} required>
-                        <option value={0}>À faire</option>
-                        <option value={1}>En cours</option>
-                        <option value={2}>En retard</option>
-                        <option value={3}>Terminé</option>
+                        <option value={0}>Mineur</option>
+                        <option value={1}>Moyen</option>
+                        <option value={2}>Majeur</option>
+                        <option value={3}>Urgent</option>
                     </select>
                 </div>
             </div>
