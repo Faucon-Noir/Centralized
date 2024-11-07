@@ -24,14 +24,6 @@ function RexCard({ name, answer1, answer2, answer3, color }: any) {
 							</Icon>
 							<h2>{name ? name : ''}</h2>
 						</div>
-						<ButtonBase>
-							<Image
-								height={20}
-								width={20}
-								alt=''
-								src='/assets/arrow-narrow-right.svg'
-							></Image>
-						</ButtonBase>
 					</div>
 					<div>
 						<ul className='listerexcard'>
