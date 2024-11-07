@@ -45,13 +45,13 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
 				setSelectedProject(project);
 				for (let ticket of project.ticket.ticket) {
-					if (ticket.urgenceId === 0) {
+					if (ticket.status === 'a faire') {
 						updatedTickets.todo.push(ticket);
-					} else if (ticket.urgenceId === 3) {
+					} else if (ticket.status === 'résolu') {
 						updatedTickets.done.push(ticket);
-					} else if (ticket.urgenceId === 2) {
+					} else if (ticket.status === 'en retard') {
 						updatedTickets.late.push(ticket);
-					} else if (ticket.urgenceId === 1) {
+					} else if (ticket.status === 'en cours') {
 						updatedTickets.inprogress.push(ticket);
 					}
 				}
@@ -142,7 +142,7 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 							</div>
 						</div>
 						<div className='done_container'>
-							<h2>Terminé</h2>
+							<h2>Résolu</h2>
 
 							<div className='card_container'>
 								{projectTickets.done.map((item: any) => (
