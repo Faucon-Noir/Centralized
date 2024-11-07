@@ -31,6 +31,50 @@ import { dirname } from "path";
 dotenv.config();
 
 // TODO: Retourner un statut pending tant que l'ia n'as aps terminé de créer un
+// Set up the environment variable for Google Application Credentials
+process.env.GOOGLE_APPLICATION_CREDENTIALS = 'src/config/centralized-434707-97b21344aa62.json';
+
+// Import VertexAI from @google-cloud/vertexai using ES module syntax
+import { VertexAI } from '@google-cloud/vertexai';
+
+// Initialize Vertex with the centralized AI project, server, and base model
+const vertex_ai = new VertexAI({ project: 'centralized-434707', location: 'europe-west9' });
+const model = 'gemini-1.5-flash-002';
+let cdc
+
+// Initialize the model, its configuration, and safety settings
+const generativeModel = vertex_ai.preview.getGenerativeModel({
+    model: model,
+    generationConfig: {
+        maxOutputTokens: 8192,
+        temperature: 1,
+        topP: 0.95,
+    },
+    safetySettings: [
+    ],
+});
+
+const chat = generativeModel.startChat({});
+
+/**
+ * Function to send a message to the AI
+ * @param {String} message - Input prompt
+ * @returns {String} Generated requirements document as JSON, with newline and quotes at the start/end removed
+ */
+async function sendMessage(message, cdc, cdc_input, cdcRepository, project_input) {
+    const streamResult = await chat.sendMessageStream(message);
+    cdc = JSON.stringify((await streamResult.response).candidates[0].content.parts[0].text).replace(/\\n/g, ' ').replace(/^"|"$/g, '');
+    cdc = cdc.replace(/```html/g, "");
+    cdc = cdc.split("```")[0];
+    console.log(cdc)
+    cdc_input.setCdc(cdc)
+    cdc_input.setProject(project_input);
+    cdcRepository.save(cdc_input);
+    console.log(`Cahier des charges créé`);
+    requestStatus.finished = true;
+    requestStatus.data = streamResult.response
+    return cdc;
+}
 
 /**
  * Traite une string pour y extirper toutes les dates
@@ -373,47 +417,48 @@ export class SpecificationController {
 
 			// Requete axios a l'api open ai
 			console.log("requete ia");
-			axios
-				.post(process.env.IA_URL, data, config)
-				.then((response) => {
-					console.log(response.data.choices[0].message.content);
-					cdc = response.data.choices[0].message.content;
-					cdc = cdc.replace(/```html/g, "");
-					cdc = cdc.split("```")[0];
-					cdc_input.setCdc(cdc);
-					cdc_input.setProject(project_input);
-					this.cdcRepository.save(cdc_input);
-					console.log(`Cahier des charges créé`);
-					requestStatus.finished = true;
-					requestStatus.data = response.data;
-					return cdc;
-				})
-				.catch(async (error) => {
-					console.error("Error:", error);
-					// If the first request fails, try a backup URL
-					console.log("Backup request ia");
-					try {
-						const backupResponse = await axios.post(
-							process.env.BACKUP_IA_URL,
-							databackup,
-							configbackup
-						);
-						console.log(
-							backupResponse.data.choices[0].message.content
-						);
-						cdc = backupResponse.data.choices[0].message.content;
-						cdc_input.setCdc(cdc);
-						cdc_input.setProject(project_input);
-						this.cdcRepository.save(cdc_input);
-						console.log(`Cahier des charges créé (backup)`);
-						requestStatus.finished = true;
-						requestStatus.data = cdc_input;
-						return cdc;
-					} catch (backupError) {
-						console.error("Backup Error:", backupError);
-						// Handle the backup error appropriately (e.g., throw, log, or return a default value).
-					}
-				});
+			// axios
+			// 	.post(process.env.IA_URL, data, config)
+			// 	.then((response) => {
+			// 		console.log(response.data.choices[0].message.content);
+			// 		cdc = response.data.choices[0].message.content;
+			// 		cdc = cdc.replace(/```html/g, "");
+			// 		cdc = cdc.split("```")[0];
+			// 		cdc_input.setCdc(cdc);
+			// 		cdc_input.setProject(project_input);
+			// 		this.cdcRepository.save(cdc_input);
+			// 		console.log(`Cahier des charges créé`);
+			// 		requestStatus.finished = true;
+			// 		requestStatus.data = response.data;
+			// 		return cdc;
+			// 	})
+			// 	.catch(async (error) => {
+			// 		console.error("Error:", error);
+			// 		// If the first request fails, try a backup URL
+			// 		console.log("Backup request ia");
+			// 		try {
+			// 			const backupResponse = await axios.post(
+			// 				process.env.BACKUP_IA_URL,
+			// 				databackup,
+			// 				configbackup
+			// 			);
+			// 			console.log(
+			// 				backupResponse.data.choices[0].message.content
+			// 			);
+			// 			cdc = backupResponse.data.choices[0].message.content;
+			// 			cdc_input.setCdc(cdc);
+			// 			cdc_input.setProject(project_input);
+			// 			this.cdcRepository.save(cdc_input);
+			// 			console.log(`Cahier des charges créé (backup)`);
+			// 			requestStatus.finished = true;
+			// 			requestStatus.data = cdc_input;
+			// 			return cdc;
+			// 		} catch (backupError) {
+			// 			console.error("Backup Error:", backupError);
+			// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
+			// 		}
+			// 	});
+			sendMessage(content, cdc, cdc_input, this.cdcRepository, project_input);
 			//On initie planning_input qu'on rentrera en base de donnée
 			const planning_input: Planning = new Planning(
 				params.getStartDate(),
