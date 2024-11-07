@@ -158,14 +158,21 @@
 			flex-direction: column;
 			gap: 25px;
 			max-height: 40% !important;
+			width: 50%;
+			min-width: 250px;
+			max-width: 550px;
 			@media (max-width: 660px) {
 				margin-bottom: 24px;
 			}
 		}
 	}
 
-	.MyTeam {
+	.second_line {
+		margin-bottom: 30px;
 		margin-top: 50px;
+	}
+	.MyTeam {
+		width: 100%;
 	}
 }
 
@@ -253,9 +260,9 @@
 		// @media (min-width: 1356px) and (max-width: 1680px) {
 		// 	flex-direction: column;
 		// }
-		// @media (max-width: 660px) {
-		// 	flex-direction: column;
-		// }
+		@media (max-width: 660px) {
+			flex-direction: column;
+		}
 		.stat_container {
 			background-color: white;
 			border-radius: 20px;
@@ -304,6 +311,9 @@
 	}
 }
 
-.mobile {
-	margin: 0 16px;
+@media (max-width: 660px) {
+	.mobile {
+		margin: 0 16px;
+		
+	}
 }
