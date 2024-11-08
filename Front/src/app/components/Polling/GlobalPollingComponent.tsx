@@ -12,7 +12,7 @@ export default function GlobalPollingComponent() {
 
 	const { isTaskStarted, isTaskComplete, completeTask } = useTask();
 	const [showPopup, setShowPopup] = useState(false);
-
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	const [userData, setUserData] = useState<any>({
 		project: [
 			{
@@ -28,7 +28,7 @@ export default function GlobalPollingComponent() {
 	useEffect(() => {
 		UserData().then((result) => {
 			setUserData(result);
-			console.log(result)
+			console.log(result);
 		});
 	}, []);
 
@@ -44,7 +44,7 @@ export default function GlobalPollingComponent() {
 					intervalId = setInterval(async () => {
 						try {
 							let responseStatus = await axios.get(
-								`http://localhost:8000/api/specification/check-status`,
+								`${baseUrl}specification/check-status`,
 								{
 									headers: {
 										Authorization: `Bearer ${userData.user.token}`,
@@ -67,7 +67,14 @@ export default function GlobalPollingComponent() {
 			}
 			return () => clearInterval(intervalId); // Cleanup l'interval si le composant se démonte
 		}
-	}, [isTaskStarted, isTaskComplete, completeTask, userData.user.token]);
+	}, [
+		isTaskStarted,
+		isTaskComplete,
+		completeTask,
+		userData.user.token,
+		userData,
+		baseUrl,
+	]);
 
 	return (
 		<>
