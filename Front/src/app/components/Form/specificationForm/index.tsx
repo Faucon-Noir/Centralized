@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import checkFilledForm from '@/utils/checkFilledForm';
@@ -24,14 +24,14 @@ function SpecificationForm({ userData }: any) {
 		template: 0,
 		status: false,
 	});
-
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	async function handleSubmit() {
 		// add user to project
 		setProject({ ...project, user: userData.user.id });
 		if (await checkFilledForm(project)) {
 			//start the request create specification
 			await axios.post(
-				`http://localhost:8000/api/project/${project.team}/${project.user}`,
+				`${baseUrl}project/${project.team}/${project.user}`,
 				project,
 				{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 			);
