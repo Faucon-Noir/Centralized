@@ -23,7 +23,6 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
     }
 
     useEffect(() => {
-        console.log(selectedProject.id)
         getUserTeamProject(selectedProject.id, userData.user.token).then((result) => {
             setUserTeam(result);
         });

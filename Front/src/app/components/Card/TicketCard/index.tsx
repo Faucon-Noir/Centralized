@@ -22,9 +22,7 @@ export default function TicketCard({ id, title, start, end, urgence, updated_at,
 	const differenceInDays = lastUpdate / millisecondsInOneDay;
 
     useEffect(() => {
-		console.log(projectId, userData, 'test')
         getUserByOneTicket(id, userData.user.token).then((result) => {
-			console.log(result)
 			setTicket({ ...ticket, userId: result.user.user_id });
         });
 

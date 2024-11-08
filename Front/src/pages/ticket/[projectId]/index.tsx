@@ -21,7 +21,7 @@ type Ticket = {
 };
 export default function Tickets({ userData, updateUserData, }: { userData: any, updateUserData: any }) {
 	const [showCreateModal, setShowCreateModal] = useState(false);
-	const [selectedProject, setSelectedProject] = useState({});
+	const [selectedProject, setSelectedProject] = useState({id: ''});
 	const [projectTickets, setProjectTickets] = useState<{
 		todo: Ticket[];
 		inprogress: Ticket[];
@@ -64,7 +64,6 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 		setShowCreateModal(false);
 	}
 
-	console.log(projectTickets);
 	return (
 		<>
 			<div className='ticketPage'>

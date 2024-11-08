@@ -244,7 +244,7 @@ export default function DashboardPage({
 												title={task.title}
 												urgenceId={task.status}
 												date={task.start_date}
-												color={task.color}
+												color={project.project.color}
 												key={task.id}
 											/>
 										))
