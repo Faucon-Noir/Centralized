@@ -1,4 +1,4 @@
-Centralized - Documentation technique  
+Centralized - Documentation technique
 
 ![logo ETNA](./img/etna-logo-1-quadri.png)
 
@@ -10,57 +10,57 @@ Centralized - GPE 2023-2024
 
 ## Information
 
-| Nom du projet | Centralized |
-| ---: | :--- |
-| Type de document | Documentation technique |
-| Date | 16/01/2024 |
-| Version | 1.0 |
-| Mots-clés |  |
-| Auteurs | Paul GILLET (gillet_p), Mathieu BEURET (beuret_m) |
+|    Nom du projet | Centralized                                       |
+| ---------------: | :------------------------------------------------ |
+| Type de document | Documentation technique                           |
+|             Date | 16/01/2024                                        |
+|          Version | 1.0                                               |
+|        Mots-clés |                                                   |
+|          Auteurs | Paul GILLET (gillet_p), Mathieu BEURET (beuret_m) |
 
 ## Rédaction et Modifications
 
-| Version | Date | Nom | Description |
-| :---: | :---: | :---: | :---: |
-| 1.0 | 16/01/2024 | Paul GILLET | Première version |
-| 1.1 | 31/05/2024 | Mathieu BEURET | Révision des procédures |
+| Version |    Date    |      Nom       |       Description       |
+| :-----: | :--------: | :------------: | :---------------------: |
+|   1.0   | 16/01/2024 |  Paul GILLET   |    Première version     |
+|   1.1   | 31/05/2024 | Mathieu BEURET | Révision des procédures |
 
 ## Table des matières
 
-- [Documentation technique](#documentation-technique)
-  - [Information](#information)
-  - [Rédaction et Modifications](#rédaction-et-modifications)
-  - [Table des matières](#table-des-matières)
-- [Résumé du document](#résumé-du-document)
-- [Rappel du fonctionnement de l'application](#rappel-du-fonctionnement-de-lapplication)
-  - [Description du projet](#description-du-projet)
-  - [Lancement du projet](#lancement-du-projet)
-  - [Décomposition du projet](#décomposition-du-projet)
-  - [Architecture globale](#architecture-globale)
-- [Front](#front)
-  - [Technologies utilisées](#technologies-utilisées)
-  - [Approche par composants](#approche-par-composants)
-  - [Structure de l'application](#structure-de-lapplication)
-  - [Tests automatisés](#tests-automatisés)
-- [Back](#back)
-  - [Architecture](#architecture)
-  - [Technologies](#technologies)
-  - [Modèle de données](#modèle-de-données)
-  - [Interaction extérieure](#interaction-extérieure)
-  - [Tests unitaires](#tests-unitaires)
-  - [API Privée](#api-privée)
-  - [API Publique](#api-publique)
-- [Bugs Connus](#bugs-connus)
-- [Annexes](#annexes)
-  - [Table des illustrations](#table-des-illustrations)
+-   [Documentation technique](#documentation-technique)
+    -   [Information](#information)
+    -   [Rédaction et Modifications](#rédaction-et-modifications)
+    -   [Table des matières](#table-des-matières)
+-   [Résumé du document](#résumé-du-document)
+-   [Rappel du fonctionnement de l'application](#rappel-du-fonctionnement-de-lapplication)
+    -   [Description du projet](#description-du-projet)
+    -   [Lancement du projet](#lancement-du-projet)
+    -   [Décomposition du projet](#décomposition-du-projet)
+    -   [Architecture globale](#architecture-globale)
+-   [Front](#front)
+    -   [Technologies utilisées](#technologies-utilisées)
+    -   [Approche par composants](#approche-par-composants)
+    -   [Structure de l'application](#structure-de-lapplication)
+    -   [Tests automatisés](#tests-automatisés)
+-   [Back](#back)
+    -   [Architecture](#architecture)
+    -   [Technologies](#technologies)
+    -   [Modèle de données](#modèle-de-données)
+    -   [Interaction extérieure](#interaction-extérieure)
+    -   [Tests unitaires](#tests-unitaires)
+    -   [API Privée](#api-privée)
+    -   [API Publique](#api-publique)
+-   [Bugs Connus](#bugs-connus)
+-   [Annexes](#annexes)
+    -   [Table des illustrations](#table-des-illustrations)
 
 # Résumé du document
 
 Ce document est la documentation technique officielle de l'outil Centralized. Il est divisé en 3 parties :
 
-- La documentation technique du Front: l'application web ;  
-- La documentation technique du Back: API ;
-- Les bugs connus de notre outil.
+-   La documentation technique du Front: l'application web ;
+-   La documentation technique du Back: API ;
+-   Les bugs connus de notre outil.
 
 # Rappel du fonctionnement de l'application
 
@@ -82,18 +82,18 @@ Nous partons du principes que vous avez déjà cloné le projet et que vous ête
 
 Pour installer les dépendances:
 
-- `cd Front/` ou `cd Back/`
-- `npm install` ou `yarn install`
+-   `cd Front/` ou `cd Back/`
+-   `npm install` ou `yarn install`
 
 Pour lancer le Front:
 
-- `cd Front/`
-- `npm run dev` ou `yarn dev`
+-   `cd Front/`
+-   `npm run dev` ou `yarn dev`
 
 Pour lancer le Back:
 
-- `cd Back/`
-- `npm run dev` ou `yarn dev`
+-   `cd Back/`
+-   `npm run dev` ou `yarn dev`
 
 ## Décomposition du projet
 
@@ -109,52 +109,52 @@ Pour lancer le Back:
 
 Le front est développé sur une base TypeScript avec NextJS. Il repose sur les dépendances suivantes:
 
-- emotion/react (11.11.1)
-- emotion/styled (11.11.0)
-- fortawesome/fontawesome-svg-core (6.5.1)
-- fortawesome/free-brands-svg-icons (6.5.1)
-- fortawesome/free-regular-svg-icons (6.5.1)
-- fortawesome/free-solid-svg-icons (6.5.1)
-- fortawesome/react-fontawesome (0.2.0)
-- fullcalendar/core (6.1.10)
-- fullcalendar/daygrid (6.1.10)
-- fullcalendar/react (6.1.10)
-- mui/icons-material (5.15.0)
-- mui/material (5.15.0)
-- mui/styled-engine-sc (6.0.0-alpha.8)
-- mui/system (5.15.0)
-- mui/x-charts (6.18.3)
-- mui/x-date-pickers-pro (6.18.5)
-- mui/x-date-pickers (6.18.5)
-- svgr/cli (8.1.0)
-- types/globalize (1.5.5)
-- types/node (20.10.4)
-- types/react-big-calendar (1.8.8)
-- types/react-dom (18.2.17)
-- types/react (18.2.45)
-- axios (1.6.7)
-- babel-plugin-macros (3.1.0)
-- date-fns (2.30.0)
-- dayjs (1.11.10)
-- eslint-config-next (14.0.3)
-- eslint (8.55.0)
-- jwt-decode (4.0.0)
-- next (14.0.3)
-- nextjs-tui-date-picker (2.2.1)
-- prettier (3.2.4)
-- react-big-calendar (1.8.6)
-- react-calendar (4.7.0)
-- react-dom (18.2.0)
-- react-router-dom (6.21.0)
-- react (18.2.0)
-- sass (1.69.5)
-- styled-components (6.1.1)
-- swiper (11.0.5)
-- typescript (5.3.3)
+-   emotion/react (11.11.1)
+-   emotion/styled (11.11.0)
+-   fortawesome/fontawesome-svg-core (6.5.1)
+-   fortawesome/free-brands-svg-icons (6.5.1)
+-   fortawesome/free-regular-svg-icons (6.5.1)
+-   fortawesome/free-solid-svg-icons (6.5.1)
+-   fortawesome/react-fontawesome (0.2.0)
+-   fullcalendar/core (6.1.10)
+-   fullcalendar/daygrid (6.1.10)
+-   fullcalendar/react (6.1.10)
+-   mui/icons-material (5.15.0)
+-   mui/material (5.15.0)
+-   mui/styled-engine-sc (6.0.0-alpha.8)
+-   mui/system (5.15.0)
+-   mui/x-charts (6.18.3)
+-   mui/x-date-pickers-pro (6.18.5)
+-   mui/x-date-pickers (6.18.5)
+-   svgr/cli (8.1.0)
+-   types/globalize (1.5.5)
+-   types/node (20.10.4)
+-   types/react-big-calendar (1.8.8)
+-   types/react-dom (18.2.17)
+-   types/react (18.2.45)
+-   axios (1.6.7)
+-   babel-plugin-macros (3.1.0)
+-   date-fns (2.30.0)
+-   dayjs (1.11.10)
+-   eslint-config-next (14.0.3)
+-   eslint (8.55.0)
+-   jwt-decode (4.0.0)
+-   next (14.0.3)
+-   nextjs-tui-date-picker (2.2.1)
+-   prettier (3.2.4)
+-   react-big-calendar (1.8.6)
+-   react-calendar (4.7.0)
+-   react-dom (18.2.0)
+-   react-router-dom (6.21.0)
+-   react (18.2.0)
+-   sass (1.69.5)
+-   styled-components (6.1.1)
+-   swiper (11.0.5)
+-   typescript (5.3.3)
 
 En raison de la méthode de référencement Google, nous avons décidé d'utiliser NextsJS.
 Ce dernier est une surcouche de React, qui corrige le souci de SEO inhérent à React.
-Afin d'harmoniser le design de notre application et d'en simplifier le développement, nous avons choisi d'utiliser Material UI,  une bibliothèque de composants React qui implémente les spécifications de Material Design, ainsi que plusieurs composants et bibliothèque d'icones très utiles et en phase avec les derniers standarts graphiques.
+Afin d'harmoniser le design de notre application et d'en simplifier le développement, nous avons choisi d'utiliser Material UI, une bibliothèque de composants React qui implémente les spécifications de Material Design, ainsi que plusieurs composants et bibliothèque d'icones très utiles et en phase avec les derniers standarts graphiques.
 
 ## Approche par composants
 
@@ -162,10 +162,10 @@ Avec React, nous avons adopté une approche par composants pour structurer notre
 Ils sont également compatibles avec les hooks, qui permettent de gérer l'état et le cycle de vie des composants de manière plus flexible et intuitive.
 Chaque composant est un dossier composé d'au maximum 4 fichiers:
 
-- un index.tsx, qui contient le rendu graphique et le minimum de logique du composant
-- un style.ts, qui contient le style du composant
-- un type.ts, qui contient les types du composant
-- un hook.ts, qui contient la majorité voir la totalité de la logique du composant
+-   un index.tsx, qui contient le rendu graphique et le minimum de logique du composant
+-   un style.ts, qui contient le style du composant
+-   un type.ts, qui contient les types du composant
+-   un hook.ts, qui contient la majorité voir la totalité de la logique du composant
 
 Ceci nous permet de séparer les différentes parties d'un même composant sans pour autant mélanger les fichiers.
 
@@ -173,14 +173,14 @@ Ceci nous permet de séparer les différentes parties d'un même composant sans 
 
 Le front est structuré de la manière suivante:
 
-- Un acceuil, où nous pourrons visualiser les différents projets, les derniers tickets créés, les équipes, les derniers cahiers des charges générés, les plannings et le dernier retour d'expérience
-- Une page cahier des charges, dans laquelle nous pourrons créer et visualiser nos cahiers des charges. Nous pourrons également les éditer au travers d'un éditeur de texte riche
-- Une page planning, où nous allons afficher les différents planning de nos projets, ainsi que les tickets associés
-- Une page retour d'expérience où nous pourrons cloturer nos projets avec un retour d'expérience sur celui-ci, exploitable par l'ia pour améliorer les prochains cahiers des charges
-- Une page équipe, où nous pourrons créer, visualiser et éditer nos équipes
-- Une page ticket où nous pourrons créer, visualiser et éditer nos tickets
-- Une page de compte, pour éditer nos informations personnelles et notre image de profil
-- Une page qui gère l'inscription et la connexion des utilisateurs
+-   Un acceuil, où nous pourrons visualiser les différents projets, les derniers tickets créés, les équipes, les derniers cahiers des charges générés, les plannings et le dernier retour d'expérience
+-   Une page cahier des charges, dans laquelle nous pourrons créer et visualiser nos cahiers des charges. Nous pourrons également les éditer au travers d'un éditeur de texte riche
+-   Une page planning, où nous allons afficher les différents planning de nos projets, ainsi que les tickets associés
+-   Une page retour d'expérience où nous pourrons cloturer nos projets avec un retour d'expérience sur celui-ci, exploitable par l'ia pour améliorer les prochains cahiers des charges
+-   Une page équipe, où nous pourrons créer, visualiser et éditer nos équipes
+-   Une page ticket où nous pourrons créer, visualiser et éditer nos tickets
+-   Une page de compte, pour éditer nos informations personnelles et notre image de profil
+-   Une page qui gère l'inscription et la connexion des utilisateurs
 
 ## Tests automatisés
 
@@ -208,51 +208,51 @@ Pour exécuter tous les tests en mode headless, il suffit de lancer la commande 
 ![Architecture Back](./img/Architecture_back.png)
 
 Lorsque le front fait une requête à l'API autre qu'une requête de connexion, l'api vérifie que l'utilisateur est bien connecté. Si ça n'est pas le cas, alors il aura une erreur.  
-Les controllers sont faits de la manière suivante:  
+Les controllers sont faits de la manière suivante:
 
-- CdcController
-- PlanningController
-- ProjectController
-- RexController
-- TeamController
-- TicketController
-- UserController
+-   CdcController
+-   PlanningController
+-   ProjectController
+-   RexController
+-   TeamController
+-   TicketController
+-   UserController
 
 Chaque controller envoie des routes associées à la table du même nom généralement.  
-Les Entity permettent la création des tables ou la modification de celle-ci. On crée une entité par table. Elles sont donc faites de la manière suivante:  
+Les Entity permettent la création des tables ou la modification de celle-ci. On crée une entité par table. Elles sont donc faites de la manière suivante:
 
-- Cdc
-- Planning
-- Project
-- Rex
-- Team
-- TeamUser
-- Ticket
-- User
+-   Cdc
+-   Planning
+-   Project
+-   Rex
+-   Team
+-   TeamUser
+-   Ticket
+-   User
 
 ## Technologies
 
 Le back est développé avec Node.js avec TypeScript. Il repose sur les dépendances suivantes:
 
-- axios (1.6.2)
-- bcrypt (5.1.0)
-- body-parser (1.20.2)
-- cors (2.8.5)
-- crypto (1.0.1)
-- express (4.18.2)
-- express-session (1.17.3)
-- fs (0.0.1-security)
-- jsonwebtoken (9.0.0)
-- morgan (1.10.0)
-- mysql2 (2.3.3)
-- nodemailer (6.9.7)
-- openai (4.13.0)
-- path (0.12.7)
-- reflect-metadata (0.1.13)
-- routing-controllers (0.10.4)
-- short-uuid (4.2.2)
-- ts-node (10.9.1)
-- typeorm (0.3.11)
+-   axios (1.6.2)
+-   bcrypt (5.1.0)
+-   body-parser (1.20.2)
+-   cors (2.8.5)
+-   crypto (1.0.1)
+-   express (4.18.2)
+-   express-session (1.17.3)
+-   fs (0.0.1-security)
+-   jsonwebtoken (9.0.0)
+-   morgan (1.10.0)
+-   mysql2 (2.3.3)
+-   nodemailer (6.9.7)
+-   openai (4.13.0)
+-   path (0.12.7)
+-   reflect-metadata (0.1.13)
+-   routing-controllers (0.10.4)
+-   short-uuid (4.2.2)
+-   ts-node (10.9.1)
+-   typeorm (0.3.11)
 
 Node.js a été sélectionné en raison de ses caractéristiques d'évolutivité remarquables. Sa capacité à gérer efficacement un grand nombre de connexions simultanées en fait un choix idéal pour les applications nécessitant une extensibilité horizontale.
 
@@ -271,80 +271,65 @@ Un autre aspect à considérer est l'écosystème robuste soutenant ces technolo
 Par manque de temps et de moyen, nous utiliserons ici l'api d'open ai pour la requête ia que nous faisons, et nous passons par mistral AI pour l'ia de backup. Nous passerons par axios pour faire cette requête.  
 Notre requête est faite comme ça:
 
-```ts
-const data = {
-  model: process.env.IA_MODEL,
-  messages: [{ role: "user", content: content }],
-  temperature: 0,
-};
+````ts
+const vertex_ai = new VertexAI({
+	project: "centralized-434707",
+	location: "europe-west9",
+});
+const model = "gemini-1.5-flash-002";
+let cdc: any;
 
-//On prépare la configuration avec la clef d'api openia et le type
-const config = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.API_KEY}`,
-  },
-};
+// Initialize the model, its configuration, and safety settings
+const generativeModel = vertex_ai.preview.getGenerativeModel({
+	model: model,
+	generationConfig: {
+		maxOutputTokens: 8192,
+		temperature: 1,
+		topP: 0.95,
+	},
+	safetySettings: [],
+});
 
-//on definie le model de backup et le message à l'ia
-const databackup = {
-  model: process.env.BACKUP_IA_MODEL,
-  messages: [{ role: "user", content: content }],
-  temperature: 0,
-};
+const chat = generativeModel.startChat({});
 
-//On prépare la configuration avec la clef d'api backup et le type
-const configbackup = {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${process.env.BACKUP_API_KEY}`,
-  },
-};
-
-// Requete axios a l'api open ai
-console.log("requete ia");
-axios
-  .post(process.env.IA_URL, data, config)
-  .then((response) => {
-    cdc = response.data.choices[0].message.content;
-    cdc = cdc.replace(/```html/g, "")
-    cdc = cdc.split("```")[0]
-    console.log(cdc)
-    cdc_input.setCdc(cdc);
-    cdc_input.setProject(project_input);
-    this.cdcRepository.save(cdc_input);
-    console.log(`Cahier des charges créé`);
-    return cdc;
-  })
-  .catch(async (error) => {
-    console.error("Error:", error);
-    // If the first request fails, try a backup URL
-    console.log("Backup request ia");
-    try {
-      const backupResponse = await axios.post(
-        process.env.BACKUP_IA_URL,
-        databackup,
-        configbackup
-      );
-      cdc = backupResponse.data.choices[0].message.content;
-      cdc = cdc.replace(/```html/g, "")
-      cdc = cdc.split("```")[0]
-      console.log(cdc)
-      cdc_input.setCdc(cdc);
-      cdc_input.setProject(project_input);
-      this.cdcRepository.save(cdc_input);
-      console.log(`Cahier des charges créé (backup)`);
-      return cdc;
-    } catch (backupError) {
-      console.error("Backup Error:", backupError);
-      // Handle the backup error appropriately (e.g., throw, log, or return a default value).
-    }
-  });
-
-```
+/**
+ * Function to send a message to the AI
+ * @param {String} message - Input prompt
+ * @param {any} cdc - Specification table
+ * @param {any} cdc_input - Specification data
+ * @param {String} cdcRepository - Specification Repository to save data
+ * @param {any} project_input - project data reference
+ * @returns {String} Generated requirements document as JSON, with newline and quotes at the start/end removed
+ */
+async function sendMessage(
+	message,
+	cdc,
+	cdc_input,
+	cdcRepository,
+	project_input
+) {
+	console.log("Lancement de la requête vers Vertex ai");
+	const streamResult = await chat.sendMessageStream(message);
+	cdc = JSON.stringify(
+		(await streamResult.response).candidates[0].content.parts[0].text
+	)
+		.replace(/\\n/g, " ")
+		.replace(/^"|"$/g, "");
+	cdc = cdc.replace(/```html/g, "");
+	cdc = cdc.split("```")[0];
+	console.log(cdc);
+	cdc_input.setCdc(cdc);
+	cdc_input.setProject(project_input);
+	cdcRepository.save(cdc_input);
+	console.log(`Cahier des charges créé`);
+	requestStatus.finished = true;
+	requestStatus.data = streamResult.response;
+	return cdc;
+}
+````
 
 La variable `content` contient le prompt qu'on envoie à l'ia. On lui fournit toutes les informations que l'utilisateurs nous demande ainsi qu'un plan pour la génération du cahier des charges.
-Nous fournissons la clef d'autorisation `procsess.env.API_KEY` dans un fichier .env pour sécuriser notre code.  
+Nous fournissons la clef d'autorisation `procsess.env.API_KEY` dans un fichier .env pour sécuriser notre code.
 
 Une fois la requete fait à l'API, nous enverrons le retour que nous fait l'ia directement dans la base de donnée.
 
@@ -355,37 +340,37 @@ Nous utilisons Jest pour réaliser les tests unitaires sur notre API car c'est l
 ## API Privée
 
 L'api que nous avons créé permet au front de récupérer les informations dont il a besoin. Cette API est privée et uniquement accessible par un utilisateur authentifié.
-C'est une API Restfull utilisant Json comme format de données.  
+C'est une API Restfull utilisant Json comme format de données.
 
 Voici la liste des actions possibles, avec leurs URL Restfull, avec leurs méthodes de requête HTTP ainsi que leur body :
 
-| URL | Méthodes | Body |
-| :--- | :--- | :--- |
-| /api/register | POST | { "lastname": string, "firstname": string, "mail": string, "password": string }|
-| /api/login | POST | { "mail", "password" } |
-| /api/user/:id | GET PATCH DELETE | { "lastname": string, "firstname": string, "mail": string, "password": string }|
-| /api/requestResetPassword | POST | { "lastname": string, "firstname": string, "mail": string, "password": string }|
-| /api/resetPassword | PATCH ||
-| /api/team | POST | { "name": string }|
-| /api/teamuser | POST | { "team_id": string, "user_id": string }|
-| /api/teamuser/:id | GET DELETE ||
-| /api/team/:id | GET PATCH DELETE | { "name": string }|
-| /api/project/:teamid/:userid | POST | { "name": string, "description": string, "functionality": string, "forecast": string, "start_date": date, "end_date": date, "budget": string, "technology": string, "constraints": string, "validation": string, "team_user": string}|
-| /api/project/:id | GET PATCH DELETE | { "name": string, "description": string, "functionality": string, "forecast": string, "start_date": date, "end_date": date, "budget": string, "technology": string, "constraints": string, "validation": string, "team_user": string}|
-| /api/project/user/:userid | GET ||
-| /api/cdc/:id | GET PATCH DELETE | { "cdc": string }|
-| /api/cdc/user/:userid | GET ||
-| /api/cdc/project/:projectid | GET ||
-| /api/planning | POST | { "project_id": string, "start_date": date, "end_date": date }|
-| /api/planning/:id | GET PATCH DELETE | { "start_date": date, "end_date": date }|
-| /api/planning/project/:projectid | GET ||
-| /api/ticket | POST | { "start_date": date, "end_date": date, "planning_id", string, "user_id": string, "title": string }|
-| /api/ticket/:id | GET PATCH DELETE | { "start_date": date, "end_date": date, "planning_id", string, "user_id": string, "title": string }|
-| /api/ticket/planning/:planningid | GET ||
-| /api/ticket/user/:userid | GET ||
-| /api/rex | POST | { "answer1": string, "answer2": string, "answer3": string, "project": string}|
-| /api/rex/:id | GET PATCH DELETE | { "answer1": string, "answer2": string, "answer3": string, "project": string}|
-| /api/rex/project/:projectid | GET ||
+| URL                              | Méthodes         | Body                                                                                                                                                                                                                                  |
+| :------------------------------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| /api/register                    | POST             | { "lastname": string, "firstname": string, "mail": string, "password": string }                                                                                                                                                       |
+| /api/login                       | POST             | { "mail", "password" }                                                                                                                                                                                                                |
+| /api/user/:id                    | GET PATCH DELETE | { "lastname": string, "firstname": string, "mail": string, "password": string }                                                                                                                                                       |
+| /api/requestResetPassword        | POST             | { "lastname": string, "firstname": string, "mail": string, "password": string }                                                                                                                                                       |
+| /api/resetPassword               | PATCH            |                                                                                                                                                                                                                                       |
+| /api/team                        | POST             | { "name": string }                                                                                                                                                                                                                    |
+| /api/teamuser                    | POST             | { "team_id": string, "user_id": string }                                                                                                                                                                                              |
+| /api/teamuser/:id                | GET DELETE       |                                                                                                                                                                                                                                       |
+| /api/team/:id                    | GET PATCH DELETE | { "name": string }                                                                                                                                                                                                                    |
+| /api/project/:teamid/:userid     | POST             | { "name": string, "description": string, "functionality": string, "forecast": string, "start_date": date, "end_date": date, "budget": string, "technology": string, "constraints": string, "validation": string, "team_user": string} |
+| /api/project/:id                 | GET PATCH DELETE | { "name": string, "description": string, "functionality": string, "forecast": string, "start_date": date, "end_date": date, "budget": string, "technology": string, "constraints": string, "validation": string, "team_user": string} |
+| /api/project/user/:userid        | GET              |                                                                                                                                                                                                                                       |
+| /api/cdc/:id                     | GET PATCH DELETE | { "cdc": string }                                                                                                                                                                                                                     |
+| /api/cdc/user/:userid            | GET              |                                                                                                                                                                                                                                       |
+| /api/cdc/project/:projectid      | GET              |                                                                                                                                                                                                                                       |
+| /api/planning                    | POST             | { "project_id": string, "start_date": date, "end_date": date }                                                                                                                                                                        |
+| /api/planning/:id                | GET PATCH DELETE | { "start_date": date, "end_date": date }                                                                                                                                                                                              |
+| /api/planning/project/:projectid | GET              |                                                                                                                                                                                                                                       |
+| /api/ticket                      | POST             | { "start_date": date, "end_date": date, "planning_id", string, "user_id": string, "title": string }                                                                                                                                   |
+| /api/ticket/:id                  | GET PATCH DELETE | { "start_date": date, "end_date": date, "planning_id", string, "user_id": string, "title": string }                                                                                                                                   |
+| /api/ticket/planning/:planningid | GET              |                                                                                                                                                                                                                                       |
+| /api/ticket/user/:userid         | GET              |                                                                                                                                                                                                                                       |
+| /api/rex                         | POST             | { "answer1": string, "answer2": string, "answer3": string, "project": string}                                                                                                                                                         |
+| /api/rex/:id                     | GET PATCH DELETE | { "answer1": string, "answer2": string, "answer3": string, "project": string}                                                                                                                                                         |
+| /api/rex/project/:projectid      | GET              |                                                                                                                                                                                                                                       |
 
 ## API Publique
 
@@ -402,4 +387,4 @@ inconnu
 Illustration 1: [Architecture Global](#architecture-globale)  
 Illustration 2: [Front - Architecture](#architecture)  
 Illustration 3: [Back - Architecture](#architecture-1)  
-Illustration 4: [Back - Modèle de données](#modèle-de-données)  
+Illustration 4: [Back - Modèle de données](#modèle-de-données)
