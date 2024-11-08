@@ -46,6 +46,7 @@ export default function WelcomePage() {
 			setScrollAmount(newScrollAmount);
 		}
 	};
+	console.log(process.env.NEXT_PUBLIC_API_URL)
 	return (
 		<>
 			<header className='header'>
@@ -90,7 +91,7 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-				Alliance de simplicité et d&aposefficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
+					Alliance de simplicité et d&aposefficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
