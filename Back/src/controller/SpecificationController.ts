@@ -479,7 +479,7 @@ export class SpecificationController {
 		// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
 		// 		}
 		// 	});
-		await sendMessage(
+		sendMessage(
 			content,
 			cdc,
 			cdc_input,
