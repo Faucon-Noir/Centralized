@@ -46,7 +46,7 @@ export default function WelcomePage() {
 			setScrollAmount(newScrollAmount);
 		}
 	};
-	console.log(process.env.NEXT_PUBLIC_API_URL)
+	console.log(process.env.NEXT_PUBLIC_API_URL);
 	return (
 		<>
 			<header className='header'>
@@ -91,7 +91,10 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-					Alliance de simplicité et d&aposefficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
+					Alliance de simplicité et d&apos;efficacité pour une gestion
+					de projet optimale. Avec ses fonctionnalités intuitives de
+					suivi, chaque tâche, équipe et objectif est parfaitement
+					visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -181,42 +184,67 @@ export default function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>💡</div>
 							<div className='title'>Gestion de projet</div>
-							<div className='description'>Planifiez et suivez vos projets de bout en bout</div>
+							<div className='description'>
+								Planifiez et suivez vos projets de bout en bout
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📊</div>
 							<div className='title'>Gestion des tâches</div>
-							<div className='description'>Organisez et priorisez chaque tâche avec une vision claire</div>
+							<div className='description'>
+								Organisez et priorisez chaque tâche avec une
+								vision claire
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🚀</div>
 							<div className='title'>Suivi des équipes</div>
-							<div className='description'>Gérez vos équipes efficacement et suivez les contribution</div>
+							<div className='description'>
+								Gérez vos équipes efficacement et suivez les
+								contribution
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📅</div>
 							<div className='title'>Calendrier intégré</div>
-							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d&aposœil</div>
+							<div className='description'>
+								Visualisez les deadlines et les jalons clés en
+								un coup d&apos;œil
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🎟️</div>
 							<div className='title'>Gestion des tickets</div>
-							<div className='description'>Suivez les demandes et résolvez les incidents via un kanban intuitif</div>
+							<div className='description'>
+								Suivez les demandes et résolvez les incidents
+								via un kanban intuitif
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🚀</div>
 							<div className='title'>Cahiers des charges</div>
-							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l&aposIA</div>
+							<div className='description'>
+								Créez des spécifications de projet en quelques
+								clics grâce à l&apos;IA
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>✨</div>
-							<div className='title'>Retour d&aposexpérience</div>
-							<div className='description'>Analysez les résultats et optimisez vos processus pour les futurs projets</div>
+							<div className='title'>
+								Retour d&apos;expérience
+							</div>
+							<div className='description'>
+								Analysez les résultats et optimisez vos
+								processus pour les futurs projets
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📈</div>
 							<div className='title'>Performance</div>
-							<div className='description'>Évaluez l&aposavancement et la performance en temps réel</div>
+							<div className='description'>
+								Évaluez l&apos;avancement et la performance en
+								temps réel
+							</div>
 						</div>
 						{/* /!* Add more blocks as needed *!/ */}
 					</div>
