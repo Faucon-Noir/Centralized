@@ -345,7 +345,7 @@ export class SpecificationController {
 				". Nom de l'équipe: " +
 				team.getName() +
 				". Chaque membre de l'équipe et leurs role: " +
-				params.getTeamUser();
+				params.getTeamRole();
 
 			//on definie le model et le message à l'ia
 			const data = {

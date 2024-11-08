@@ -47,7 +47,7 @@ export class Project {
 	private color: number;
 
 	@Column()
-	private team_user: string;
+	private teamRole: string;
 
 	@Column()
 	private template: string;
@@ -91,7 +91,7 @@ export class Project {
 		this.validation = validation;
 		this.template = template;
 		this.status = status;
-		this.team_user = this.team_user;
+		this.teamRole = this.teamRole;
 		this.color = color;
 	}
 
@@ -179,11 +179,11 @@ export class Project {
 	public getUser(): User {
 		return this.user;
 	}
-	public setTeamUser(team_user: string): void {
-		this.team_user = team_user;
+	public setTeamRole(teamRole: string): void {
+		this.teamRole = teamRole;
 	}
-	public getTeamUser(): string {
-		return this.team_user;
+	public getTeamRole(): string {
+		return this.teamRole;
 	}
 	public setColor(color: number): void {
 		this.color = color;

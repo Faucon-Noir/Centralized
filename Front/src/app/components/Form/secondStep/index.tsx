@@ -26,7 +26,7 @@ function SecondStep({
 		technology: '',
 		constraints: '',
 		validation: '',
-		teamUser: '',
+		teamRole: '',
 		template: 0,
 		status: false,
 	});
@@ -141,13 +141,13 @@ function SecondStep({
 						<option value=''>Veuillez choisir une équipe</option>
 						{userData?.team
 							? userData?.team.map((item: any) => (
-									<option
-										key={item.team.id}
-										value={item.team.id}
-									>
-										{item.team.name}
-									</option>
-								))
+								<option
+									key={item.team.id}
+									value={item.team.id}
+								>
+									{item.team.name}
+								</option>
+							))
 							: null}
 					</select>
 				</div>
@@ -194,7 +194,7 @@ function SecondStep({
 						onChange={(e) =>
 							setProject({
 								...project,
-								teamUser: e.target.value.trim(),
+								teamRole: e.target.value.trim(),
 							})
 						}
 					/>

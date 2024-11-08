@@ -20,7 +20,7 @@ function SpecificationForm({ userData }: any) {
 		technology: '',
 		constraints: '',
 		validation: '',
-		teamUser: '',
+		teamRole: '',
 		template: 0,
 		status: false,
 	});
@@ -111,7 +111,7 @@ function SpecificationForm({ userData }: any) {
 						onChange={(e) =>
 							setProject({
 								...project,
-								teamUser: e.target.value.trim(),
+								teamRole: e.target.value.trim(),
 							})
 						}
 					/>
@@ -161,13 +161,13 @@ function SpecificationForm({ userData }: any) {
 						<option value=''>Veuillez choisir une équipe</option>
 						{userData?.team
 							? userData?.team.map((item: any) => (
-									<option
-										key={item.team.id}
-										value={item.team.id}
-									>
-										{item.team.name}
-									</option>
-								))
+								<option
+									key={item.team.id}
+									value={item.team.id}
+								>
+									{item.team.name}
+								</option>
+							))
 							: null}
 					</select>
 				</div>
@@ -210,7 +210,7 @@ function SpecificationForm({ userData }: any) {
 					!project.technology ||
 					!project.constraints ||
 					!project.validation ||
-					!project.teamUser
+					!project.teamRole
 				}
 			>
 				Générer
