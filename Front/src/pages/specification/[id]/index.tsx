@@ -1,77 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
-// import { FormEvent } from 'react'
-// import { useRouter } from 'next/router'
-// import "./style.scss"
-// import { Grid } from "@mui/material";
-// import { jwtDecode } from "jwt-decode";
-// import { useEffect, useState } from "react";
-
-// import { useCallback } from 'react';
-// import Dashboard from "@/app/components/Dashboard/Dashboard";
-
-// export default function SpecificationEdit({ userData, updateUserData }: { userData: any, updateUserData: any }) {
-//   const router = useRouter();
-//   const [project, setProject] = useState<string>('');
-//   const [specification, setSpecification] = useState<string>('');
-//   const [mySpecification, setMySpecification] = useState<{ charge: string }>({ charge: "" });
-//   let contentText: string = '';
-//   const [text, setText] = useState<string | undefined>(contentText);
-
-//   if (typeof window !== 'undefined') {
-
-//     const isAuth: boolean = !!localStorage.getItem("token");
-//     let user_id: string = "";
-//     if (isAuth) {
-//       const token: any = localStorage.getItem("token");
-//       const decodeToken: any = jwtDecode(token);
-//       user_id = decodeToken["id"];
-
-//       useEffect(() => {
-//         let idProject = new URL(window.location.href).pathname.split('/')[2]
-//         setProject(idProject)
-//         if (!idProject) {
-//           router.push("/specification");
-//         }
-//         //GET PROJECT OF USER
-//         try {
-//           axios.get(`http://localhost:8000/api/cdc/project/${idProject}`, {
-//             headers: { Authorization: `Bearer ${token}` }
-//           }).then(res => {
-//             let new_specification = res.data.cdc;
-//             setMySpecification({ charge: new_specification })
-//             setText(new_specification)
-//             setSpecification(res.data.id)
-//           })
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       }, [router, token]);
-
-//     }
-//   }
-
-//   console.log(userData)
-
-//   return (
-//     <div>
-
-//       <form onSubmit={handleSubmit}>
-//         <div className="box-specification">
-//           <CustomEditor content={mySpecification.charge} onChange={(value: string) => handleChangeContentText(value)} />
-//           <button type="submit">
-//             <CheckIcon />
-//           </button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// }
-
-/* eslint-disable react-hooks/rules-of-hooks */
-'use client';
-
 import './style.scss';
 import { FormEvent, useCallback } from 'react';
 import { useRouter } from 'next/router';
@@ -103,6 +32,7 @@ export default function SpecificationEdit({
 	const [projectPageID, setprojectPageID] = useState('');
 	const [text, setText] = useState<string | undefined>('');
 	const [showPopPup, setShowPopPup] = useState(false);
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
 		if (userData.project.length > 0) {
@@ -122,7 +52,7 @@ export default function SpecificationEdit({
 		// TODO: data a revoir => x n'exsite pas sur le type EventTarget
 		axios
 			.patch(
-				`http://localhost:8000/api/cdc/${projectMap[projectPageID]?.cdc?.id}`,
+				`${baseUrl}cdc/${projectMap[projectPageID]?.cdc?.id}`,
 				{
 					cdc: text,
 				},

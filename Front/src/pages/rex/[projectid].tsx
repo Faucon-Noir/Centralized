@@ -6,7 +6,6 @@ import './style.scss';
 import axios, { AxiosResponse } from 'axios';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import RexCard from '@/app/components/Card/rexCard/index';
 export default function Page({
 	userData,
 	updateUserData,
@@ -47,6 +46,7 @@ export default function Page({
 		constraints: '',
 	});
 	const [isError, setIsError] = useState<number>(0);
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
 		for (let project of userData.project) {
@@ -74,7 +74,7 @@ export default function Page({
 		if (statusError == 0) {
 			axios
 				.post(
-					`http://localhost:8000/api/rex`,
+					`${baseUrl}rex`,
 					{
 						project: project.id,
 						answer1: myRex.rexReussite.trim(),

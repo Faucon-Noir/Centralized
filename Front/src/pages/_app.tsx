@@ -86,11 +86,10 @@ export default function App({ Component, pageProps }: AppProps) {
 	if (loading) {
 		return <div>En attente</div>;
 	}
-	console.log(Component.name)
+	console.log(Component.name);
 	return (
 		<main className={myFont.className} style={{ height: '100%' }}>
-			{Component.name == 'b' ||
-				Component.name == 'h' ? (
+			{Component.name == 'b' || Component.name == 'h' ? (
 				<Component {...pageProps} />
 			) : (
 				<AuthWrapper>
