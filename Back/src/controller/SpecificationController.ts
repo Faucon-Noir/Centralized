@@ -69,6 +69,7 @@ async function sendMessage(
 	cdcRepository,
 	project_input
 ) {
+	console.log("coucou je suis dans le fonction la !")
 	const streamResult = await chat.sendMessageStream(message);
 	cdc = JSON.stringify(
 		(await streamResult.response).candidates[0].content.parts[0].text
@@ -374,133 +375,130 @@ export class SpecificationController {
 		if (!planning_input) throw new Error("Planning not created");
 		await this.planningRepository.save(planning_input);
 		console.log(`Planning créé: ${planning_input.getId()}`);
-		try {
-			//On créé la requete a l'ia
-			const dataread = await fs.promises.readFile(
-				__filename + `/../../template/Template_1.txt`,
-				"utf8"
-			);
-			let content =
-				"La génération doit etre en HTML. En suivant ce plan: " +
-				dataread +
-				" Génère un cahier des charges comme si un humain l'avais rédigé en ajoutant des informations correspondant au projet et en developpant d'avantage le projet pour remplir toutes les catégories pour un projet appelé " +
-				params.getName() +
-				". Description du projet: " +
-				params.getDescription() +
-				". Développe d'avantage la description du projet et justifie le besoin de ce projet. Liste des fonctionnalités: " +
-				params.getFunctionality() +
-				". Developpe la rédatio autour de ces fonctionnalité. Planning prévisionnel: " +
-				params.getForecast() +
-				". Date de début: " +
-				params.getStartDate() +
-				". Date de fin: " +
-				params.getEndDate() +
-				". Budget: " +
-				params.getBudget() +
-				". Estimme comment ce budget va etre dépensé et justifie le. Technologies du projet: " +
-				params.getTechnology() +
-				". Jusitifie le choix de ses technologies dans un developpement complet. Les contraintes techniques: " +
-				params.getConstraints() +
-				". Condition de validation du projet: " +
-				params.getValidation() +
-				". Chef de projet: " +
-				user.getFirstname() +
-				" " +
-				user.getLastname() +
-				". Nom de l'équipe: " +
-				team.getName() +
-				". Chaque membre de l'équipe et leurs role: " +
-				params.getTeamRole();
+		//On créé la requete a l'ia
+		const dataread = await fs.promises.readFile(
+			__dirname + `/../template/Template_1.txt`,
+			"utf8"
+		);
+		let content =
+			"La génération doit etre en HTML. En suivant ce plan: " +
+			dataread +
+			" Génère un cahier des charges comme si un humain l'avais rédigé en ajoutant des informations correspondant au projet et en developpant d'avantage le projet pour remplir toutes les catégories pour un projet appelé " +
+			params.getName() +
+			". Description du projet: " +
+			params.getDescription() +
+			". Développe d'avantage la description du projet et justifie le besoin de ce projet. Liste des fonctionnalités: " +
+			params.getFunctionality() +
+			". Developpe la rédatio autour de ces fonctionnalité. Planning prévisionnel: " +
+			params.getForecast() +
+			". Date de début: " +
+			params.getStartDate() +
+			". Date de fin: " +
+			params.getEndDate() +
+			". Budget: " +
+			params.getBudget() +
+			". Estimme comment ce budget va etre dépensé et justifie le. Technologies du projet: " +
+			params.getTechnology() +
+			". Jusitifie le choix de ses technologies dans un developpement complet. Les contraintes techniques: " +
+			params.getConstraints() +
+			". Condition de validation du projet: " +
+			params.getValidation() +
+			". Chef de projet: " +
+			user.getFirstname() +
+			" " +
+			user.getLastname() +
+			". Nom de l'équipe: " +
+			team.getName() +
+			". Chaque membre de l'équipe et leurs role: " +
+			params.getTeamRole();
 
-			//on definie le model et le message à l'ia
-			const data = {
-				model: process.env.IA_MODEL,
-				messages: [{ role: "user", content: content }],
-				temperature: 0,
-			};
+		//on definie le model et le message à l'ia
+		const data = {
+			model: process.env.IA_MODEL,
+			messages: [{ role: "user", content: content }],
+			temperature: 0,
+		};
 
-			//On prépare la configuration avec la clef d'api openia et le type
-			const config = {
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${process.env.API_KEY}`,
-				},
-			};
+		//On prépare la configuration avec la clef d'api openia et le type
+		const config = {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${process.env.API_KEY}`,
+			},
+		};
 
-			//on definie le model de backup et le message à l'ia
-			const databackup = {
-				model: process.env.BACKUP_IA_MODEL,
-				messages: [{ role: "user", content: content }],
-				temperature: 0,
-			};
+		//on definie le model de backup et le message à l'ia
+		const databackup = {
+			model: process.env.BACKUP_IA_MODEL,
+			messages: [{ role: "user", content: content }],
+			temperature: 0,
+		};
 
-			//On prépare la configuration avec la clef d'api backup et le type
-			const configbackup = {
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${process.env.BACKUP_API_KEY}`,
-				},
-			};
+		//On prépare la configuration avec la clef d'api backup et le type
+		const configbackup = {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${process.env.BACKUP_API_KEY}`,
+			},
+		};
 
-			// Requete axios a l'api open ai
-			console.log("requete ia");
-			// axios
-			// 	.post(process.env.IA_URL, data, config)
-			// 	.then((response) => {
-			// 		console.log(response.data.choices[0].message.content);
-			// 		cdc = response.data.choices[0].message.content;
-			// 		cdc = cdc.replace(/```html/g, "");
-			// 		cdc = cdc.split("```")[0];
-			// 		cdc_input.setCdc(cdc);
-			// 		cdc_input.setProject(project_input);
-			// 		this.cdcRepository.save(cdc_input);
-			// 		console.log(`Cahier des charges créé`);
-			// 		requestStatus.finished = true;
-			// 		requestStatus.data = response.data;
-			// 		return cdc;
-			// 	})
-			// 	.catch(async (error) => {
-			// 		console.error("Error:", error);
-			// 		// If the first request fails, try a backup URL
-			// 		console.log("Backup request ia");
-			// 		try {
-			// 			const backupResponse = await axios.post(process.env.BACKUP_IA_URL, databackup, configbackup);
-			// 			console.log(backupResponse.data.choices[0].message.content);
-			// 			cdc = backupResponse.data.choices[0].message.content;
-			// 			cdc_input.setCdc(cdc);
-			// 			cdc_input.setProject(project_input);
-			// 			this.cdcRepository.save(cdc_input);
-			// 			console.log(`Cahier des charges créé (backup)`);
-			// 			requestStatus.finished = true;
-			// 			requestStatus.data = cdc_input;
-			// 			return cdc;
-			// 		} catch (backupError) {
-			// 			console.error("Backup Error:", backupError);
-			// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
-			// 		}
-			// 	});
-			sendMessage(
-				content,
-				cdc,
-				cdc_input,
-				this.cdcRepository,
-				project_input
-			);
+		// Requete axios a l'api open ai
+		console.log("requete ia");
+		// axios
+		// 	.post(process.env.IA_URL, data, config)
+		// 	.then((response) => {
+		// 		console.log(response.data.choices[0].message.content);
+		// 		cdc = response.data.choices[0].message.content;
+		// 		cdc = cdc.replace(/```html/g, "");
+		// 		cdc = cdc.split("```")[0];
+		// 		cdc_input.setCdc(cdc);
+		// 		cdc_input.setProject(project_input);
+		// 		this.cdcRepository.save(cdc_input);
+		// 		console.log(`Cahier des charges créé`);
+		// 		requestStatus.finished = true;
+		// 		requestStatus.data = response.data;
+		// 		return cdc;
+		// 	})
+		// 	.catch(async (error) => {
+		// 		console.error("Error:", error);
+		// 		// If the first request fails, try a backup URL
+		// 		console.log("Backup request ia");
+		// 		try {
+		// 			const backupResponse = await axios.post(process.env.BACKUP_IA_URL, databackup, configbackup);
+		// 			console.log(backupResponse.data.choices[0].message.content);
+		// 			cdc = backupResponse.data.choices[0].message.content;
+		// 			cdc_input.setCdc(cdc);
+		// 			cdc_input.setProject(project_input);
+		// 			this.cdcRepository.save(cdc_input);
+		// 			console.log(`Cahier des charges créé (backup)`);
+		// 			requestStatus.finished = true;
+		// 			requestStatus.data = cdc_input;
+		// 			return cdc;
+		// 		} catch (backupError) {
+		// 			console.error("Backup Error:", backupError);
+		// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
+		// 		}
+		// 	});
+		await sendMessage(
+			content,
+			cdc,
+			cdc_input,
+			this.cdcRepository,
+			project_input
+		);
 
-			//on appelle la fonction de création de ticket
-			createTicket(
-				params,
-				project_input,
-				planning_input,
-				user,
-				this.planningRepository,
-				this.ticketRepository
-			);
+		//on appelle la fonction de création de ticket
+		createTicket(
+			params,
+			project_input,
+			planning_input,
+			user,
+			this.planningRepository,
+			this.ticketRepository
+		);
 
-			return { status: requestStatus.finished };
-		} catch (error) {
-			return { error: error.message };
-		}
+		return { status: requestStatus.finished };
+
 	}
 
 	@Get("/specification/check-status")
