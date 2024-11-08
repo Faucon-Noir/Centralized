@@ -312,6 +312,13 @@ export class SpecificationController {
 
 		await this.projectRepository.save(project_input);
 		console.log(`Projet créé: ${project_input.getId()}`);
+
+		//On initie planning_input qu'on rentrera en base de donnée
+		const planning_input: Planning = new Planning(params.getStartDate(), params.getEndDate());
+		planning_input.setProject(project_input);
+		if (!planning_input) throw new Error("Planning not created");
+		await this.planningRepository.save(planning_input);
+		console.log(`Planning créé: ${planning_input.getId()}`);
 		try {
 			//On créé la requete a l'ia
 			const dataread = await fs.promises.readFile(__filename + `/../../template/Template_1.txt`, "utf8");
@@ -416,13 +423,7 @@ export class SpecificationController {
 			// 	});
 			let cdcIA = sendMessage(content, cdc, cdc_input, this.cdcRepository, project_input);
 			this.cdcRepository.save(cdcIA)
-			//On initie planning_input qu'on rentrera en base de donnée
-			const planning_input: Planning = new Planning(params.getStartDate(), params.getEndDate());
-			planning_input.setProject(project_input);
-			if (!planning_input) throw new Error("Planning not created");
-			console.log(planning_input)
-			await this.planningRepository.save(planning_input);
-			console.log(`Planning créé: ${planning_input.getId()}`);
+
 
 			//on appelle la fonction de création de ticket
 			createTicket(params, project_input, planning_input, user, this.planningRepository, this.ticketRepository);

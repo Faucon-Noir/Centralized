@@ -113,7 +113,7 @@ export default function TeamCard({
 			>
 				<div className='card-header yellow'>
 					<img
-						src={'./media/' + team.avatar}
+						src={'/media/' + team.avatar}
 						alt='avatar'
 						className='avatar'
 						onError={(e) => {
@@ -144,7 +144,7 @@ export default function TeamCard({
 						<div className='team_main_modal_content'>
 							<div className='image_container'>
 								<img
-									src={'./media/' + team.avatar}
+									src={'/media/' + team.avatar}
 									alt='avatar'
 									className='avatar'
 									onError={(e) => {
