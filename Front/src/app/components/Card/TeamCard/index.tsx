@@ -21,10 +21,12 @@ export default function TeamCard({
 	const [showModal, setShowModal] = useState(false);
 	const [validEmail, setValidEmail] = useState(false);
 
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 	useEffect(() => {
 		try {
 			axios
-				.get('http://localhost:8000/api/teamuser/' + team.id, {
+				.get(`${baseUrl}teamuser/` + team.id, {
 					headers: { Authorization: `Bearer ${userData.user.token}` },
 				})
 				.then((res) => {
@@ -32,10 +34,11 @@ export default function TeamCard({
 						setTeamData(res.data);
 					}
 				});
+			console.log('API URL', baseUrl);
 		} catch (e) {
 			console.log(e);
 		}
-	}, [team.id, userData.user.token]);
+	}, [baseUrl, team.id, userData.user.token]);
 
 	function validateEmail(email: any) {
 		return String(email)
@@ -49,14 +52,11 @@ export default function TeamCard({
 		console.log(selectedTeamUser);
 		try {
 			await axios
-				.delete(
-					'http://localhost:8000/api/teamuser/' + selectedTeamUser.id,
-					{
-						headers: {
-							Authorization: `Bearer ${userData.user.token}`,
-						},
-					}
-				)
+				.delete(`${baseUrl}teamuser/` + selectedTeamUser.id, {
+					headers: {
+						Authorization: `Bearer ${userData.user.token}`,
+					},
+				})
 				.then((res) => {
 					if (res.status === 200) {
 						if (selectedTeamUser.user.id == userData.user.id)
@@ -78,7 +78,7 @@ export default function TeamCard({
 	async function addMateToTeam(email: any, teamid: any) {
 		console.log(email, teamid);
 		let response = await axios.post(
-			`http://localhost:8000/api/teamuser`,
+			`${baseUrl}teamuser/`,
 			{ user: email, team: teamid },
 			{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 		);
@@ -86,7 +86,7 @@ export default function TeamCard({
 
 	async function handleFinish() {
 		let response = await axios.patch(
-			'http://localhost:8000/api/team/' + selectedTeam.id,
+			`${baseUrl}team/` + selectedTeam.id,
 			selectedTeam,
 			{
 				headers: { Authorization: `Bearer ${userData.user.token}` },

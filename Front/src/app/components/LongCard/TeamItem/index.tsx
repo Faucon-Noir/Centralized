@@ -6,28 +6,6 @@ import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import axios from 'axios';
 
 function TeamItem({ id, avatar, name, onOpen, onDelete }: TeamListItemProps) {
-	// const token = useTypedSelector((state) => state.auth.token);
-	// onDelete = () => {
-	// 	console.log('id', id);
-	// 	axios
-	// 		.delete(`http://localhost:8000/api/team/${id}`, {
-	// 			headers: {
-	// 				Authorization: `Bearer ${token}`,
-	// 			},
-	// 		})
-	// 		.then(function (response) {
-	// 			console.log(response);
-	// 			if (response.status === 200) {
-	// 				console.log('deleted', id);
-	// 				console.log('response', response.data);
-	// 				window.location.reload();
-	// 			}
-	// 		})
-	// 		.catch(function (error) {
-	// 			console.log('error', error);
-	// 			alert('Une erreur est survenue');
-	// 		});
-	// };
 	return (
 		<>
 			<Avatar

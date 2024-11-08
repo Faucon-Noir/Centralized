@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async function getUserTeamProject(id: string, token: string) {
-    try {
-        let response = await axios.get("http://localhost:8000/api/teamuser/project/" + id, {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        return response.data;
-    } catch (e) {
-        console.log(e)
-    }
-
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+	try {
+		let response = await axios.get(`${baseUrl}teamuser/project/` + id, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return response.data;
+	} catch (e) {
+		console.log(e);
+	}
 }

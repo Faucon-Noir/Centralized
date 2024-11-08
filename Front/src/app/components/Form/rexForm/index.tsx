@@ -15,6 +15,7 @@ function RexForm({ userData, RexData, idProject, color }: any) {
 		rexAmelioration: RexData.rexAmelioration,
 		isForm: RexData.isForm,
 	});
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 	useEffect(() => {
 		setMyRex(RexData);
@@ -23,7 +24,7 @@ function RexForm({ userData, RexData, idProject, color }: any) {
 		if (await checkFilledForm(myRex)) {
 			//start the request create rex
 			await axios.post(
-				`http://localhost:8000/api/rex`,
+				`${baseUrl}rex`,
 				{
 					project: idProject,
 					answer1: myRex.rexReussite.trim(),
