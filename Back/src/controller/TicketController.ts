@@ -265,7 +265,7 @@ export class TicketController {
 				where: { project: { id: projectid } },
 			});
 			if (!planning) throw new Error("Ticket not found");
-
+			console.log(planning)
 			const ticket: Ticket = await this.ticketRepository.find({
 				where: { planning: { id: planning[0].getId() } },
 				order: { start_date: "ASC" },
@@ -646,7 +646,7 @@ export class TicketController {
 		try {
 			const tickets = await this.ticketRepository
 				.createQueryBuilder("ticket")
-				.innerJoin("ticket.planning","planning")
+				.innerJoin("ticket.planning", "planning")
 				.innerJoin(
 					"ticket.user",
 					"user",

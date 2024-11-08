@@ -414,11 +414,13 @@ export class SpecificationController {
 			// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
 			// 		}
 			// 	});
-			sendMessage(content, cdc, cdc_input, this.cdcRepository, project_input);
+			let cdcIA = sendMessage(content, cdc, cdc_input, this.cdcRepository, project_input);
+			this.cdcRepository.save(cdcIA)
 			//On initie planning_input qu'on rentrera en base de donnée
 			const planning_input: Planning = new Planning(params.getStartDate(), params.getEndDate());
 			planning_input.setProject(project_input);
 			if (!planning_input) throw new Error("Planning not created");
+			console.log(planning_input)
 			await this.planningRepository.save(planning_input);
 			console.log(`Planning créé: ${planning_input.getId()}`);
 
