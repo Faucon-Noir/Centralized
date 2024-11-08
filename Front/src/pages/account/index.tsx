@@ -128,7 +128,7 @@ export default function AccountPage({
 			<div style={{ display: 'block' }}>
 				<div className='profile-photo' style={{ position: 'relative' }}>
 					<Avatar
-						src={avatarPreview || `/media/${user.avatar}`}
+						src={avatarPreview || `./media/${user.avatar}`}
 						sx={{ height: '100%', width: '100%' }}
 					/>
 					<div id='inner' className='inner' onClick={handleClickOpen}>

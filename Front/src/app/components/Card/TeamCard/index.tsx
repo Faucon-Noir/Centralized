@@ -113,7 +113,7 @@ export default function TeamCard({
 			>
 				<div className='card-header yellow'>
 					<img
-						src={'/media/' + team.avatar}
+						src={'./media/' + team.avatar}
 						alt='avatar'
 						className='avatar'
 						onError={(e) => {
@@ -144,7 +144,7 @@ export default function TeamCard({
 						<div className='team_main_modal_content'>
 							<div className='image_container'>
 								<img
-									src={'/media/' + team.avatar}
+									src={'./media/' + team.avatar}
 									alt='avatar'
 									className='avatar'
 									onError={(e) => {
@@ -167,41 +167,41 @@ export default function TeamCard({
 								<div className='user_container'>
 									{teamData
 										? teamData.map((item: any) => (
-												<div
-													className='one_user'
-													key={item.id}
-												>
-													<p>
-														<img
-															src='/assets/icons/user.png'
-															alt=''
-														/>{' '}
-														: {item.user.lastname}{' '}
-														{item.user.firstname}
-													</p>
-													{item.user.id ===
-													userData.user.id ? (
-														<p>(vous)</p>
-													) : null}
-													<p>
-														<img
-															src='/assets/icons/email.png'
-															alt=''
-														/>{' '}
-														: {item.user.mail}
-													</p>
+											<div
+												className='one_user'
+												key={item.id}
+											>
+												<p>
 													<img
-														src='/assets/icons/bin.png'
-														className='bin_img'
+														src='/assets/icons/user.png'
 														alt=''
-														onClick={() =>
-															deleteUserFromTeam(
-																item
-															)
-														}
-													/>
-												</div>
-											))
+													/>{' '}
+													: {item.user.lastname}{' '}
+													{item.user.firstname}
+												</p>
+												{item.user.id ===
+													userData.user.id ? (
+													<p>(vous)</p>
+												) : null}
+												<p>
+													<img
+														src='/assets/icons/email.png'
+														alt=''
+													/>{' '}
+													: {item.user.mail}
+												</p>
+												<img
+													src='/assets/icons/bin.png'
+													className='bin_img'
+													alt=''
+													onClick={() =>
+														deleteUserFromTeam(
+															item
+														)
+													}
+												/>
+											</div>
+										))
 										: null}
 								</div>
 								<input

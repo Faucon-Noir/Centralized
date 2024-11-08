@@ -44,15 +44,17 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 		for (let project of userData.project) {
 			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
 				setSelectedProject(project);
-				for (let ticket of project.ticket.ticket) {
-					if (ticket.status === 'a faire') {
-						updatedTickets.todo.push(ticket);
-					} else if (ticket.status === 'résolu') {
-						updatedTickets.done.push(ticket);
-					} else if (ticket.status === 'en retard') {
-						updatedTickets.late.push(ticket);
-					} else if (ticket.status === 'en cours') {
-						updatedTickets.inprogress.push(ticket);
+				if (project.ticket.ticket != undefined) {
+					for (let ticket of project.ticket.ticket) {
+						if (ticket.status === 'a faire') {
+							updatedTickets.todo.push(ticket);
+						} else if (ticket.status === 'résolu') {
+							updatedTickets.done.push(ticket);
+						} else if (ticket.status === 'en retard') {
+							updatedTickets.late.push(ticket);
+						} else if (ticket.status === 'en cours') {
+							updatedTickets.inprogress.push(ticket);
+						}
 					}
 				}
 			}
