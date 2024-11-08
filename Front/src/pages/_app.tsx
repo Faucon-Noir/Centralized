@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [router.events]);
 
 	useEffect(() => {
-		if (Component.name != 'b' && Component.name != 'h') {
+		if (Component.name != 'LoginPage' && Component.name != 'WelcomePage') {
 			UserData().then((result) => {
 				setUserData(result);
 				setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
@@ -86,16 +86,16 @@ export default function App({ Component, pageProps }: AppProps) {
 	if (loading) {
 		return <div>En attente</div>;
 	}
-	console.log(Component.name)
+	console.log(Component.name);
 	return (
 		<main className={myFont.className} style={{ height: '100%' }}>
-			{Component.name == 'b' ||
-				Component.name == 'h' ? (
+			{Component.name == 'LoginPage' ||
+			Component.name == 'WelcomePage' ? (
 				<Component {...pageProps} />
 			) : (
 				<AuthWrapper>
 					<TaskProvider>
-						{Component.name === 'b' ? (
+						{Component.name === 'LoginPage' ? (
 							<Component {...pageProps} userData={userData} />
 						) : windowWidth >= 1280 ? (
 							<Grid container style={{ height: '100%' }}>
