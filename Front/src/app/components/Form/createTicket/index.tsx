@@ -1,27 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
-import styled from '@mui/system/styled';
-import { Button, Grid, TextField } from '@mui/material';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import getUserTeamProject from '@/utils/User/getUserTeamProject';
 function CreateTicketForm({ userData, selectedProject }: { userData: any, selectedProject: any }) {
     const [ticket, setTicket] = useState({
         start_date: new Date().toISOString().split('T')[0],
         end_date: new Date().toISOString().split('T')[0],
         planningId: selectedProject.ticket.planning[0].id,
-        userId: userData.user.id,
+        user: userData.user.id,
         title: '',
         urgenceId: 0,
         description: '',
         status: 'a faire',
     });
 
+    const [userTeam, setUserTeam] = useState([{}])
     async function handleSubmit() {
         let response = await axios.post(`http://localhost:8000/api/ticket`, ticket, { headers: { Authorization: `Bearer ${userData.user.token}` } });
         window.location.reload();
     }
+
+    useEffect(() => {
+        console.log(selectedProject.id)
+        getUserTeamProject(selectedProject.id, userData.user.token).then((result) => {
+            setUserTeam(result);
+        });
+	}, []);
     return (
         <div className='ticket_form'>
             <h3>Créez votre ticket</h3>
@@ -64,6 +70,29 @@ function CreateTicketForm({ userData, selectedProject }: { userData: any, select
                     <p>Description</p>
                     <textarea name="" id="" onChange={(e) => setTicket({ ...ticket, description: e.target.value })}></textarea>
                 </div>
+            </div>
+            <div>
+                <select
+                    onChange={(e) =>
+                        setTicket({
+                            ...ticket,
+                            user: e.target.value.trim(),
+                        })
+                    }
+                    required
+                >
+                    <option value=''>Veuillez choisir une personne</option>
+                    {userTeam.length > 0 ?
+                         userTeam.map((item: any) => (
+                                <option
+                                    key={item.id}
+                                    value={item.id}
+                                >
+                                    {item.user_firstname + ' ' + item.user_lastname}
+                                </option>
+                            ))
+                        : null}
+                </select>
             </div>
             <button className='next_btn' onClick={() => handleSubmit()}>
                 Valider

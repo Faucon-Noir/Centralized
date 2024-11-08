@@ -323,6 +323,7 @@ export class TeamController {
 					"user.lastname",
 					"user.bio",
 					"user.avatar as avatar",
+					"user.id as id"
 				])
 				.getRawMany();
 			if (!users_in_project) throw new Error("Project not found");
