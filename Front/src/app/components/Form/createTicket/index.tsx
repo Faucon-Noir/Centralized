@@ -13,8 +13,8 @@ function CreateTicketForm({
 	const [ticket, setTicket] = useState({
 		start_date: new Date().toISOString().split('T')[0],
 		end_date: new Date().toISOString().split('T')[0],
-		planningId: selectedProject.ticket.planning[0].id,
-		userId: userData.user.id,
+		planningId: selectedProject?.ticket?.planning[0]?.id,
+		userId: userData?.user?.id,
 		title: '',
 		urgenceId: 0,
 		description: '',
