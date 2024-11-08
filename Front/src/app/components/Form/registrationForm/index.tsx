@@ -48,6 +48,7 @@ function RegistrationForm() {
 			setIsErrorLogin(0);
 			axios
 				.post(`${baseUrl}login`, {
+
 					mail: user.mail.trim(),
 					password: user.password.trim(),
 				})
