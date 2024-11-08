@@ -1,4 +1,14 @@
-import { JsonController, Param, Body, Get, Post, Delete, Req, UseBefore, Patch } from "routing-controllers";
+import {
+	JsonController,
+	Param,
+	Body,
+	Get,
+	Post,
+	Delete,
+	Req,
+	UseBefore,
+	Patch,
+} from "routing-controllers";
 import { AppDataSource } from "../db/data-source";
 import { Planning } from "../entity/Planning";
 import { Project } from "../entity/Project";
@@ -19,14 +29,18 @@ import { SpecificationDto } from "../dto/SpecificationDto";
 import { VertexAI } from "@google-cloud/vertexai";
 
 // Set up the environment variable for Google Application Credentials
-process.env.GOOGLE_APPLICATION_CREDENTIALS = "src/config/centralized-434707-97b21344aa62.json";
+process.env.GOOGLE_APPLICATION_CREDENTIALS =
+	"src/config/centralized-434707-97b21344aa62.json";
 
 dotenv.config();
 
 // TODO: Retourner un statut pending tant que l'ia n'as aps terminé de créer un
 
 // Initialize Vertex with the centralized AI project, server, and base model
-const vertex_ai = new VertexAI({ project: "centralized-434707", location: "europe-west9" });
+const vertex_ai = new VertexAI({
+	project: "centralized-434707",
+	location: "europe-west9",
+});
 const model = "gemini-1.5-flash-002";
 let cdc: any;
 
@@ -48,9 +62,17 @@ const chat = generativeModel.startChat({});
  * @param {String} message - Input prompt
  * @returns {String} Generated requirements document as JSON, with newline and quotes at the start/end removed
  */
-async function sendMessage(message, cdc, cdc_input, cdcRepository, project_input) {
+async function sendMessage(
+	message,
+	cdc,
+	cdc_input,
+	cdcRepository,
+	project_input
+) {
 	const streamResult = await chat.sendMessageStream(message);
-	cdc = JSON.stringify((await streamResult.response).candidates[0].content.parts[0].text)
+	cdc = JSON.stringify(
+		(await streamResult.response).candidates[0].content.parts[0].text
+	)
 		.replace(/\\n/g, " ")
 		.replace(/^"|"$/g, "");
 	cdc = cdc.replace(/```html/g, "");
@@ -112,19 +134,27 @@ function parseDurations(input: string, startDateString: string): Date[] {
 
 			switch (unit) {
 				case "month":
-					newDate = new Date(startDate.getTime() + value * 31 * 24 * 60 * 60 * 1000);
+					newDate = new Date(
+						startDate.getTime() + value * 31 * 24 * 60 * 60 * 1000
+					);
 					break;
 				case "week":
 				case "weeks":
-					newDate = new Date(startDate.getTime() + value * 7 * 24 * 60 * 60 * 1000);
+					newDate = new Date(
+						startDate.getTime() + value * 7 * 24 * 60 * 60 * 1000
+					);
 					break;
 				case "day":
 				case "days":
-					newDate = new Date(startDate.getTime() + value * 24 * 60 * 60 * 1000);
+					newDate = new Date(
+						startDate.getTime() + value * 24 * 60 * 60 * 1000
+					);
 					break;
 				case "hour":
 				case "hours":
-					newDate = new Date(startDate.getTime() + value * 60 * 60 * 1000);
+					newDate = new Date(
+						startDate.getTime() + value * 60 * 60 * 1000
+					);
 					break;
 				default:
 					continue; // Unsupported unit
@@ -146,9 +176,19 @@ function parseDurations(input: string, startDateString: string): Date[] {
  * @param {any} planningRepository
  * @param {any} ticketRepository
  */
-async function createTicket(params: Project, project_input: Project, planning_input: Planning, user: User, planningRepository: any, ticketRepository: any) {
+async function createTicket(
+	params: Project,
+	project_input: Project,
+	planning_input: Planning,
+	user: User,
+	planningRepository: any,
+	ticketRepository: any
+) {
 	//On traite l'échéance pour ne récuperer que les dates
-	const resultArray = parseDurations(params.getForecast(), JSON.stringify(project_input.getStartDate()));
+	const resultArray = parseDurations(
+		params.getForecast(),
+		JSON.stringify(project_input.getStartDate())
+	);
 	let forecastarray = params.getForecast().split(/[;,]/);
 
 	//On recherche l'id du planning pour l'attribuer au nouveau projet
@@ -185,7 +225,14 @@ let requestStatus = {
 };
 @JsonController()
 export class SpecificationController {
-	constructor(private planningRepository, private projectRepository, private cdcRepository, private teamRepository, private userRepository, private ticketRepository) {
+	constructor(
+		private planningRepository,
+		private projectRepository,
+		private cdcRepository,
+		private teamRepository,
+		private userRepository,
+		private ticketRepository
+	) {
 		this.planningRepository = AppDataSource.getRepository(Planning);
 		this.projectRepository = AppDataSource.getRepository(Project);
 		this.cdcRepository = AppDataSource.getRepository(Cdc);
@@ -278,7 +325,12 @@ export class SpecificationController {
 	 * @param userid - The user ID.
 	 * @returns A success message if the project is created, or an error message if there is an error.
 	 */
-	public async newproject(@Body() params: Project, @Req() req: any, @Param("teamid") teamid: string, @Param("userid") userid: string) {
+	public async newproject(
+		@Body() params: Project,
+		@Req() req: any,
+		@Param("teamid") teamid: string,
+		@Param("userid") userid: string
+	) {
 		requestStatus.finished = false;
 		requestStatus.data = null;
 		//On recherche l'id de la team pour l'attribuer au nouveau projet
@@ -314,14 +366,20 @@ export class SpecificationController {
 		console.log(`Projet créé: ${project_input.getId()}`);
 
 		//On initie planning_input qu'on rentrera en base de donnée
-		const planning_input: Planning = new Planning(params.getStartDate(), params.getEndDate());
+		const planning_input: Planning = new Planning(
+			params.getStartDate(),
+			params.getEndDate()
+		);
 		planning_input.setProject(project_input);
 		if (!planning_input) throw new Error("Planning not created");
 		await this.planningRepository.save(planning_input);
 		console.log(`Planning créé: ${planning_input.getId()}`);
 		try {
 			//On créé la requete a l'ia
-			const dataread = await fs.promises.readFile(__filename + `/../../template/Template_1.txt`, "utf8");
+			const dataread = await fs.promises.readFile(
+				__filename + `/../../template/Template_1.txt`,
+				"utf8"
+			);
 			let content =
 				"La génération doit etre en HTML. En suivant ce plan: " +
 				dataread +
@@ -421,12 +479,23 @@ export class SpecificationController {
 			// 			// Handle the backup error appropriately (e.g., throw, log, or return a default value).
 			// 		}
 			// 	});
-			let cdcIA = sendMessage(content, cdc, cdc_input, this.cdcRepository, project_input);
-			this.cdcRepository.save(cdcIA)
-
+			sendMessage(
+				content,
+				cdc,
+				cdc_input,
+				this.cdcRepository,
+				project_input
+			);
 
 			//on appelle la fonction de création de ticket
-			createTicket(params, project_input, planning_input, user, this.planningRepository, this.ticketRepository);
+			createTicket(
+				params,
+				project_input,
+				planning_input,
+				user,
+				this.planningRepository,
+				this.ticketRepository
+			);
 
 			return { status: requestStatus.finished };
 		} catch (error) {
@@ -479,7 +548,9 @@ export class SpecificationController {
 	 * @param id - The ID of the Cdc entity.
 	 * @returns The retrieved Cdc entity if found, otherwise an error object.
 	 */
-	public async getOne(@Param("id") id: string): Promise<SpecificationDto | ErrorDto> {
+	public async getOne(
+		@Param("id") id: string
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
 			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { id },
@@ -531,7 +602,9 @@ export class SpecificationController {
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the retrieved CDCs or an error object.
 	 */
-	public async getAllCdcByUser(@Param("userid") userid: string): Promise<SpecificationDto | ErrorDto> {
+	public async getAllCdcByUser(
+		@Param("userid") userid: string
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
 			const cdc: SpecificationDto = await this.cdcRepository.find({
 				where: { user: { id: userid } },
@@ -583,7 +656,9 @@ export class SpecificationController {
 	 * @param projectid - The ID of the project.
 	 * @returns A Promise that resolves to the retrieved CDCs, or an error object if not found.
 	 */
-	public async getAllCdcByProject(@Param("projectid") projectid: string): Promise<SpecificationDto | ErrorDto> {
+	public async getAllCdcByProject(
+		@Param("projectid") projectid: string
+	): Promise<SpecificationDto | ErrorDto> {
 		try {
 			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { project: { id: projectid } },
@@ -638,7 +713,9 @@ export class SpecificationController {
 	 * @param id - The ID of the Cdc to remove.
 	 * @returns A promise that resolves to an object with a success property if the Cdc is deleted successfully, or an error property if an error occurs.
 	 */
-	public async remove(@Param("id") id: string): Promise<SuccessDto | ErrorDto> {
+	public async remove(
+		@Param("id") id: string
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const cdc: SpecificationDto = await this.cdcRepository.findOne({
 				where: { id },
@@ -701,7 +778,10 @@ export class SpecificationController {
 	 * @param data - The updated data for the Cdc record.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async update(@Param("id") id: string, @Body() data: Cdc): Promise<SuccessDto | ErrorDto> {
+	public async update(
+		@Param("id") id: string,
+		@Body() data: Cdc
+	): Promise<SuccessDto | ErrorDto> {
 		try {
 			const cdc = await this.cdcRepository.findOne({
 				where: { id },
