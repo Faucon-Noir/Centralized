@@ -20,10 +20,11 @@ Centralized - GPE 2023-2024
 
 ## Rédaction et Modifications
 
-| Version |    Date    |      Nom       |       Description       |
-| :-----: | :--------: | :------------: | :---------------------: |
-|   1.0   | 16/01/2024 |  Paul GILLET   |    Première version     |
-|   1.1   | 31/05/2024 | Mathieu BEURET | Révision des procédures |
+| Version |    Date    |      Nom       |                 Description                 |
+| :-----: | :--------: | :------------: | :-----------------------------------------: |
+|   1.0   | 16/01/2024 |  Paul GILLET   |              Première version               |
+|   1.1   | 31/05/2024 | Mathieu BEURET |           Révision des procédures           |
+|   1.2   | 7/11/2024  | Mathieu Beuret | Changement du code IA et de l'archi globale |
 
 ## Table des matières
 
