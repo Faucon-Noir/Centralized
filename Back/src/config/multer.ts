@@ -8,7 +8,7 @@ export const multerConfig = {
     destination: (req, file, callback) => {
       callback(
         null,
-        resolve(__dirname, "..", "..", "..", "media")
+        resolve(__dirname, "..", "..", "..", "Front", "public", "media")
       );
     },
     filename: (req, file, callback) => {
