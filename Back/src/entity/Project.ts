@@ -46,7 +46,7 @@ export class Project {
 	@Column()
 	private color: number;
 
-	@Column()
+	@Column({ default: 'Member' })
 	private teamRole: string;
 
 	@Column()
@@ -76,7 +76,7 @@ export class Project {
 		validation: string,
 		template: string,
 		status: boolean,
-		team_user: string,
+		teamRole: string,
 		color: number
 	) {
 		this.name = name;
@@ -91,7 +91,7 @@ export class Project {
 		this.validation = validation;
 		this.template = template;
 		this.status = status;
-		this.teamRole = this.teamRole;
+		this.teamRole = teamRole;
 		this.color = color;
 	}
 

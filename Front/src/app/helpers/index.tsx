@@ -208,17 +208,20 @@ export function GenerateDataWeekTicket(tickets: any) {
 		format(startOfISOWeek(addWeeks(new Date(), i - 4)), 'dd/MM/yyyy')
 	);
 	const data = Array.from({ length: 9 }, (_, i) => 0);
-	for (let ticket of tickets) {
-		if (ticket.status != 'résolu') {
-			const FindElement = (element: any) =>
-				element ==
-				format(startOfISOWeek(new Date(ticket.end_date)), 'dd/MM/yyyy');
-			const index = labels.findIndex(FindElement);
-			if (index != -1) {
-				data[index]++;
+	if (tickets != undefined) {
+		for (let ticket of tickets) {
+			if (ticket.status != 'résolu') {
+				const FindElement = (element: any) =>
+					element ==
+					format(startOfISOWeek(new Date(ticket.end_date)), 'dd/MM/yyyy');
+				const index = labels.findIndex(FindElement);
+				if (index != -1) {
+					data[index]++;
+				}
 			}
 		}
 	}
+
 	return { week: labels, nbr_ticket: data };
 }
 
