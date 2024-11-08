@@ -46,7 +46,7 @@ function RegistrationForm() {
 		if (isRegister == false) {
 			setIsErrorLogin(0);
 			axios
-				.post(`http://localhost:8000/api/login`, {
+				.post(`http://193.108.55.233:8000/api/login`, {
 					mail: user.mail.trim(),
 					password: user.password.trim(),
 				})
@@ -68,7 +68,7 @@ function RegistrationForm() {
 			setIsErrorRegister(0);
 
 			axios
-				.post(`http://localhost:8000/api/register`, {
+				.post(`http://193.108.55.233:8000/api/register`, {
 					lastname: user.lastname.trim(),
 					firstname: user.firstname.trim(),
 					mail: user.mail.trim(),
