@@ -33,7 +33,7 @@ function FirstStep({
 		avatar: '',
 		members: '',
 	});
-
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 		if (file) {
@@ -68,7 +68,7 @@ function FirstStep({
 		});
 
 		let response = await axios.post(
-			`http://localhost:8000/api/team/${userData.user.id}`,
+			`${baseUrl}team/${userData.user.id}`,
 			formData,
 			{
 				headers: {
@@ -85,7 +85,7 @@ function FirstStep({
 	async function addMateToTeam(email: any, teamid: any) {
 		console.log(email, teamid);
 		let response = await axios.post(
-			`http://localhost:8000/api/teamuser`,
+			`${baseUrl}teamuser`,
 			{ user: email, team: teamid },
 			{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 		);

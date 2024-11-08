@@ -1,12 +1,4 @@
-import {
-	Avatar,
-	Box,
-	Button,
-	IconButton,
-	Input,
-	Modal,
-	TextField,
-} from '@mui/material';
+import { Avatar, Box, Button, IconButton, Input, Modal } from '@mui/material';
 import './style.scss';
 import CameraOutlinedIcon from '@mui/icons-material/CameraOutlined';
 import { useEffect, useState } from 'react';
@@ -58,6 +50,7 @@ export default function AccountPage({
 	const [open, setOpen] = useState<boolean>(false);
 	const [avatarPreview, setAvatarPreview] = useState<string>('');
 	let user_id: string = '';
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -98,7 +91,7 @@ export default function AccountPage({
 			}
 		});
 		axios
-			.patch(`http://localhost:8000/api/user/${user_id}`, formData, {
+			.patch(`${baseUrl}user/${user_id}`, formData, {
 				headers: {
 					Authorization: `Bearer ${userData.user.token}`,
 					'Content-Type': 'multipart/form-data',
@@ -118,7 +111,7 @@ export default function AccountPage({
 	useEffect(() => {
 		try {
 			axios
-				.get(`http://localhost:8000/api/user/${userData.user.id}`, {
+				.get(`${baseUrl}user/${userData.user.id}`, {
 					headers: { Authorization: `Bearer ${userData.user.token}` },
 				})
 				.then((res) => {

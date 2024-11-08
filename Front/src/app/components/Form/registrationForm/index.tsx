@@ -40,13 +40,15 @@ function RegistrationForm() {
 		phone: '',
 		password: '',
 	});
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	function handleRedirect(e: any) {
 		e.preventDefault();
 
 		if (isRegister == false) {
 			setIsErrorLogin(0);
 			axios
-				.post(`http://193.108.55.233:8000/api/login`, {
+				.post(`${baseUrl}login`, {
+
 					mail: user.mail.trim(),
 					password: user.password.trim(),
 				})
@@ -68,7 +70,7 @@ function RegistrationForm() {
 			setIsErrorRegister(0);
 
 			axios
-				.post(`http://centralized.fr:8000/api/register`, {
+				.post(`${baseUrl}register`, {
 					lastname: user.lastname.trim(),
 					firstname: user.firstname.trim(),
 					mail: user.mail.trim(),

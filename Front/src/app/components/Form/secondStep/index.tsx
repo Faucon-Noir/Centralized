@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import checkFilledForm from '@/utils/checkFilledForm';
 import { useTask } from '../../../contexts/isReq';
 
 function SecondStep({
@@ -31,12 +30,13 @@ function SecondStep({
 		template: 0,
 		status: false,
 	});
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	async function handleSubmit() {
 		// setUserStep(3)
 		// add user to project
 		// start the request create specification
 		await axios.post(
-			`http://localhost:8000/api/project/${project.team}/${project.user}`,
+			`${baseUrl}project/${project.team}/${project.user}`,
 			project,
 			{ headers: { Authorization: `Bearer ${userData?.user?.token}` } }
 		);
@@ -141,13 +141,13 @@ function SecondStep({
 						<option value=''>Veuillez choisir une équipe</option>
 						{userData?.team
 							? userData?.team.map((item: any) => (
-								<option
-									key={item.team.id}
-									value={item.team.id}
-								>
-									{item.team.name}
-								</option>
-							))
+									<option
+										key={item.team.id}
+										value={item.team.id}
+									>
+										{item.team.name}
+									</option>
+								))
 							: null}
 					</select>
 				</div>

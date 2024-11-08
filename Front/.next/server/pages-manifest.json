@@ -1,1 +1,6 @@
-{"/_app":"pages/_app.js","/_error":"pages/_error.js","/_document":"pages/_document.js","/account":"pages/account.html","/dashboard/[projectid]":"pages/dashboard/[projectid].html","/home":"pages/home.html","/":"pages/index.html","/login":"pages/login.html","/planning":"pages/planning.html","/rex/[projectid]":"pages/rex/[projectid].html","/specification/[id]":"pages/specification/[id].html","/specification":"pages/specification.html","/specification/create":"pages/specification/create.html","/team":"pages/team.html","/ticket/[projectId]":"pages/ticket/[projectId].html","/404":"pages/404.html"}
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js"
+}

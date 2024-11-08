@@ -5,12 +5,10 @@ export default async function getCountAllTicketByUserOneProject(
 	token: string,
 	id_project: string
 ) {
+	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	try {
 		let response = await axios.get(
-			'http://localhost:8000/api/ticket/user/' +
-				id +
-				'/project/' +
-				id_project,
+			`${baseUrl}ticket/user/` + id + '/project/' + id_project,
 			{
 				headers: { Authorization: `Bearer ${token}` },
 			}
