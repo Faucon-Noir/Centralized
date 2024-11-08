@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "centralized_front",
+      "script": "npm",
+      "args": "start",
+      "cwd": "./Front",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "name": "centralized_back",
+      "script": "npm",
+      "args": "start",
+      "cwd": "./Back",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

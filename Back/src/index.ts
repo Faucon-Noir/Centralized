@@ -224,7 +224,7 @@ const specs = swaggerJsdoc(options);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-let server = app.listen(PORT, () => {
+let server = app.listen(PORT, '0.0.0.0', () => {
 	return console.log(`Express is listening at ${process.env.CLIENT_URL}`), console.log(`Swagger is listening at ${process.env.CLIENT_URL}/api-docs`);
 });
 
