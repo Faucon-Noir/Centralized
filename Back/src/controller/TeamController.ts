@@ -292,7 +292,7 @@ export class TeamController {
 				.innerJoin("team_user.user", "user")
 				.innerJoin("team_user.team", "team")
 				.innerJoin("team.project", "project", "project.id = :projectId", { projectId: id })
-				.select(["user.firstname", "user.lastname", "user.bio", "user.avatar as avatar"])
+				.select(["user.firstname", "user.lastname", "user.bio", "user.avatar as avatar", "user.id as id"])
 				.getRawMany();
 			if (!users_in_project) throw new Error("Project not found");
 			return users_in_project;
