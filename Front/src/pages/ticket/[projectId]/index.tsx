@@ -66,7 +66,6 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 		setShowCreateModal(false);
 	}
 
-	console.log(selectedProject);
 	return (
 		<>
 			<div className='ticketPage'>
