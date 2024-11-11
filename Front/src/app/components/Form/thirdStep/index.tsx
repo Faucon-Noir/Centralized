@@ -10,7 +10,7 @@ function ThirdStep() {
 				projet.
 			</p>
 			<p>
-				Il ne vous reste plus qu&apos;a crée vos ticket et profiter de
+				Il ne vous reste plus qu&apos;à créer vos ticket et profiter de
 				votre plateforme.
 			</p>
 			<button onClick={() => window.location.reload()}>Terminer</button>

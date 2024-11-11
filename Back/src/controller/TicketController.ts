@@ -469,7 +469,7 @@ export class TicketController {
 	@Get("/ticket/user/:userid/project/:projectid")
 	@UseBefore(CheckAuth)
 	/**
-	 * Retrieves the number of tickets per user of a specific user's groups for a project .
+	 * Retrieves the number of tickets per user of a specific user's groups for a project.
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
@@ -652,7 +652,6 @@ export class TicketController {
 					"user",
 					"ticket.user = :userid",
 					{ userid: userid }
-
 				)
 				.innerJoin(
 					"planning.project",
