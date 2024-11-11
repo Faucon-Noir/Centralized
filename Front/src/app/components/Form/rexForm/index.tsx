@@ -34,7 +34,7 @@ function RexForm({ userData, RexData, idProject, color }: any) {
 				{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 			);
 			startTask(); // Met à jour l'état global que la tâche a démarré
-			window.location.reload();
+			// window.location.reload();
 		}
 	}
 
