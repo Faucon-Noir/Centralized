@@ -340,57 +340,51 @@ export default function WelcomePage() {
 			</section>
 
 			<footer className='footer'>
-				<div className='container debut'>
-					<div className='box'>
+				<div className='firstLine'>
+					<div className='imgContainer'>
 						<img
 							src='/assets/logo/WhiteLogoLeft.png'
 							alt='Logo'
 							className='logo'
 						/>
-						<br />
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<Link href='/login'>Connexion</Link>
-						</div>
+					<div className='hrefContainer'>
+						<Link href='/login'>Connexion</Link>
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<a href='#'>
-								A propos de Centralized
-								<h6>
-									Qui sommes nous? Découvrez tout ce
-									qu&apos;il y a à savoir sur nous
-								</h6>
-							</a>
-						</div>
+					<div className='whoContainer'>
+						<a href='#'>
+							A propos de Centralized
+							<h6>
+								Qui sommes nous? Découvrez tout ce
+								qu&apos;il y a à savoir sur nous
+							</h6>
+						</a>
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<a href='#'>
-								Nous contacter
-								<h6>Besoin d&apos;aide? Contactez-nous!</h6>
-							</a>
-						</div>
+					<div className='whoContainer'>
+						<a href='#'>
+							Nous contacter
+							<h6>
+								Besoin d&apos;aide? Contactez-nous !
+							</h6>
+						</a>
 					</div>
 				</div>
-				<div className='container bottom'>
-					<div className='box bottom line'>
-						<div className='inbox'>
-							<a href='#'>
-								<h6>Conditions</h6>
-							</a>
-						</div>
-						<div className='inbox'>
-							<a href='#'>
-								<h6>Politique de confidentialité</h6>
-							</a>
-						</div>
+				<div className='secondLine'>
+					<div className='whoContainer'>
+						<a href='#'>
+							<h6>Conditions</h6>
+						</a>
 					</div>
-					<div className='box bottom'>
-						<div className='inbox'>
+					<div className='whoContainer'>
+						<a href='#'>
+							<h6>Politique de confidentialité</h6>
+						</a>
+					</div>
+					<div className='whoContainer'>
+						<a href='#'>
 							<h6>Copyright © 2024 Centralized</h6>
-						</div>
+						</a>
+
 					</div>
 					<div className='box bottom media'>
 						<div className='social'>
@@ -439,7 +433,28 @@ export default function WelcomePage() {
 						</div>
 					</div>
 				</div>
-			</footer>
+				{/*
+					
+				<div className='container bottom'>
+					<div className='box bottom line'>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Conditions</h6>
+							</a>
+						</div>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Politique de confidentialité</h6>
+							</a>
+						</div>
+					</div>
+					<div className='box bottom'>
+						<div className='inbox'>
+							<h6>Copyright © 2024 Centralized</h6>
+						</div>
+					</div>
+					 */}
+			</footer >
 		</>
 	);
 }

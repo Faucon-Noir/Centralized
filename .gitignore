@@ -643,3 +643,12 @@ yarn.lock
 */cypress/downloads/*
 .idea
 Back/src/config/*.json
+
+
+
+
+*.env
+Front/.env
+Front/*.env
+Back/.env
+Back/*.env
