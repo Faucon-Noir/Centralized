@@ -430,21 +430,30 @@
 	},
 	"team": 
 	{
-		"72e46816-5ff4-42ef-a000-8c95e9c6c38b": {
-			"id": "72e46816-5ff4-42ef-a000-8c95e9c6c38b",
-			"name": "CentralizedDevTeam",
-			"created_at": "2024-03-22T12:00:00.000Z"
+		"5d331087-7797-49b6-9211-a2c6914d0c30": {
+			"avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name": "OneForAllTeam",
+			"created_at": "2024-11-08T02:29:27.000Z"
 		},
-		"6362dd37-46f3-11ef-9af0-2800af05439c": {
-			"id": "6362dd37-46f3-11ef-9af0-2800af05439c",
-			"name": "VoidTeam",
-			"created_at": "2024-07-21T12:00:00.000Z"
+		"8b66844f-3e11-4e6c-a652-dca635f1fa3f": {
+            "avatar": "e48ea8e3-bccb-4012-8009-14f1e3d84c09.jpg",
+            "id": "8b66844f-3e11-4e6c-a652-dca635f1fa3f",
+            "name": "SoulKingTeam",
+			"created_at": "2024-11-08T02:38:20.000Z"
 		},
-		"8327bda4-6bc5-4f2c-9b61-c6cfcc5df290": {
-			"id": "8327bda4-6bc5-4f2c-9b61-c6cfcc5df290",
-			"name": "TemplateDevTeam",
-			"created_at": "2024-06-23T12:00:00.000Z"
-		}
+		"3eb6385c-cd3b-49d2-9b22-4fc02791e779": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "3eb6385c-cd3b-49d2-9b22-4fc02791e779",
+            "name": "HackTime",
+			"created_at": "2024-11-08T02:41:19.000Z"
+		},
+		"c61016f6-1bac-4801-bc29-5b931ad15336": {
+            "avatar": "5ffb034c-1c4d-4710-90ee-f950f5483853.jpg",
+            "id": "c61016f6-1bac-4801-bc29-5b931ad15336",
+            "name":"Equipe Gestionnaire",
+			"created_at": "2024-11-08T02:43:24.000Z"
+        }
 	},
 	"rex": {
 		"365a05b4-874b-4857-9742-ffb957ef1340": {
