@@ -1,0 +1,13 @@
+{
+    "id": "08059a3d-a05e-453f-8e1f-2e9ea5a31aa0",
+    "title": "Tableau de bord pour les administrateurs",
+    "description": "",
+    "urgenceId": 1,
+    "status": "en retard",
+    "start_date": "2024-11-08T00:00:00.000Z",
+    "end_date": "2024-12-09T00:00:00.000Z",
+    "updated_at": "2024-11-11T02:58:09.000Z",
+    "planningId": "d664c977-1f70-4147-b1db-08f5ee000a9d",
+    "userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+    "projectId": "c7dd4544-c901-4e90-8475-992c8e631194"
+}

@@ -1,0 +1,18 @@
+{
+    "ticket": [
+        {
+			"id": "18f9eec9-0012-4d61-b6e0-b6a6c8927cfb",
+			"title": "scalabilité et rapidité de déploiement 10 mois.",
+			"description": "",
+			"urgenceId": 2,
+			"status": "en cours",
+			"start_date": "2024-11-22T00:00:00.000Z",
+			"end_date": "2025-09-28T01:00:00.000Z",
+			"updated_at": "2024-11-11T03:12:20.000Z",
+			"planningId": "34f1e8ad-febe-40ac-8ee6-c9e39bd430e1",
+			"userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+			"projectId": "8f282a0c-c7a4-4eda-96b4-71ddc8b002c2"
+		}
+    ],
+    "count": 1
+}

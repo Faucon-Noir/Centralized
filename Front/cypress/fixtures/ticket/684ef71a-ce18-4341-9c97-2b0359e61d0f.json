@@ -1,0 +1,13 @@
+{
+    "id": "684ef71a-ce18-4341-9c97-2b0359e61d0f",
+    "title": "partie admin",
+    "description": "",
+    "urgenceId": 1,
+    "status": "a faire",
+    "start_date": "2024-11-08T00:00:00.000Z",
+    "end_date": "2024-12-09T00:00:00.000Z",
+    "updated_at": "2024-11-08T11:13:28.000Z",
+    "planningId": "7a0a08c7-b886-4d2d-ad5e-d9301c4cec2c",
+    "userId": "4b4df483-15c8-4760-b339-ee7a39b88398",
+    "projectId": "b01be757-e3f2-4c10-8b33-1b516cc4964a"
+}
