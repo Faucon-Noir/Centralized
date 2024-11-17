@@ -1,0 +1,17 @@
+{
+    "id": "0dfd13bc-e1a4-4be2-876b-2223de262b26",
+    "name": "League of skin",
+    "description": "Site pour choisir un ensemble de skin entre amis",
+    "functionality": "selection de skin, création de room, proposition d'ensemble",
+    "forecast": "selection de skin: 2 semaines, création de room: 3 semaines, proposition d'ensemble: 1 mois",
+    "start_date": "2024-10-17T12:00:00.000Z",
+    "end_date": "2025-01-09T12:00:00.000Z",
+    "budget": "10K",
+    "technology": "elixir et phoenix",
+    "constraints": "Doit respecter les règles du jeu et de son api",
+    "validation": "Pouvoir proposer au moins 5 correspondances possibles",
+    "color": 1,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

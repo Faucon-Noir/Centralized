@@ -1,0 +1,17 @@
+{
+    "id": "8f282a0c-c7a4-4eda-96b4-71ddc8b002c2",
+    "name": "BlockBegin",
+    "description": "Solution dédiée aux développeurs et aux entreprises pour créer des applications Blockchain.",
+    "functionality": "Développement d'applications décentralisées, scalabilité, rapidité de déploiement.",
+    "forecast": "Développement d'applications décentralisées 10 mois, scalabilité et rapidité de déploiement 10 mois.",
+    "start_date": "2024-11-22T12:00:00.000Z",
+    "end_date": "2026-01-08T12:00:00.000Z",
+    "budget": "50 000€",
+    "technology": "Blockchain, Solidity pour le développement d'applications décentralisées.",
+    "constraints": "Complexité de la technologie blockchain, nécessité d'une sécurité robuste.",
+    "validation": "Applications fonctionnelles et sécurisées, adoption par les développeurs et les entreprises.",
+    "color": 9,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

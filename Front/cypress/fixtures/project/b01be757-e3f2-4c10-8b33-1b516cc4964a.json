@@ -1,0 +1,17 @@
+{
+    "id": "b01be757-e3f2-4c10-8b33-1b516cc4964a",
+    "name": "Liberty Cookie",
+    "description": "Site e-commerce de vente de cookie",
+    "functionality": "Faire le site qui affiche les articles et la partie admin du site",
+    "forecast": "faire le site: 2mois; partie admin: 1 mois",
+    "start_date": "2024-11-08T12:00:00.000Z",
+    "end_date": "2025-03-28T12:00:00.000Z",
+    "budget": "250 mille euros",
+    "technology": "Laravel PHP, Mysql",
+    "constraints": "Que le site donne envie d'acheter beaucoup de cookie",
+    "validation": "Mise en recette sur l'environnement du client",
+    "color": 5,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}
