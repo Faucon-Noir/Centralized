@@ -19,7 +19,7 @@ import {
 // Collection de tests
 describe('GlobalPage', () => {
 	beforeEach(() => {
-		cy.login()
+		cy.loginJdc()
 	})
 	afterEach(() => {
 		cy.logout()

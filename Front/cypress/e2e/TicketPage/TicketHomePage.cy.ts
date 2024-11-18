@@ -11,7 +11,7 @@ import { mockGetProjectByIdHttpCall, mockGetProjectByUserIdHttpCall, mockGetRexB
 // Collection de test pour la page d'affichage des tickets
 describe('TicketHomePage', () => {
 	beforeEach(() => {
-		cy.login()
+		cy.loginJdc()
 		cy.selectProject('24411468-8707-4773-9af0-0e483cbaa459')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 		mockGetProjectByUserIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')

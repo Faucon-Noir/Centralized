@@ -47,9 +47,21 @@ declare global {
 
 			/**
 			 * Custom command to login
-			 * @example cy.login()
+			 * @example cy.loginJdc()
 			 */
-			login(): void;
+			loginJdc(): void;
+
+			/**
+			 * Custom command to login
+			 * @example cy.loginMathieu()
+			 */
+			loginMathieu(): void;
+
+			/**
+			 * Custom command to login
+			 * @example cy.loginAdmin()
+			 */
+			loginAdmin(): void;
 
 			/**
 			 * Custom command to logout

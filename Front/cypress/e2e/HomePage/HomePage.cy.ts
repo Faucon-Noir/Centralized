@@ -23,7 +23,7 @@ import { HomeHelloCy } from '../../../src/app/const/home/const'
 // Collection de tests
 describe('HomePage', () => {
 	beforeEach(() => {
-		cy.login()
+		cy.loginJdc()
 		cy.visit('http://localhost:3000/')
 		mockGetProjectByIdHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
