@@ -25,7 +25,33 @@
 			"planningId": "7f45127b-591d-4ad5-95d6-a63fe771238d",
 			"userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
 			"projectId": "0dfd13bc-e1a4-4be2-876b-2223de262b26"
+		},
+		{
+			"id": "b9ea3de3-13d0-4d13-a144-5c9977f6af86",
+			"title": "création de room",
+			"description": "",
+			"urgenceId": 1,
+			"status": "résolu",
+			"start_date": "2024-11-08T00:00:00.000Z",
+			"end_date": "2024-11-29T01:00:00.000Z",
+			"updated_at": "2024-11-08T03:05:11.000Z",
+			"planningId": "7f45127b-591d-4ad5-95d6-a63fe771238d",
+			"userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+			"projectId": "0dfd13bc-e1a4-4be2-876b-2223de262b26"
+		},
+		{
+			"id": "d0d626f8-147d-4f90-966b-c3bdfc00238f",
+			"title": "selection de skin",
+			"description": "",
+			"urgenceId": 0,
+			"status": "en cours",
+			"start_date": "2024-11-08T00:00:00.000Z",
+			"end_date": "2024-11-22T01:00:00.000Z",
+			"updated_at": "2024-11-08T03:05:17.000Z",
+			"planningId": "7f45127b-591d-4ad5-95d6-a63fe771238d",
+			"userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+			"projectId": "0dfd13bc-e1a4-4be2-876b-2223de262b26"
 		}
     ],
-    "count": 2
+    "count": 4
 }
