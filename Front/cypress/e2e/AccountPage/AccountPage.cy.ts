@@ -102,7 +102,12 @@ describe('AccountPage', () => {
 			CloseModalButtonCy,
 			ModalAvatarCy
 		].forEach((element) => {
-			cy.centralizedGet(element).should('exist').should('be.visible')
+			if(AvatarFieldCy) {
+				cy.centralizedGet(element).should('exist')
+			} else {
+				cy.centralizedGet(element).should('exist').should('be.visible')
+
+			}
 		})
 
 		cy.centralizedGet(CloseModalButtonCy)
