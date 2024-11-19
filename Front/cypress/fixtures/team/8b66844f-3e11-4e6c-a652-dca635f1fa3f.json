@@ -1,6 +1,22 @@
-{
-    "avatar": "e48ea8e3-bccb-4012-8009-14f1e3d84c09.jpg",
-    "id": "8b66844f-3e11-4e6c-a652-dca635f1fa3f",
-    "name": "SoulKingTeam",
-    "created_at": "2024-11-08T02:38:20.000Z"
-}
+[
+    {
+        "created_at": "2024-11-08T01:38:20.747Z",
+        "id": 4,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "8b66844f-3e11-4e6c-a652-dca635f1fa3f",
+            "name": "SoulKingTeam",
+            "created_at": "2024-11-08T01:38:20.740Z"
+        },
+        "user": {
+            "avatar": "e48ea8e3-bccb-4012-8009-14f1e3d84c09.jpg",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "created_at": "2024-11-08T01:28:14.026Z",
+            "firstname": "Da Cruz",
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "mail": "lowog32348@edectus.com",
+            "phone": "33781981249"
+        }
+    }
+]

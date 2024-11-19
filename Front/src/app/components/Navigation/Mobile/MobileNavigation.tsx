@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 // Utils
 import './MobileNav.scss';
 import { numberToColor } from '@/app/helpers';
+import { ButtonCloseProjectMobileNavCy, ButtonHideMobileNavCy, LinkAccountMobileNavCy, LinkDashboardMobileNavCy, LinkHomeMobileNavCy, LinkLogoutMobileNavCy, LinkOneSpecificationMobileNavCy, LinkPlanningMobileNavCy, LinkSpecificationMobileNavCy, LinkTeamMobileNavCy, LinkTicketMobileNavCy, LogoMobileNavCy, ProjectOpenMobileNavCy } from './const';
 
 export default function MobileNavigation({
 	page = '',
@@ -99,12 +100,13 @@ export default function MobileNavigation({
 		<>
 			<div className='navigation-mobile mobileNav'>
 				<img
+					data-cy={ButtonHideMobileNavCy}
 					src='/assets/icons/icon-cross.svg'
 					alt=''
 					className='cross'
 					onClick={() => setShowMobileNav(false)}
 				/>
-				<div className='centralized_logo'>
+				<div data-cy={LogoMobileNavCy} className='centralized_logo'>
 					<img
 						src='/assets/logo/WhiteLogoLeft.png'
 						alt='Logo'
@@ -114,6 +116,7 @@ export default function MobileNavigation({
 				<div className='home_button'>
 					<Link href='/home'>
 						<button
+							data-cy={LinkHomeMobileNavCy} 
 							className={
 								page == 'HomePage'
 									? 'navigation_button active'
@@ -128,6 +131,7 @@ export default function MobileNavigation({
 				<div className='navigation_nav'>
 					<Link href='/planning'>
 						<button
+						 	data-cy={LinkPlanningMobileNavCy}
 							className={
 								page == 'Planning'
 									? 'navigation_button active'
@@ -140,6 +144,7 @@ export default function MobileNavigation({
 					</Link>
 					<Link href='/specification'>
 						<button
+							data-cy={LinkSpecificationMobileNavCy}
 							className={
 								page == 'Specification'
 									? 'navigation_button active'
@@ -152,6 +157,7 @@ export default function MobileNavigation({
 					</Link>
 					<Link href='/team'>
 						<button
+							data-cy={LinkTeamMobileNavCy}
 							className={
 								page == 'Team'
 									? 'navigation_button active'
@@ -166,8 +172,9 @@ export default function MobileNavigation({
 					{Object.keys(selctedMap).length > 0 ? (
 						<div className='selectedContainer'>
 							{Object.values(selctedMap).map((project, index) => (
-								<div className='projectOpen' key={index}>
+								<div data-cy={ProjectOpenMobileNavCy} className='projectOpen' key={index}>
 									<a
+										data-cy={LinkDashboardMobileNavCy}
 										className={
 											page == 'DashboardPage' &&
 											project?.id ==
@@ -179,7 +186,7 @@ export default function MobileNavigation({
 										}
 										href={'/dashboard/' + project.id}
 									>
-										<button className='pName'>
+										<button data-cy={ButtonCloseProjectMobileNavCy} className='pName'>
 											<img
 												src='/assets/icons/icon-cross.svg'
 												alt=''
@@ -204,6 +211,7 @@ export default function MobileNavigation({
 									</a>
 									<div className='submenu'>
 										<a
+											data-cy={LinkOneSpecificationMobileNavCy}
 											href={
 												'/specification/' + project.id
 											}
@@ -216,7 +224,7 @@ export default function MobileNavigation({
 												<p>Cahier des charges</p>
 											</button>
 										</a>
-										<a href={'/ticket/' + project.id}>
+										<a data-cy={LinkTicketMobileNavCy} href={'/ticket/' + project.id}>
 											<button className='submenu_btn'>
 												<img
 													src='/assets/icons/tickets.svg'
@@ -232,10 +240,10 @@ export default function MobileNavigation({
 					) : null}
 				</div>
 				<div className='navigation_profile'>
-					<Link href='/account'>
+					<Link data-cy={LinkAccountMobileNavCy} href='/account'>
 						<button
 							className={
-								page == 'account'
+								page == 'AccountPage'
 									? 'navigation_button active'
 									: 'navigation_button'
 							}
@@ -245,6 +253,7 @@ export default function MobileNavigation({
 						</button>
 					</Link>
 					<button
+						data-cy={LinkLogoutMobileNavCy}
 						className='navigation_button red'
 						onClick={() => logout()}
 					>

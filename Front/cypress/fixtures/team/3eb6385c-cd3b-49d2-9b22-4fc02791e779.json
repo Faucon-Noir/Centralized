@@ -1,6 +1,42 @@
-{
-    "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
-    "id": "3eb6385c-cd3b-49d2-9b22-4fc02791e779",
-    "name": "HackTime",
-    "created_at": "2024-11-08T02:41:19.000Z"
-}
+[
+    {
+        "created_at": "2024-11-08T01:29:27.381Z",
+        "id": 5,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "3eb6385c-cd3b-49d2-9b22-4fc02791e779",
+            "name": "HackTime",
+            "created_at": "2024-11-08T01:41:19.277Z"
+        },
+        "user": {
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "created_at": "2024-11-08T01:28:14.026Z",
+            "firstname": "Da Cruz",
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "mail": "lowog32348@edectus.com",
+            "phone": "33781981249"
+        }
+    },
+    {
+        "created_at": "2024-11-08T01:29:27.406Z",
+        "id": 6,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "3eb6385c-cd3b-49d2-9b22-4fc02791e779",
+            "name": "HackTime",
+            "created_at": "2024-11-08T01:41:19.277Z"
+        },
+        "user": {
+            "avatar": null,
+            "bio": null,
+            "created_at": "2024-11-08T01:25:56.433Z",
+            "firstname": "Mathieu",
+            "id": "4b4df483-15c8-4760-b339-ee7a39b88398",
+            "lastname": "Beuret",
+            "mail": "cocida6834@gianes.com",
+            "phone": ""
+        }
+    }
+]

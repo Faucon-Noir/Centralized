@@ -74,7 +74,7 @@ Cypress.Commands.add('loginJdc', (): void => {
 		'token',
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4YTU0N2E2LTFkYTYtNDgyNC1hZjMwLTRiMWYyNmFjYmM1YyIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzMxOTE4NjEyLCJleHAiOjE3OTUwMzM4MTJ9.fBgyjbxyopRqsyCJ6QD5yzaXFN6dGvTb_1xoiOQChRY'
 	);
-	cy.visit('localhost:3000/');
+	cy.visit('localhost:3000/home');
 	cy.viewport(1920, 1080);
 });
 
@@ -98,7 +98,7 @@ Cypress.Commands.add('loginAdmin', (): void => {
 		'token',
 		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZkNzNkNjQ5LTRhZGMtNDA3Yi05YjI2LWU0NTYwMWMyNWE3MSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzMxOTE4Nzg5LCJleHAiOjE3OTUwMzM5ODl9.4NQgWGsn7QLTN53MmdhSYehGuPGqZN_GsXJL7ImE6bA'
 	);
-	cy.visit('localhost:3000/');
+	cy.visit('localhost:3000/home');
 	cy.viewport(1920, 1080);
 });
 
@@ -112,6 +112,6 @@ Cypress.Commands.add('selectProject', (id: string): void => {
 	cy.visit('localhost:3000/');
 	localStorage.removeItem('SelectedProject');
 	localStorage.setItem('SelectedProject', id);
-	cy.visit('localhost:3000/');
+	cy.visit('localhost:3000/home');
 	cy.viewport(1920, 1080);
 });

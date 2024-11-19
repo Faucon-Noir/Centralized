@@ -20,6 +20,7 @@ import FirstStep from '@/app/components/Form/firstStep';
 import SecondStep from '@/app/components/Form/secondStep';
 import ThirdStep from '@/app/components/Form/thirdStep';
 import HomeData from '@/app/components/HomeData';
+import { HomeButtonSpecificationCy } from '../../app/const/home/const';
 
 export default function HomePage({
 	userData,
@@ -101,7 +102,7 @@ export default function HomePage({
 							<div className='Entete'>
 								<div className='TitleProjetCards'>
 									<h2>Mes projets</h2>
-									<ButtonBase href='/specification/create'>
+									<ButtonBase data-cy={HomeButtonSpecificationCy} href='/specification/create'>
 										<AddIcon
 											fontSize='medium'
 											sx={{ color: '#000000' }}

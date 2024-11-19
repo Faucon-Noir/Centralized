@@ -58,6 +58,12 @@ export const mockGetCountTicketByUserdHttpCall = (id: string) => {
 	}).as('getTicketByUserId')
 }
 
+export const mockGetTeamUserByIdHttpCall = (id: string) => {
+	cy.intercept('GET', `http://localhost:8000/api/teamuser/${id}`, {
+		fixture: `teamuser/${id}.json`,
+	}).as('getTeamuserById')
+}
+
 export const mockGetTeamUserByUserIdHttpCall = (id: string) => {
 	cy.intercept('GET', `http://localhost:8000/api/teamuser/user/${id}`, {
 		fixture: `teamuser/user/${id}.json`,
