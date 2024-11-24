@@ -168,6 +168,11 @@ function parseDurations(input: string, startDateString: string): Date[] {
 	return durations;
 }
 
+export {
+	sendMessage,
+	parseDurations
+}
+
 /**
  * Créé des tickets pour chaque date trouvé dans l'échéancier
  * @param {Project} params

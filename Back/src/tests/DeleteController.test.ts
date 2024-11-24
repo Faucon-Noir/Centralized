@@ -59,4 +59,4 @@ describe("Delete tests", () => {
   });
 });
 
-server.close();
+// server.close();

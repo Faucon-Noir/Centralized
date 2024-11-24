@@ -5,3 +5,4 @@ import "./PlanningController.test";
 import "./TicketController.test";
 import "./RexController.test";
 import "./DeleteController.test";
+import "./Function.test";
