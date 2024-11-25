@@ -119,6 +119,14 @@ export class TicketController {
 			});
 			if (!ticket) throw new Error("Ticket not found");
 
+			const user = await this.userRepository.findOne({
+				where: { id: data.userId },
+			});
+
+			if (!user) {
+				throw new Error("User not found");
+			}
+			ticket.setUser(user);
 			await this.ticketRepository.save({ ...ticket, ...data });
 			return { success: "Ticket updated" };
 		} catch (err) {
@@ -469,7 +477,7 @@ export class TicketController {
 	@Get("/ticket/user/:userid/project/:projectid")
 	@UseBefore(CheckAuth)
 	/**
-	 * Retrieves the number of tickets per user of a specific user's groups for a project .
+	 * Retrieves the number of tickets per user of a specific user's groups for a project.
 	 * @param userid - The ID of the user.
 	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
 	 */
@@ -652,7 +660,6 @@ export class TicketController {
 					"user",
 					"ticket.user = :userid",
 					{ userid: userid }
-
 				)
 				.innerJoin(
 					"planning.project",
@@ -677,6 +684,61 @@ export class TicketController {
 				.getRawMany();
 			if (!tickets) throw new Error("Ticket not found");
 			return tickets;
+		} catch (err) {
+			return { error: err.message };
+		}
+	}
+
+	/**
+	 * @swagger
+	 * /ticket/{ticketid}/user/:
+	 *   get:
+	 *     tags:
+	 *       - Ticket
+	 *     summary: Récupère le mail de l'utilisateur d'un ticket
+	 *     parameters:
+	 *       - in: path
+	 *         name: userid
+	 *         required: true
+	 *         schema:
+	 *           type: string
+	 *         description: L'ID de l'utilisateur
+	 *     responses:
+	 *       200:
+	 *         description: Les tickets ont été récupérés avec succès
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Ticket'
+	 *       404:
+	 *         description: Les tickets n'ont pas été trouvés
+	 *         content:
+	 *           application/json:
+	 *             schema:
+	 *               $ref: '#/components/schemas/Error'
+	 */
+	@Get("/ticket/:ticketid/user")
+	@UseBefore(CheckAuth)
+	/**
+	 * Retrieves mail's of the ticket.
+	 * @param projectid - The ID of the user.
+	 * @returns A Promise that resolves to the ticket associated with the user, or an error message if not found.
+	 */
+	public async getUserByOneTicket(@Param("ticketid") ticketid: string) {
+		try {
+			const user = await this.ticketRepository
+				.createQueryBuilder("ticket")
+				.innerJoin(
+					"ticket.user",
+					"user",
+					"ticket.id = :ticketid",
+					{ ticketid: ticketid }
+				)
+				.select("user.id")
+				.getRawOne();
+
+			if (!user) throw new Error("Ticket not found");
+			return { user };
 		} catch (err) {
 			return { error: err.message };
 		}

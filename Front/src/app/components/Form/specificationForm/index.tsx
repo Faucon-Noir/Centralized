@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import checkFilledForm from '@/utils/checkFilledForm';
 import { useTask } from '../../../contexts/isReq';
+import { encryptData } from '@/app/security/encrypt';
 
 function SpecificationForm({ userData }: any) {
 	const router = useRouter();
@@ -29,10 +30,22 @@ function SpecificationForm({ userData }: any) {
 		// add user to project
 		setProject({ ...project, user: userData.user.id });
 		if (await checkFilledForm(project)) {
+			const encryptedProject = {
+				...project,
+				name: encryptData(project.name.trim()),
+				description: encryptData(project.description.trim()),
+				functionality: encryptData(project.functionality.trim()),
+				forecast: encryptData(project.forecast.trim()),
+				budget: encryptData(project.budget.trim()),
+				technology: encryptData(project.technology.trim()),
+				constraints: encryptData(project.constraints.trim()),
+				validation: encryptData(project.validation.trim()),
+				teamRole: encryptData(project.teamRole.trim()),
+			};
 			//start the request create specification
 			await axios.post(
 				`${baseUrl}project/${project.team}/${project.user}`,
-				project,
+				encryptedProject,
 				{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 			);
 
@@ -161,13 +174,13 @@ function SpecificationForm({ userData }: any) {
 						<option value=''>Veuillez choisir une équipe</option>
 						{userData?.team
 							? userData?.team.map((item: any) => (
-								<option
-									key={item.team.id}
-									value={item.team.id}
-								>
-									{item.team.name}
-								</option>
-							))
+									<option
+										key={item.team.id}
+										value={item.team.id}
+									>
+										{item.team.name}
+									</option>
+								))
 							: null}
 					</select>
 				</div>

@@ -91,10 +91,7 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-					Alliance de simplicité et d&apos;efficacité pour une gestion
-					de projet optimale. Avec ses fonctionnalités intuitives de
-					suivi, chaque tâche, équipe et objectif est parfaitement
-					visible et maîtrisé.
+				Alliance de simplicité et d&apos;efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -207,10 +204,7 @@ export default function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>📅</div>
 							<div className='title'>Calendrier intégré</div>
-							<div className='description'>
-								Visualisez les deadlines et les jalons clés en
-								un coup d&apos;œil
-							</div>
+							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d&apos;œil</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🎟️</div>
@@ -223,28 +217,17 @@ export default function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>🚀</div>
 							<div className='title'>Cahiers des charges</div>
-							<div className='description'>
-								Créez des spécifications de projet en quelques
-								clics grâce à l&apos;IA
-							</div>
+							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l&apos;IA</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>✨</div>
-							<div className='title'>
-								Retour d&apos;expérience
-							</div>
-							<div className='description'>
-								Analysez les résultats et optimisez vos
-								processus pour les futurs projets
-							</div>
+							<div className='title'>Retour d&apos;expérience</div>
+							<div className='description'>Analysez les résultats et optimisez vos processus pour les futurs projets</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📈</div>
 							<div className='title'>Performance</div>
-							<div className='description'>
-								Évaluez l&apos;avancement et la performance en
-								temps réel
-							</div>
+							<div className='description'>Évaluez l&apos;avancement et la performance en temps réel</div>
 						</div>
 						{/* /!* Add more blocks as needed *!/ */}
 					</div>
@@ -340,57 +323,51 @@ export default function WelcomePage() {
 			</section>
 
 			<footer className='footer'>
-				<div className='container debut'>
-					<div className='box'>
+				<div className='firstLine'>
+					<div className='imgContainer'>
 						<img
 							src='/assets/logo/WhiteLogoLeft.png'
 							alt='Logo'
 							className='logo'
 						/>
-						<br />
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<Link href='/login'>Connexion</Link>
-						</div>
+					<div className='hrefContainer'>
+						<Link href='/login'>Connexion</Link>
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<a href='#'>
-								A propos de Centralized
-								<h6>
-									Qui sommes nous? Découvrez tout ce
-									qu&apos;il y a à savoir sur nous
-								</h6>
-							</a>
-						</div>
+					<div className='whoContainer'>
+						<a href='#'>
+							A propos de Centralized
+							<h6>
+								Qui sommes nous? Découvrez tout ce
+								qu&apos;il y a à savoir sur nous
+							</h6>
+						</a>
 					</div>
-					<div className='box'>
-						<div className='inbox'>
-							<a href='#'>
-								Nous contacter
-								<h6>Besoin d&apos;aide? Contactez-nous!</h6>
-							</a>
-						</div>
+					<div className='whoContainer'>
+						<a href='#'>
+							Nous contacter
+							<h6>
+								Besoin d&apos;aide? Contactez-nous !
+							</h6>
+						</a>
 					</div>
 				</div>
-				<div className='container bottom'>
-					<div className='box bottom line'>
-						<div className='inbox'>
-							<a href='#'>
-								<h6>Conditions</h6>
-							</a>
-						</div>
-						<div className='inbox'>
-							<a href='#'>
-								<h6>Politique de confidentialité</h6>
-							</a>
-						</div>
+				<div className='secondLine'>
+					<div className='whoContainer'>
+						<a href='#'>
+							<h6>Conditions</h6>
+						</a>
 					</div>
-					<div className='box bottom'>
-						<div className='inbox'>
+					<div className='whoContainer'>
+						<a href='#'>
+							<h6>Politique de confidentialité</h6>
+						</a>
+					</div>
+					<div className='whoContainer'>
+						<a href='#'>
 							<h6>Copyright © 2024 Centralized</h6>
-						</div>
+						</a>
+
 					</div>
 					<div className='box bottom media'>
 						<div className='social'>
@@ -439,7 +416,28 @@ export default function WelcomePage() {
 						</div>
 					</div>
 				</div>
-			</footer>
+				{/*
+					
+				<div className='container bottom'>
+					<div className='box bottom line'>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Conditions</h6>
+							</a>
+						</div>
+						<div className='inbox'>
+							<a href='#'>
+								<h6>Politique de confidentialité</h6>
+							</a>
+						</div>
+					</div>
+					<div className='box bottom'>
+						<div className='inbox'>
+							<h6>Copyright © 2024 Centralized</h6>
+						</div>
+					</div>
+					 */}
+			</footer >
 		</>
 	);
 }

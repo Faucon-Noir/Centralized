@@ -5,17 +5,25 @@ import { useEffect, useState } from 'react';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { decryptData } from '../../app/security/decrypt';
+import { encryptData } from '../../app/security/encrypt';
 import {
+	AvartarImageCy,
+	AvatarFieldCy,
 	BioFielCy,
 	BioLabelCy,
+	CameraButtonCy,
+	CloseModalButtonCy,
 	EmailFielCy,
 	EmailLabelCy,
 	FirstNameFielCy,
 	FirstNameLabelCy,
 	LastNameFielCy,
 	LastNameLabelCy,
+	ModalAvatarCy,
 	PhoneFielCy,
 	PhoneLabelCy,
+	SaveButtonCy,
 } from '../../app/const/account/const';
 
 export default function AccountPage({
@@ -85,8 +93,11 @@ export default function AccountPage({
 
 		const formData = new FormData();
 		Object.keys(user).forEach((key) => {
-			const value = user[key as keyof typeof user];
+			let value = user[key as keyof typeof user];
 			if (value !== undefined) {
+				if (typeof value === 'string') {
+					value = encryptData(value);
+				}
 				formData.append(key, value as string); // Ajoute un casting si nécessaire pour FormData
 			}
 		});
@@ -108,6 +119,7 @@ export default function AccountPage({
 	const token: any = localStorage.getItem('token');
 	const decodeToken: any = jwtDecode(token);
 	user_id = decodeToken['id'];
+
 	useEffect(() => {
 		try {
 			axios
@@ -115,7 +127,16 @@ export default function AccountPage({
 					headers: { Authorization: `Bearer ${userData.user.token}` },
 				})
 				.then((res) => {
-					setUser(res.data);
+					const decryptedData = { ...res.data };
+					Object.keys(decryptedData).forEach((key) => {
+						let value =
+							decryptedData[key as keyof typeof decryptedData];
+						if (typeof value === 'string') {
+							decryptedData[key as keyof typeof decryptedData] =
+								decryptData(value);
+						}
+					});
+					setUser(decryptedData);
 				});
 		} catch (error) {
 			console.log('error', error);
@@ -128,15 +149,20 @@ export default function AccountPage({
 			<div style={{ display: 'block' }}>
 				<div className='profile-photo' style={{ position: 'relative' }}>
 					<Avatar
+						data-cy={AvartarImageCy}
 						src={avatarPreview || `/media/${user.avatar}`}
 						sx={{ height: '100%', width: '100%' }}
 					/>
 					<div id='inner' className='inner' onClick={handleClickOpen}>
-						<CameraOutlinedIcon sx={{ fontSize: '30px' }} />
+						<CameraOutlinedIcon
+							data-cy={CameraButtonCy}
+							sx={{ fontSize: '30px' }}
+						/>
 					</div>
-					<Modal open={open}>
+					<Modal data-cy={ModalAvatarCy} open={open}>
 						<Box sx={ModalContentStyle}>
 							<IconButton
+								data-cy={CloseModalButtonCy}
 								onClick={handleClose}
 								style={{
 									position: 'absolute',
@@ -146,7 +172,11 @@ export default function AccountPage({
 							>
 								<CloseOutlinedIcon />
 							</IconButton>
-							<Input type='file' onChange={handleFileChange} />
+							<Input
+								data-cy={AvatarFieldCy}
+								type='file'
+								onChange={handleFileChange}
+							/>
 						</Box>
 					</Modal>
 				</div>
@@ -223,6 +253,7 @@ export default function AccountPage({
 				</Box>
 
 				<Button
+					data-cy={SaveButtonCy}
 					disabled={!user}
 					className='cta-primary'
 					type='submit'

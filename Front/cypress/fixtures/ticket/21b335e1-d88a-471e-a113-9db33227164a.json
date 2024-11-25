@@ -1,0 +1,13 @@
+{
+    "id": "21b335e1-d88a-471e-a113-9db33227164a",
+    "title": "Lister les mangas",
+    "description": "",
+    "urgenceId": 1,
+    "status": "en cours",
+    "start_date": "2024-11-08T00:00:00.000Z",
+    "end_date": "2024-11-22T01:00:00.000Z",
+    "updated_at": "2024-11-08T11:35:45.000Z",
+    "planningId": "b7241f80-fce9-4a3e-bb69-81e2934ea7c7",
+    "userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+    "projectId": "44d8fa72-d0bc-4a6f-9ee4-c5869c94b7e2"
+}

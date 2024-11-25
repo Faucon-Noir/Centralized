@@ -58,44 +58,6 @@ export default function DashboardPage({
 			nbrMyTicketProject: 0,
 		},
 	});
-	const [lastP, setLastP] = useState({
-		name: '',
-		start_date: '',
-		end_date: '',
-		description: '',
-		color: 0,
-		ticket: {
-			count: 0,
-			ticket: [{}],
-		},
-		rex: {
-			answer1: '',
-			answer2: '',
-			answer3: '',
-		},
-	});
-	useEffect(() => {
-		let tmp_lastP = {
-			name: '',
-			start_date: '',
-			end_date: '',
-			description: '',
-			color: 0,
-			ticket: {
-				count: 0,
-				ticket: [{}],
-			},
-			rex: {
-				answer1: '',
-				answer2: '',
-				answer3: '',
-			},
-		};
-		if (!isNaN(userData?.project?.length - 1)) {
-			tmp_lastP = userData?.project[userData?.project?.length - 1];
-		}
-		setLastP(tmp_lastP);
-	}, [userData]);
 
 	useEffect(() => {
 		const handleResize = () => setWindowWidth(window.innerWidth);
@@ -267,7 +229,7 @@ export default function DashboardPage({
 												title={task.title}
 												urgenceId={task.status}
 												date={task.start_date}
-												color={lastP.color}
+												color={project.project.color}
 												key={task.id}
 											/>
 										))

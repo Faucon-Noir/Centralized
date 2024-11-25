@@ -1,0 +1,17 @@
+{
+    "id": "c7dd4544-c901-4e90-8475-992c8e631194",
+    "name": "LibraTrack",
+    "description": "Système de Gestion de Bibliothèque en Ligne",
+    "functionality": "Gestion des utilisateurs : Inscription, connexion, gestion des profils de membres.Catalogue de livres : Liste des livres disponibles avec filtres par catégorie.Gestion des emprunts : Fonctionnalités pour emprunter, retourner et réserver des livres.Historique et état des prêts : Suivi des emprunts et état des retours.Recommandation de livres : Algorithme pour suggérer des livres basés sur l'historique de lecture.Commentaires et évaluations : Ajout de critiques et de notes sur les livres.Notifications de rappel : Alertes pour les retours et les réservations de livres.",
+    "forecast": "Authentification utilisateur : 1 mois; Catalogue en ligne : 2 mois; Système de réservation et d'emprunt : 2 mois; Gestion des retours et notifications : 1.5 mois; Tableau de bord pour les administrateurs : 1 mois; Intégration avec les systèmes de bibliothèque existants : 1.5 mois;",
+    "start_date": "2024-11-08T12:00:00.000Z",
+    "end_date": "2025-02-21T12:00:00.000Z",
+    "budget": "120 000€",
+    "technology": "Java (Spring Boot), Angular, MySQL",
+    "constraints": "Capacité à gérer un catalogue de 500,000 livres. Interface utilisateur intuitive accessible sur tous les appareils. Système de réservation et de retour de livres doit être en temps réel.",
+    "validation": "Les utilisateurs doivent pouvoir emprunter et retourner des livres sans erreurs dans 100% des cas. Le système doit gérer les conflits de réservation avec un taux de résolution de 99%. Les notifications de rappel doivent être envoyées avec une latence inférieure à 1 minute.",
+    "color": 7,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

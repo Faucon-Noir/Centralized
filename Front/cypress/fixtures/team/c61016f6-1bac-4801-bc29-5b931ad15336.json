@@ -1,0 +1,42 @@
+[
+    {
+        "created_at": "2024-11-08T01:43:24.465Z",
+        "id": 7,
+        "team": {
+            "avatar": "5ffb034c-1c4d-4710-90ee-f950f5483853.jpg",
+            "id": "c61016f6-1bac-4801-bc29-5b931ad15336",
+            "name": "Equipe Gestionnaire",
+            "created_at": "2024-11-08T01:43:24.461Z"
+        },
+        "user": {
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "created_at": "2024-11-08T01:28:14.026Z",
+            "firstname": "Da Cruz",
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "mail": "lowog32348@edectus.com",
+            "phone": "33781981249"
+        }
+    },
+    {
+        "created_at": "2024-11-08T01:43:24.476Z",
+        "id": 8,
+        "team": {
+            "avatar": "5ffb034c-1c4d-4710-90ee-f950f5483853.jpg",
+            "id": "c61016f6-1bac-4801-bc29-5b931ad15336",
+            "name": "Equipe Gestionnaire",
+            "created_at": "2024-11-08T01:43:24.461Z"
+        },
+        "user": {
+            "avatar": null,
+            "bio": null,
+            "created_at": "2024-11-08T01:25:56.433Z",
+            "firstname": "Admin",
+            "id": "fd73d649-4adc-407b-9b26-e45601c25a71",
+            "lastname": "Admin",
+            "mail": "gapekav881@gianes.com",
+            "phone": "0626417574"
+        }
+    }
+]
