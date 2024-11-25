@@ -1,0 +1,17 @@
+{
+    "id": "32825337-0288-4cd6-b7a5-1ac7f4ebf389",
+    "name": "Drone Juice Integration",
+    "description": "Logiciel de vol embarqué open source afin de disposer d'un logiciel unique pour différents type de drone (multirotor, aile volante, planeur...) modulable par le développement d'extension personnalisé",
+    "functionality": "Une app bureau pour générer le logiciel de vol à injecter dans le drone. Modèle de vol sélectionnable en fonction du type de drone, du nombre de rotor du nombre de pale par rotor et de leur orientation. Fonction RTH, gestion de nacelle photo, fonction track & follow, fonction AutoFlight, maintient d'altitude, maintient de position, régulateur et limiteur de vitesse",
+    "forecast": "Recherche et implémentation de trois modèles de vols génériques: 9 mois, Implémentation Track & Follow: 2 semaines",
+    "start_date": "2024-10-15T12:00:00.000Z",
+    "end_date": "2025-09-08T12:00:00.000Z",
+    "budget": "50,000 - 150,000 USD",
+    "technology": "React Native, Java, spring boot, mysql, docker",
+    "constraints": "aucune",
+    "validation": "tester par le client",
+    "color": 6,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

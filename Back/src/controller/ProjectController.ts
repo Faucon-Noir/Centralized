@@ -114,17 +114,19 @@ export class ProjectController {
 	 */
 	public async getAllPojectByUser(@Param("userid") userid: string) {
 		try {
-			const project = await this.projectRepository.find({
-				where: { user: { id: userid } },
-				order: { start_date: "ASC" },
-			});
-			if (!project) throw new Error("Project not found");
-			for (let task of project) {
-				const cdc: SpecificationDto = await this.cdcRepository.findOne({
-					where: { project: { id: task.id } },
-				});
-				task.cdc = cdc ? cdc : "";
-			}
+			const project = await this.projectRepository
+			.createQueryBuilder("project")
+			// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
+			.innerJoin("project.team", "team")
+			.innerJoin("team.teamUser", "teamUser")
+			.innerJoin(
+				"teamUser.user",
+				"TeamLimit",
+				"teamUser.user = :userid",
+				{ userid: userid }
+			)
+			.select("project")
+			.getMany();
 			return project;
 		} catch (err) {
 			return { error: err.message };

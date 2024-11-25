@@ -71,7 +71,7 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 			<div className='ticketPage'>
 				<div className='header'>
 					<h1>Gestion des tickets</h1>
-					<ButtonBase onClick={() => setShowCreateModal(true)}>
+					<ButtonBase data-cy={ButtonCreateTicketCy} onClick={() => setShowCreateModal(true)}>
 						<AddIcon fontSize='medium' sx={{ color: '#000000' }} />
 					</ButtonBase>
 				</div>

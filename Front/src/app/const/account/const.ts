@@ -1,18 +1,20 @@
-export const AvartarImageCy = 'avartar_image';
-
+export const AvartarImageCy = 'avatar_image_cy';
+export const CameraButtonCy = 'camera_button_cy';
+export const ModalAvatarCy = 'modal_avatar_cy';
 // Label
-export const FirstNameLabelCy = 'first_name_label';
-export const LastNameLabelCy = 'last_name_label';
-export const EmailLabelCy = 'email_label';
-export const PhoneLabelCy = 'phone_label';
-export const BioLabelCy = 'bio_label';
+export const FirstNameLabelCy = 'first_name_label_cy';
+export const LastNameLabelCy = 'last_name_label_cy';
+export const EmailLabelCy = 'email_label_cy';
+export const PhoneLabelCy = 'phone_label_cy';
+export const BioLabelCy = 'bio_label_cy';
 
 // Field
-export const FirstNameFielCy = 'first_name_field';
-export const LastNameFielCy = 'last_name_field';
-export const EmailFielCy = 'email_field';
-export const PhoneFielCy = 'phone_field';
-export const BioFielCy = 'bio_field';
-
+export const FirstNameFielCy = 'first_name_field_cy';
+export const LastNameFielCy = 'last_name_field_cy';
+export const EmailFielCy = 'email_field_cy';
+export const PhoneFielCy = 'phone_field_cy';
+export const BioFielCy = 'bio_field_cy';
+export const AvatarFieldCy = 'avatar_field_cy';
 // Button
-export const SaveButtonCy = 'save_button';
+export const SaveButtonCy = 'save_button_cy';
+export const CloseModalButtonCy = 'close_button_modal_cy'

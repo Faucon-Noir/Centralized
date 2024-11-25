@@ -1,0 +1,17 @@
+{
+    "id": "44d8fa72-d0bc-4a6f-9ee4-c5869c94b7e2",
+    "name": "Mangavore",
+    "description": "Une application permettant de garder une trace de nos achats de manga afin de le partager",
+    "functionality": "Lister tous les mangas disponibles, Selectionner les mangas qu'on possède, partager sa colection",
+    "forecast": "Enregistrer tous les mangas: 4 semaines, Lister les mangas: 2 semaines, système de partage: 2 semaines",
+    "start_date": "2024-11-08T12:00:00.000Z",
+    "end_date": "2025-01-15T12:00:00.000Z",
+    "budget": "mille euros",
+    "technology": "Angular, mariaDB",
+    "constraints": "Récupération automatique des mangas",
+    "validation": "Enregistrement de plus d'une dizaines de tomes sur plusieurs mangas",
+    "color": 4,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

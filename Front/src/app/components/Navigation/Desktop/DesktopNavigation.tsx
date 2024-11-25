@@ -14,6 +14,7 @@ import React from 'react';
 // Utils
 import './DesktopNav.scss';
 import { numberToColor } from '@/app/helpers';
+import { ButtonCloseProjectDesktopNavCy, LinkAccountDesktopNavCy, LinkDashboardDesktopNavCy, LinkHomeDesktopNavCy, LinkLogoutDesktopNavCy, LinkOneSpecificationDesktopNavCy, LinkPlanningDesktopNavCy, LinkSpecificationDesktopNavCy, LinkTeamDesktopNavCy, LinkTicketDesktopNavCy, LogoDesktopNavCy, ProjectOpenDesktopNavCy } from './const';
 
 export default function DesktopNavigation({
 	page = '',
@@ -90,6 +91,7 @@ export default function DesktopNavigation({
 		<div className='navigation-desktop'>
 			<div className='centralized_logo'>
 				<img
+					data-cy={LogoDesktopNavCy}
 					src='/assets/logo/WhiteLogoLeft.png'
 					alt='Logo'
 					className='logo'
@@ -98,6 +100,7 @@ export default function DesktopNavigation({
 			<div className='home_button'>
 				<Link href='/home'>
 					<button
+						data-cy={LinkHomeDesktopNavCy}
 						className={
 							page == 'HomePage'
 								? 'navigation_button active'
@@ -112,6 +115,7 @@ export default function DesktopNavigation({
 			<div className='navigation_nav'>
 				<Link href='/planning'>
 					<button
+						data-cy={LinkPlanningDesktopNavCy}
 						className={
 							page == 'Planning'
 								? 'navigation_button active'
@@ -124,6 +128,7 @@ export default function DesktopNavigation({
 				</Link>
 				<Link href='/specification'>
 					<button
+						data-cy={LinkSpecificationDesktopNavCy}
 						className={
 							page == 'Specification'
 								? 'navigation_button active'
@@ -136,6 +141,7 @@ export default function DesktopNavigation({
 				</Link>
 				<Link href='/team'>
 					<button
+						data-cy={LinkTeamDesktopNavCy}
 						className={
 							page == 'Team'
 								? 'navigation_button active'
@@ -150,8 +156,9 @@ export default function DesktopNavigation({
 				{Object.keys(selctedMap).length > 0 ? (
 					<div className='selectedContainer'>
 						{Object.values(selctedMap).map((project, index) => (
-							<div className='projectOpen' key={index}>
+							<div data-cy={ProjectOpenDesktopNavCy} className='projectOpen' key={index}>
 								<a
+									data-cy={LinkDashboardDesktopNavCy}
 									className={
 										page == 'DashboardPage' &&
 											project?.id ==
@@ -165,6 +172,7 @@ export default function DesktopNavigation({
 								>
 									<button className='pName'>
 										<img
+											data-cy={ButtonCloseProjectDesktopNavCy}
 											src='/assets/icons/icon-cross.svg'
 											alt=''
 											className='cross'
@@ -187,7 +195,7 @@ export default function DesktopNavigation({
 									</button>
 								</a>
 								<div className='submenu'>
-									<a href={'/specification/' + project.id}>
+									<a data-cy={LinkOneSpecificationDesktopNavCy} href={'/specification/' + project.id}>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/project.svg'
@@ -196,7 +204,7 @@ export default function DesktopNavigation({
 											<p>Cahier des charges</p>
 										</button>
 									</a>
-									<a href={'/ticket/' + project.id}>
+									<a data-cy={LinkTicketDesktopNavCy} href={'/ticket/' + project.id}>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/tickets.svg'
@@ -214,8 +222,9 @@ export default function DesktopNavigation({
 			<div className='navigation_profile'>
 				<Link href='/account'>
 					<button
+						data-cy={LinkAccountDesktopNavCy}
 						className={
-							page == 'account'
+							page == 'AccountPage'
 								? 'navigation_button active'
 								: 'navigation_button'
 						}
@@ -224,6 +233,7 @@ export default function DesktopNavigation({
 					</button>
 				</Link>
 				<button
+					data-cy={LinkLogoutDesktopNavCy}
 					className='navigation_button red'
 					onClick={() => logout()}
 				>

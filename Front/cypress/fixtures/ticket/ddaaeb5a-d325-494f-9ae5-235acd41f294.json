@@ -1,0 +1,13 @@
+{
+    "id": "ddaaeb5a-d325-494f-9ae5-235acd41f294",
+    "title": "enregistrer les tickets 2 semaines",
+    "description": "",
+    "urgenceId": 0,
+    "status": "a faire",
+    "start_date": "2024-12-12T00:00:00.000Z",
+    "end_date": "2024-12-26T01:00:00.000Z",
+    "updated_at": "2024-11-08T09:51:24.000Z",
+    "planningId": "6002f349-f211-4933-a8c7-3e588bca7280",
+    "userId": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+    "projectId": "4c020328-1060-4ba6-8d75-ba1cf51326d3"
+}

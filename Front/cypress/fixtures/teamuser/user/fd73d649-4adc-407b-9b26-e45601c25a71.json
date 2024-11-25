@@ -1,0 +1,36 @@
+[
+    {
+        "id": 2,
+        "team": {
+            "avatar": "214f20ee-9f35-4cda-818a-de0280d100cb.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name": "OneForAllTeam"
+        },
+        "user": {
+            "id": "fd73d649-4adc-407b-9b26-e45601c25a71",
+            "lastname": "Admin",
+            "firstname": "Admin",
+            "mail": "gapekav881@gianes.com",
+            "bio": null,
+            "phone": "0626417574",
+            "avatar": null
+        }
+    },
+    {
+        "id": 8,
+        "team": {
+            "avatar": "5ffb034c-1c4d-4710-90ee-f950f5483853.jpg",
+            "id": "c61016f6-1bac-4801-bc29-5b931ad15336",
+            "name": "Equipe Gestionnaire"
+        },
+        "user": {
+            "id": "fd73d649-4adc-407b-9b26-e45601c25a71",
+            "lastname": "Admin",
+            "firstname": "Admin",
+            "mail": "gapekav881@gianes.com",
+            "bio": null,
+            "phone": "0626417574",
+            "avatar": null
+        }
+    }
+]
