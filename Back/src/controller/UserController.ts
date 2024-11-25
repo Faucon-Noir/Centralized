@@ -8,10 +8,11 @@ import * as crypto from "crypto";
 import "reflect-metadata";
 import { NodeMailerSendEmail } from "../email/NodeMailer";
 import { multerConfig } from "../config/multer";
-
+import { createStripeCustomer, UserStripe, paymentStripe, getProductStripe, finishPaymentStripe } from '../services/stripeService';
 import * as dotenv from "dotenv";
 import { UserDto } from "../dto/UserDto";
 import { ErrorDto, SuccessDto, SuccessAuthDto } from "../dto/ResultDto";
+import { error } from "console";
 dotenv.config();
 
 @JsonController()
@@ -63,7 +64,7 @@ export class UserController {
 	 * @param data - The user data to be registered.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async register(@Body() data: User): Promise<SuccessAuthDto | ErrorDto> {
+	public async register(@Body() data: User) {//: Promise<SuccessAuthDto | ErrorDto | string> {
 		try {
 			// verif object existing in data source
 			const hasAccountWithEmail: User = await this.userRepository.findOne({
@@ -74,16 +75,25 @@ export class UserController {
 			if (data.getPassword() == "" || !data.getPassword()) throw new Error("No password provide");
 
 			if (data.getPassword().includes(" ")) throw new Error("Space cannot be in a password");
+
+			const newUser: UserStripe = { 
+				id: data.getId(), // Généré par ton système 
+				mail: data.getMail(), 
+				firstname: data.getFirstname(),
+				lastname: data.getLastname(), 
+			};
+			const stripeCustomer = await createStripeCustomer(newUser); 
+			const prices = await getProductStripe(data.getProductId());
+			const session = await paymentStripe(prices.data[0].id, stripeCustomer.id, data);
+			
 			// hash password
 			const hash = await bcrypt.hash(data.getPassword(), 10);
-
 			// create object with condition
 			const user: User = data;
 			if (!user) throw new Error("Account not created");
 			user.setPassword(hash);
-
 			await this.userRepository.save(user);
-
+			return session;
 			const token = jwt.sign(
 				{
 					id: user.getId(),
@@ -95,7 +105,6 @@ export class UserController {
 				}
 			);
 			if (!token) throw new Error("Error authentication");
-
 			return { success: "Account created", token: token };
 		} catch (error) {
 			return { error: error.message };
@@ -561,5 +570,16 @@ export class UserController {
 		} catch (error) {
 			return { error: error.message };
 		}
+	}
+
+	@Post('/webhook')
+
+	public async webhook(@Body() data: any) {
+		const sig = data.headers['stripe-signature']; 
+		await finishPaymentStripe(data, sig);
+		
+		console.log('ici'); 
+		console.log(data);
+		return 0;
 	}
 }

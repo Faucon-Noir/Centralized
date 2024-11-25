@@ -34,6 +34,9 @@ export class User {
   @Column({ nullable: true })
   private bio: string;
 
+  @Column({ default: false})
+  private payment: boolean;
+
   @Column()
   private password: string;
 
@@ -51,6 +54,8 @@ export class User {
 
   private roles;
 
+  private product_id;
+
   constructor(
     lastname: string,
     firstname: string,
@@ -58,7 +63,9 @@ export class User {
     phone: string,
     bio: string,
     password: string,
-    avatar: string
+    avatar: string,
+    product_id: string,
+    payment: boolean,
   ) {
     this.lastname = lastname;
     this.firstname = firstname;
@@ -67,6 +74,8 @@ export class User {
     this.bio = bio;
     this.password = password;
     this.avatar = avatar;
+    this.product_id = product_id;
+    this.payment = payment;
   }
 
   public getId(): string {
@@ -92,6 +101,13 @@ export class User {
   }
   public setFirstname(firstname: string): void {
     this.firstname = firstname;
+  }
+
+  public getPayment(): boolean {
+    return this.payment;
+  }
+  public setPayment(payment: boolean): void {
+    this.payment = payment;
   }
 
   public getPassword(): string {
@@ -145,5 +161,13 @@ export class User {
   }
   public getCdc(): Cdc[] {
     return this.cdc;
+  }
+
+  public getProductId(): string {
+    return this.product_id;
+  }
+
+  public setProductId(product_id: string){
+    this.product_id = product_id;
   }
 }

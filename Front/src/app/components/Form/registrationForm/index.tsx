@@ -39,6 +39,7 @@ function RegistrationForm() {
 		mail: '',
 		phone: '',
 		password: '',
+		product_id: '',
 	});
 	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	function handleRedirect(e: any) {
@@ -75,25 +76,28 @@ function RegistrationForm() {
 					firstname: user.firstname.trim(),
 					mail: user.mail.trim(),
 					phone: user.phone.trim(),
+					product_id: user.product_id.trim(),
 					password: user.password.trim(),
 				})
 				.then(function (response) {
-					if (response.status === 200 && response.data.success) {
-						for (let index = 0; index < 20; index++) {
-							confetti({
-								origin: {
-									x: Math.random() - 0.1,
-									y: Math.random() - 0.1,
-								},
-							});
-						}
-
-						setTimeout(() => {
-							setIsErrorLogin(0);
-							setIsErrorRegister(0);
-							localStorage.setItem('token', response.data.token);
-							router.push('/home');
-						}, 1000);
+					if (response.status === 200 /*&& response.data.success*/){
+						router.push(response.data.url);
+						// if (response.status === 200 && response.data.success) {
+						// 	for (let index = 0; index < 20; index++) {
+						// 		confetti({
+						// 			origin: {
+						// 				x: Math.random() - 0.1,
+						// 				y: Math.random() - 0.1,
+						// 			},
+						// 		});
+						// 	}
+	
+						// 	setTimeout(() => {
+						// 		setIsErrorLogin(0);
+						// 		setIsErrorRegister(0);
+						// 		localStorage.setItem('token', response.data.token);
+						// 		router.push('/home');
+						// 	}, 1000);
 					} else if (
 						response.data.error &&
 						response.data.error == 'Account existing. Please Login'
@@ -102,6 +106,7 @@ function RegistrationForm() {
 					} else {
 						setIsErrorRegister(2);
 					}
+					
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -212,6 +217,36 @@ function RegistrationForm() {
 									}
 								/>
 							</div>
+						</div>
+					) : null}
+					{isRegister ? (
+						<div className='line third-line'>
+							<div className='row '>
+								<p>Produit</p>
+								<label htmlFor='Nom'>Standard</label>
+								<input
+									type='radio'
+									name="produit"
+									onChange={(e) =>
+										setUser({
+											...user,
+											product_id: 'prod_REOcseWjklf70e',
+										})
+									}
+								/>
+								<label htmlFor='Nom'>Premium</label>
+								<input
+									type='radio'
+									name="produit"
+									onChange={(e) =>
+										setUser({
+											...user,
+											product_id: 'prod_REOdmnlK9M7uKW',
+										})
+									}
+								/>
+							</div>
+							
 						</div>
 					) : null}
 					<div className='line fourth-line'>
