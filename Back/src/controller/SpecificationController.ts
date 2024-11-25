@@ -199,7 +199,6 @@ async function createTicket(
 		params.getForecast(),
 		JSON.stringify(project_input.getStartDate())
 	);
-	console.log(resultArray, project_input.getStartDate())
 	let forecastarray = params.getForecast().split(/[;,]/);
 
 	//On recherche l'id du planning pour l'attribuer au nouveau projet
