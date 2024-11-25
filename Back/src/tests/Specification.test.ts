@@ -86,5 +86,5 @@ describe("SpecificationController Tests", () => {
 	// });
 });
 
-// server.close()
+server.close()
 export { project_id, cdc_id };

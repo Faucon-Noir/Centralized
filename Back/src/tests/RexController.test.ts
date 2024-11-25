@@ -45,4 +45,4 @@ describe("RexController Tests", () => {
 });
 
 export { rex_id };
-// server.close()
+server.close()

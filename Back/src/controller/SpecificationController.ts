@@ -97,10 +97,14 @@ async function sendMessage(
 function parseDurations(input: string, startDateString: string): Date[] {
 	const durations: Date[] = [];
 
+	if(isNaN(Date.parse(startDateString)) ) {
+		return [];
+	}
 	const startDate = new Date(startDateString);
 
 	// Define mappings for different units
 	const unitMappings: { [key: string]: string } = {
+		months: "month",
 		month: "month",
 		mois: "month",
 		m: "month",
@@ -136,25 +140,25 @@ function parseDurations(input: string, startDateString: string): Date[] {
 			switch (unit) {
 				case "month":
 					newDate = new Date(
-						startDate.getTime() + value * 31 * 24 * 60 * 60 * 1000
+						new Date(startDate).setMonth(startDate.getMonth() + value)
 					);
 					break;
 				case "week":
 				case "weeks":
 					newDate = new Date(
-						startDate.getTime() + value * 7 * 24 * 60 * 60 * 1000
+						new Date(startDate).setDate(startDate.getDate() + value * 7)
 					);
 					break;
 				case "day":
 				case "days":
 					newDate = new Date(
-						startDate.getTime() + value * 24 * 60 * 60 * 1000
+						new Date(startDate).setDate(startDate.getDate() + value)
 					);
 					break;
 				case "hour":
 				case "hours":
 					newDate = new Date(
-						startDate.getTime() + value * 60 * 60 * 1000
+						new Date(startDate).setHours(startDate.getHours() + value)
 					);
 					break;
 				default:
@@ -195,6 +199,7 @@ async function createTicket(
 		params.getForecast(),
 		JSON.stringify(project_input.getStartDate())
 	);
+	console.log(resultArray, project_input.getStartDate())
 	let forecastarray = params.getForecast().split(/[;,]/);
 
 	//On recherche l'id du planning pour l'attribuer au nouveau projet

@@ -44,5 +44,5 @@ describe("PlanningController Tests", () => {
   });
 });
 
-// server.close()
+server.close()
 export { planning_id };

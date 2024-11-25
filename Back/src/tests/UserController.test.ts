@@ -59,6 +59,6 @@ describe("UserController Tests", () => {
   });
 });
 
-// server.close()
+server.close()
 
 export { tokentest };

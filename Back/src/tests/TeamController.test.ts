@@ -62,5 +62,5 @@ describe('TeamController Tests', () => {
   });
 });
 
-// server.close()
+server.close()
 export {team_id}
