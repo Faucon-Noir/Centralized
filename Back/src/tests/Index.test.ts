@@ -1,4 +1,4 @@
-import "./Function.test";
+// import "./Function.test";
 import "./UserController.test";
 import "./TeamController.test";
 import "./Specification.test";

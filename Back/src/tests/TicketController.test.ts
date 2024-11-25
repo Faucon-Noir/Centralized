@@ -61,5 +61,5 @@ describe("TicketController Tests", () => {
   });
 });
 
-server.close();
+// server.close();
 export { ticket_id };
