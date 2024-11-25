@@ -95,9 +95,9 @@ export default function AccountPage({
 		Object.keys(user).forEach((key) => {
 			let value = user[key as keyof typeof user];
 			if (value !== undefined) {
-				if (typeof value === 'string') {
-					value = encryptData(value);
-				}
+				// if (typeof value === 'string') {
+				// 	value = encryptData(value);
+				// }
 				formData.append(key, value as string); // Ajoute un casting si nécessaire pour FormData
 			}
 		});
@@ -127,16 +127,16 @@ export default function AccountPage({
 					headers: { Authorization: `Bearer ${userData.user.token}` },
 				})
 				.then((res) => {
-					const decryptedData = { ...res.data };
-					Object.keys(decryptedData).forEach((key) => {
-						let value =
-							decryptedData[key as keyof typeof decryptedData];
-						if (typeof value === 'string') {
-							decryptedData[key as keyof typeof decryptedData] =
-								decryptData(value);
-						}
-					});
-					setUser(decryptedData);
+					// const decryptedData = { ...res.data };
+					// Object.keys(decryptedData).forEach((key) => {
+					// 	let value =
+					// 		decryptedData[key as keyof typeof decryptedData];
+					// 	if (typeof value === 'string') {
+					// 		decryptedData[key as keyof typeof decryptedData] =
+					// 			decryptData(value);
+					// 	}
+					// });
+					setUser(res.data);
 				});
 		} catch (error) {
 			console.log('error', error);

@@ -71,10 +71,13 @@ function RegistrationForm() {
 
 			axios
 				.post(`${baseUrl}register`, {
-					lastname: encryptData(user.lastname.trim()),
-					firstname: encryptData(user.firstname.trim()),
+					lastname: user.lastname.trim(),
+					firstname: user.firstname.trim(),
+					// lastname: encryptData(user.lastname.trim()),
+					// firstname: encryptData(user.firstname.trim()),
 					mail: user.mail.trim(),
-					phone: encryptData(user.phone.trim()),
+					phone: user.phone.trim(),
+					// phone: encryptData(user.phone.trim()),
 					password: user.password.trim(),
 				})
 				.then(function (response) {

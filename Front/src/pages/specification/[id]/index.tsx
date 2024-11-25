@@ -41,13 +41,14 @@ export default function SpecificationEdit({
 		if (userData.project.length > 0) {
 			let tempMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
 			for (let line of userData.project) {
-				tempMap[line.id] = {
-					...line,
-					cdc: {
-						...line.cdc,
-						cdc: decryptData(line.cdc.cdc), // Décrypter le champ texte
-					},
-				};
+				// tempMap[line.id] = {
+				// 	...line,
+				// 	cdc: {
+				// 		...line.cdc,
+				// 		cdc: decryptData(line.cdc.cdc), // Décrypter le champ texte
+				// 	},
+				// };
+				tempMap[line.id] = line;
 			}
 			setProjectMap(tempMap);
 		}
@@ -58,14 +59,14 @@ export default function SpecificationEdit({
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const token: any = localStorage.getItem('token');
-		const encryptedText = encryptData(text || '');
+		// const encryptedText = encryptData(text || '');
 
 		// TODO: data a revoir => x n'exsite pas sur le type EventTarget
 		axios
 			.patch(
 				`${baseUrl}cdc/${projectMap[projectPageID]?.cdc?.id}`,
 				{
-					cdc: encryptedText,
+					cdc: text,
 				},
 				{ headers: { Authorization: `Bearer ${token}` } }
 			)
