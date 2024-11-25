@@ -4,7 +4,11 @@ import server from "../index";
 import { tokentest } from "./UserController.test";
 import datatest from "./Datatest";
 import { team_id } from "./TeamController.test";
-import { parseDurations } from "../controller/SpecificationController";
+import { parseDurations, sendMessage } from "../controller/SpecificationController";
+import { AppDataSource } from "../db/data-source";
+import { Ticket } from "../entity/Ticket";
+import { Cdc } from "../entity/Specification";
+import { Project } from "../entity/Project";
 
 describe('Test function parseDurations', () => {
 	it('must return empty, bad date', async () => {
@@ -50,6 +54,14 @@ describe('Test function parseDurations', () => {
         await expect(parseDurations(
 			"Je suis un test: 3 jour, Je suis le deuxieme test: 2 mois; je suis une heure: 12 heure, Je suis un test: 1 jours, Je suis le deuxieme test: 1 mois; je suis une heure: 1 heure", "2021-06-08"
 		)).toEqual([new Date("2021-06-11T00:00:00.000Z"), new Date("2021-08-08T00:00:00.000Z"), new Date("2021-06-08T12:00:00.000Z"), new Date("2021-06-09T00:00:00.000Z"), new Date("2021-07-08T00:00:00.000Z"), new Date("2021-06-08T01:00:00.000Z")])
+    })
+
+	it('can create message', async () => {
+        let cdcRepository = AppDataSource.getRepository(Cdc);
+        let cdc = new Cdc('test');
+        let project = new Project('name', 'description', 'functionality', 'forecast', new Date, new Date,
+            'budget', 'technology', 'constraints', 'validation', 'template', false, 'teamRole', 0);
+        await expect(sendMessage("je suis un test", "hello", cdc, cdcRepository, project)).toBeDefined();
     })
 });
 
