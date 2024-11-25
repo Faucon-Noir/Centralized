@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	BoxTicketCardCy,
 	MajTicketCardCy,
@@ -8,6 +8,8 @@ import {
 } from './const';
 import './style.scss';
 import axios from 'axios';
+import getUserByOneTicket from '@/utils/User/getUserByOneTicket';
+import getUserTeamProject from '@/utils/User/getUserTeamProject';
 
 type Status = 'a faire' | 'en cours' | 'en retard' | 'résolu'; // Définir les statuts possibles
 type Urgence = 0 | 1 | 2 | 3; // Définir les urgences possibles
@@ -24,6 +26,8 @@ export default function TicketCard({
 	planningId,
 	userData,
 	description,
+	mail,
+	projectId
 }: {
 	description: any;
 	userData: any;
@@ -35,6 +39,8 @@ export default function TicketCard({
 	updated_at: Date;
 	status: Status;
 	planningId: any;
+	mail: string;
+	projectId: string
 }) {
 	const [ticket, setTicket] = useState({
 		start_date: start,
@@ -47,6 +53,7 @@ export default function TicketCard({
 		status: status,
 	});
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
+	const [userTeam, setUserTeam] = useState([{}])
 
 	const urgenceColor = {
 		0: '#8BC729',
@@ -60,6 +67,17 @@ export default function TicketCard({
 	let lastUpdate = Number(date1) - Number(date2);
 	const millisecondsInOneDay = 1000 * 60 * 60 * 24;
 	const differenceInDays = lastUpdate / millisecondsInOneDay;
+
+	useEffect(() => {
+        getUserByOneTicket(id, userData.user.token).then((result) => {
+			setTicket({ ...ticket, userId: result.user.user_id });
+        });
+
+        getUserTeamProject(projectId, userData.user.token).then((result) => {
+            setUserTeam(result);
+        });
+
+	}, []);
 
 	async function handleSubmit() {
 		let response = await axios.patch(`${baseUrl}ticket/` + id, ticket, {
@@ -134,10 +152,7 @@ export default function TicketCard({
 									<input
 										type='date'
 										placeholder='Date de début'
-										value={ticket.start_date.substring(
-											0,
-											10
-										)}
+										value={ticket.start_date.substring(0,10)}
 										onChange={(e) =>
 											setTicket({
 												...ticket,
@@ -264,6 +279,30 @@ export default function TicketCard({
 										}
 									></textarea>
 								</div>
+							</div>
+							<div>
+								<select
+									onChange={(e) =>
+										setTicket({
+											...ticket,
+											userId: e.target.value.trim(),
+										})
+									}
+									required
+								>
+									<option value=''>Veuillez choisir une personne</option>
+									{userTeam.length > 0 ?
+										userTeam.map((item: any) => (
+												<option
+													key={item.id}
+													value={item.id}
+													selected={ticket?.userId === item.id}
+												>
+													{item.user_firstname + ' ' + item.user_lastname}
+												</option>
+											))
+										: null}
+								</select>
 							</div>
 							<div className='buttn_container'>
 								<button

@@ -18,7 +18,7 @@ function Specification({
 		let opened_tmp = [];
 		let closed_tmp = [];
 		for (let line of userData.project) {
-			if (new Date().toISOString() > line.end_date) {
+			if (line.status == true) {
 				closed_tmp.push(line);
 			} else {
 				opened_tmp.push(line);

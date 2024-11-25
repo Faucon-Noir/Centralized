@@ -21,7 +21,7 @@ type Ticket = {
 };
 export default function Tickets({ userData, updateUserData, }: { userData: any, updateUserData: any }) {
 	const [showCreateModal, setShowCreateModal] = useState(false);
-	const [selectedProject, setSelectedProject] = useState({});
+	const [selectedProject, setSelectedProject] = useState({id: ''});
 	const [projectTickets, setProjectTickets] = useState<{
 		todo: Ticket[];
 		inprogress: Ticket[];
@@ -66,7 +66,6 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 		setShowCreateModal(false);
 	}
 
-	console.log(selectedProject);
 	return (
 		<>
 			<div className='ticketPage'>
@@ -95,6 +94,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -117,6 +118,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -139,6 +142,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -160,6 +165,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>

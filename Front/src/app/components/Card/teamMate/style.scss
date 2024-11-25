@@ -1,22 +1,75 @@
-.memberTeamCard {
-	display: flex;
-	justify-content: space-evenly;
-	box-shadow: 5px 4px 20px 5px rgba(0, 0, 0, 0.25);
-	border-radius: 20px;
-	padding: 20px;
-	background-color: #ffffff;
-	height: 130px;
-	transition: all 350ms ease-in-out;
-	// width: 250px;
-	flex-direction: column;
-	align-items: center;
+.card_user {
+	border-radius: 15px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	width: 200px;
 	text-align: center;
-	height: 200px;
-	h2 {
-		font-size: 20px;
-	}
+}
 
-	p {
-		font-size: 16px;
-	}
+.card-header {
+	position: relative;
+	height: 80px;
+	border-radius: 15px 15px 0 0;
+}
+
+.card-header img.avatar {
+	position: absolute;
+	bottom: -25px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	border: 3px solid white;
+	object-fit: cover;
+}
+
+.card-body {
+	padding: 40px 20px 20px;
+}
+
+.user-name {
+	font-size: 18px !important;
+	font-weight: bold;
+	color: #333;
+}
+
+.role {
+	color: grey;
+	margin: 5px 0;
+}
+
+.card-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	border-top: 1px solid #eee;
+	font-size: 14px;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+}
+
+.user-info .icon {
+	margin-right: 5px;
+}
+
+.actions .icon {
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+.yellow {
+	background-color: #f4c200;
+}
+
+.purple {
+	background-color: #8000ff;
+}
+
+.blue {
+	background-color: #00aaff;
 }
