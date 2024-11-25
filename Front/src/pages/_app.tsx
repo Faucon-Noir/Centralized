@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }, [router.events]);
 
     useEffect(() => {
-        if (Component.name != 'LoginPage' && Component.name != 'WelcomePage') {
+        if (Component.name != 'b' && Component.name != 'h') {
             UserData().then((result) => {
                 setUserData(result);
                 setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
@@ -89,7 +89,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     return (
         <main className={myFont.className} style={{ height: '100%' }}>
-            {Component.name == 'LoginPage' || Component.name == 'WelcomePage' ? (
+            {Component.name == 'b' || Component.name == 'h' ? (
                 <Component {...pageProps} />
             ) : (
                 <AuthWrapper>

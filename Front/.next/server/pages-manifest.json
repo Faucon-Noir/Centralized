@@ -1,18 +1,1 @@
-{
-	"/_app": "pages/_app.js",
-	"/_error": "pages/_error.js",
-	"/account": "pages/account.html",
-	"/_document": "pages/_document.js",
-	"/dashboard/[projectid]": "pages/dashboard/[projectid].html",
-	"/": "pages/index.html",
-	"/home": "pages/home.html",
-	"/login": "pages/login.html",
-	"/planning": "pages/planning.html",
-	"/rex/[projectid]": "pages/rex/[projectid].html",
-	"/specification/[id]": "pages/specification/[id].html",
-	"/specification/create": "pages/specification/create.html",
-	"/specification": "pages/specification.html",
-	"/team": "pages/team.html",
-	"/ticket/[projectId]": "pages/ticket/[projectId].html",
-	"/404": "pages/404.html"
-}
+{"/_app":"pages/_app.js","/_document":"pages/_document.js","/_app_prod":"pages/_app_prod.js","/_error":"pages/_error.js","/account":"pages/account.html","/dashboard/[projectid]":"pages/dashboard/[projectid].html","/home":"pages/home.html","/login":"pages/login.html","/planning":"pages/planning.html","/rex/[projectid]":"pages/rex/[projectid].html","/specification/[id]":"pages/specification/[id].html","/specification/create":"pages/specification/create.html","/":"pages/index.html","/specification":"pages/specification.html","/team":"pages/team.html","/ticket/[projectId]":"pages/ticket/[projectId].html","/404":"pages/404.html"}
