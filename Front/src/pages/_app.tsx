@@ -21,132 +21,134 @@ import './main_style.scss';
 import './global.scss';
 import UserData from '@/utils/User/UserData';
 import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingComponent';
+import { randomBytes } from 'crypto';
 
 // Font files can be colocated inside of `pages`
 const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [showMobileNav, setShowMobileNav] = useState(false);
-    const [loading, setLoading] = useState(true); // Ajouter un état de chargement
-    const [userData, setUserData] = useState<any>({
-        project: [
-            {
-                rex: [],
-                ticket: [],
-            },
-        ],
-        team: [],
-        user: [],
-        specification: [],
-        selectedProjects: [],
-    });
-    const [windowWidth, setWindowWidth] = useState<number>(0);
-    const router = useRouter();
+	const [showMobileNav, setShowMobileNav] = useState(false);
+	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
+	const [userData, setUserData] = useState<any>({
+		project: [
+			{
+				rex: [],
+				ticket: [],
+			},
+		],
+		team: [],
+		user: [],
+		specification: [],
+		selectedProjects: [],
+	});
+	const [windowWidth, setWindowWidth] = useState<number>(0);
+	const router = useRouter();
 
-    useEffect(() => {
-        setWindowWidth(window.innerWidth);
+	useEffect(() => {
+		setWindowWidth(window.innerWidth);
 
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        const handleRouteChange = () => setWindowWidth(window.innerWidth);
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		const handleRouteChange = () => setWindowWidth(window.innerWidth);
 
-        window.addEventListener('resize', handleResize);
-        router.events.on('routeChangeComplete', handleRouteChange);
+		window.addEventListener('resize', handleResize);
+		router.events.on('routeChangeComplete', handleRouteChange);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            router.events.off('routeChangeComplete', handleRouteChange);
-        };
-    }, [router.events]);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			router.events.off('routeChangeComplete', handleRouteChange);
+		};
+	}, [router.events]);
 
-    useEffect(() => {
-        if (Component.name != 'LoginPage' && Component.name != 'WelcomePage') {
-            UserData().then((result) => {
-                setUserData(result);
-                setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
-            });
-        } else {
-            setLoading(false);
-        }
-    }, [Component.name]);
+	useEffect(() => {
+		if (Component.name != 'LoginPage' && Component.name != 'WelcomePage') {
+			UserData().then((result) => {
+				setUserData(result);
+				setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
+			});
+		} else {
+			setLoading(false);
+		}
+	}, [Component.name]);
 
-    useEffect(() => {
-        const handleRouteChangeComplete = (url: string) => {
-            if (url === '/home') {
-                window.location.reload();
-            }
-        };
+	useEffect(() => {
+		const handleRouteChangeComplete = (url: string) => {
+			if (url === '/home') {
+				window.location.reload();
+			}
+		};
 
-        router.events.on('routeChangeComplete', handleRouteChangeComplete);
+		router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
-        return () => {
-            router.events.off('routeChangeComplete', handleRouteChangeComplete);
-        };
-    }, [router]);
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChangeComplete);
+		};
+	}, [router]);
 
-    if (loading) {
-        // TODO: Spinner
-        return <div>En attente</div>;
-    }
-    return (
-        <main className={myFont.className} style={{ height: '100%' }}>
-            {Component.name == 'LoginPage' || Component.name == 'WelcomePage' ? (
-                <Component {...pageProps} />
-            ) : (
-                <AuthWrapper>
-                    <TaskProvider>
-                        {Component.name === 'b' ? (
-                            <Component {...pageProps} userData={userData} />
-                        ) : windowWidth >= 1280 ? (
-                            <Grid container style={{ height: '100%' }}>
-                                <Grid xs={2} item={true}>
-                                    <DesktopNavigation
-                                        page={Component.name}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        updateUserData={setUserData}
-                                    />
-                                </Grid>
-                                <Grid xs={10} item={true}>
-                                    <Component
-                                        {...pageProps}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        updateUserData={setUserData}
-                                    />
-                                    <GlobalPollingComponent />
-                                </Grid>
-                            </Grid>
-                        ) : (
-                            <>
-                                <MenuIcon
-                                    className='burgerMenu'
-                                    onClick={() => setShowMobileNav(true)}
-                                />
-                                {/* </button> */}
-                                {showMobileNav ? (
-                                    <MobileNavigation
-                                        page={Component.name}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        setShowMobileNav={setShowMobileNav}
-                                    />
-                                ) : (
-                                    <></>
-                                )}
-                                <Component
-                                    {...pageProps}
-                                    userData={userData?.user ? userData : {}}
-                                    updateUserData={setUserData}
-                                />
-                                <GlobalPollingComponent />
-                            </>
-                        )}
-                    </TaskProvider>
-                </AuthWrapper>
-            )}
-        </main>
-    );
+	if (loading) {
+		// TODO: Spinner
+		return <div>En attente</div>;
+	}
+	return (
+		<main className={myFont.className} style={{ height: '100%' }}>
+			{Component.name == 'LoginPage' ||
+			Component.name == 'WelcomePage' ? (
+				<Component {...pageProps} />
+			) : (
+				<AuthWrapper>
+					<TaskProvider>
+						{Component.name === 'b' ? (
+							<Component {...pageProps} userData={userData} />
+						) : windowWidth >= 1280 ? (
+							<Grid container style={{ height: '100%' }}>
+								<Grid xs={2} item={true}>
+									<DesktopNavigation
+										page={Component.name}
+										userData={
+											userData?.user ? userData : {}
+										}
+										updateUserData={setUserData}
+									/>
+								</Grid>
+								<Grid xs={10} item={true}>
+									<Component
+										{...pageProps}
+										userData={
+											userData?.user ? userData : {}
+										}
+										updateUserData={setUserData}
+									/>
+									<GlobalPollingComponent />
+								</Grid>
+							</Grid>
+						) : (
+							<>
+								<MenuIcon
+									className='burgerMenu'
+									onClick={() => setShowMobileNav(true)}
+								/>
+								{/* </button> */}
+								{showMobileNav ? (
+									<MobileNavigation
+										page={Component.name}
+										userData={
+											userData?.user ? userData : {}
+										}
+										setShowMobileNav={setShowMobileNav}
+									/>
+								) : (
+									<></>
+								)}
+								<Component
+									{...pageProps}
+									userData={userData?.user ? userData : {}}
+									updateUserData={setUserData}
+								/>
+								<GlobalPollingComponent />
+							</>
+						)}
+					</TaskProvider>
+				</AuthWrapper>
+			)}
+		</main>
+	);
 }

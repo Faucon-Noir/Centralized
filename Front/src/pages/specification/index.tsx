@@ -18,6 +18,7 @@ function Specification({
 	useEffect(() => {
 		let opened_tmp = [];
 		let closed_tmp = [];
+		if (!userData.project) return;
 		for (let line of userData.project) {
 			const decryptedLine = {
 				...line,
