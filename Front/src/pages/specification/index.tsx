@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { ButtonBase } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import MyProjectCard from '@/app/components/Card/ProjectCardSpecification';
+import { decryptData } from '@/app/security/decrypt';
 
 function Specification({
 	userData,
@@ -18,10 +19,23 @@ function Specification({
 		let opened_tmp = [];
 		let closed_tmp = [];
 		for (let line of userData.project) {
-			if (line.status == true) {
-				closed_tmp.push(line);
+			const decryptedLine = {
+				...line,
+				name: decryptData(line.name),
+				description: decryptData(line.description),
+				functionality: decryptData(line.functionality),
+				forecast: decryptData(line.forecast),
+				budget: decryptData(line.budget),
+				technology: decryptData(line.technology),
+				constraints: decryptData(line.constraints),
+				validation: decryptData(line.validation),
+				teamRole: decryptData(line.teamRole),
+			};
+
+			if (decryptedLine.status == true) {
+				closed_tmp.push(decryptedLine);
 			} else {
-				opened_tmp.push(line);
+				opened_tmp.push(decryptedLine);
 			}
 		}
 		setOpenedP(opened_tmp);

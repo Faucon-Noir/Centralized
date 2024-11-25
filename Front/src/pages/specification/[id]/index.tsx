@@ -15,6 +15,9 @@ import {
 	PopUpSpecificationCy,
 	TitleSpecificationCy,
 } from '@/app/const/specification/const';
+import { decryptData } from '@/app/security/decrypt';
+import { encryptData } from '@/app/security/encrypt';
+
 const CustomEditor = dynamic(() => import('@/app/components/customEditor'), {
 	ssr: false,
 });
@@ -38,7 +41,13 @@ export default function SpecificationEdit({
 		if (userData.project.length > 0) {
 			let tempMap: { [key: string]: any } = {}; // Crée un objet temporaire pour stocker les projets
 			for (let line of userData.project) {
-				tempMap[line.id] = line;
+				tempMap[line.id] = {
+					...line,
+					cdc: {
+						...line.cdc,
+						cdc: decryptData(line.cdc.cdc), // Décrypter le champ texte
+					},
+				};
 			}
 			setProjectMap(tempMap);
 		}
@@ -49,12 +58,14 @@ export default function SpecificationEdit({
 	async function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const token: any = localStorage.getItem('token');
+		const encryptedText = encryptData(text || '');
+
 		// TODO: data a revoir => x n'exsite pas sur le type EventTarget
 		axios
 			.patch(
 				`${baseUrl}cdc/${projectMap[projectPageID]?.cdc?.id}`,
 				{
-					cdc: text,
+					cdc: encryptedText,
 				},
 				{ headers: { Authorization: `Bearer ${token}` } }
 			)
@@ -80,6 +91,7 @@ export default function SpecificationEdit({
 		[setText, text]
 	);
 
+	// TODO: Spinner
 	if (loading) {
 		return <div>Chargement en cours...</div>;
 	}

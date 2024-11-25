@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 import axios from 'axios';
 import getUserTeamProject from '@/utils/User/getUserTeamProject';
+import { encryptData } from '@/app/security/encrypt';
+import { decryptData } from '@/app/security/decrypt';
+
 function CreateTicketForm({
 	userData,
 	selectedProject,
@@ -22,18 +25,31 @@ function CreateTicketForm({
 		status: 'a faire',
 	});
 	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-	const [userTeam, setUserTeam] = useState([{}])
+	const [userTeam, setUserTeam] = useState([{}]);
 	async function handleSubmit() {
-		let response = await axios.post(`${baseUrl}ticket`, ticket, {
+		const encryptedTicket = {
+			...ticket,
+			title: encryptData(ticket.title),
+			description: encryptData(ticket.description),
+		};
+
+		let response = await axios.post(`${baseUrl}ticket`, encryptedTicket, {
 			headers: { Authorization: `Bearer ${userData.user.token}` },
 		});
 		window.location.reload();
 	}
 
-    useEffect(() => {
-        getUserTeamProject(selectedProject.id, userData.user.token).then((result) => {
-            setUserTeam(result);
-        });
+	useEffect(() => {
+		getUserTeamProject(selectedProject.id, userData.user.token).then(
+			(result) => {
+				const decryptedTeam = result.map((item: any) => ({
+					...item,
+					user_firstname: decryptData(item.user_firstname),
+					user_lastname: decryptData(item.user_lastname),
+				}));
+				setUserTeam(decryptedTeam);
+			}
+		);
 	}, []);
 	return (
 		<div className='ticket_form'>
@@ -132,29 +148,28 @@ function CreateTicketForm({
 					></textarea>
 				</div>
 			</div>
-            <div>
-                <select
-                    onChange={(e) =>
-                        setTicket({
-                            ...ticket,
-                            user: e.target.value.trim(),
-                        })
-                    }
-                    required
-                >
-                    <option value=''>Veuillez choisir une personne</option>
-                    {userTeam.length > 0 ?
-                         userTeam.map((item: any) => (
-                                <option
-                                    key={item.id}
-                                    value={item.id}
-                                >
-                                    {item.user_firstname + ' ' + item.user_lastname}
-                                </option>
-                            ))
-                        : null}
-                </select>
-            </div>
+			<div>
+				<select
+					onChange={(e) =>
+						setTicket({
+							...ticket,
+							user: e.target.value.trim(),
+						})
+					}
+					required
+				>
+					<option value=''>Veuillez choisir une personne</option>
+					{userTeam.length > 0
+						? userTeam.map((item: any) => (
+								<option key={item.id} value={item.id}>
+									{item.user_firstname +
+										' ' +
+										item.user_lastname}
+								</option>
+							))
+						: null}
+				</select>
+			</div>
 			<button className='next_btn' onClick={() => handleSubmit()}>
 				Valider
 			</button>
