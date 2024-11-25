@@ -53,4 +53,4 @@ describe('Test function parseDurations', () => {
     })
 });
 
-server.close();
+// server.close();
