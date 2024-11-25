@@ -107,7 +107,8 @@ function SpecificationForm({ userData }: any) {
 				</div>
 				<div>
 					<textarea
-						placeholder='Planning prévisionnel'
+						placeholder="Planning prévisionnel&#10;&#x0A;
+						Remplir le formulaire: 1 heure, Repartir les tickets: 2 jours; Finir le projet: 3 mois"
 						rows={5}
 						cols={50}
 						onChange={(e) =>
