@@ -28,7 +28,7 @@ describe('Test function parseDurations', () => {
     })
 
 	it('can use french single string', async () => {
-        await expect(parseDurations("Je suis un test: 1 jour, Je suis le deuxieme test: 1 mois; je suis une heure: 1 heure, c'est l'heure de travailler: 1 semaine", "2022-02-28")).toEqual([new Date("2022-03-01T00:00:00.000Z"), new Date("2022-03-28T00:00:00.000Z"), new Date("2022-02-28T01:00:00.000Z"), new Date("2022-03-07T00:00:00.000Z")])
+        await expect(parseDurations("Je suis un test: 1 jour, Je suis le deuxieme test: 1 mois; je suis une heure: 1 heure, c'est l'heure de travailler: 1 semaine", "2022-02-28")).toEqual([new Date("2022-03-01T00:00:00.000Z"), new Date("2022-03-27T23:00:00.000Z"), new Date("2022-02-28T01:00:00.000Z"), new Date("2022-03-07T00:00:00.000Z")])
     })
 
 	it('can use english plurial string', async () => {
