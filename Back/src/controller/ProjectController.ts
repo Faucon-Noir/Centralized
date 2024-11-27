@@ -118,6 +118,7 @@ export class ProjectController {
 			.createQueryBuilder("project")
 			// Pour s'assurer que le projet est bien géré par une équipe de l'utilisateur
 			.innerJoin("project.team", "team")
+			.innerJoinAndSelect("project.cdc", "cdc")
 			.innerJoin("team.teamUser", "teamUser")
 			.innerJoin(
 				"teamUser.user",
@@ -125,7 +126,6 @@ export class ProjectController {
 				"teamUser.user = :userid",
 				{ userid: userid }
 			)
-			.select("project")
 			.getMany();
 			return project;
 		} catch (err) {
