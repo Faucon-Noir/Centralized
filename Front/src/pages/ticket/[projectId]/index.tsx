@@ -55,19 +55,19 @@ export default function Tickets({
 				setSelectedProject(project);
 				if (project.ticket.ticket != undefined) {
 					for (let ticket of project.ticket.ticket) {
-						const decryptedTicket = {
-							...ticket,
-							title: ticket.title,
-							description: ticket.description,
-						};
+						// const decryptedTicket = {
+						// 	...ticket,
+						// 	title: ticket.title,
+						// 	description: ticket.description,
+						// };
 						if (ticket.status === 'a faire') {
-							updatedTickets.todo.push(decryptedTicket);
+							updatedTickets.todo.push(ticket);
 						} else if (ticket.status === 'résolu') {
-							updatedTickets.done.push(decryptedTicket);
+							updatedTickets.done.push(ticket);
 						} else if (ticket.status === 'en retard') {
-							updatedTickets.late.push(decryptedTicket);
+							updatedTickets.late.push(ticket);
 						} else if (ticket.status === 'en cours') {
-							updatedTickets.inprogress.push(decryptedTicket);
+							updatedTickets.inprogress.push(ticket);
 						}
 					}
 				}

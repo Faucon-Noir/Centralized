@@ -44,7 +44,7 @@
 		"draft-js": "^0.11.7",
 		"draftjs-to-html": "^0.9.1",
 		"jwt-decode": "^4.0.0",
-		"next": "14.0.3",
+		"next": "^15.0.3",
 		"next-router-mock": "^0.9.13",
 		"nextjs-tui-date-picker": "^2.2.1",
 		"react": "^18.2.0",

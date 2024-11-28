@@ -68,8 +68,8 @@ async function sendMessage(message, cdc, cdc_input, cdcRepository, project_input
 	requestStatus.finished = true;
 	requestStatus.data = streamResult.response;
 
-	const encryptedData = encryptData(cdc);
-	return encryptedData;
+	// const encryptedData = encryptData(cdc);
+	return cdc;
 }
 
 /**
@@ -174,7 +174,8 @@ async function createTicket(params: Project, project_input: Project, planning_in
 	if (resultArray.length > 0) {
 		resultArray.forEach(async (date, index) => {
 			const ticket: Ticket = new Ticket(
-				encryptData(forecastarray[index].split(":")[0].trim()), // title
+				// encryptData(forecastarray[index].split(":")[0].trim()), // title
+				forecastarray[index].split(":")[0].trim(), // title
 				"", // description
 				0, // urgenceId
 				StatusEnum.Todo, // status

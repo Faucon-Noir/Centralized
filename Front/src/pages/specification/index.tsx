@@ -19,23 +19,26 @@ function Specification({
 		let opened_tmp = [];
 		let closed_tmp = [];
 		for (let line of userData.project) {
-			const decryptedLine = {
-				...line,
-				name: decryptData(line.name),
-				description: decryptData(line.description),
-				functionality: decryptData(line.functionality),
-				forecast: decryptData(line.forecast),
-				budget: decryptData(line.budget),
-				technology: decryptData(line.technology),
-				constraints: decryptData(line.constraints),
-				validation: decryptData(line.validation),
-				teamRole: decryptData(line.teamRole),
-			};
+			// const decryptedLine = {
+			// 	...line,
+			// 	name: decryptData(line.name),
+			// 	description: decryptData(line.description),
+			// 	functionality: decryptData(line.functionality),
+			// 	forecast: decryptData(line.forecast),
+			// 	budget: decryptData(line.budget),
+			// 	technology: decryptData(line.technology),
+			// 	constraints: decryptData(line.constraints),
+			// 	validation: decryptData(line.validation),
+			// 	teamRole: decryptData(line.teamRole),
+			// };
 
-			if (decryptedLine.status == true) {
-				closed_tmp.push(decryptedLine);
+			// if (decryptedLine.status == true) {
+			// 	closed_tmp.push(decryptedLine);
+			// }
+			if (line.status == true) {
+				closed_tmp.push(line);
 			} else {
-				opened_tmp.push(decryptedLine);
+				opened_tmp.push(line);
 			}
 		}
 		setOpenedP(opened_tmp);

@@ -27,13 +27,13 @@ function CreateTicketForm({
 	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 	const [userTeam, setUserTeam] = useState([{}]);
 	async function handleSubmit() {
-		const encryptedTicket = {
-			...ticket,
-			title: encryptData(ticket.title),
-			description: encryptData(ticket.description),
-		};
+		// const encryptedTicket = {
+		// 	...ticket,
+		// 	title: encryptData(ticket.title),
+		// 	description: encryptData(ticket.description),
+		// };
 
-		let response = await axios.post(`${baseUrl}ticket`, encryptedTicket, {
+		let response = await axios.post(`${baseUrl}ticket`, ticket, {
 			headers: { Authorization: `Bearer ${userData.user.token}` },
 		});
 		window.location.reload();
@@ -42,12 +42,12 @@ function CreateTicketForm({
 	useEffect(() => {
 		getUserTeamProject(selectedProject.id, userData.user.token).then(
 			(result) => {
-				const decryptedTeam = result.map((item: any) => ({
-					...item,
-					user_firstname: decryptData(item.user_firstname),
-					user_lastname: decryptData(item.user_lastname),
-				}));
-				setUserTeam(decryptedTeam);
+				// const decryptedTeam = result.map((item: any) => ({
+				// 	...item,
+				// 	user_firstname: decryptData(item.user_firstname),
+				// 	user_lastname: decryptData(item.user_lastname),
+				// }));
+				setUserTeam(result);
 			}
 		);
 	}, []);

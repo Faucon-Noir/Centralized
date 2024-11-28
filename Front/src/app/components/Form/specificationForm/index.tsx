@@ -30,22 +30,22 @@ function SpecificationForm({ userData }: any) {
 		// add user to project
 		setProject({ ...project, user: userData.user.id });
 		if (await checkFilledForm(project)) {
-			const encryptedProject = {
-				...project,
-				name: encryptData(project.name.trim()),
-				description: encryptData(project.description.trim()),
-				functionality: encryptData(project.functionality.trim()),
-				forecast: encryptData(project.forecast.trim()),
-				budget: encryptData(project.budget.trim()),
-				technology: encryptData(project.technology.trim()),
-				constraints: encryptData(project.constraints.trim()),
-				validation: encryptData(project.validation.trim()),
-				teamRole: encryptData(project.teamRole.trim()),
-			};
+			// const encryptedProject = {
+			// 	...project,
+			// 	name: encryptData(project.name.trim()),
+			// 	description: encryptData(project.description.trim()),
+			// 	functionality: encryptData(project.functionality.trim()),
+			// 	forecast: encryptData(project.forecast.trim()),
+			// 	budget: encryptData(project.budget.trim()),
+			// 	technology: encryptData(project.technology.trim()),
+			// 	constraints: encryptData(project.constraints.trim()),
+			// 	validation: encryptData(project.validation.trim()),
+			// 	teamRole: encryptData(project.teamRole.trim()),
+			// };
 			//start the request create specification
 			await axios.post(
 				`${baseUrl}project/${project.team}/${project.user}`,
-				encryptedProject,
+				project,
 				{ headers: { Authorization: `Bearer ${userData.user.token}` } }
 			);
 
