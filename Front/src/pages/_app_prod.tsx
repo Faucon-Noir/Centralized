@@ -23,7 +23,7 @@ import UserData from '@/utils/User/UserData';
 import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingComponent';
 
 // Font files can be colocated inside of `pages`
-const myFont = localFont({ src: './fonts/Poppins-Medium.ttf' });
+const myFont = localFont({ src: '../fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
 	const [showMobileNav, setShowMobileNav] = useState(false);
