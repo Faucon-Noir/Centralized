@@ -1,0 +1,28 @@
+.req {
+	opacity: 0.5;
+	position: fixed;
+	top: 5%;
+	min-height: 5%;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+    opacity: 1;
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.colorSuccess {
+    background-color: #8BC729;
+}
+
+.colorError {
+	background-color: #FB2C39;
+}

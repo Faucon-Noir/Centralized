@@ -8,11 +8,15 @@ import * as crypto from "crypto";
 import "reflect-metadata";
 import { NodeMailerSendEmail } from "../email/NodeMailer";
 import { multerConfig } from "../config/multer";
-
+import { createStripeCustomer, UserStripe, paymentStripe, getProductStripe, findCustomerByEmail } from '../services/stripeService';
 import * as dotenv from "dotenv";
 import { UserDto } from "../dto/UserDto";
 import { ErrorDto, SuccessDto, SuccessAuthDto } from "../dto/ResultDto";
+import Stripe from 'stripe';
+
 dotenv.config();
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-10-28.acacia', });
 
 @JsonController()
 export class UserController {
@@ -63,7 +67,7 @@ export class UserController {
 	 * @param data - The user data to be registered.
 	 * @returns An object indicating the success or error message.
 	 */
-	public async register(@Body() data: User): Promise<SuccessAuthDto | ErrorDto> {
+	public async register(@Body() data: User) {//: Promise<SuccessAuthDto | ErrorDto | string> {
 		try {
 			// verif object existing in data source
 			const hasAccountWithEmail: User = await this.userRepository.findOne({
@@ -74,16 +78,25 @@ export class UserController {
 			if (data.getPassword() == "" || !data.getPassword()) throw new Error("No password provide");
 
 			if (data.getPassword().includes(" ")) throw new Error("Space cannot be in a password");
+
+			const newUser: UserStripe = { 
+				id: data.getId(), // Généré par ton système 
+				mail: data.getMail(), 
+				firstname: data.getFirstname(),
+				lastname: data.getLastname(), 
+			};
+			const stripeCustomer = await createStripeCustomer(newUser); 
+			const prices = await getProductStripe(data.getAbonnement());
+			const session = await paymentStripe(prices.data[0].id, stripeCustomer.id, data);
+			
 			// hash password
 			const hash = await bcrypt.hash(data.getPassword(), 10);
-
 			// create object with condition
 			const user: User = data;
 			if (!user) throw new Error("Account not created");
 			user.setPassword(hash);
-
 			await this.userRepository.save(user);
-
+			return session;
 			const token = jwt.sign(
 				{
 					id: user.getId(),
@@ -95,7 +108,6 @@ export class UserController {
 				}
 			);
 			if (!token) throw new Error("Error authentication");
-
 			return { success: "Account created", token: token };
 		} catch (error) {
 			return { error: error.message };
@@ -151,7 +163,7 @@ export class UserController {
 	 * @returns An object containing the success message and the generated token if authentication is successful,
 	 *          otherwise an object containing the error message.
 	 */
-	public async login(@Body() data: User, @Req() req: any): Promise<SuccessAuthDto | ErrorDto> {
+	public async login(@Body() data: User, @Req() req: any) { //: Promise<SuccessAuthDto | ErrorDto> {
 		try {
 			// find object in data source
 			const user: User = await this.userRepository.findOne({
@@ -162,22 +174,28 @@ export class UserController {
 			// check if password conform
 			const isValid = await bcrypt.compare(data.getPassword(), user.getPassword());
 			if (!isValid) throw new Error("Identifiant/password incorrect");
-
-			const token = jwt.sign(
-				{
-					id: user.getId(),
-					roles: user.getRoles(),
-				},
-				process.env.SEC_KEY,
-				{
-					expiresIn: "24h",
-				}
-			);
-			if (!token) throw new Error("Error authentication");
-
-			await this.mailer.sendMailTicket(user.getMail(), "Centralized : votre ticket à été avec succès !", user.getLastname());
-
-			return { success: "Account login", token: token };
+			if(user.getPayment() == false) {
+				const stripeCustomer = await findCustomerByEmail(data.getMail());
+				const prices = await getProductStripe(user.getAbonnement());
+				const session = await paymentStripe(prices.data[0].id, stripeCustomer[0].id, data);
+				return {session : session};
+			} else {
+				const token = jwt.sign(
+					{
+						id: user.getId(),
+						roles: user.getRoles(),
+					},
+					process.env.SEC_KEY,
+					{
+						expiresIn: "24h",
+					}
+				);
+				if (!token) throw new Error("Error authentication");
+	
+				await this.mailer.sendMailTicket(user.getMail(), "Centralized : votre ticket à été avec succès !", user.getLastname());
+	
+				return { success: "Account login", token: token };
+			}
 		} catch (error) {
 			return { error: error.message };
 		}
@@ -561,5 +579,21 @@ export class UserController {
 		} catch (error) {
 			return { error: error.message };
 		}
+	}
+
+	@Post('/webhook')
+	public async webhook(@Req() req: any): Promise<SuccessDto | string> {
+		const body = req.body;
+		if (body.type === 'checkout.session.completed') { 
+			const email = body.data.object.customer_details.email;
+			const user: User = await this.userRepository.findOne({
+				where: { mail: email },
+			});
+			let newuser: User = user;
+			newuser.setPayment(true);
+			await this.userRepository.save({ ...user, ...newuser });
+			return { success: "Payement effectuer" }; 
+		}
+		return 'Payement non finalisé';
 	}
 }

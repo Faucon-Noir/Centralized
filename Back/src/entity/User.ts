@@ -34,6 +34,12 @@ export class User {
   @Column({ nullable: true })
   private bio: string;
 
+  @Column({ default: false})
+  private payment: boolean;
+
+  @Column()
+  private abonnement: string;
+
   @Column()
   private password: string;
 
@@ -58,7 +64,9 @@ export class User {
     phone: string,
     bio: string,
     password: string,
-    avatar: string
+    avatar: string,
+    payment: boolean,
+    abonnement: string,
   ) {
     this.lastname = lastname;
     this.firstname = firstname;
@@ -67,6 +75,8 @@ export class User {
     this.bio = bio;
     this.password = password;
     this.avatar = avatar;
+    this.payment = payment;
+    this.abonnement = abonnement;
   }
 
   public getId(): string {
@@ -92,6 +102,20 @@ export class User {
   }
   public setFirstname(firstname: string): void {
     this.firstname = firstname;
+  }
+
+  public getPayment(): boolean {
+    return this.payment;
+  }
+  public setPayment(payment: boolean): void {
+    this.payment = payment;
+  }
+
+  public getAbonnement(): string {
+    return this.abonnement;
+  }
+  public setAbonnement(abonnement: string): void {
+    this.abonnement = abonnement;
   }
 
   public getPassword(): string {

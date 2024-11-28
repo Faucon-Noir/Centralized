@@ -12,6 +12,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Poppins } from 'next/font/google';
 import confetti from 'canvas-confetti';
+import PollingStripe from '@/app/components/Polling/PollingStripe/index';
+import { TaskProvider } from '../../../contexts/isReq'; // Importation du contexte
 import {
 	CGUButtonCy,
 	ForgotPasswordLinkCy,
@@ -40,8 +42,13 @@ function RegistrationForm() {
 		mail: '',
 		phone: '',
 		password: '',
+		abonnement: '',
 	});
+	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => { 
+		setUser({ ...user, abonnement: e.target.value }); 
+	};
 	const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+	const { status_stripe } = router.query;
 	function handleRedirect(e: any) {
 		e.preventDefault();
 
@@ -53,11 +60,12 @@ function RegistrationForm() {
 					password: user.password.trim(),
 				})
 				.then(function (response) {
-					console.log(response);
 					if (response.status === 200 && response.data.success) {
 						localStorage.setItem('token', response.data.token);
 						console.log('logged in');
 						router.push('/home');
+					} else if(response.status === 200 && response.data.session){
+						router.push(response.data.session.url);
 					} else {
 						setIsErrorLogin(1);
 					}
@@ -76,12 +84,15 @@ function RegistrationForm() {
 					// lastname: encryptData(user.lastname.trim()),
 					// firstname: encryptData(user.firstname.trim()),
 					mail: user.mail.trim(),
+					abonnement: user.abonnement.trim(),
 					phone: user.phone.trim(),
 					// phone: encryptData(user.phone.trim()),
 					password: user.password.trim(),
 				})
 				.then(function (response) {
-					if (response.status === 200 && response.data.success) {
+					console.log(response);
+					if (response.status === 200 /*&& response.data.success*/){
+					// if (response.status === 200 && response.data.success) {
 						for (let index = 0; index < 20; index++) {
 							confetti({
 								origin: {
@@ -90,12 +101,13 @@ function RegistrationForm() {
 								},
 							});
 						}
-
+						
 						setTimeout(() => {
-							setIsErrorLogin(0);
-							setIsErrorRegister(0);
-							localStorage.setItem('token', response.data.token);
-							router.push('/home');
+							router.push(response.data.url);
+							// setIsErrorLogin(0);
+							// setIsErrorRegister(0);
+							// localStorage.setItem('token', response.data.token);
+							// router.push('/home');
 						}, 1000);
 					} else if (
 						response.data.error &&
@@ -105,6 +117,7 @@ function RegistrationForm() {
 					} else {
 						setIsErrorRegister(2);
 					}
+					
 				})
 				.catch(function (error) {
 					console.log(error);
@@ -132,10 +145,10 @@ function RegistrationForm() {
 							style={{
 								color: isRegister ? 'black' : 'white',
 								backgroundColor: isRegister
-									? '#FFFFFF'
-									: '#0293FC',
+								? '#FFFFFF'
+								: '#0293FC',
 							}}
-						>
+							>
 							Inscription
 						</button>
 						<button
@@ -145,14 +158,15 @@ function RegistrationForm() {
 							style={{
 								color: isRegister ? 'white' : 'black',
 								backgroundColor: isRegister
-									? '#0293FC'
-									: '#FFFFFF',
+								? '#0293FC'
+								: '#FFFFFF',
 							}}
-						>
+							>
 							Connexion
 						</button>
 					</ButtonGroup>
 				</Box>
+				{ (status_stripe === 'success' || status_stripe === "error") && <TaskProvider><PollingStripe status={status_stripe}/></TaskProvider>}
 				<div className='form_container'>
 					{isRegister ? (
 						<div className='line first-line'>
@@ -214,6 +228,18 @@ function RegistrationForm() {
 										})
 									}
 								/>
+							</div>
+						</div>
+					) : null}
+					{isRegister ? (
+						<div className='line third-line'>
+							<div className='row '>
+								<label>Abonnement</label>
+								<select name="abonnement" value={user.abonnement} onChange={handleSelectChange}>
+									<option value="">-- Choisissez un Abonnement --</option>
+									<option value="prod_REOcseWjklf70e">Standard : 6€ par mois</option>
+									<option value="prod_REOdmnlK9M7uKW">Premium : 12€ par mois</option>
+								</select>
 							</div>
 						</div>
 					) : null}
