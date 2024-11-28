@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }, [router.events]);
 
     useEffect(() => {
-        if (Component.name != 'b' && Component.name != 'h') {
+        if (Component.name != 'c' && Component.name != 'h') {
             UserData().then((result) => {
                 setUserData(result);
                 setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
@@ -91,12 +91,12 @@ export default function App({ Component, pageProps }: AppProps) {
     console.log(Component.name)
     return (
         <main className={myFont.className} style={{ height: '100%' }}>
-            {Component.name == 'b' || Component.name == 'h' ? (
+            {Component.name == 'c' || Component.name == 'h' ? (
                 <Component {...pageProps} />
             ) : (
                 <AuthWrapper>
                     <TaskProvider>
-                        {Component.name === 'b' ? (
+                        {Component.name === 'c' ? (
                             <Component {...pageProps} userData={userData} />
                         ) : windowWidth >= 1280 ? (
                             <Grid container style={{ height: '100%' }}>
