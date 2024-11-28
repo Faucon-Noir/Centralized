@@ -17,7 +17,7 @@ export class Cdc {
   @Column({ length: 15000 })
   private cdc: string;
 
-  @OneToOne(() => Project, { persistence: false }) // Init one to one relation with User
+  @OneToOne(() => Project, (project) => project.cdc, { persistence: false }) // Init one to one relation with User
   @JoinColumn() // Join user table with FavoriteList table
   public project: Project;
 
