@@ -4,9 +4,11 @@ import {
 	Column,
 	ManyToOne,
 	JoinColumn,
+	OneToOne
 } from "typeorm";
 import { Team } from "./Team";
 import { User } from "./User";
+import { Cdc } from './Specification';
 
 @Entity()
 export class Project {
@@ -62,6 +64,9 @@ export class Project {
 	@ManyToOne((type) => Team) // Init many to one relation with Localisation
 	@JoinColumn()
 	public team: Team; // Join user table with Localisation table
+
+	@OneToOne(() => Cdc, (cdc) => cdc.project) // Init many to one relation with Localisation
+	public cdc: Cdc; // Join user table with Localisation table
 
 	constructor(
 		name: string,

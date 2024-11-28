@@ -4,7 +4,11 @@ import TaskCard from '@/app/components/Card/TaskCard';
 import CalendarBox from '@/app/components/CalendarBox';
 import 'swiper/css';
 import { SwiperSlide } from 'swiper/react';
-import { ButtonBase } from '@mui/material';
+import { ButtonBase, Icon } from '@mui/material';
+import InboxIcon from '@mui/icons-material/Inbox'; 
+import ArchiveIcon from '@mui/icons-material/Archive';
+import AssignmentIcon from '@mui/icons-material/Assignment'; 
+import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
 import AddIcon from '@mui/icons-material/Add';
 import './style.scss';
 import 'swiper/css/pagination';
@@ -123,26 +127,48 @@ export default function DashboardPage({
 									</div>
 									<div className='text_stat stat_container_1'>
 										<div className='stat_container'>
-											<p>Vous avez</p>
-											<h3>
-												{project?.stat
-													?.nbrMyTicketProject
-													? project.stat
-															.nbrMyTicketProject
-													: 0}
-											</h3>
-											<p>tickets en tout sur ce projet</p>
+											<p>Total des tickets ouverts</p>
+											<div className='icon_container'>
+												<Icon
+													sx={{
+														color: numberToColor(project.project.color),
+														height: '35px',
+														width: '35px',
+														marginBottom: '10px',
+													}}
+												>
+													<AssignmentIcon fontSize='large'/>
+												</Icon>
+												<h3>
+													{project?.stat
+														?.nbrTicketOpenProject
+														? project.stat
+																.nbrTicketOpenProject
+														: 0}
+												</h3>
+											</div>
 										</div>
 										<div className='stat_container'>
-											<p>Vous avez</p>
-											<h3>
-												{project?.stat
-													?.nbrMyTicketOpenProject
-													? project.stat
-															.nbrMyTicketOpenProject
-													: 0}
-											</h3>
-											<p>tickets ouverts sur ce projet</p>
+											<p>Vos tickets ouverts</p>
+											<div className='icon_container'>
+												<Icon
+													sx={{
+														color: numberToColor(project.project.color),
+														height: '35px',
+														width: '35px',
+														marginBottom: '10px',
+													}}
+												>
+													<AssignmentReturnedIcon fontSize='large'/>
+												</Icon>
+												<h3>
+													{project?.stat
+														?.nbrMyTicketOpenProject
+														? project.stat
+																.nbrMyTicketOpenProject
+														: 0}
+												</h3>
+											</div>
 										</div>
 									</div>
 									{project?.stat?.nbrTicketByUser ? (
@@ -161,25 +187,48 @@ export default function DashboardPage({
 									) : null}
 									<div className='text_stat stat_container_2'>
 										<div className='stat_container'>
-											<p>Il y a</p>
-											<h3>
-												{project?.stat?.nbrTicketProject
+											<p>Total des tickets</p>
+											<div className='icon_container'>
+												<Icon
+													sx={{
+														color: numberToColor(project.project.color),
+														height: '35px',
+														width: '35px',
+														marginBottom: '10px',
+													}}
+												>
+													<InboxIcon fontSize='large'/>
+												</Icon>
+												<h3>
+													{project?.stat?.nbrTicketProject
 													? project.stat
 															.nbrTicketProject
-													: 0}
-											</h3>
-											<p>tickets en tout sur ce projet</p>
+														: 0}
+												</h3>
+											</div>
 										</div>
 										<div className='stat_container'>
-											<p>Il y a</p>
-											<h3>
-												{project?.stat
-													?.nbrTicketOpenProject
-													? project.stat
-															.nbrTicketOpenProject
-													: 0}
-											</h3>
-											<p>tickets ouverts sur ce projet</p>
+											<p>Vos tickets</p>
+											<div className='icon_container'>
+												<Icon
+													className='icon_stat'
+													sx={{
+														color: numberToColor(project.project.color),
+														height: '35px',
+														width: '35px',
+														marginBottom: '10px',
+													}}
+												>
+													<ArchiveIcon fontSize='large'/>
+												</Icon>
+												<h3>
+													{project?.stat
+														?.nbrMyTicketProject
+														? project.stat
+															.nbrMyTicketProject
+														: 0}
+												</h3>
+											</div>
 										</div>
 									</div>
 								</div>
