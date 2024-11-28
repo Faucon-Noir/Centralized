@@ -22,7 +22,6 @@ const createStripeCustomer = async (user: UserStripe) => {
             name: user.lastname + ' ' + user.firstname, 
             metadata: { userId: user.id, }, 
         }); 
-        console.log('Customer created: ', customer); 
         return customer; 
     } catch (error) { 
         console.error('Error creating customer: ', error); 
@@ -41,8 +40,8 @@ const paymentStripe = async (price: string, customer_id: string, data: User) => 
                 }, 
             ], 
             mode: 'subscription', 
-            success_url: 'http://localhost:3000/success', 
-            cancel_url: 'http://localhost:3000/login', 
+            success_url: 'http://localhost:3000/login?status_stripe=success', 
+            cancel_url: 'http://localhost:3000/login?status_stripe=error', 
             customer: customer_id, 
         })
         return session;
@@ -65,18 +64,17 @@ const getProductStripe = async (productId: string) => {
     }
 }
 
-const finishPaymentStripe = async (data: any, sig: string) => {
-    let event; 
+async function findCustomerByEmail(email: string) { 
     try { 
-        event = stripe.webhooks.constructEvent(data.body, sig, process.env.STRIPE_SECRET_WEBHOOK_KEY); 
+        const customers = await stripe.customers.search({ 
+            query : 'email:"'+email+'"',
+            limit: 1
+        }); 
+        return customers.data; 
     } catch (err) { 
-        return {error: `Webhook Error: ${err.message}`}; 
-    } // Gérer l'événement 
-    if (event.type === 'checkout.session.completed') { 
-        const session = event.data.object as Stripe.Checkout.Session; 
-        session.customer_details.email;
-    }
-
+        console.error(`Error searching for customer: ${err.message}`); 
+        return null; 
+    } 
 }
 
-export { createStripeCustomer, UserStripe, paymentStripe, getProductStripe, finishPaymentStripe };
+export { createStripeCustomer, UserStripe, paymentStripe, getProductStripe, findCustomerByEmail };

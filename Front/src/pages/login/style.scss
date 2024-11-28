@@ -127,7 +127,7 @@ body {
 			width: 100% !important;
 		}
 
-		input {
+		input, select {
 			border-radius: 5px;
 			background: #eceeee;
 			border: none;
@@ -137,7 +137,7 @@ body {
 			padding: 12px;
 		}
 
-		input::placeholder {
+		input::placeholder, select::placeholder {
 			font-size: 12px;
 			font-style: normal;
 			font-weight: 400;

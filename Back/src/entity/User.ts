@@ -38,6 +38,9 @@ export class User {
   private payment: boolean;
 
   @Column()
+  private abonnement: string;
+
+  @Column()
   private password: string;
 
   @CreateDateColumn()
@@ -54,8 +57,6 @@ export class User {
 
   private roles;
 
-  private product_id;
-
   constructor(
     lastname: string,
     firstname: string,
@@ -64,8 +65,8 @@ export class User {
     bio: string,
     password: string,
     avatar: string,
-    product_id: string,
     payment: boolean,
+    abonnement: string,
   ) {
     this.lastname = lastname;
     this.firstname = firstname;
@@ -74,8 +75,8 @@ export class User {
     this.bio = bio;
     this.password = password;
     this.avatar = avatar;
-    this.product_id = product_id;
     this.payment = payment;
+    this.abonnement = abonnement;
   }
 
   public getId(): string {
@@ -108,6 +109,13 @@ export class User {
   }
   public setPayment(payment: boolean): void {
     this.payment = payment;
+  }
+
+  public getAbonnement(): string {
+    return this.abonnement;
+  }
+  public setAbonnement(abonnement: string): void {
+    this.abonnement = abonnement;
   }
 
   public getPassword(): string {
@@ -161,13 +169,5 @@ export class User {
   }
   public getCdc(): Cdc[] {
     return this.cdc;
-  }
-
-  public getProductId(): string {
-    return this.product_id;
-  }
-
-  public setProductId(product_id: string){
-    this.product_id = product_id;
   }
 }
