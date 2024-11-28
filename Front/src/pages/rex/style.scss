@@ -74,7 +74,7 @@
 
 	input,
 	textarea::placeholder {
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		color: white;
 	}
 
@@ -95,7 +95,7 @@
 		padding: 15px 0px;
 		border-radius: 15px;
 		border: none;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		box-shadow: 0px 2px 8px 0px #0000001a;
 		text-align: center;
 		outline: none;
@@ -113,7 +113,7 @@
 			border-radius: 15px;
 			font-size: 16px;
 			border: none;
-			font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+			font-family: 'myFont';
 			background-color: #0293fc;
 			color: white;
 			transition: all 350ms ease-in-out;

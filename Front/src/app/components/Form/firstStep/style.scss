@@ -14,7 +14,7 @@
 		width: 30%;
 		border-radius: 15px;
 		color: white;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		transition: all 350ms ease-in-out;
 
 		cursor: pointer;
@@ -48,7 +48,7 @@
 
 	input,
 	textarea::placeholder {
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		color: white;
 	}
 

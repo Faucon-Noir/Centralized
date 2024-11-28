@@ -135,7 +135,7 @@ function FirstStep({
 							minWidth: '200px',
 							margin: '5px',
 							fontSize: '12px',
-							fontFamily: '__myFont_834f5e',
+							fontFamily: 'myFont',
 						}}
 						component='label'
 						role={undefined}

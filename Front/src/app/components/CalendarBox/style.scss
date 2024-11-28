@@ -11,11 +11,11 @@
 		background-color: #ffffff;
 		width: 100%;
 		min-width: 300px;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 	}
 
 	.react-calendar {
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		width: 100%;
 		background-color: #fff;
 		padding-right: 45px;
@@ -58,7 +58,7 @@
 		width: 150px;
 		flex-grow: 0 !important;
 		text-transform: capitalize;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 	}
 
 	.react-calendar__tile--now {
@@ -79,7 +79,7 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		text-transform: capitalize;
 	}
 

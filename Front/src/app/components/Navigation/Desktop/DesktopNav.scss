@@ -42,7 +42,7 @@
 		gap: 10px;
 		border-radius: 12px;
 		padding: 12px 24px;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		cursor: pointer;
 		font-size: 14px;
 		transition: all 350ms ease-in-out;
@@ -137,8 +137,7 @@
 
 					p {
 						color: white;
-						font-family: '__myFont_834f5e',
-							'__myFont_Fallback_834f5e';
+						font-family: 'myFont';
 						font-size: 11px;
 						margin: 0;
 						padding: 0;
@@ -174,8 +173,7 @@
 					p {
 						color: black;
 						margin-top: 10px;
-						font-family: '__myFont_834f5e',
-							'__myFont_Fallback_834f5e';
+						font-family: 'myFont';
 						font-size: 11px;
 					}
 				}

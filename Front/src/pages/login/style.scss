@@ -16,7 +16,7 @@ body {
 	.logo_container {
 		background-color: #0293fc;
 		color: white;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		@media screen and (max-width: 768px) {
 			display: none;
 		}
@@ -127,7 +127,8 @@ body {
 			width: 100% !important;
 		}
 
-		input, select {
+		input,
+		select {
 			border-radius: 5px;
 			background: #eceeee;
 			border: none;
@@ -137,7 +138,8 @@ body {
 			padding: 12px;
 		}
 
-		input::placeholder, select::placeholder {
+		input::placeholder,
+		select::placeholder {
 			font-size: 12px;
 			font-style: normal;
 			font-weight: 400;
@@ -159,7 +161,7 @@ body {
 		background: #0293fc;
 		border: none;
 		align-self: center;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		cursor: pointer;
 	}
 
@@ -175,7 +177,7 @@ body {
 		background: #0293fc;
 		border: none;
 		align-self: center;
-		font-family: '__myFont_834f5e', '__myFont_Fallback_834f5e';
+		font-family: 'myFont';
 		cursor: pointer;
 	}
 }
