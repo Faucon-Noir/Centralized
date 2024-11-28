@@ -1,0 +1,17 @@
+{
+    "id": "efa1c9a7-4ee2-48d3-8e45-051a52956e58",
+    "name": "TutorPeak",
+    "description": "plateforme de professeurs particuliers pour donner des cours de soutien",
+    "functionality": "Mise en relation de parents et d'étudiants avec des professeurs particuliers, suivi des progrès des élèves",
+    "forecast": "Mise en relation de parents et d'étudiants avec des professeurs particuliers: 6 mois, suivi des progrès des élèves: 4 mois",
+    "start_date": "2025-04-01T12:00:00.000Z",
+    "end_date": "2026-02-01T12:00:00.000Z",
+    "budget": "75 000€",
+    "technology": "C# pour le backend, ember js pour le frontend",
+    "constraints": "Qualité de l'enseignement, facilité d'utilisation de la plateforme.",
+    "validation": "Amélioration vérifiable des performances scolaires des élèves, adoption par les parents, les étudiants et les professeurs.",
+    "color": 11,
+    "template": "0",
+    "status": true,
+    "team_user": "Member"
+}

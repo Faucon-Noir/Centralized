@@ -1,0 +1,62 @@
+[
+    {
+        "created_at": "2024-11-08T01:29:27.381Z",
+        "id": 1,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name": "OneForAllTeam",
+            "created_at": "2024-11-08T02:29:27.000Z"
+        },
+        "user": {
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "created_at": "2024-11-08T01:28:14.026Z",
+            "firstname": "Da Cruz",
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "mail": "lowog32348@edectus.com",
+            "phone": "33781981249"
+        }
+    },
+    {
+        "created_at": "2024-11-08T01:29:27.381Z",
+        "id": 2,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name": "OneForAllTeam",
+            "created_at": "2024-11-08T02:29:27.000Z"
+        },
+        "user": {
+            "avatar": null,
+            "bio": null,
+            "created_at": "2024-11-08T01:25:56.433Z",
+            "firstname": "Admin",
+            "id": "fd73d649-4adc-407b-9b26-e45601c25a71",
+            "lastname": "Admin",
+            "mail": "gapekav881@gianes.com",
+            "phone": "0626417574"
+        }
+    },
+    {
+        "created_at": "2024-11-08T01:29:27.406Z",
+        "id": 3,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name": "OneForAllTeam",
+            "created_at": "2024-11-08T02:29:27.000Z"
+        },
+        "user": {
+            "avatar": null,
+            "bio": null,
+            "created_at": "2024-11-08T01:25:56.433Z",
+            "firstname": "Mathieu",
+            "id": "4b4df483-15c8-4760-b339-ee7a39b88398",
+            "lastname": "Beuret",
+            "mail": "cocida6834@gianes.com",
+            "phone": ""
+        }
+    }
+]

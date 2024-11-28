@@ -1,0 +1,17 @@
+{
+    "id": "9837714d-03f6-4ba7-b750-8f973e8f301a",
+    "name": "RecycleSmart",
+    "description": "Système de Gestion des Déchets avec Reconnaissance d'Images",
+    "functionality": "- **Gestion des utilisateurs** : Inscription, connexion, gestion des profils.",
+    "forecast": "Authentification utilisateur : 1 mois; Reconnaissance d'images pour le recyclage : 2 mois; Conseils personnalisés de recyclage : 1 mois; Suivi et historique des recyclages : 1 mois; Interface utilisateur : 1 mois;",
+    "start_date": "2024-11-08T12:00:00.000Z",
+    "end_date": "2025-01-31T12:00:00.000Z",
+    "budget": "100000 $",
+    "technology": "TensorFlow, Flask, React.js",
+    "constraints": "Algorithme de reconnaissance d'images doit avoir une précision d'au moins 90% pour les types de déchets courants.Informations sur le recyclage doivent être mises à jour en fonction des régulations locales.Système de localisation des centres de recyclage doit être précis avec une marge d'erreur inférieure à 1 km.",
+    "validation": "Les utilisateurs doivent pouvoir identifier correctement et recycler leurs déchets dans 95% des cas.Les centres de recyclage affichés doivent être exacts et pertinents pour 100% des utilisateurs.Les conseils de recyclage doivent être conformes aux régulations locales pour 100% des types de déchets reconnus.",
+    "color": 8,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

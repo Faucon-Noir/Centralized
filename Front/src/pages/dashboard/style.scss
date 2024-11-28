@@ -252,7 +252,6 @@
 		display: flex;
 		justify-content: space-evenly;
 		gap: 25px;
-		text-align: center;
 		flex-direction: row;
 		// @media (min-width: 2537px) {
 		// 	flex-direction: column;
@@ -278,13 +277,21 @@
 			transition: all 350ms ease-in-out;
 			min-width: 275px;
 			max-width: 450px;
-			text-align: center;
 			p {
 				margin: 0;
 			}
 			h3 {
 				margin: 0;
 			}
+		}
+		.icon_container {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 10px
+		}
+		.icon_stat {
+			margin: 0;
 		}
 	}
 	.stat_container_1 {
@@ -317,6 +324,5 @@
 @media (max-width: 660px) {
 	.mobile {
 		margin: 0 16px;
-		
 	}
 }

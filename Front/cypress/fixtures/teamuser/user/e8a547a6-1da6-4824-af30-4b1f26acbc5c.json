@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "5d331087-7797-49b6-9211-a2c6914d0c30",
+            "name":"OneForAllTeam"
+        },
+        "user": {
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "firstname": "Da Cruz",
+            "mail": "lowog32348@edectus.com",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "phone": "33781981249",
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg"
+        }
+        
+    },
+    {
+        "id": 4,
+        "team": {
+            "avatar": "e48ea8e3-bccb-4012-8009-14f1e3d84c09.jpg",
+            "id": "8b66844f-3e11-4e6c-a652-dca635f1fa3f",
+            "name":"SoulKingTeam"
+        },
+        "user": {
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "firstname": "Da Cruz",
+            "mail": "lowog32348@edectus.com",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "phone": "33781981249",
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg"
+        }
+    },
+    {
+        "id": 5,
+        "team": {
+            "avatar": "ae9b5c9b-44d6-46fb-94af-8cb57f9b4fb7.jpg",
+            "id": "3eb6385c-cd3b-49d2-9b22-4fc02791e779",
+            "name":"HackTime"
+        },
+        "user": {
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "firstname": "Da Cruz",
+            "mail": "lowog32348@edectus.com",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "phone": "33781981249",
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg"
+        }
+    },
+    {
+        "id": 7,
+        "team": {
+            "avatar": "5ffb034c-1c4d-4710-90ee-f950f5483853.jpg",
+            "id": "c61016f6-1bac-4801-bc29-5b931ad15336",
+            "name":"Equipe Gestionnaire"
+        },
+        "user": {
+            "id": "e8a547a6-1da6-4824-af30-4b1f26acbc5c",
+            "lastname": "Jérémy",
+            "firstname": "Da Cruz",
+            "mail": "lowog32348@edectus.com",
+            "bio": "Jérémy Da Cruz, 22 ans",
+            "phone": "33781981249",
+            "avatar": "1d05a06e-b309-484b-ad8b-e5f3a6f22eee.jpg"
+        }
+    }
+]

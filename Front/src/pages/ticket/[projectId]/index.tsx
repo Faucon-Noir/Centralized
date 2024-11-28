@@ -19,9 +19,15 @@ type Ticket = {
 	urgenceId: string;
 	updated_at: Date;
 };
-export default function Tickets({ userData, updateUserData, }: { userData: any, updateUserData: any }) {
+export default function Tickets({
+	userData,
+	updateUserData,
+}: {
+	userData: any;
+	updateUserData: any;
+}) {
 	const [showCreateModal, setShowCreateModal] = useState(false);
-	const [selectedProject, setSelectedProject] = useState({});
+	const [selectedProject, setSelectedProject] = useState({ id: '' });
 	const [projectTickets, setProjectTickets] = useState<{
 		todo: Ticket[];
 		inprogress: Ticket[];
@@ -42,18 +48,26 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 			done: [] as Ticket[],
 		};
 		for (let project of userData.project) {
-			if (project.id == new URL(window.location.href).pathname.split('/')[2]) {
+			if (
+				project.id ==
+				new URL(window.location.href).pathname.split('/')[2]
+			) {
 				setSelectedProject(project);
 				if (project.ticket.ticket != undefined) {
 					for (let ticket of project.ticket.ticket) {
+						const decryptedTicket = {
+							...ticket,
+							title: ticket.title,
+							description: ticket.description,
+						};
 						if (ticket.status === 'a faire') {
-							updatedTickets.todo.push(ticket);
+							updatedTickets.todo.push(decryptedTicket);
 						} else if (ticket.status === 'résolu') {
-							updatedTickets.done.push(ticket);
+							updatedTickets.done.push(decryptedTicket);
 						} else if (ticket.status === 'en retard') {
-							updatedTickets.late.push(ticket);
+							updatedTickets.late.push(decryptedTicket);
 						} else if (ticket.status === 'en cours') {
-							updatedTickets.inprogress.push(ticket);
+							updatedTickets.inprogress.push(decryptedTicket);
 						}
 					}
 				}
@@ -66,13 +80,15 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 		setShowCreateModal(false);
 	}
 
-	console.log(selectedProject);
 	return (
 		<>
 			<div className='ticketPage'>
 				<div className='header'>
 					<h1>Gestion des tickets</h1>
-					<ButtonBase onClick={() => setShowCreateModal(true)}>
+					<ButtonBase
+						data-cy={ButtonCreateTicketCy}
+						onClick={() => setShowCreateModal(true)}
+					>
 						<AddIcon fontSize='medium' sx={{ color: '#000000' }} />
 					</ButtonBase>
 				</div>
@@ -95,6 +111,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -117,6 +135,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -139,6 +159,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -160,6 +182,8 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 										updated_at={item.updated_at}
 										userData={userData}
 										description={item.description}
+										mail={item.description}
+										projectId={selectedProject.id}
 									/>
 								))}
 							</div>
@@ -175,7 +199,10 @@ export default function Tickets({ userData, updateUserData, }: { userData: any, 
 								className='cross'
 								onClick={() => handleCloseModal()}
 							/>
-							<CreateTicketForm userData={userData} selectedProject={selectedProject} />
+							<CreateTicketForm
+								userData={userData}
+								selectedProject={selectedProject}
+							/>
 						</div>
 					</div>
 				) : null}

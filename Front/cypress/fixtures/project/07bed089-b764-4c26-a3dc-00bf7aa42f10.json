@@ -1,0 +1,17 @@
+{
+    "id": "07bed089-b764-4c26-a3dc-00bf7aa42f10",
+    "name": "Doki Loki",
+    "description": "Jeu à scénario en 2D sur le theme du harcelement avec differentes fin",
+    "functionality": "Créer le scénario, faire les dessins et la structure du jeu.",
+    "forecast": "Faire le scénario: 3 mois, faire les dessins 3mois; et en paralléle pendant 6 mois pour la structure du jeu.",
+    "start_date": "2024-10-01T12:00:00.000Z",
+    "end_date": "2025-11-08T12:00:00.000Z",
+    "budget": "50 milles euros",
+    "technology": "unreal engine",
+    "constraints": "Que le jeu soit fluide et compréhensible.",
+    "validation": "Mise en recette sur l'environnement du client",
+    "color": 3,
+    "template": "0",
+    "status": false,
+    "team_user": "Member"
+}

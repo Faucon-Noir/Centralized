@@ -31,7 +31,7 @@ import {
 // Collection de test pour la page de création de ticket
 describe('TicketCreatePage', () => {
 	beforeEach(() => {
-		cy.login()
+		cy.loginJdc()
 		cy.visit('http://localhost:3000/ticket/create')
 		mockGetPlanningByUserIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
 	})

@@ -40,10 +40,28 @@ export const mockGetTicketByProjectIdHttpCall = (id: string) => {
 	}).as('getTicketByProjectId')
 }
 
+export const mockGetTicketByUserAndProjectdHttpCall = (id_user: string, id_project: string) => {
+	cy.intercept('GET', `http://localhost:8000/api/ticket/user/${id_user}/project/${id_project}`, {
+		fixture: `ticket/project/${id_user}/${id_project}.json`,
+	}).as('getTicketByUserAndProjectId')
+}
+
 export const mockGetTicketByUserdHttpCall = (id: string) => {
 	cy.intercept('GET', `http://localhost:8000/api/ticket/user/${id}`, {
 		fixture: `ticket/user/${id}.json`,
 	}).as('getTicketByUserId')
+}
+
+export const mockGetCountTicketByUserdHttpCall = (id: string) => {
+	cy.intercept('GET', `http://localhost:8000/api/ticket/user/${id}/count`, {
+		fixture: `ticket/count/user/${id}.json`,
+	}).as('getTicketByUserId')
+}
+
+export const mockGetTeamUserByIdHttpCall = (id: string) => {
+	cy.intercept('GET', `http://localhost:8000/api/teamuser/${id}`, {
+		fixture: `teamuser/${id}.json`,
+	}).as('getTeamuserById')
 }
 
 export const mockGetTeamUserByUserIdHttpCall = (id: string) => {

@@ -27,7 +27,7 @@ import {
 // Collection de test pour la page de création et l'affichage de rex
 describe('RexPage', () => {
 	// beforeEach(() => {
-	// 	cy.login()
+	// 	cy.loginJdc()
 	// })
 	// afterEach(() => {
 	// 	cy.logout()

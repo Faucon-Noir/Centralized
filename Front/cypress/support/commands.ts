@@ -66,15 +66,39 @@ Cypress.Commands.add(
 	}
 );
 
-Cypress.Commands.add('login', (): void => {
+Cypress.Commands.add('loginJdc', (): void => {
 	cy.visit('localhost:3000/login');
 	// Token valide 10 ans
 	localStorage.clear();
 	localStorage.setItem(
 		'token',
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkMzQ1ZWEyLTJhNWYtNDJmMi1hNTg4LTU2MGZmNGVhYmE4ZSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzE3NTk3MDkyLCJleHAiOjI0NzQ5Nzk0OTJ9.So-Ldq8l1g_hSG6Nz7SdoAhbvdM4WNCkqHGy-wl3IjY'
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU4YTU0N2E2LTFkYTYtNDgyNC1hZjMwLTRiMWYyNmFjYmM1YyIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzMxOTE4NjEyLCJleHAiOjE3OTUwMzM4MTJ9.fBgyjbxyopRqsyCJ6QD5yzaXFN6dGvTb_1xoiOQChRY'
+	);
+	cy.visit('localhost:3000/home');
+	cy.viewport(1920, 1080);
+});
+
+Cypress.Commands.add('loginMathieu', (): void => {
+	cy.visit('localhost:3000/login');
+	// Token valide 10 ans
+	localStorage.clear();
+	localStorage.setItem(
+		'token',
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRiNGRmNDgzLTE1YzgtNDc2MC1iMzM5LWVlN2EzOWI4ODM5OCIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzMxOTE4NzAzLCJleHAiOjE3OTUwMzM5MDN9.f7BwJqhGs7nvtn7kyHD2LTM6nms7AA1iNlFwWBuDQ0A'
 	);
 	cy.visit('localhost:3000/');
+	cy.viewport(1920, 1080);
+});
+
+Cypress.Commands.add('loginAdmin', (): void => {
+	cy.visit('localhost:3000/login');
+	// Token valide 10 ans
+	localStorage.clear();
+	localStorage.setItem(
+		'token',
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZkNzNkNjQ5LTRhZGMtNDA3Yi05YjI2LWU0NTYwMWMyNWE3MSIsInJvbGVzIjpbIlVTRVIiXSwiaWF0IjoxNzMxOTE4Nzg5LCJleHAiOjE3OTUwMzM5ODl9.4NQgWGsn7QLTN53MmdhSYehGuPGqZN_GsXJL7ImE6bA'
+	);
+	cy.visit('localhost:3000/home');
 	cy.viewport(1920, 1080);
 });
 
@@ -88,6 +112,6 @@ Cypress.Commands.add('selectProject', (id: string): void => {
 	cy.visit('localhost:3000/');
 	localStorage.removeItem('SelectedProject');
 	localStorage.setItem('SelectedProject', id);
-	cy.visit('localhost:3000/');
+	cy.visit('localhost:3000/home');
 	cy.viewport(1920, 1080);
 });

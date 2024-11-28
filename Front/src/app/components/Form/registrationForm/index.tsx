@@ -27,6 +27,7 @@ import {
 	SubmitButtonCy,
 	RegistrationFormCy,
 } from './const';
+import { encryptData } from '@/app/security/encrypt';
 
 const poppins = Poppins({ subsets: ['latin'], weight: '600' });
 
@@ -55,7 +56,6 @@ function RegistrationForm() {
 			setIsErrorLogin(0);
 			axios
 				.post(`${baseUrl}login`, {
-
 					mail: user.mail.trim(),
 					password: user.password.trim(),
 				})
@@ -79,11 +79,11 @@ function RegistrationForm() {
 
 			axios
 				.post(`${baseUrl}register`, {
-					lastname: user.lastname.trim(),
-					firstname: user.firstname.trim(),
+					lastname: encryptData(user.lastname.trim()),
+					firstname: encryptData(user.firstname.trim()),
 					mail: user.mail.trim(),
-					phone: user.phone.trim(),
 					abonnement: user.abonnement.trim(),
+					phone: encryptData(user.phone.trim()),
 					password: user.password.trim(),
 				})
 				.then(function (response) {

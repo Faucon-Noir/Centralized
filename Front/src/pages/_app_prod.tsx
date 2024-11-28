@@ -84,6 +84,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	}, [router]);
 
 	if (loading) {
+		// TODO: Spinner
 		return <div>En attente</div>;
 	}
 	console.log(Component.name);
