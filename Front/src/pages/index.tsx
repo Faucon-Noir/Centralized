@@ -14,7 +14,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import XIcon from '@mui/icons-material/X';
 
-export default function WelcomePage() {
+function WelcomePage() {
 	const [currentImage, setCurrentImage] = useState(
 		'/assets/vitrine/second-1.png'
 	);
@@ -91,7 +91,7 @@ export default function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-				Alliance de simplicité et d&apos;efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
+					Alliance de simplicité et d&apos;efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -441,3 +441,7 @@ export default function WelcomePage() {
 		</>
 	);
 }
+
+WelcomePage.displayName = "WelcomePage"
+
+export default WelcomePage;

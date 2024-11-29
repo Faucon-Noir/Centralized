@@ -18,7 +18,7 @@ describe('SpecificationEditPage', () => {
 		mockGetSpecificationByProjectHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		mockGetSpecificationByProjectHttpCall('c896afae-0532-4ee5-8385-110ccecf72d0')
 		mockGetUserByIdHttpCall('cd345ea2-2a5f-42f2-a588-560ff4eaba8e')
-	 	mockGetSpecificationByProjectHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
+		mockGetSpecificationByProjectHttpCall('24411468-8707-4773-9af0-0e483cbaa459')
 		cy.visit('http://localhost:3000/specification/24411468-8707-4773-9af0-0e483cbaa459')
 	})
 	// Test pour vérifier que la page d'édition de cahier des charges s'affiche correctement
@@ -29,20 +29,20 @@ describe('SpecificationEditPage', () => {
 		].forEach((element) => {
 			cy.centralizedGet(element).should('exist').should('be.visible')
 		})
-		;[
-			TextareaSpecificationCy,
-			PopUpSpecificationCy
-		].forEach((element) => {
-			cy.centralizedGet(element).should('not.exist')
-		})
-		
-		;[
-			'.rdw-storybook-toolbar',
-			'.rdw-storybook-wrapper',
-			'.rdw-storybook-editor'
-		].forEach((element) => {
-			cy.get(element).should('exist').should('be.visible')
-		})
+			;[
+				TextareaSpecificationCy,
+				PopUpSpecificationCy
+			].forEach((element) => {
+				cy.centralizedGet(element).should('not.exist')
+			})
+
+			;[
+				'.rdw-storybook-toolbar',
+				'.rdw-storybook-wrapper',
+				'.rdw-storybook-editor'
+			].forEach((element) => {
+				cy.get(element).should('exist').should('be.visible')
+			})
 		// TODO Bloqué car donnée mal ciblé, en attente de correction
 		// cy.get('.rdw-storybook-editor').should('contain', 'Cahier des charges: Taverne des citations');
 	})
@@ -56,7 +56,7 @@ describe('SpecificationEditPage', () => {
 		// cy.centralizedGet(PopUpSpecificationCy).should('exist').should('be.visible');
 		// cy.centralizedGet(PopUpSpecificationCy).click();
 		// cy.centralizedGet(PopUpSpecificationCy).should('not.exist');
-		
+
 		// cy.centralizedGet(ButtonSubmitSpecificationCy).click();
 		// cy.centralizedGet(PopUpSpecificationCy).should('exist').should('be.visible');
 		// cy.wait(10001);

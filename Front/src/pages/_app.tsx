@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
     }, [router.events]);
 
     useEffect(() => {
-        if (Component.name != 'b' && Component.name != 'h') {
+        if (Component.displayName != 'LoginPage' && Component.displayName != 'WelcomePage') {
             UserData().then((result) => {
                 setUserData(result);
                 setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
@@ -67,7 +67,7 @@ export default function App({ Component, pageProps }: AppProps) {
         } else {
             setLoading(false);
         }
-    }, [Component.name]);
+    }, [Component.displayName]);
 
     useEffect(() => {
         const handleRouteChangeComplete = (url: string) => {
@@ -88,15 +88,15 @@ export default function App({ Component, pageProps }: AppProps) {
         return <div>En attente</div>;
     }
 
-    console.log(Component.name)
+    console.log("Component : ", Component.displayName)
     return (
         <main className={myFont.className} style={{ height: '100%' }}>
-            {Component.name == 'b' || Component.name == 'h' ? (
+            {Component.displayName == 'LoginPage' || Component.displayName == 'WelcomePage' ? (
                 <Component {...pageProps} />
             ) : (
                 <AuthWrapper>
                     <TaskProvider>
-                        {Component.name === 'b' ? (
+                        {Component.displayName === 'LoginPage' ? (
                             <Component {...pageProps} userData={userData} />
                         ) : windowWidth >= 1280 ? (
                             <Grid container style={{ height: '100%' }}>

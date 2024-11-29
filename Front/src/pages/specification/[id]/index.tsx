@@ -22,7 +22,7 @@ const CustomEditor = dynamic(() => import('@/app/components/customEditor'), {
 	ssr: false,
 });
 
-export default function SpecificationEdit({
+function SpecificationEdit({
 	userData,
 	updateUserData,
 }: {
@@ -154,3 +154,8 @@ export default function SpecificationEdit({
 		</div>
 	);
 }
+
+
+SpecificationEdit.displayName = "SpecificationEdit"
+
+export default SpecificationEdit;
