@@ -171,7 +171,7 @@ function RegistrationForm() {
 					{isRegister ? (
 						<div className='line first-line'>
 							<div className='row'>
-								<label htmlFor='Nom'>Nom</label>
+								<label htmlFor='Nom'>Prénom</label>
 								<input
 									data-cy={NameFieldCy}
 									type='text'
@@ -185,7 +185,7 @@ function RegistrationForm() {
 								/>
 							</div>
 							<div className='row'>
-								<label htmlFor='Nom'>Prénom</label>
+								<label htmlFor='Nom'>Nom</label>
 								<input
 									data-cy={SurnameFieldCy}
 									type='text'
