@@ -4,17 +4,30 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 // MaterialUi
-import { Icon } from '@mui/material';
+import { CircularProgress, Icon } from '@mui/material';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 
 // React
-
 import { useEffect, useState } from 'react';
 import React from 'react';
+
 // Utils
 import './DesktopNav.scss';
 import { numberToColor } from '@/app/helpers';
-import { ButtonCloseProjectDesktopNavCy, LinkAccountDesktopNavCy, LinkDashboardDesktopNavCy, LinkHomeDesktopNavCy, LinkLogoutDesktopNavCy, LinkOneSpecificationDesktopNavCy, LinkPlanningDesktopNavCy, LinkSpecificationDesktopNavCy, LinkTeamDesktopNavCy, LinkTicketDesktopNavCy, LogoDesktopNavCy, ProjectOpenDesktopNavCy } from './const';
+import {
+	ButtonCloseProjectDesktopNavCy,
+	LinkAccountDesktopNavCy,
+	LinkDashboardDesktopNavCy,
+	LinkHomeDesktopNavCy,
+	LinkLogoutDesktopNavCy,
+	LinkOneSpecificationDesktopNavCy,
+	LinkPlanningDesktopNavCy,
+	LinkSpecificationDesktopNavCy,
+	LinkTeamDesktopNavCy,
+	LinkTicketDesktopNavCy,
+	LogoDesktopNavCy,
+	ProjectOpenDesktopNavCy,
+} from './const';
 
 export default function DesktopNavigation({
 	page = '',
@@ -84,7 +97,21 @@ export default function DesktopNavigation({
 	}
 
 	if (loading) {
-		return <div>Chargement des projets...</div>;
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+				Chargements des projets...
+			</div>
+		);
 	}
 
 	return (
@@ -156,12 +183,16 @@ export default function DesktopNavigation({
 				{Object.keys(selctedMap).length > 0 ? (
 					<div className='selectedContainer'>
 						{Object.values(selctedMap).map((project, index) => (
-							<div data-cy={ProjectOpenDesktopNavCy} className='projectOpen' key={index}>
+							<div
+								data-cy={ProjectOpenDesktopNavCy}
+								className='projectOpen'
+								key={index}
+							>
 								<a
 									data-cy={LinkDashboardDesktopNavCy}
 									className={
 										page == 'DashboardPage' &&
-											project?.id ==
+										project?.id ==
 											window.location.pathname.split(
 												'/'
 											)[2]
@@ -172,7 +203,9 @@ export default function DesktopNavigation({
 								>
 									<button className='pName'>
 										<img
-											data-cy={ButtonCloseProjectDesktopNavCy}
+											data-cy={
+												ButtonCloseProjectDesktopNavCy
+											}
 											src='/assets/icons/icon-cross.svg'
 											alt=''
 											className='cross'
@@ -195,7 +228,12 @@ export default function DesktopNavigation({
 									</button>
 								</a>
 								<div className='submenu'>
-									<a data-cy={LinkOneSpecificationDesktopNavCy} href={'/specification/' + project.id}>
+									<a
+										data-cy={
+											LinkOneSpecificationDesktopNavCy
+										}
+										href={'/specification/' + project.id}
+									>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/project.svg'
@@ -204,7 +242,10 @@ export default function DesktopNavigation({
 											<p>Cahier des charges</p>
 										</button>
 									</a>
-									<a data-cy={LinkTicketDesktopNavCy} href={'/ticket/' + project.id}>
+									<a
+										data-cy={LinkTicketDesktopNavCy}
+										href={'/ticket/' + project.id}
+									>
 										<button className='submenu_btn'>
 											<img
 												src='/assets/icons/tickets.svg'

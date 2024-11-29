@@ -1,12 +1,8 @@
 {
   "pages\\specification\\[id]\\index.tsx -> @/app/components/customEditor": {
-    "id": 68332,
+    "id": "pages\\specification\\[id]\\index.tsx -> @/app/components/customEditor",
     "files": [
-      "static/css/ab699959edbc876f.css",
-      "static/chunks/2c386607.725d38420899a390.js",
-      "static/chunks/3b9d1622.8b373cecb21f609b.js",
-      "static/chunks/381.670d6bebbfdae444.js",
-      "static/chunks/951.41ed2e6d59fd3e2a.js"
+      "static/chunks/src_app_components_customEditor_index_tsx.js"
     ]
   }
 }

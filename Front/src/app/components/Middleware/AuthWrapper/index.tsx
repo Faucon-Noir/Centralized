@@ -2,6 +2,8 @@ import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { AuthWrapperProps } from './type';
+import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 	const router = useRouter();
@@ -51,7 +53,20 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 
 	// Si en cours de vérification, afficher un message de chargement
 	if (isLoading) {
-		return <div>Chargement...</div>; // Affichage temporaire pendant la vérification
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+			</div>
+		); // Affichage temporaire pendant la vérification
 	}
 
 	return <>{children}</>; // Rendu des composants seulement après la vérification

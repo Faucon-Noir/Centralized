@@ -1,0 +1,11 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[13].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"src\\pages\\_app.tsx","import":"","arguments":[{"src":"../fonts/Poppins-Medium.ttf"}],"variableName":"myFont"} ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@font-face {
+font-family: 'myFont';
+src: url(/_next/static/media/a52d0bf095c248da-s.p.ttf) format('truetype');
+font-display: swap;
+}@font-face {font-family: 'myFont Fallback';src: local("Arial");ascent-override: 91.82%;descent-override: 30.61%;line-gap-override: 8.74%;size-adjust: 114.36%
+}.__className_834f5e {font-family: 'myFont', 'myFont Fallback'
+}
+

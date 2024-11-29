@@ -31,7 +31,6 @@ export default function MyProjectCard({
 			selectedProjects: [...userData.selectedProjects, project.id],
 		});
 	}
-	console.log(project);
 	return (
 		<>
 			<div className='project_card' onClick={() => addSelectedProject()}>

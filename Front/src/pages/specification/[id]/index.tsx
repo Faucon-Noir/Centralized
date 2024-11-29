@@ -15,8 +15,8 @@ import {
 	PopUpSpecificationCy,
 	TitleSpecificationCy,
 } from '@/app/const/specification/const';
-import { decryptData } from '@/app/security/decrypt';
-import { encryptData } from '@/app/security/encrypt';
+import CircularProgress from '@mui/material/CircularProgress';
+import React from 'react';
 
 const CustomEditor = dynamic(() => import('@/app/components/customEditor'), {
 	ssr: false,
@@ -94,7 +94,20 @@ function SpecificationEdit({
 
 	// TODO: Spinner
 	if (loading) {
-		return <div>Chargement en cours...</div>;
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+			</div>
+		);
 	}
 
 	return (
@@ -155,7 +168,6 @@ function SpecificationEdit({
 	);
 }
 
-
-SpecificationEdit.displayName = "SpecificationEdit"
+SpecificationEdit.displayName = 'SpecificationEdit';
 
 export default SpecificationEdit;

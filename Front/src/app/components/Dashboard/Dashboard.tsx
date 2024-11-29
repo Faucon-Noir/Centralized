@@ -2,9 +2,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import './Dashboard.scss';
 import FolderCopyIcon from '@mui/icons-material/FolderCopy';
-import { Icon } from '@mui/material';
+import { CircularProgress, Icon } from '@mui/material';
 import { numberToColor } from '@/app/helpers';
 import Link from 'next/link';
+import React from 'react';
 
 export default function Dashboard({
 	page = '',
@@ -75,7 +76,21 @@ export default function Dashboard({
 	}
 
 	if (loading) {
-		return <div>Chargement des projets...</div>;
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+				Chargements des projets...
+			</div>
+		);
 	}
 
 	return (

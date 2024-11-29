@@ -46,7 +46,6 @@ function WelcomePage() {
 			setScrollAmount(newScrollAmount);
 		}
 	};
-	console.log(process.env.NEXT_PUBLIC_API_URL);
 	return (
 		<>
 			<header className='header'>
@@ -91,7 +90,10 @@ function WelcomePage() {
 			<section className='second'>
 				<h2>Centralisez vos besoins</h2>
 				<p>
-					Alliance de simplicité et d&apos;efficacité pour une gestion de projet optimale. Avec ses fonctionnalités intuitives de suivi, chaque tâche, équipe et objectif est parfaitement visible et maîtrisé.
+					Alliance de simplicité et d&apos;efficacité pour une gestion
+					de projet optimale. Avec ses fonctionnalités intuitives de
+					suivi, chaque tâche, équipe et objectif est parfaitement
+					visible et maîtrisé.
 				</p>
 				<div className='container'>
 					<div className='box-container'>
@@ -204,7 +206,10 @@ function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>📅</div>
 							<div className='title'>Calendrier intégré</div>
-							<div className='description'>Visualisez les deadlines et les jalons clés en un coup d&apos;œil</div>
+							<div className='description'>
+								Visualisez les deadlines et les jalons clés en
+								un coup d&apos;œil
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>🎟️</div>
@@ -217,17 +222,28 @@ function WelcomePage() {
 						<div className='block'>
 							<div className='icon'>🚀</div>
 							<div className='title'>Cahiers des charges</div>
-							<div className='description'>Créez des spécifications de projet en quelques clics grâce à l&apos;IA</div>
+							<div className='description'>
+								Créez des spécifications de projet en quelques
+								clics grâce à l&apos;IA
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>✨</div>
-							<div className='title'>Retour d&apos;expérience</div>
-							<div className='description'>Analysez les résultats et optimisez vos processus pour les futurs projets</div>
+							<div className='title'>
+								Retour d&apos;expérience
+							</div>
+							<div className='description'>
+								Analysez les résultats et optimisez vos
+								processus pour les futurs projets
+							</div>
 						</div>
 						<div className='block'>
 							<div className='icon'>📈</div>
 							<div className='title'>Performance</div>
-							<div className='description'>Évaluez l&apos;avancement et la performance en temps réel</div>
+							<div className='description'>
+								Évaluez l&apos;avancement et la performance en
+								temps réel
+							</div>
 						</div>
 						{/* /!* Add more blocks as needed *!/ */}
 					</div>
@@ -338,17 +354,15 @@ function WelcomePage() {
 						<a href='#'>
 							A propos de Centralized
 							<h6>
-								Qui sommes nous? Découvrez tout ce
-								qu&apos;il y a à savoir sur nous
+								Qui sommes nous? Découvrez tout ce qu&apos;il y
+								a à savoir sur nous
 							</h6>
 						</a>
 					</div>
 					<div className='whoContainer'>
 						<a href='#'>
 							Nous contacter
-							<h6>
-								Besoin d&apos;aide? Contactez-nous !
-							</h6>
+							<h6>Besoin d&apos;aide? Contactez-nous !</h6>
 						</a>
 					</div>
 				</div>
@@ -367,7 +381,6 @@ function WelcomePage() {
 						<a href='#'>
 							<h6>Copyright © 2024 Centralized</h6>
 						</a>
-
 					</div>
 					<div className='box bottom media'>
 						<div className='social'>
@@ -437,11 +450,11 @@ function WelcomePage() {
 						</div>
 					</div>
 					 */}
-			</footer >
+			</footer>
 		</>
 	);
 }
 
-WelcomePage.displayName = "WelcomePage"
+WelcomePage.displayName = 'WelcomePage';
 
 export default WelcomePage;

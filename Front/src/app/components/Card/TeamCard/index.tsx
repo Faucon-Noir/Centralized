@@ -34,7 +34,6 @@ export default function TeamCard({
 						setTeamData(res.data);
 					}
 				});
-			console.log('API URL', baseUrl);
 		} catch (e) {
 			console.log(e);
 		}
@@ -49,7 +48,6 @@ export default function TeamCard({
 	}
 
 	async function deleteUserFromTeam(selectedTeamUser: any) {
-		console.log(selectedTeamUser);
 		try {
 			await axios
 				.delete(`${baseUrl}teamuser/` + selectedTeamUser.id, {
@@ -76,7 +74,6 @@ export default function TeamCard({
 	}
 
 	async function addMateToTeam(email: any, teamid: any) {
-		console.log(email, teamid);
 		let response = await axios.post(
 			`${baseUrl}teamuser/`,
 			{ user: email, team: teamid },
@@ -97,7 +94,7 @@ export default function TeamCard({
 				if (!validateEmail(mate.trim()) && mate.trim().length > 0) {
 					setValidEmail(true);
 				} else {
-					console.log('ok');
+					console.log('mate : ', mate);
 					await addMateToTeam(mate.trim(), selectedTeam.id);
 				}
 			}
@@ -167,41 +164,41 @@ export default function TeamCard({
 								<div className='user_container'>
 									{teamData
 										? teamData.map((item: any) => (
-											<div
-												className='one_user'
-												key={item.id}
-											>
-												<p>
-													<img
-														src='/assets/icons/user.png'
-														alt=''
-													/>{' '}
-													: {item.user.lastname}{' '}
-													{item.user.firstname}
-												</p>
-												{item.user.id ===
+												<div
+													className='one_user'
+													key={item.id}
+												>
+													<p>
+														<img
+															src='/assets/icons/user.png'
+															alt=''
+														/>{' '}
+														: {item.user.lastname}{' '}
+														{item.user.firstname}
+													</p>
+													{item.user.id ===
 													userData.user.id ? (
-													<p>(vous)</p>
-												) : null}
-												<p>
+														<p>(vous)</p>
+													) : null}
+													<p>
+														<img
+															src='/assets/icons/email.png'
+															alt=''
+														/>{' '}
+														: {item.user.mail}
+													</p>
 													<img
-														src='/assets/icons/email.png'
+														src='/assets/icons/bin.png'
+														className='bin_img'
 														alt=''
-													/>{' '}
-													: {item.user.mail}
-												</p>
-												<img
-													src='/assets/icons/bin.png'
-													className='bin_img'
-													alt=''
-													onClick={() =>
-														deleteUserFromTeam(
-															item
-														)
-													}
-												/>
-											</div>
-										))
+														onClick={() =>
+															deleteUserFromTeam(
+																item
+															)
+														}
+													/>
+												</div>
+											))
 										: null}
 								</div>
 								<input

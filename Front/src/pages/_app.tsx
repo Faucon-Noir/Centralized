@@ -5,7 +5,7 @@ import DesktopNavigation from '@/app/components/Navigation/Desktop/DesktopNaviga
 import MobileNavigation from '@/app/components/Navigation/Mobile/MobileNavigation';
 
 // Material	UI
-import { Grid } from '@mui/material';
+import { Grid, Box, CircularProgress } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 // Next
@@ -26,129 +26,144 @@ import GlobalPollingComponent from '@/app/components/Polling/GlobalPollingCompon
 const myFont = localFont({ src: '../fonts/Poppins-Medium.ttf' });
 
 export default function App({ Component, pageProps }: AppProps) {
-    const [showMobileNav, setShowMobileNav] = useState(false);
-    const [loading, setLoading] = useState(true); // Ajouter un état de chargement
-    const [userData, setUserData] = useState<any>({
-        project: [
-            {
-                rex: [],
-                ticket: [],
-            },
-        ],
-        team: [],
-        user: [],
-        specification: [],
-        selectedProjects: [],
-    });
-    const [windowWidth, setWindowWidth] = useState<number>(0);
-    const router = useRouter();
+	const [showMobileNav, setShowMobileNav] = useState(false);
+	const [loading, setLoading] = useState(true); // Ajouter un état de chargement
+	const [userData, setUserData] = useState<any>({
+		project: [
+			{
+				rex: [],
+				ticket: [],
+			},
+		],
+		team: [],
+		user: [],
+		specification: [],
+		selectedProjects: [],
+	});
+	const [windowWidth, setWindowWidth] = useState<number>(0);
+	const router = useRouter();
 
-    useEffect(() => {
-        setWindowWidth(window.innerWidth);
+	useEffect(() => {
+		setWindowWidth(window.innerWidth);
 
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        const handleRouteChange = () => setWindowWidth(window.innerWidth);
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		const handleRouteChange = () => setWindowWidth(window.innerWidth);
 
-        window.addEventListener('resize', handleResize);
-        router.events.on('routeChangeComplete', handleRouteChange);
+		window.addEventListener('resize', handleResize);
+		router.events.on('routeChangeComplete', handleRouteChange);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            router.events.off('routeChangeComplete', handleRouteChange);
-        };
-    }, [router.events]);
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			router.events.off('routeChangeComplete', handleRouteChange);
+		};
+	}, [router.events]);
 
-    useEffect(() => {
-        if (Component.displayName != 'LoginPage' && Component.displayName != 'WelcomePage') {
-            UserData().then((result) => {
-                setUserData(result);
-                setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
-            });
-        } else {
-            setLoading(false);
-        }
-    }, [Component.displayName]);
+	useEffect(() => {
+		if (
+			Component.displayName != 'LoginPage' &&
+			Component.displayName != 'WelcomePage'
+		) {
+			UserData().then((result) => {
+				setUserData(result);
+				setLoading(false); // Une fois que les données sont prêtes, on arrête le chargement
+			});
+		} else {
+			setLoading(false);
+		}
+	}, [Component.displayName]);
 
-    useEffect(() => {
-        const handleRouteChangeComplete = (url: string) => {
-            if (url === '/home') {
-                window.location.reload();
-            }
-        };
+	useEffect(() => {
+		const handleRouteChangeComplete = (url: string) => {
+			if (url === '/home') {
+				window.location.reload();
+			}
+		};
 
-        router.events.on('routeChangeComplete', handleRouteChangeComplete);
+		router.events.on('routeChangeComplete', handleRouteChangeComplete);
 
-        return () => {
-            router.events.off('routeChangeComplete', handleRouteChangeComplete);
-        };
-    }, [router]);
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChangeComplete);
+		};
+	}, [router]);
 
-    if (loading) {
-        // TODO: Spinner
-        return <div>En attente</div>;
-    }
+	if (loading) {
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+			</div>
+		);
+	}
 
-    console.log("Component : ", Component.displayName)
-    return (
-        <main className={myFont.className} style={{ height: '100%' }}>
-            {Component.displayName == 'LoginPage' || Component.displayName == 'WelcomePage' ? (
-                <Component {...pageProps} />
-            ) : (
-                <AuthWrapper>
-                    <TaskProvider>
-                        {Component.displayName === 'LoginPage' ? (
-                            <Component {...pageProps} userData={userData} />
-                        ) : windowWidth >= 1280 ? (
-                            <Grid container style={{ height: '100%' }}>
-                                <Grid xs={2} item={true}>
-                                    <DesktopNavigation
-                                        page={Component.name}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        updateUserData={setUserData}
-                                    />
-                                </Grid>
-                                <Grid xs={10} item={true}>
-                                    <Component
-                                        {...pageProps}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        updateUserData={setUserData}
-                                    />
-                                    <GlobalPollingComponent />
-                                </Grid>
-                            </Grid>
-                        ) : (
-                            <>
-                                <MenuIcon
-                                    className='burgerMenu'
-                                    onClick={() => setShowMobileNav(true)}
-                                />
-                                {/* </button> */}
-                                {showMobileNav ? (
-                                    <MobileNavigation
-                                        page={Component.name}
-                                        userData={
-                                            userData?.user ? userData : {}
-                                        }
-                                        setShowMobileNav={setShowMobileNav}
-                                    />
-                                ) : (
-                                    <></>
-                                )}
-                                <Component
-                                    {...pageProps}
-                                    userData={userData?.user ? userData : {}}
-                                    updateUserData={setUserData}
-                                />
-                                <GlobalPollingComponent />
-                            </>
-                        )}
-                    </TaskProvider>
-                </AuthWrapper>
-            )}
-        </main>
-    );
+	return (
+		<main className={myFont.className} style={{ height: '100%' }}>
+			{Component.displayName == 'LoginPage' ||
+			Component.displayName == 'WelcomePage' ? (
+				<Component {...pageProps} />
+			) : (
+				<AuthWrapper>
+					<TaskProvider>
+						{Component.displayName === 'LoginPage' ? (
+							<Component {...pageProps} userData={userData} />
+						) : windowWidth >= 1280 ? (
+							<Grid container style={{ height: '100%' }}>
+								<Grid xs={2} item={true}>
+									<DesktopNavigation
+										page={Component.name}
+										userData={
+											userData?.user ? userData : {}
+										}
+										updateUserData={setUserData}
+									/>
+								</Grid>
+								<Grid xs={10} item={true}>
+									<Component
+										{...pageProps}
+										userData={
+											userData?.user ? userData : {}
+										}
+										updateUserData={setUserData}
+									/>
+									<GlobalPollingComponent />
+								</Grid>
+							</Grid>
+						) : (
+							<>
+								<MenuIcon
+									className='burgerMenu'
+									onClick={() => setShowMobileNav(true)}
+								/>
+								{/* </button> */}
+								{showMobileNav ? (
+									<MobileNavigation
+										page={Component.name}
+										userData={
+											userData?.user ? userData : {}
+										}
+										setShowMobileNav={setShowMobileNav}
+									/>
+								) : (
+									<></>
+								)}
+								<Component
+									{...pageProps}
+									userData={userData?.user ? userData : {}}
+									updateUserData={setUserData}
+								/>
+								<GlobalPollingComponent />
+							</>
+						)}
+					</TaskProvider>
+				</AuthWrapper>
+			)}
+		</main>
+	);
 }

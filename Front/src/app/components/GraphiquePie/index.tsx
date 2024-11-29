@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { ChartData, ChartOptions } from 'chart.js';
 import { numberToArrayColor } from '@/app/helpers';
+import { CircularProgress } from '@mui/material';
+import React from 'react';
 
 interface GraphiquePieProps {
 	labels: Array<string>;
@@ -59,7 +61,21 @@ function GraphiquePie({
 	}, [labels, data, hover, title]);
 
 	if (loading) {
-		return <div>Chargement des données...</div>;
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100%',
+					height: '100%',
+				}}
+			>
+				<CircularProgress />
+				Chargements des données...
+			</div>
+		);
 	}
 
 	return (

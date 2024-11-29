@@ -28,7 +28,6 @@ export default function GlobalPollingComponent() {
 	useEffect(() => {
 		UserData().then((result) => {
 			setUserData(result);
-			console.log(result);
 		});
 	}, []);
 

@@ -67,8 +67,7 @@ export default function HomePage({
 			},
 		};
 		if (!isNaN(userData?.project?.length - 1)) {
-			tmp_lastP = userData?.project[userData?.project?.length - 1]
-
+			tmp_lastP = userData?.project[userData?.project?.length - 1];
 		}
 		setLastP(tmp_lastP);
 
@@ -83,7 +82,6 @@ export default function HomePage({
 		router.push('/team?create=true');
 	};
 
-	console.log(lastP)
 	return (
 		<>
 			<div className='right_container'>
@@ -102,7 +100,10 @@ export default function HomePage({
 							<div className='Entete'>
 								<div className='TitleProjetCards'>
 									<h2>Mes projets</h2>
-									<ButtonBase data-cy={HomeButtonSpecificationCy} href='/specification/create'>
+									<ButtonBase
+										data-cy={HomeButtonSpecificationCy}
+										href='/specification/create'
+									>
 										<AddIcon
 											fontSize='medium'
 											sx={{ color: '#000000' }}
@@ -117,25 +118,25 @@ export default function HomePage({
 							<CustomSwiper swiperId={1}>
 								<div className='ProjetCards'>
 									{userData?.project &&
-										Array.isArray(userData?.project) &&
-										userData?.project.length > 0
+									Array.isArray(userData?.project) &&
+									userData?.project.length > 0
 										? userData?.project.map((item: any) => (
-											<SwiperSlide key={item.id}>
-												<ProjetCard
-													name={item.name}
-													totalTickets={
-														item.ticket?.count
-													}
-													key={item.id}
-													id={item.color}
-													projectId={item.id}
-													updateUserData={
-														updateUserData
-													}
-													userData={userData}
-												/>
-											</SwiperSlide>
-										))
+												<SwiperSlide key={item.id}>
+													<ProjetCard
+														name={item.name}
+														totalTickets={
+															item.ticket?.count
+														}
+														key={item.id}
+														id={item.color}
+														projectId={item.id}
+														updateUserData={
+															updateUserData
+														}
+														userData={userData}
+													/>
+												</SwiperSlide>
+											))
 										: null}
 								</div>
 							</CustomSwiper>
@@ -184,15 +185,15 @@ export default function HomePage({
 								<div className='ProjetCards'>
 									{userData?.team
 										? userData?.team.map((item: any) => (
-											<SwiperSlide key={item.id}>
-												<TeamCard
-													team={item?.team}
-													userData={userData}
-													key={item?.team?.id}
-													clickable={false}
-												/>
-											</SwiperSlide>
-										))
+												<SwiperSlide key={item.id}>
+													<TeamCard
+														team={item?.team}
+														userData={userData}
+														key={item?.team?.id}
+														clickable={false}
+													/>
+												</SwiperSlide>
+											))
 										: null}
 								</div>
 							</CustomSwiper>

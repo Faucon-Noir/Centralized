@@ -99,7 +99,7 @@ function FirstStep({
 				if (!validateEmail(mate.trim()) && mate.trim().length > 0) {
 					setValidEmail(true);
 				} else {
-					console.log('ok');
+					console.log(mate.trim());
 					await addMateToTeam(mate.trim(), isCreated.team.id);
 				}
 			}

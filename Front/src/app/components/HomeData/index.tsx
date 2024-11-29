@@ -14,7 +14,6 @@ export default function HomeData({
 	userData: any;
 	lastP: any;
 }) {
-	console.log(lastP)
 	return (
 		<>
 			{userData?.stat?.error ? (
@@ -30,7 +29,8 @@ export default function HomeData({
 										(x: { userName: any }) => x.userName
 									)}
 									data={userData.stat.nbrTicketByUser.map(
-										(row: { nbr_ticket: any }) => row.nbr_ticket
+										(row: { nbr_ticket: any }) =>
+											row.nbr_ticket
 									)}
 									title='Nombre de ticket non fini par utilisateur'
 									hover='Nombre de ticket'
@@ -39,7 +39,10 @@ export default function HomeData({
 							{userData?.stat?.nbrTicketByUser ? (
 								<GraphiqueLine
 									labels={userData.stat.nbrTicketPerWeek.week}
-									data={userData.stat.nbrTicketPerWeek.nbr_ticket}
+									data={
+										userData.stat.nbrTicketPerWeek
+											.nbr_ticket
+									}
 									title='Nombre de tickets ouverts par semaine'
 									hover='Nombre de tickets'
 								/>
@@ -89,17 +92,17 @@ export default function HomeData({
 					</div>
 					{lastP.ticket.count > 0
 						? lastP.ticket.ticket
-							.filter((task: any, idx: number) => idx < 3)
-							.map((task: any) => (
-								<TaskCard
-									id={task.id}
-									title={task.title}
-									urgenceId={task.status}
-									date={task.start_date}
-									color={lastP.color}
-									key={task.id}
-								/>
-							))
+								.filter((task: any, idx: number) => idx < 3)
+								.map((task: any) => (
+									<TaskCard
+										id={task.id}
+										title={task.title}
+										urgenceId={task.status}
+										date={task.start_date}
+										color={lastP.color}
+										key={task.id}
+									/>
+								))
 						: null}
 				</div>
 			</div>
