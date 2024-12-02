@@ -20,8 +20,8 @@ function SecondStep({
 		description: '',
 		functionality: '',
 		forecast: '',
-		start_date: new Date(),
-		end_date: new Date(),
+		start_date: '',
+		end_date: '',
 		budget: '',
 		technology: '',
 		constraints: '',
@@ -85,7 +85,8 @@ function SecondStep({
 						}
 					/>
 					<textarea
-						placeholder='Planning prévisionnel'
+						placeholder="Planning prévisionnel&#10;&#x0A;
+						Remplir le formulaire: 1 heure, Repartir les tickets: 2 jours; Finir le projet: 3 mois"
 						rows={5}
 						cols={50}
 						onChange={(e) =>
@@ -211,7 +212,9 @@ function SecondStep({
 						!project.budget ||
 						!project.technology ||
 						!project.constraints ||
-						!project.validation
+						!project.validation ||
+						!project.team ||
+						!project.teamRole
 					}
 				>
 					Générer
