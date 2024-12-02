@@ -21,34 +21,97 @@
 			color: #0293fc;
 		}
 
-		.line {
-			display: flex;
-			gap: 50px;
+		input,
+		textarea,
+		select {
+			border: none;
+			border-radius: 5px;
+			background-color: #eceeee;
+			color: #887575;
+			padding: 10px;
+			transition: all 350ms ease-in-out;
+			outline: none;
+			box-shadow: 0px 2px 8px 0px #0000001a;
+		}
 
+		input,
+		textarea::placeholder {
+			font-family: 'myFont';
+		}
+
+		input:focus,
+		textarea:focus,
+		select:focus {
+			color: #0293fc;
+			outline: none;
+			border: 1px solid #0293fc;
+			border-radius: 5px;
+			transform: scale(1.2);
+		}
+	
+		.w-45 {
+			div {
+				display: flex;
+				justify-content: center;
+				@media screen and (max-width: 920px) {
+					flex-direction: column;
+					align-items: center;
+				}
+			}
 			input,
 			textarea,
 			select {
-				border: none;
-				border-radius: 5px;
-				background-color: #eceeee;
-				color: #887575;
-				padding: 10px;
-				transition: all 350ms ease-in-out;
-				outline: none;
-				box-shadow: 0px 2px 8px 0px #0000001a;
+				@media screen and (max-width: 920px) {
+					width: 100%;
+				}
+				@media screen and (max-width: 680px) {
+					margin: 2%;
+				}
+				width: 40%;
+				margin: 1%;
 			}
-
-			input,
-			textarea::placeholder {
-				font-family: 'myFont';
+			.small {
+				@media screen and (max-width: 920px) {
+					flex-direction: row;
+				}
+				@media screen and (max-width: 680px) {
+					flex-direction: column;
+				}
+				input {
+					@media screen and (max-width: 920px) {
+						width: 40%;
+					}
+					@media screen and (max-width: 680px) {
+						width: 100%;
+					}
+					width: 40%;
+				}
 			}
-
-			input:focus,
-			textarea:focus,
-			select:focus {
-				color: #0293fc !important;
-				outline: none !important;
-				border-radius: 5px;
+			.centered {
+				@media screen and (max-width: 920px) {
+					flex-direction: row;
+				}
+				@media screen and (max-width: 680px) {
+					flex-direction: column;
+				}
+				input {
+					@media screen and (max-width: 920px) {
+						width: 40%;
+					}
+					@media screen and (max-width: 680px) {
+						width: 100%;
+					}
+					width: 40%;
+				}
+				select {
+					@media screen and (max-width: 920px) {
+						width: calc(40% + 20px);
+					}
+					@media screen and (max-width: 680px) {
+						width: calc(100% + 20px);
+					}
+					width: calc(40% + 20px);
+				}
 			}
 		}
 
@@ -57,7 +120,8 @@
 		}
 
 		button {
-			width: 20%;
+			width: auto;
+			padding: 2% 10%;
 			cursor: pointer;
 			padding: 15px 10px;
 			border-radius: 15px;
@@ -73,6 +137,7 @@
 			background-color: #ccc;
 			color: #666;
 			cursor: not-allowed;
+			padding: 2% 10%;
 		}
 
 		button:hover:enabled {
@@ -80,6 +145,7 @@
 			background-color: white;
 			color: #0293fc;
 			box-shadow: 0px 2px 8px 0px #0000001a;
+			padding: 2% 10%;
 		}
 	}
 }
