@@ -1,0 +1,5 @@
+{
+	"name": "buffer-equal-constant-time",
+	"version": "1.0.1",
+	"main": "index.js"
+}
